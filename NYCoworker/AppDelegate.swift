@@ -6,11 +6,9 @@
 //
 
 import UIKit
+import SwiftUI
 
-@main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -34,3 +32,45 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+
+struct TestView: View {
+    init() {
+        UITabBar.appearance().backgroundColor = .white
+    }
+    var body: some View {
+        VStack(spacing: 0) {
+            TabView {
+                Text("Home")
+                    .tabItem {
+                        Label("Home", image: "home")
+                    }
+                Text("Coworkers")
+                    .tabItem {
+                        Label("Coworkers", image: "social")
+                    }
+                Text("Profile")
+                    .tabItem {
+                        Label("Profile", image: "profile")
+                    }
+            }
+            .accentColor(Resources.Colors.primary)
+        }
+    }
+}
+
+@main
+struct RemMemberAdminApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    var body: some Scene {
+        WindowGroup {
+            Onboarding()
+        }
+    }
+}
+
+
+struct C_Previews: PreviewProvider {
+    static var previews: some View {
+        TestView()
+    }
+}
