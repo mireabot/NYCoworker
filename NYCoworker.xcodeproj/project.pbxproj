@@ -13,6 +13,11 @@
 		3503BD8F297F50AC00C0E365 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3503BD8E297F50AC00C0E365 /* Assets.xcassets */; };
 		3503BD92297F50AC00C0E365 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3503BD90297F50AC00C0E365 /* LaunchScreen.storyboard */; };
 		3503BD9D297F5EE500C0E365 /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3503BD9C297F5EE500C0E365 /* Resources.swift */; };
+		3538C623298353210017800B /* iPages in Frameworks */ = {isa = PBXBuildFile; productRef = 3538C622298353210017800B /* iPages */; };
+		3538C626298356270017800B /* LanguageSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3538C625298356270017800B /* LanguageSetup.swift */; };
+		3538C6292983569D0017800B /* NYCBottomSheetHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3538C6282983569D0017800B /* NYCBottomSheetHeader.swift */; };
+		3538C62C298357490017800B /* AppLanguageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3538C62B298357490017800B /* AppLanguageModel.swift */; };
+		3538C62F298358890017800B /* LanguageCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3538C62E298358890017800B /* LanguageCard.swift */; };
 		359E6AA22981ED8B00333BD7 /* Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359E6AA12981ED8B00333BD7 /* Onboarding.swift */; };
 		359E6AA72981FEB800333BD7 /* Nunito-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 359E6AA62981FDD300333BD7 /* Nunito-Bold.ttf */; };
 		359E6AA82981FEB800333BD7 /* Nunito-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 359E6AA52981FDC800333BD7 /* Nunito-SemiBold.ttf */; };
@@ -28,6 +33,10 @@
 		3503BD91297F50AC00C0E365 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3503BD93297F50AC00C0E365 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3503BD9C297F5EE500C0E365 /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
+		3538C625298356270017800B /* LanguageSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSetup.swift; sourceTree = "<group>"; };
+		3538C6282983569D0017800B /* NYCBottomSheetHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCBottomSheetHeader.swift; sourceTree = "<group>"; };
+		3538C62B298357490017800B /* AppLanguageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLanguageModel.swift; sourceTree = "<group>"; };
+		3538C62E298358890017800B /* LanguageCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageCard.swift; sourceTree = "<group>"; };
 		359E6AA12981ED8B00333BD7 /* Onboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding.swift; sourceTree = "<group>"; };
 		359E6AA42981FDBA00333BD7 /* Nunito-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Regular.ttf"; sourceTree = "<group>"; };
 		359E6AA52981FDC800333BD7 /* Nunito-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-SemiBold.ttf"; sourceTree = "<group>"; };
@@ -39,6 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3538C623298353210017800B /* iPages in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,8 +74,9 @@
 		3503BD84297F50AA00C0E365 /* NYCoworker */ = {
 			isa = PBXGroup;
 			children = (
-				358B93992980D42700160BFC /* Views */,
 				358B93962980D35800160BFC /* Model */,
+				358B93992980D42700160BFC /* Views */,
+				3538C62D298358560017800B /* ViewModels */,
 				3503BD99297F5EB900C0E365 /* Other */,
 				3503BD85297F50AA00C0E365 /* AppDelegate.swift */,
 				3503BD87297F50AA00C0E365 /* SceneDelegate.swift */,
@@ -80,6 +91,7 @@
 		3503BD99297F5EB900C0E365 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				3538C627298356840017800B /* Helper Views */,
 				3503BD9A297F5ECB00C0E365 /* Resources */,
 			);
 			path = Other;
@@ -94,9 +106,43 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		3538C624298356120017800B /* Onboarding Views */ = {
+			isa = PBXGroup;
+			children = (
+				359E6AA12981ED8B00333BD7 /* Onboarding.swift */,
+				3538C625298356270017800B /* LanguageSetup.swift */,
+			);
+			path = "Onboarding Views";
+			sourceTree = "<group>";
+		};
+		3538C627298356840017800B /* Helper Views */ = {
+			isa = PBXGroup;
+			children = (
+				3538C6282983569D0017800B /* NYCBottomSheetHeader.swift */,
+			);
+			path = "Helper Views";
+			sourceTree = "<group>";
+		};
+		3538C62A298357310017800B /* System */ = {
+			isa = PBXGroup;
+			children = (
+				3538C62B298357490017800B /* AppLanguageModel.swift */,
+			);
+			path = System;
+			sourceTree = "<group>";
+		};
+		3538C62D298358560017800B /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				3538C62E298358890017800B /* LanguageCard.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		358B93962980D35800160BFC /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				3538C62A298357310017800B /* System */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -112,7 +158,7 @@
 		359E6AA02981ECB200333BD7 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				359E6AA12981ED8B00333BD7 /* Onboarding.swift */,
+				3538C624298356120017800B /* Onboarding Views */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -143,6 +189,9 @@
 			dependencies = (
 			);
 			name = NYCoworker;
+			packageProductDependencies = (
+				3538C622298353210017800B /* iPages */,
+			);
 			productName = NYCoworker;
 			productReference = 3503BD82297F50AA00C0E365 /* NYCoworker.app */;
 			productType = "com.apple.product-type.application";
@@ -171,6 +220,9 @@
 				Base,
 			);
 			mainGroup = 3503BD79297F50AA00C0E365;
+			packageReferences = (
+				3538C621298353210017800B /* XCRemoteSwiftPackageReference "iPages" */,
+			);
 			productRefGroup = 3503BD83297F50AA00C0E365 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -203,8 +255,12 @@
 				3503BD8A297F50AA00C0E365 /* ViewController.swift in Sources */,
 				3503BD9D297F5EE500C0E365 /* Resources.swift in Sources */,
 				359E6AA22981ED8B00333BD7 /* Onboarding.swift in Sources */,
+				3538C6292983569D0017800B /* NYCBottomSheetHeader.swift in Sources */,
+				3538C626298356270017800B /* LanguageSetup.swift in Sources */,
+				3538C62F298358890017800B /* LanguageCard.swift in Sources */,
 				3503BD86297F50AA00C0E365 /* AppDelegate.swift in Sources */,
 				3503BD88297F50AA00C0E365 /* SceneDelegate.swift in Sources */,
+				3538C62C298357490017800B /* AppLanguageModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -426,6 +482,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		3538C621298353210017800B /* XCRemoteSwiftPackageReference "iPages" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/benjaminsage/iPages.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.9;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3538C622298353210017800B /* iPages */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3538C621298353210017800B /* XCRemoteSwiftPackageReference "iPages" */;
+			productName = iPages;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 3503BD7A297F50AA00C0E365 /* Project object */;
 }
