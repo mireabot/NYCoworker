@@ -22,6 +22,14 @@
 		359E6AA72981FEB800333BD7 /* Nunito-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 359E6AA62981FDD300333BD7 /* Nunito-Bold.ttf */; };
 		359E6AA82981FEB800333BD7 /* Nunito-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 359E6AA52981FDC800333BD7 /* Nunito-SemiBold.ttf */; };
 		359E6AA92981FEB800333BD7 /* Nunito-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 359E6AA42981FDBA00333BD7 /* Nunito-Regular.ttf */; };
+		35E7FB8B298486F400EFF282 /* ProfileSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E7FB8A298486F400EFF282 /* ProfileSetup.swift */; };
+		35E7FB8D29848AE300EFF282 /* NYCFloatingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E7FB8C29848AE300EFF282 /* NYCFloatingTextField.swift */; };
+		35E7FB8F29848B1C00EFF282 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E7FB8E29848B1C00EFF282 /* Extensions.swift */; };
+		35E7FB9129848FEE00EFF282 /* NYCActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E7FB9029848FEE00EFF282 /* NYCActionButton.swift */; };
+		35E7FB942985A9D500EFF282 /* UserRegistrationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E7FB932985A9D500EFF282 /* UserRegistrationModel.swift */; };
+		35E7FB992985AB9300EFF282 /* NotificationPermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E7FB982985AB9300EFF282 /* NotificationPermission.swift */; };
+		35E7FB9B2985ADF800EFF282 /* GeopositionPermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E7FB9A2985ADF800EFF282 /* GeopositionPermission.swift */; };
+		35E7FB9D2985B88700EFF282 /* GeoLocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E7FB9C2985B88700EFF282 /* GeoLocationModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +49,14 @@
 		359E6AA42981FDBA00333BD7 /* Nunito-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Regular.ttf"; sourceTree = "<group>"; };
 		359E6AA52981FDC800333BD7 /* Nunito-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-SemiBold.ttf"; sourceTree = "<group>"; };
 		359E6AA62981FDD300333BD7 /* Nunito-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Bold.ttf"; sourceTree = "<group>"; };
+		35E7FB8A298486F400EFF282 /* ProfileSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSetup.swift; sourceTree = "<group>"; };
+		35E7FB8C29848AE300EFF282 /* NYCFloatingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCFloatingTextField.swift; sourceTree = "<group>"; };
+		35E7FB8E29848B1C00EFF282 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		35E7FB9029848FEE00EFF282 /* NYCActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCActionButton.swift; sourceTree = "<group>"; };
+		35E7FB932985A9D500EFF282 /* UserRegistrationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegistrationModel.swift; sourceTree = "<group>"; };
+		35E7FB982985AB9300EFF282 /* NotificationPermission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPermission.swift; sourceTree = "<group>"; };
+		35E7FB9A2985ADF800EFF282 /* GeopositionPermission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeopositionPermission.swift; sourceTree = "<group>"; };
+		35E7FB9C2985B88700EFF282 /* GeoLocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoLocationModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +118,7 @@
 			children = (
 				359E6AA32981FD8400333BD7 /* Fonts */,
 				3503BD9C297F5EE500C0E365 /* Resources.swift */,
+				35E7FB8E29848B1C00EFF282 /* Extensions.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -111,6 +128,9 @@
 			children = (
 				359E6AA12981ED8B00333BD7 /* Onboarding.swift */,
 				3538C625298356270017800B /* LanguageSetup.swift */,
+				35E7FB8A298486F400EFF282 /* ProfileSetup.swift */,
+				35E7FB982985AB9300EFF282 /* NotificationPermission.swift */,
+				35E7FB9A2985ADF800EFF282 /* GeopositionPermission.swift */,
 			);
 			path = "Onboarding Views";
 			sourceTree = "<group>";
@@ -119,6 +139,8 @@
 			isa = PBXGroup;
 			children = (
 				3538C6282983569D0017800B /* NYCBottomSheetHeader.swift */,
+				35E7FB8C29848AE300EFF282 /* NYCFloatingTextField.swift */,
+				35E7FB9029848FEE00EFF282 /* NYCActionButton.swift */,
 			);
 			path = "Helper Views";
 			sourceTree = "<group>";
@@ -127,6 +149,7 @@
 			isa = PBXGroup;
 			children = (
 				3538C62B298357490017800B /* AppLanguageModel.swift */,
+				35E7FB9C2985B88700EFF282 /* GeoLocationModel.swift */,
 			);
 			path = System;
 			sourceTree = "<group>";
@@ -142,6 +165,7 @@
 		358B93962980D35800160BFC /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				35E7FB922985A9C200EFF282 /* User */,
 				3538C62A298357310017800B /* System */,
 			);
 			path = Model;
@@ -171,6 +195,14 @@
 				359E6AA42981FDBA00333BD7 /* Nunito-Regular.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		35E7FB922985A9C200EFF282 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				35E7FB932985A9D500EFF282 /* UserRegistrationModel.swift */,
+			);
+			path = User;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,10 +289,18 @@
 				359E6AA22981ED8B00333BD7 /* Onboarding.swift in Sources */,
 				3538C6292983569D0017800B /* NYCBottomSheetHeader.swift in Sources */,
 				3538C626298356270017800B /* LanguageSetup.swift in Sources */,
+				35E7FB942985A9D500EFF282 /* UserRegistrationModel.swift in Sources */,
+				35E7FB9D2985B88700EFF282 /* GeoLocationModel.swift in Sources */,
 				3538C62F298358890017800B /* LanguageCard.swift in Sources */,
+				35E7FB8D29848AE300EFF282 /* NYCFloatingTextField.swift in Sources */,
+				35E7FB8F29848B1C00EFF282 /* Extensions.swift in Sources */,
 				3503BD86297F50AA00C0E365 /* AppDelegate.swift in Sources */,
+				35E7FB9129848FEE00EFF282 /* NYCActionButton.swift in Sources */,
+				35E7FB992985AB9300EFF282 /* NotificationPermission.swift in Sources */,
+				35E7FB8B298486F400EFF282 /* ProfileSetup.swift in Sources */,
 				3503BD88297F50AA00C0E365 /* SceneDelegate.swift in Sources */,
 				3538C62C298357490017800B /* AppLanguageModel.swift in Sources */,
+				35E7FB9B2985ADF800EFF282 /* GeopositionPermission.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
