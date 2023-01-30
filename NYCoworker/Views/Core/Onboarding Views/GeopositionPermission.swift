@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct GeopositionPermission: View {
+    @ObservedObject var locationManager = LocationModel.shared
     var body: some View {
         VStack {
             /// Content stack
@@ -30,11 +31,20 @@ struct GeopositionPermission: View {
             Spacer()
             
             NYCActionButton(action: {
-                print("Create user initial model, make app state as logged - make push to tab bar")
+                LocationModel.shared.requestLocation {
+                    checkForLocationAccess()
+                }
             }, text: "Continue")
             .padding(.bottom, 10)
         }
         .toolbar(.hidden)
+    }
+    
+    func checkForLocationAccess() {
+        if locationManager.status! {
+            print("Ok")
+        }
+        else { print("Not ok")}
     }
 }
 

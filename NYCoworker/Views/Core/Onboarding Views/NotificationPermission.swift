@@ -51,6 +51,7 @@ struct NotificationPermission: View {
             }
             else {
                 print(error ?? "Unknown")
+                prepareToNavigate.toggle()
             }
         }
     }

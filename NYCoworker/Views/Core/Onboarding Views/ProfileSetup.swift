@@ -13,6 +13,12 @@ struct ProfileSetup: View {
     @State var personType: String = "Student"
     @State var prepareToNavigate: Bool = false
     @Environment(\.dismiss) var makeDismiss
+    
+    enum Field: Hashable {
+        case nameField
+        case occupationField
+    }
+    @FocusState private var focusedField: Field?
     var body: some View {
         NavigationStack {
             VStack {
@@ -35,7 +41,9 @@ struct ProfileSetup: View {
                 /// Main section - Name, Occupation, Personality
                 VStack(alignment: .leading) {
                     NYCFloatingTextField(title: "Your name", text: $nameTextFieldText)
+                        .focused($focusedField, equals: .nameField)
                     NYCFloatingTextField(title: "Describe occupation", text: $occupationTextFieldText)
+                        .focused($focusedField, equals: .occupationField)
                     
                     Text("Who are you?")
                         .foregroundColor(Resources.Colors.customBlack)
@@ -123,8 +131,14 @@ struct ProfileSetup: View {
                 Spacer()
                 
                 /// Action button
-                NYCActionButton(action: makeAction, text: "Continue")
+                Button(action: {
+                    makeAction()
+                }, label: {
+                    Text("Continue")
+                })
                     .padding(.bottom, 10)
+                    .disabled(nameTextFieldText == "")
+                    .buttonStyle(NYCActionButtonStyle())
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -144,13 +158,19 @@ struct ProfileSetup: View {
                 NotificationPermission()
             }
             .navigationBarBackButtonHidden()
+            .onTapGesture {
+                focusedField = nil
+            }
         }
     }
     
     func makeAction() -> Void {
-        print(nameTextFieldText)
-        print(occupationTextFieldText)
-        prepareToNavigate.toggle()
+        if nameTextFieldText != "" {
+            prepareToNavigate.toggle()
+        }
+        else {
+            print("Err")
+        }
     }
 }
 
