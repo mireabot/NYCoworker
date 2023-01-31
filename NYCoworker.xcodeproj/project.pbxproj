@@ -25,6 +25,8 @@
 		359E6AA72981FEB800333BD7 /* Nunito-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 359E6AA62981FDD300333BD7 /* Nunito-Bold.ttf */; };
 		359E6AA82981FEB800333BD7 /* Nunito-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 359E6AA52981FDC800333BD7 /* Nunito-SemiBold.ttf */; };
 		359E6AA92981FEB800333BD7 /* Nunito-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 359E6AA42981FDBA00333BD7 /* Nunito-Regular.ttf */; };
+		35D9A5CE298981EE00A2F8D6 /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D9A5CD298981EE00A2F8D6 /* SettingsModel.swift */; };
+		35D9A5D02989832200A2F8D6 /* SettingsCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D9A5CF2989832200A2F8D6 /* SettingsCard.swift */; };
 		35E7FB8B298486F400EFF282 /* ProfileSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E7FB8A298486F400EFF282 /* ProfileSetup.swift */; };
 		35E7FB8D29848AE300EFF282 /* NYCFloatingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E7FB8C29848AE300EFF282 /* NYCFloatingTextField.swift */; };
 		35E7FB8F29848B1C00EFF282 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E7FB8E29848B1C00EFF282 /* Extensions.swift */; };
@@ -55,6 +57,8 @@
 		359E6AA42981FDBA00333BD7 /* Nunito-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Regular.ttf"; sourceTree = "<group>"; };
 		359E6AA52981FDC800333BD7 /* Nunito-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-SemiBold.ttf"; sourceTree = "<group>"; };
 		359E6AA62981FDD300333BD7 /* Nunito-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Bold.ttf"; sourceTree = "<group>"; };
+		35D9A5CD298981EE00A2F8D6 /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
+		35D9A5CF2989832200A2F8D6 /* SettingsCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCard.swift; sourceTree = "<group>"; };
 		35E7FB8A298486F400EFF282 /* ProfileSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSetup.swift; sourceTree = "<group>"; };
 		35E7FB8C29848AE300EFF282 /* NYCFloatingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCFloatingTextField.swift; sourceTree = "<group>"; };
 		35E7FB8E29848B1C00EFF282 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -156,6 +160,7 @@
 			children = (
 				3538C62B298357490017800B /* AppLanguageModel.swift */,
 				35E7FB9C2985B88700EFF282 /* GeoLocationModel.swift */,
+				35D9A5CD298981EE00A2F8D6 /* SettingsModel.swift */,
 			);
 			path = System;
 			sourceTree = "<group>";
@@ -164,6 +169,7 @@
 			isa = PBXGroup;
 			children = (
 				3538C62E298358890017800B /* LanguageCard.swift */,
+				35D9A5CF2989832200A2F8D6 /* SettingsCard.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -325,10 +331,12 @@
 				35E7FB942985A9D500EFF282 /* UserRegistrationModel.swift in Sources */,
 				35E7FB9D2985B88700EFF282 /* GeoLocationModel.swift in Sources */,
 				3538C62F298358890017800B /* LanguageCard.swift in Sources */,
+				35D9A5D02989832200A2F8D6 /* SettingsCard.swift in Sources */,
 				35E7FB8D29848AE300EFF282 /* NYCFloatingTextField.swift in Sources */,
 				35737E5E29888DA5003B68BE /* Social View.swift in Sources */,
 				35E7FB8F29848B1C00EFF282 /* Extensions.swift in Sources */,
 				35737E5B29888866003B68BE /* ProfileView.swift in Sources */,
+				35D9A5CE298981EE00A2F8D6 /* SettingsModel.swift in Sources */,
 				3503BD86297F50AA00C0E365 /* AppDelegate.swift in Sources */,
 				35737E6129888DF9003B68BE /* HomeView.swift in Sources */,
 				35E7FB9129848FEE00EFF282 /* NYCActionButton.swift in Sources */,

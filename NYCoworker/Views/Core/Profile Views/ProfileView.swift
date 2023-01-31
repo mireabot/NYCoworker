@@ -10,9 +10,9 @@ import SwiftUI
 struct ProfileView: View {
     var body: some View {
         NavigationStack {
-            VStack {
+            VStack(spacing: 30) {
                 /// Profile section
-                VStack(alignment: .center, spacing: 10) {
+                VStack(alignment: .center, spacing: 5) {
                     Circle()
                         .frame(width: 100, height: 100)
                     Text("Michael")
@@ -22,10 +22,26 @@ struct ProfileView: View {
                         .foregroundColor(Resources.Colors.darkGrey)
                         .font(Resources.Fonts.regular(withSize: 13))
                 }
-                .padding(.top, 20)
+                .padding(.top, 25)
                 
-                Spacer()
+                VStack(alignment: .leading) {
+                    Text("Settings")
+                        .foregroundColor(Resources.Colors.customBlack)
+                        .font(Resources.Fonts.regular(withSize: 16))
+                    
+                    ForEach(settigsData) { data in
+                        VStack {
+                            SettingsCard(data: data)
+                                .onTapGesture {
+                                    print(data.title)
+                                }
+                        }
+                    }
+                }
+                .padding([.leading,.trailing], 16)
                 
+                
+                /// Bottom content
                 HStack {
                     VStack(alignment: .leading, spacing: 5) {
                         Text("Log out")

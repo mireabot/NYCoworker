@@ -21,11 +21,11 @@ struct NYCBottomSheetHeader: View {
 struct NYCHeader: View {
     var title: String
     var body: some View {
-        VStack(alignment: .leading) {
+        HStack {
             Text(title)
                 .font(Resources.Fonts.bold(withSize: 22))
                 .padding(.leading, 16)
-            Divider()
+            Spacer()
         }
     }
 }

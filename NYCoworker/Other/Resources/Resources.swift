@@ -15,7 +15,7 @@ enum Resources {
     /// Colors resource pack
     enum Colors {
         static let primary = Color(uiColor: UIColor(red: 0.11, green: 0.47, blue: 0.45, alpha: 1.00))
-        static let secondary = UIColor(red: 0.03, green: 0.12, blue: 0.13, alpha: 1.00)
+        static let secondary = Color(uiColor: UIColor(red: 0.03, green: 0.12, blue: 0.13, alpha: 1.00))
         
         static let customBlack = Color(uiColor: UIColor(red: 0.15, green: 0.16, blue: 0.19, alpha: 1.00))
         static let lightGrey = Color(uiColor: UIColor(red: 0.73, green: 0.76, blue: 0.80, alpha: 1.00))
@@ -36,6 +36,14 @@ enum Resources {
         enum Navigation {
             static let arrowBack = Image("arrow-back")
             static let close = Image("close")
+            static let chevron = Image("chevron-right")
+        }
+        /// Images for settings
+        enum Settings {
+            static let manageAccount = Image("edit-account")
+            static let help = Image("help")
+            static let manageNotifications = Image("edit-notifications")
+            static let changeLanguage = Image("language")
         }
     }
     /// Fonts resource pack
