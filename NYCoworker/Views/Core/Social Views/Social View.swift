@@ -14,9 +14,9 @@ struct SocialView: View {
                 
             }
             .toolbar {
-                NYCHeader(title: "Find coworkers")
-                    .frame(width: UIScreen.main.bounds.width)
-                    .padding(.top, 10)
+                ToolbarItem(placement: .navigationBarLeading) {
+                    NYCHeader(title: "Find coworkers")
+                }
             }
         }
     }

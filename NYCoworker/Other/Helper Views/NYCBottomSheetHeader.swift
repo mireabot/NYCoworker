@@ -24,7 +24,7 @@ struct NYCHeader: View {
         HStack {
             Text(title)
                 .font(Resources.Fonts.bold(withSize: 22))
-                .padding(.leading, 16)
+//                .padding(.leading, 16)
             Spacer()
         }
     }

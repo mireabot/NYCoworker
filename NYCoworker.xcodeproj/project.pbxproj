@@ -25,6 +25,7 @@
 		359E6AA72981FEB800333BD7 /* Nunito-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 359E6AA62981FDD300333BD7 /* Nunito-Bold.ttf */; };
 		359E6AA82981FEB800333BD7 /* Nunito-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 359E6AA52981FDC800333BD7 /* Nunito-SemiBold.ttf */; };
 		359E6AA92981FEB800333BD7 /* Nunito-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 359E6AA42981FDBA00333BD7 /* Nunito-Regular.ttf */; };
+		359F80F2298AA911000D792E /* NYCCircleImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359F80F1298AA911000D792E /* NYCCircleImageButton.swift */; };
 		35D9A5CE298981EE00A2F8D6 /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D9A5CD298981EE00A2F8D6 /* SettingsModel.swift */; };
 		35D9A5D02989832200A2F8D6 /* SettingsCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D9A5CF2989832200A2F8D6 /* SettingsCard.swift */; };
 		35E7FB8B298486F400EFF282 /* ProfileSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E7FB8A298486F400EFF282 /* ProfileSetup.swift */; };
@@ -57,6 +58,7 @@
 		359E6AA42981FDBA00333BD7 /* Nunito-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Regular.ttf"; sourceTree = "<group>"; };
 		359E6AA52981FDC800333BD7 /* Nunito-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-SemiBold.ttf"; sourceTree = "<group>"; };
 		359E6AA62981FDD300333BD7 /* Nunito-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Bold.ttf"; sourceTree = "<group>"; };
+		359F80F1298AA911000D792E /* NYCCircleImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCCircleImageButton.swift; sourceTree = "<group>"; };
 		35D9A5CD298981EE00A2F8D6 /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
 		35D9A5CF2989832200A2F8D6 /* SettingsCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCard.swift; sourceTree = "<group>"; };
 		35E7FB8A298486F400EFF282 /* ProfileSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSetup.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 				3538C6282983569D0017800B /* NYCBottomSheetHeader.swift */,
 				35E7FB8C29848AE300EFF282 /* NYCFloatingTextField.swift */,
 				35E7FB9029848FEE00EFF282 /* NYCActionButton.swift */,
+				359F80F1298AA911000D792E /* NYCCircleImageButton.swift */,
 			);
 			path = "Helper Views";
 			sourceTree = "<group>";
@@ -326,6 +329,7 @@
 				3503BD8A297F50AA00C0E365 /* ViewController.swift in Sources */,
 				3503BD9D297F5EE500C0E365 /* Resources.swift in Sources */,
 				359E6AA22981ED8B00333BD7 /* Onboarding.swift in Sources */,
+				359F80F2298AA911000D792E /* NYCCircleImageButton.swift in Sources */,
 				3538C6292983569D0017800B /* NYCBottomSheetHeader.swift in Sources */,
 				3538C626298356270017800B /* LanguageSetup.swift in Sources */,
 				35E7FB942985A9D500EFF282 /* UserRegistrationModel.swift in Sources */,
