@@ -5,8 +5,7 @@
 //  Created by Mikhail Kolkov on 1/27/23.
 //
 
-import Foundation
-
+import SwiftUI
 
 //MARK: - String
 extension String {

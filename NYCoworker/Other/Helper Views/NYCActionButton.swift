@@ -36,9 +36,11 @@ struct NYCActionButtonStyle: ButtonStyle {
         let configuration: ButtonStyle.Configuration
         @Environment(\.isEnabled) private var isEnabled: Bool
         var body: some View {
-            configuration.label.foregroundColor(isEnabled ? Color.white : Resources.Colors.darkGrey)
+            configuration.label
+                .foregroundColor(isEnabled ? Color.white : Resources.Colors.darkGrey)
                 .background(RoundedRectangle(cornerRadius: 5).fill(isEnabled ? Resources.Colors.primary : Resources.Colors.customGrey))
                 .cornerRadius(10)
+                .scaleEffect(configuration.isPressed ? 0.95 : 1)
         }
     }
 }

@@ -26,6 +26,11 @@
 		359E6AA82981FEB800333BD7 /* Nunito-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 359E6AA52981FDC800333BD7 /* Nunito-SemiBold.ttf */; };
 		359E6AA92981FEB800333BD7 /* Nunito-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 359E6AA42981FDBA00333BD7 /* Nunito-Regular.ttf */; };
 		359F80F2298AA911000D792E /* NYCCircleImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359F80F1298AA911000D792E /* NYCCircleImageButton.swift */; };
+		359F80F4298C2253000D792E /* NYCSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359F80F3298C2253000D792E /* NYCSectionHeader.swift */; };
+		359F80F7298C2508000D792E /* LocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359F80F6298C2508000D792E /* LocationCell.swift */; };
+		359F80F9298C30D2000D792E /* NYCBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359F80F8298C30D2000D792E /* NYCBadgeView.swift */; };
+		359F80FB298C330B000D792E /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359F80FA298C330B000D792E /* FavoriteView.swift */; };
+		359F80FD298C492D000D792E /* FavoriteLocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359F80FC298C492D000D792E /* FavoriteLocationCell.swift */; };
 		35D9A5CE298981EE00A2F8D6 /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D9A5CD298981EE00A2F8D6 /* SettingsModel.swift */; };
 		35D9A5D02989832200A2F8D6 /* SettingsCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D9A5CF2989832200A2F8D6 /* SettingsCard.swift */; };
 		35E7FB8B298486F400EFF282 /* ProfileSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E7FB8A298486F400EFF282 /* ProfileSetup.swift */; };
@@ -59,6 +64,11 @@
 		359E6AA52981FDC800333BD7 /* Nunito-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-SemiBold.ttf"; sourceTree = "<group>"; };
 		359E6AA62981FDD300333BD7 /* Nunito-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Bold.ttf"; sourceTree = "<group>"; };
 		359F80F1298AA911000D792E /* NYCCircleImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCCircleImageButton.swift; sourceTree = "<group>"; };
+		359F80F3298C2253000D792E /* NYCSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCSectionHeader.swift; sourceTree = "<group>"; };
+		359F80F6298C2508000D792E /* LocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCell.swift; sourceTree = "<group>"; };
+		359F80F8298C30D2000D792E /* NYCBadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCBadgeView.swift; sourceTree = "<group>"; };
+		359F80FA298C330B000D792E /* FavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteView.swift; sourceTree = "<group>"; };
+		359F80FC298C492D000D792E /* FavoriteLocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteLocationCell.swift; sourceTree = "<group>"; };
 		35D9A5CD298981EE00A2F8D6 /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
 		35D9A5CF2989832200A2F8D6 /* SettingsCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCard.swift; sourceTree = "<group>"; };
 		35E7FB8A298486F400EFF282 /* ProfileSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSetup.swift; sourceTree = "<group>"; };
@@ -154,6 +164,8 @@
 				35E7FB8C29848AE300EFF282 /* NYCFloatingTextField.swift */,
 				35E7FB9029848FEE00EFF282 /* NYCActionButton.swift */,
 				359F80F1298AA911000D792E /* NYCCircleImageButton.swift */,
+				359F80F3298C2253000D792E /* NYCSectionHeader.swift */,
+				359F80F8298C30D2000D792E /* NYCBadgeView.swift */,
 			);
 			path = "Helper Views";
 			sourceTree = "<group>";
@@ -197,6 +209,7 @@
 			isa = PBXGroup;
 			children = (
 				35737E6029888DF9003B68BE /* HomeView.swift */,
+				359F80FA298C330B000D792E /* FavoriteView.swift */,
 			);
 			path = "Home Views";
 			sourceTree = "<group>";
@@ -213,6 +226,7 @@
 		358B93992980D42700160BFC /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				359F80F5298C24FB000D792E /* Cells */,
 				359E6AA02981ECB200333BD7 /* Core */,
 			);
 			path = Views;
@@ -237,6 +251,15 @@
 				359E6AA42981FDBA00333BD7 /* Nunito-Regular.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		359F80F5298C24FB000D792E /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				359F80F6298C2508000D792E /* LocationCell.swift */,
+				359F80FC298C492D000D792E /* FavoriteLocationCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		35E7FB922985A9C200EFF282 /* User */ = {
@@ -327,6 +350,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3503BD8A297F50AA00C0E365 /* ViewController.swift in Sources */,
+				359F80F4298C2253000D792E /* NYCSectionHeader.swift in Sources */,
 				3503BD9D297F5EE500C0E365 /* Resources.swift in Sources */,
 				359E6AA22981ED8B00333BD7 /* Onboarding.swift in Sources */,
 				359F80F2298AA911000D792E /* NYCCircleImageButton.swift in Sources */,
@@ -334,18 +358,22 @@
 				3538C626298356270017800B /* LanguageSetup.swift in Sources */,
 				35E7FB942985A9D500EFF282 /* UserRegistrationModel.swift in Sources */,
 				35E7FB9D2985B88700EFF282 /* GeoLocationModel.swift in Sources */,
+				359F80F9298C30D2000D792E /* NYCBadgeView.swift in Sources */,
 				3538C62F298358890017800B /* LanguageCard.swift in Sources */,
 				35D9A5D02989832200A2F8D6 /* SettingsCard.swift in Sources */,
 				35E7FB8D29848AE300EFF282 /* NYCFloatingTextField.swift in Sources */,
 				35737E5E29888DA5003B68BE /* Social View.swift in Sources */,
 				35E7FB8F29848B1C00EFF282 /* Extensions.swift in Sources */,
 				35737E5B29888866003B68BE /* ProfileView.swift in Sources */,
+				359F80FB298C330B000D792E /* FavoriteView.swift in Sources */,
 				35D9A5CE298981EE00A2F8D6 /* SettingsModel.swift in Sources */,
+				359F80FD298C492D000D792E /* FavoriteLocationCell.swift in Sources */,
 				3503BD86297F50AA00C0E365 /* AppDelegate.swift in Sources */,
 				35737E6129888DF9003B68BE /* HomeView.swift in Sources */,
 				35E7FB9129848FEE00EFF282 /* NYCActionButton.swift in Sources */,
 				35E7FB992985AB9300EFF282 /* NotificationPermission.swift in Sources */,
 				35E7FB8B298486F400EFF282 /* ProfileSetup.swift in Sources */,
+				359F80F7298C2508000D792E /* LocationCell.swift in Sources */,
 				3503BD88297F50AA00C0E365 /* SceneDelegate.swift in Sources */,
 				3538C62C298357490017800B /* AppLanguageModel.swift in Sources */,
 				35E7FB9B2985ADF800EFF282 /* GeopositionPermission.swift in Sources */,
