@@ -9,7 +9,7 @@ import SwiftUI
 
 struct FavoriteLocationCell: View {
     var body: some View {
-        HStack(alignment: .bottom) {
+        HStack(alignment: .center) {
             Rectangle()
                 .frame(width: 110, height: 110)
                 .cornerRadius(5)
@@ -38,9 +38,6 @@ struct FavoriteLocationCell: View {
                             .font(Resources.Fonts.regular(withSize: 12))
                     }
                 }
-                
-                NYCBadgeWithIconView(title: "Open now")
-                
             }
         }
     }

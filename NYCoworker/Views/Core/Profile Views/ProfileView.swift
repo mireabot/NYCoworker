@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ProfileView: View {
+    @State var showSettings = false
     var body: some View {
         NavigationStack {
             VStack {
@@ -35,6 +36,7 @@ struct ProfileView: View {
                                 SettingsCard(data: data)
                                     .onTapGesture {
                                         print(data.title)
+                                        showSettings.toggle()
                                     }
                             }
                         }
@@ -57,7 +59,6 @@ struct ProfileView: View {
                     }
                     .padding(.leading, 16)
                     .padding(.top, 10)
-    //                .padding(.bottom, 30)
                 }
                 
                 Spacer()

@@ -11,8 +11,15 @@ struct FavoriteView: View {
     @Environment(\.dismiss) var makeDismiss
     var body: some View {
         NavigationStack {
-            VStack {
-                
+            ScrollView(.vertical, showsIndicators: false) {
+                VStack(spacing: 10) {
+                    ForEach(0..<10){_ in
+                        FavoriteLocationCell()
+                    }
+                }
+                .padding([.leading,.trailing], 16)
+                .padding(.top, 20)
+                Spacer()
             }
             .toolbar(content: {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -25,7 +32,7 @@ struct FavoriteView: View {
 
                 }
                 
-                ToolbarItem(placement: .principal) {
+                ToolbarItem(placement: .navigationBarLeading) {
                     Text("Your favorites")
                         .foregroundColor(Resources.Colors.customBlack)
                         .font(Resources.Fonts.bold(withSize: 17))
