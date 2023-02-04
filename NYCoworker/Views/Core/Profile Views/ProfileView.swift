@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ProfileView: View {
     @Binding var showSettings: Bool
+    @State var settingsTitle = ""
     var body: some View {
         VStack {
             /// Profile section
@@ -35,6 +36,7 @@ struct ProfileView: View {
                             SettingsCard(data: data)
                                 .onTapGesture {
                                     print(data.title)
+                                    settingsTitle = data.title
                                     showSettings.toggle()
                                 }
                         }
@@ -62,6 +64,10 @@ struct ProfileView: View {
             
             Spacer()
         }
+        .hideTabbar(shouldHideTabbar: false)
+        .navigationDestination(isPresented: $showSettings, destination: {
+            SettingsView(title: settingsTitle)
+        })
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 NYCHeader(title: "Profile")
@@ -69,9 +75,3 @@ struct ProfileView: View {
         }
     }
 }
-
-//struct ProfileView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ProfileView()
-//    }
-//}
