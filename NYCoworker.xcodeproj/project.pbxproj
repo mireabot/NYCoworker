@@ -21,6 +21,12 @@
 		35737E5B29888866003B68BE /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35737E5A29888866003B68BE /* ProfileView.swift */; };
 		35737E5E29888DA5003B68BE /* Social View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35737E5D29888DA5003B68BE /* Social View.swift */; };
 		35737E6129888DF9003B68BE /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35737E6029888DF9003B68BE /* HomeView.swift */; };
+		359A7929298DDD20001B66CF /* BottomSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 359A7928298DDD20001B66CF /* BottomSheet */; };
+		359A792B298DFBB9001B66CF /* Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359A792A298DFBB9001B66CF /* Modifiers.swift */; };
+		359A792D298ECC6B001B66CF /* NYCSocialCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359A792C298ECC6B001B66CF /* NYCSocialCard.swift */; };
+		359A7930298ED141001B66CF /* Shimmer in Frameworks */ = {isa = PBXBuildFile; productRef = 359A792F298ED141001B66CF /* Shimmer */; };
+		359A7932298EDCCB001B66CF /* ShareCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359A7931298EDCCB001B66CF /* ShareCardView.swift */; };
+		359A7934298EF1C2001B66CF /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359A7933298EF1C2001B66CF /* TabBarView.swift */; };
 		359E6AA22981ED8B00333BD7 /* Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359E6AA12981ED8B00333BD7 /* Onboarding.swift */; };
 		359E6AA72981FEB800333BD7 /* Nunito-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 359E6AA62981FDD300333BD7 /* Nunito-Bold.ttf */; };
 		359E6AA82981FEB800333BD7 /* Nunito-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 359E6AA52981FDC800333BD7 /* Nunito-SemiBold.ttf */; };
@@ -60,6 +66,10 @@
 		35737E5A29888866003B68BE /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		35737E5D29888DA5003B68BE /* Social View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Social View.swift"; sourceTree = "<group>"; };
 		35737E6029888DF9003B68BE /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		359A792A298DFBB9001B66CF /* Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifiers.swift; sourceTree = "<group>"; };
+		359A792C298ECC6B001B66CF /* NYCSocialCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCSocialCard.swift; sourceTree = "<group>"; };
+		359A7931298EDCCB001B66CF /* ShareCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareCardView.swift; sourceTree = "<group>"; };
+		359A7933298EF1C2001B66CF /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		359E6AA12981ED8B00333BD7 /* Onboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding.swift; sourceTree = "<group>"; };
 		359E6AA42981FDBA00333BD7 /* Nunito-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Regular.ttf"; sourceTree = "<group>"; };
 		359E6AA52981FDC800333BD7 /* Nunito-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-SemiBold.ttf"; sourceTree = "<group>"; };
@@ -88,7 +98,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				359A7930298ED141001B66CF /* Shimmer in Frameworks */,
 				3538C623298353210017800B /* iPages in Frameworks */,
+				359A7929298DDD20001B66CF /* BottomSheet in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,6 +155,7 @@
 				359E6AA32981FD8400333BD7 /* Fonts */,
 				3503BD9C297F5EE500C0E365 /* Resources.swift */,
 				35E7FB8E29848B1C00EFF282 /* Extensions.swift */,
+				359A792A298DFBB9001B66CF /* Modifiers.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -168,6 +181,7 @@
 				359F80F1298AA911000D792E /* NYCCircleImageButton.swift */,
 				359F80F3298C2253000D792E /* NYCSectionHeader.swift */,
 				359F80F8298C30D2000D792E /* NYCBadgeView.swift */,
+				359A792C298ECC6B001B66CF /* NYCSocialCard.swift */,
 			);
 			path = "Helper Views";
 			sourceTree = "<group>";
@@ -204,6 +218,7 @@
 			isa = PBXGroup;
 			children = (
 				35737E5D29888DA5003B68BE /* Social View.swift */,
+				359A7931298EDCCB001B66CF /* ShareCardView.swift */,
 			);
 			path = "Social Views";
 			sourceTree = "<group>";
@@ -242,6 +257,7 @@
 				35737E5C29888D98003B68BE /* Social Views */,
 				35737E592988885B003B68BE /* Profile Views */,
 				3538C624298356120017800B /* Onboarding Views */,
+				359A7933298EF1C2001B66CF /* TabBarView.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -291,6 +307,8 @@
 			name = NYCoworker;
 			packageProductDependencies = (
 				3538C622298353210017800B /* iPages */,
+				359A7928298DDD20001B66CF /* BottomSheet */,
+				359A792F298ED141001B66CF /* Shimmer */,
 			);
 			productName = NYCoworker;
 			productReference = 3503BD82297F50AA00C0E365 /* NYCoworker.app */;
@@ -322,6 +340,8 @@
 			mainGroup = 3503BD79297F50AA00C0E365;
 			packageReferences = (
 				3538C621298353210017800B /* XCRemoteSwiftPackageReference "iPages" */,
+				359A7927298DDD20001B66CF /* XCRemoteSwiftPackageReference "bottom-sheet" */,
+				359A792E298ED141001B66CF /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */,
 			);
 			productRefGroup = 3503BD83297F50AA00C0E365 /* Products */;
 			projectDirPath = "";
@@ -353,9 +373,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				3503BD8A297F50AA00C0E365 /* ViewController.swift in Sources */,
+				359A7934298EF1C2001B66CF /* TabBarView.swift in Sources */,
 				359F80F4298C2253000D792E /* NYCSectionHeader.swift in Sources */,
 				3503BD9D297F5EE500C0E365 /* Resources.swift in Sources */,
 				359E6AA22981ED8B00333BD7 /* Onboarding.swift in Sources */,
+				359A792B298DFBB9001B66CF /* Modifiers.swift in Sources */,
 				359F80F2298AA911000D792E /* NYCCircleImageButton.swift in Sources */,
 				3538C6292983569D0017800B /* NYCBottomSheetHeader.swift in Sources */,
 				3538C626298356270017800B /* LanguageSetup.swift in Sources */,
@@ -363,6 +385,7 @@
 				35E7FB9D2985B88700EFF282 /* GeoLocationModel.swift in Sources */,
 				359F80F9298C30D2000D792E /* NYCBadgeView.swift in Sources */,
 				3538C62F298358890017800B /* LanguageCard.swift in Sources */,
+				359A792D298ECC6B001B66CF /* NYCSocialCard.swift in Sources */,
 				35D9A5D02989832200A2F8D6 /* SettingsCard.swift in Sources */,
 				35E7FB8D29848AE300EFF282 /* NYCFloatingTextField.swift in Sources */,
 				35737E5E29888DA5003B68BE /* Social View.swift in Sources */,
@@ -372,6 +395,7 @@
 				35D9A5CE298981EE00A2F8D6 /* SettingsModel.swift in Sources */,
 				35C479A6298C89D50089F342 /* SettingsView.swift in Sources */,
 				359F80FD298C492D000D792E /* FavoriteLocationCell.swift in Sources */,
+				359A7932298EDCCB001B66CF /* ShareCardView.swift in Sources */,
 				3503BD86297F50AA00C0E365 /* AppDelegate.swift in Sources */,
 				35737E6129888DF9003B68BE /* HomeView.swift in Sources */,
 				35E7FB9129848FEE00EFF282 /* NYCActionButton.swift in Sources */,
@@ -524,6 +548,7 @@
 				INFOPLIST_FILE = NYCoworker/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = NYCoworker;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "For test";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
@@ -558,6 +583,7 @@
 				INFOPLIST_FILE = NYCoworker/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = NYCoworker;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "For test";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
@@ -612,6 +638,22 @@
 				minimumVersion = 0.0.9;
 			};
 		};
+		359A7927298DDD20001B66CF /* XCRemoteSwiftPackageReference "bottom-sheet" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/weitieda/bottom-sheet";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+		359A792E298ED141001B66CF /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/markiv/SwiftUI-Shimmer";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -619,6 +661,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3538C621298353210017800B /* XCRemoteSwiftPackageReference "iPages" */;
 			productName = iPages;
+		};
+		359A7928298DDD20001B66CF /* BottomSheet */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 359A7927298DDD20001B66CF /* XCRemoteSwiftPackageReference "bottom-sheet" */;
+			productName = BottomSheet;
+		};
+		359A792F298ED141001B66CF /* Shimmer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 359A792E298ED141001B66CF /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */;
+			productName = Shimmer;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

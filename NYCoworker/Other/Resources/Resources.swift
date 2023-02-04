@@ -37,6 +37,7 @@ enum Resources {
             static let arrowBack = Image("arrow-back")
             static let close = Image("close")
             static let chevron = Image("chevron-right")
+            static let share = Image("share")
         }
         /// Images for settings
         enum Settings {
@@ -44,6 +45,13 @@ enum Resources {
             static let help = Image("help")
             static let manageNotifications = Image("edit-notifications")
             static let changeLanguage = Image("language")
+        }
+        
+        /// Images for social screen
+        enum Social {
+            static let search = Image("search")
+            static let go = Image("go")
+            static let mark = Image("mark")
         }
     }
     /// Fonts resource pack

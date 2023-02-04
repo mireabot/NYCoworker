@@ -11,7 +11,9 @@ struct LocationCell: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 3) {
             ZStack(alignment: .topTrailing) {
-                Rectangle()
+                Image("load")
+                    .resizable()
+                    .scaledToFill()
                     .frame(width: 120, height: 100)
                     .cornerRadius(10)
                 Button {

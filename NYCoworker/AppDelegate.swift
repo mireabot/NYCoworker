@@ -7,6 +7,23 @@
 
 import UIKit
 import SwiftUI
+import BottomSheet
+
+@main
+struct RemMemberAdminApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    var body: some Scene {
+        WindowGroup {
+            if Resources.isLogged {
+                TabBarView()
+            }
+            else {
+                Onboarding()
+            }
+        }
+    }
+}
+
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
@@ -30,50 +47,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     
-}
-
-
-struct TestView: View {
-    var body: some View {
-        TabView {
-            HomeView()
-                .tabItem {
-                    Label("Home", image: "home")
-                }
-            SocialView()
-                .tabItem {
-                    Label("Coworkers", image: "social")
-                }
-            ProfileView()
-                .tabItem {
-                    Label("Profile", image: "profile")
-                }
-        }
-        .accentColor(Resources.Colors.primary)
-        .onAppear() {
-            UITabBar.appearance().backgroundColor = .white
-        }
-    }
-}
-
-@main
-struct RemMemberAdminApp: App {
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-    var body: some Scene {
-        WindowGroup {
-            if Resources.isLogged {
-                TestView()
-            }
-            else {
-                Onboarding()
-            }
-        }
-    }
-}
-
-
-struct C_Previews: PreviewProvider {
-    static var previews: some View {
-        TestView()
-    }
 }

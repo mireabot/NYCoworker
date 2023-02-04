@@ -10,7 +10,9 @@ import SwiftUI
 struct FavoriteLocationCell: View {
     var body: some View {
         HStack(alignment: .center) {
-            Rectangle()
+            Image("load")
+                .resizable()
+                .scaledToFill()
                 .frame(width: 110, height: 110)
                 .cornerRadius(5)
             

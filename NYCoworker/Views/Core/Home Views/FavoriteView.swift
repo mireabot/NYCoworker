@@ -13,7 +13,7 @@ struct FavoriteView: View {
         NavigationStack {
             ScrollView(.vertical, showsIndicators: false) {
                 VStack(spacing: 10) {
-                    ForEach(0..<10){_ in
+                    ForEach(0..<3){_ in
                         FavoriteLocationCell()
                     }
                 }
@@ -21,6 +21,7 @@ struct FavoriteView: View {
                 .padding(.top, 20)
                 Spacer()
             }
+            .hideTabbar(shouldHideTabbar: true)
             .toolbar(content: {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button {

@@ -18,3 +18,10 @@ extension String {
         " " + self
     }
 }
+
+extension View {
+    
+    func hideTabbar(shouldHideTabbar: Bool) -> some View {
+        self.modifier(HideTabbarModifier(shouldHideTabbar: shouldHideTabbar))
+    }
+}
