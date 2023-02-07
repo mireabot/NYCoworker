@@ -17,7 +17,7 @@ struct NYCActionButton: View {
                 action()
             } label: {
                 Text(text)
-                    .foregroundColor(.white)
+                    .foregroundColor(Color.white)
                     .padding([.top,.bottom], 13)
                     .font(Resources.Fonts.regular(withSize: 17))
                     .frame(maxWidth: .infinity)
