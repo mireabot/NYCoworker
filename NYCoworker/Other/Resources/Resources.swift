@@ -38,6 +38,7 @@ enum Resources {
             static let close = Image("close")
             static let chevron = Image("chevron-right")
             static let share = Image("share")
+            static let location = Image("location")
         }
         /// Images for settings
         enum Settings {

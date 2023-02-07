@@ -36,6 +36,7 @@ struct GeopositionPermission: View {
                 }
             }, text: "Continue")
             .padding(.bottom, 10)
+            .padding([.leading,.trailing], 16)
         }
         .toolbar(.hidden)
     }

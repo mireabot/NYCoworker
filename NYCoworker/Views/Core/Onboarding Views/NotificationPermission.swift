@@ -35,6 +35,7 @@ struct NotificationPermission: View {
                 requestNotification()
             }, text: "Continue")
             .padding(.bottom, 10)
+            .padding([.leading,.trailing], 16)
         }
         .toolbar(.hidden)
         .navigationDestination(isPresented: $prepareToNavigate) {

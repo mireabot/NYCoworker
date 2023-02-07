@@ -9,8 +9,11 @@ import SwiftUI
 import Shimmer
 
 struct HomeView: View {
-    @State var presentFavoritesView = true
+    @State var presentFavoritesView = false
+    @State var presentLocationList = false
     @State var timer = false
+    @State var locationTitle = ""
+    @State var presentMap = false
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             /// Map section
@@ -23,12 +26,12 @@ struct HomeView: View {
                         .cornerRadius(10)
                     
                     Button {
-                        
+                        presentMap.toggle()
                     } label: {
                         Text("Open map")
-                            .frame(width: UIScreen.main.bounds.width / 2, height: 40)
                     }
                     .buttonStyle(NYCActionButtonStyle())
+                    .padding([.leading,.trailing], 90)
                 }
             }
             .padding([.leading,.trailing], 20)
@@ -38,7 +41,11 @@ struct HomeView: View {
             VStack(alignment: .leading, spacing: 15) {
                 /// Category scrollview
                 VStack(alignment: .leading, spacing: 10) {
-                    NYCSectionHeader(title: "Silent libraries", isExpandButton: true)
+                    NYCSectionHeader(title: Locations.libraries.rawValue, isExpandButton: true)
+                        .onTapGesture {
+                            locationTitle = Locations.libraries.rawValue
+                            presentLocationList.toggle()
+                        }
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 10) {
                             ForEach(0..<10) {_ in
@@ -57,7 +64,11 @@ struct HomeView: View {
                 
                 /// Category scrollview
                 VStack(alignment: .leading, spacing: 10) {
-                    NYCSectionHeader(title: "Stunning lobbies", isExpandButton: true)
+                    NYCSectionHeader(title: Locations.lobbies.rawValue, isExpandButton: true)
+                        .onTapGesture {
+                            locationTitle = Locations.lobbies.rawValue
+                            presentLocationList.toggle()
+                        }
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 10) {
                             ForEach(0..<10) {_ in
@@ -80,6 +91,12 @@ struct HomeView: View {
         .navigationDestination(isPresented: $presentFavoritesView, destination: {
             FavoriteView()
         })
+        .navigationDestination(isPresented: $presentLocationList, destination: {
+            LocationListView(title: locationTitle)
+        })
+        .fullScreenCover(isPresented: $presentMap, content: {
+            LocationsMapView()
+        })
         .onAppear {
             timer = true
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
@@ -100,9 +117,6 @@ struct HomeView: View {
             }
         }
         .toolbarBackground(.white, for: .navigationBar, .automatic)
-        .onAppear {
-            UITabBar.appearance().isHidden = true
-        }
         .hideTabbar(shouldHideTabbar: false)
     }
 }

@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct ProfileView: View {
-    @Binding var showSettings: Bool
+    @Binding var showPopup: Bool
+    @State var showSettings = false
     @State var settingsTitle = ""
     var body: some View {
         VStack {
@@ -48,9 +49,14 @@ struct ProfileView: View {
                 /// Bottom content
                 HStack {
                     VStack(alignment: .leading, spacing: 5) {
-                        Text("Log out")
-                            .foregroundColor(Resources.Colors.actionRed)
-                            .font(Resources.Fonts.bold(withSize: 20))
+                        Button {
+                            showPopup.toggle()
+                        } label: {
+                            Text("Log out")
+                                .foregroundColor(Resources.Colors.actionRed)
+                                .font(Resources.Fonts.bold(withSize: 20))
+                        }
+
                         Text("Version 1.0")
                             .foregroundColor(Resources.Colors.darkGrey)
                             .font(Resources.Fonts.regular(withSize: 16))

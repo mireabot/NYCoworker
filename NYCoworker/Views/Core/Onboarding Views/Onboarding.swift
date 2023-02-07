@@ -65,24 +65,17 @@ struct Onboarding: View {
                 Spacer()
                 
                 /// Bottom footer with button
-                VStack(alignment: .center, spacing: 15) {
-                    Button {
+                VStack(alignment: .leading, spacing: 15) {
+                    NYCActionButton(action: {
                         prepareToNavigate.toggle()
-                    } label: {
-                        Text("Get started")
-                            .foregroundColor(.white)
-                            .font(Resources.Fonts.regular(withSize: 17))
-                            .frame(width: UIScreen.main.bounds.width - 16, height: 48)
-                    }
-                    .background(Resources.Colors.primary)
-                    .cornerRadius(10)
+                    }, text: "Get Started")
                     
                     Text("By pressing “Get started” button, you agree to our \(Text("Terms of service").foregroundColor(Resources.Colors.actionGreen)) and \(Text("Privacy Policy").foregroundColor(Resources.Colors.actionGreen))")
                         .foregroundColor(Resources.Colors.customBlack)
                         .font(Resources.Fonts.regular(withSize: 13))
-                        .padding([.trailing], 16)
                 }
                 .padding(.bottom, 10)
+                .padding([.trailing,.leading], 16)
             }
             .sheet(isPresented: $showingCredits) {
                 LanguageSetup()

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import BottomSheet
 
 struct TabBarView: View {
     @State var showBottomsheet = false
@@ -24,12 +25,15 @@ struct TabBarView: View {
                 Label("Coworkers", image: "social")
             }
             NavigationStack {
-                ProfileView(showSettings: $showBottomsheet)
+                ProfileView(showPopup: $showBottomsheet)
             }
             .tabItem {
                 Label("Profile", image: "profile")
             }
         }
+        .bottomSheet(isPresented: $showBottomsheet, height: 200, showTopIndicator: false, content: {
+            LogoutView()
+        })
         .accentColor(Resources.Colors.primary)
         .onAppear() {
             UITabBar.appearance().backgroundColor = .white

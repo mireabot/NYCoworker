@@ -135,11 +135,11 @@ struct ProfileSetup: View {
                     makeAction()
                 }, label: {
                     Text("Continue")
-                        .frame(width: UIScreen.main.bounds.width - 16, height: 48)
                 })
-                    .padding(.bottom, 10)
-                    .disabled(nameTextFieldText == "")
-                    .buttonStyle(NYCActionButtonStyle())
+                .padding(.bottom, 10)
+                .padding([.leading,.trailing], 16)
+                .disabled(nameTextFieldText == "")
+                .buttonStyle(NYCActionButtonStyle())
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
