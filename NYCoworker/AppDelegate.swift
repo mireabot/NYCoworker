@@ -10,16 +10,10 @@ import SwiftUI
 import BottomSheet
 
 @main
-struct RemMemberAdminApp: App {
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+struct NYCoworkerApp: App {
     var body: some Scene {
         WindowGroup {
-            if Resources.isLogged {
-                TabBarView()
-            }
-            else {
-                Onboarding()
-            }
+            SplashScreenView()
         }
     }
 }
@@ -47,4 +41,55 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     
+}
+
+struct SplashScreenView: View {
+    @State var isActive : Bool = false
+    @State private var size = 0.8
+    @State private var opacity = 0.5
+    
+    // Customise your SplashScreen here
+    var body: some View {
+        if isActive {
+            InitView()
+        } else {
+            VStack {
+                VStack {
+                    Image("appLogo")
+                        .resizable()
+                        .frame(width: 150, height: 150)
+                    Text("NYCoworker")
+                        .foregroundColor(Resources.Colors.customBlack)
+                        .font(Resources.Fonts.bold(withSize: 28))
+                }
+                .scaleEffect(size)
+                .opacity(opacity)
+                .onAppear {
+                    withAnimation(.easeIn(duration: 1.2)) {
+                        self.size = 0.9
+                        self.opacity = 1.00
+                    }
+                }
+            }
+            .onAppear {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                    withAnimation {
+                        self.isActive = true
+                    }
+                }
+            }
+        }
+    }
+}
+
+struct InitView: View {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    var body: some View {
+        if Resources.isLogged {
+            TabBarView()
+        }
+        else {
+            Onboarding()
+        }
+    }
 }

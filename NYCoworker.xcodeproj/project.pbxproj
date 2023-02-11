@@ -25,6 +25,7 @@
 		35737E5B29888866003B68BE /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35737E5A29888866003B68BE /* ProfileView.swift */; };
 		35737E5E29888DA5003B68BE /* Social View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35737E5D29888DA5003B68BE /* Social View.swift */; };
 		35737E6129888DF9003B68BE /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35737E6029888DF9003B68BE /* HomeView.swift */; };
+		359213632995DC0C00B18A8D /* KeyboardAvoider in Frameworks */ = {isa = PBXBuildFile; productRef = 359213622995DC0C00B18A8D /* KeyboardAvoider */; };
 		359A7929298DDD20001B66CF /* BottomSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 359A7928298DDD20001B66CF /* BottomSheet */; };
 		359A792B298DFBB9001B66CF /* Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359A792A298DFBB9001B66CF /* Modifiers.swift */; };
 		359A792D298ECC6B001B66CF /* NYCSocialCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359A792C298ECC6B001B66CF /* NYCSocialCard.swift */; };
@@ -41,6 +42,7 @@
 		359F80F9298C30D2000D792E /* NYCBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359F80F8298C30D2000D792E /* NYCBadgeView.swift */; };
 		359F80FB298C330B000D792E /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359F80FA298C330B000D792E /* FavoriteView.swift */; };
 		359F80FD298C492D000D792E /* FavoriteLocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359F80FC298C492D000D792E /* FavoriteLocationCell.swift */; };
+		35BC807A29970DC0001ACC35 /* ListModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BC807929970DC0001ACC35 /* ListModifier.swift */; };
 		35C479A6298C89D50089F342 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C479A5298C89D50089F342 /* SettingsView.swift */; };
 		35D9A5CE298981EE00A2F8D6 /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D9A5CD298981EE00A2F8D6 /* SettingsModel.swift */; };
 		35D9A5D02989832200A2F8D6 /* SettingsCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D9A5CF2989832200A2F8D6 /* SettingsCard.swift */; };
@@ -88,6 +90,7 @@
 		359F80F8298C30D2000D792E /* NYCBadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCBadgeView.swift; sourceTree = "<group>"; };
 		359F80FA298C330B000D792E /* FavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteView.swift; sourceTree = "<group>"; };
 		359F80FC298C492D000D792E /* FavoriteLocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteLocationCell.swift; sourceTree = "<group>"; };
+		35BC807929970DC0001ACC35 /* ListModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListModifier.swift; sourceTree = "<group>"; };
 		35C479A5298C89D50089F342 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		35D9A5CD298981EE00A2F8D6 /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
 		35D9A5CF2989832200A2F8D6 /* SettingsCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCard.swift; sourceTree = "<group>"; };
@@ -108,6 +111,7 @@
 			files = (
 				359A7930298ED141001B66CF /* Shimmer in Frameworks */,
 				3538C623298353210017800B /* iPages in Frameworks */,
+				359213632995DC0C00B18A8D /* KeyboardAvoider in Frameworks */,
 				359A7929298DDD20001B66CF /* BottomSheet in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -165,6 +169,7 @@
 				35E7FB8E29848B1C00EFF282 /* Extensions.swift */,
 				359A792A298DFBB9001B66CF /* Modifiers.swift */,
 				350DE2772991C66600573163 /* Enums.swift */,
+				35BC807929970DC0001ACC35 /* ListModifier.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -329,6 +334,7 @@
 				3538C622298353210017800B /* iPages */,
 				359A7928298DDD20001B66CF /* BottomSheet */,
 				359A792F298ED141001B66CF /* Shimmer */,
+				359213622995DC0C00B18A8D /* KeyboardAvoider */,
 			);
 			productName = NYCoworker;
 			productReference = 3503BD82297F50AA00C0E365 /* NYCoworker.app */;
@@ -362,6 +368,7 @@
 				3538C621298353210017800B /* XCRemoteSwiftPackageReference "iPages" */,
 				359A7927298DDD20001B66CF /* XCRemoteSwiftPackageReference "bottom-sheet" */,
 				359A792E298ED141001B66CF /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */,
+				359213612995DC0C00B18A8D /* XCRemoteSwiftPackageReference "KeyboardAvoider" */,
 			);
 			productRefGroup = 3503BD83297F50AA00C0E365 /* Products */;
 			projectDirPath = "";
@@ -416,6 +423,7 @@
 				35737E5B29888866003B68BE /* ProfileView.swift in Sources */,
 				359F80FB298C330B000D792E /* FavoriteView.swift in Sources */,
 				35D9A5CE298981EE00A2F8D6 /* SettingsModel.swift in Sources */,
+				35BC807A29970DC0001ACC35 /* ListModifier.swift in Sources */,
 				35C479A6298C89D50089F342 /* SettingsView.swift in Sources */,
 				359F80FD298C492D000D792E /* FavoriteLocationCell.swift in Sources */,
 				359A7932298EDCCB001B66CF /* ShareCardView.swift in Sources */,
@@ -662,6 +670,14 @@
 				minimumVersion = 0.0.9;
 			};
 		};
+		359213612995DC0C00B18A8D /* XCRemoteSwiftPackageReference "KeyboardAvoider" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/michaelhenry/KeyboardAvoider.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		359A7927298DDD20001B66CF /* XCRemoteSwiftPackageReference "bottom-sheet" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/weitieda/bottom-sheet";
@@ -685,6 +701,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3538C621298353210017800B /* XCRemoteSwiftPackageReference "iPages" */;
 			productName = iPages;
+		};
+		359213622995DC0C00B18A8D /* KeyboardAvoider */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 359213612995DC0C00B18A8D /* XCRemoteSwiftPackageReference "KeyboardAvoider" */;
+			productName = KeyboardAvoider;
 		};
 		359A7928298DDD20001B66CF /* BottomSheet */ = {
 			isa = XCSwiftPackageProductDependency;
