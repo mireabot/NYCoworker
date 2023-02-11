@@ -17,6 +17,9 @@
 		350DE2762991C5F200573163 /* LocationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350DE2752991C5F200573163 /* LocationListView.swift */; };
 		350DE2782991C66600573163 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350DE2772991C66600573163 /* Enums.swift */; };
 		350DE27B2991CA7600573163 /* LocationsMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350DE27A2991CA7600573163 /* LocationsMapView.swift */; };
+		351B3A23299814B8007E7D00 /* ManageAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351B3A22299814B8007E7D00 /* ManageAccountView.swift */; };
+		351B3A2529981665007E7D00 /* HelpSupportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351B3A2429981665007E7D00 /* HelpSupportView.swift */; };
+		351B3A2729981B22007E7D00 /* NYCSettingsCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351B3A2629981B22007E7D00 /* NYCSettingsCard.swift */; };
 		3538C623298353210017800B /* iPages in Frameworks */ = {isa = PBXBuildFile; productRef = 3538C622298353210017800B /* iPages */; };
 		3538C626298356270017800B /* LanguageSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3538C625298356270017800B /* LanguageSetup.swift */; };
 		3538C6292983569D0017800B /* NYCBottomSheetHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3538C6282983569D0017800B /* NYCBottomSheetHeader.swift */; };
@@ -69,6 +72,9 @@
 		350DE2752991C5F200573163 /* LocationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationListView.swift; sourceTree = "<group>"; };
 		350DE2772991C66600573163 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		350DE27A2991CA7600573163 /* LocationsMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsMapView.swift; sourceTree = "<group>"; };
+		351B3A22299814B8007E7D00 /* ManageAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageAccountView.swift; sourceTree = "<group>"; };
+		351B3A2429981665007E7D00 /* HelpSupportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpSupportView.swift; sourceTree = "<group>"; };
+		351B3A2629981B22007E7D00 /* NYCSettingsCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCSettingsCard.swift; sourceTree = "<group>"; };
 		3538C625298356270017800B /* LanguageSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSetup.swift; sourceTree = "<group>"; };
 		3538C6282983569D0017800B /* NYCBottomSheetHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCBottomSheetHeader.swift; sourceTree = "<group>"; };
 		3538C62B298357490017800B /* AppLanguageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLanguageModel.swift; sourceTree = "<group>"; };
@@ -182,6 +188,15 @@
 			path = MapViews;
 			sourceTree = "<group>";
 		};
+		351B3A21299814AA007E7D00 /* Settings Views */ = {
+			isa = PBXGroup;
+			children = (
+				351B3A22299814B8007E7D00 /* ManageAccountView.swift */,
+				351B3A2429981665007E7D00 /* HelpSupportView.swift */,
+			);
+			path = "Settings Views";
+			sourceTree = "<group>";
+		};
 		3538C624298356120017800B /* Onboarding Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -204,6 +219,7 @@
 				359F80F3298C2253000D792E /* NYCSectionHeader.swift */,
 				359F80F8298C30D2000D792E /* NYCBadgeView.swift */,
 				359A792C298ECC6B001B66CF /* NYCSocialCard.swift */,
+				351B3A2629981B22007E7D00 /* NYCSettingsCard.swift */,
 			);
 			path = "Helper Views";
 			sourceTree = "<group>";
@@ -230,6 +246,7 @@
 		35737E592988885B003B68BE /* Profile Views */ = {
 			isa = PBXGroup;
 			children = (
+				351B3A21299814AA007E7D00 /* Settings Views */,
 				35737E5A29888866003B68BE /* ProfileView.swift */,
 				35C479A5298C89D50089F342 /* SettingsView.swift */,
 				350DE273299143B500573163 /* LogoutView.swift */,
@@ -407,6 +424,7 @@
 				359A792B298DFBB9001B66CF /* Modifiers.swift in Sources */,
 				359F80F2298AA911000D792E /* NYCCircleImageButton.swift in Sources */,
 				3538C6292983569D0017800B /* NYCBottomSheetHeader.swift in Sources */,
+				351B3A2729981B22007E7D00 /* NYCSettingsCard.swift in Sources */,
 				350DE274299143B500573163 /* LogoutView.swift in Sources */,
 				3538C626298356270017800B /* LanguageSetup.swift in Sources */,
 				35E7FB942985A9D500EFF282 /* UserRegistrationModel.swift in Sources */,
@@ -416,6 +434,7 @@
 				359F80F9298C30D2000D792E /* NYCBadgeView.swift in Sources */,
 				3538C62F298358890017800B /* LanguageCard.swift in Sources */,
 				359A792D298ECC6B001B66CF /* NYCSocialCard.swift in Sources */,
+				351B3A23299814B8007E7D00 /* ManageAccountView.swift in Sources */,
 				35D9A5D02989832200A2F8D6 /* SettingsCard.swift in Sources */,
 				35E7FB8D29848AE300EFF282 /* NYCFloatingTextField.swift in Sources */,
 				35737E5E29888DA5003B68BE /* Social View.swift in Sources */,
@@ -431,6 +450,7 @@
 				35737E6129888DF9003B68BE /* HomeView.swift in Sources */,
 				35E7FB9129848FEE00EFF282 /* NYCActionButton.swift in Sources */,
 				35E7FB992985AB9300EFF282 /* NotificationPermission.swift in Sources */,
+				351B3A2529981665007E7D00 /* HelpSupportView.swift in Sources */,
 				35E7FB8B298486F400EFF282 /* ProfileSetup.swift in Sources */,
 				359F80F7298C2508000D792E /* LocationCell.swift in Sources */,
 				3503BD88297F50AA00C0E365 /* SceneDelegate.swift in Sources */,

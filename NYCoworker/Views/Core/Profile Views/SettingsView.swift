@@ -9,12 +9,23 @@ import SwiftUI
 
 struct SettingsView: View {
     @Environment(\.dismiss) var makeDismiss
+    @State var nameTextFieldText = ""
+    @State var occupationTextFieldText = ""
+    @State var personType: String = "Student"
     var title: String
     var body: some View {
         NavigationStack {
             VStack {
-                
+                switch title {
+                case Strings.Settings.manageAccount :
+                    ManageAccountView(nameText: $nameTextFieldText, occupationText: $occupationTextFieldText)
+                case Strings.Settings.helpSupport:
+                    HelpSupportView()
+                default:
+                    Text("1")
+                }
             }
+            .hideTabbar(shouldHideTabbar: true)
             .toolbar(content: {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button {
@@ -23,7 +34,7 @@ struct SettingsView: View {
                         Resources.Images.Navigation.arrowBack
                             .foregroundColor(Resources.Colors.primary)
                     }
-
+                    
                 }
                 
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -32,15 +43,15 @@ struct SettingsView: View {
                         .font(Resources.Fonts.bold(withSize: 17))
                 }
             })
-            .hideTabbar(shouldHideTabbar: true)
+            .ignoresSafeArea(.keyboard)
             .navigationBarBackButtonHidden()
             .toolbarBackground(.white, for: .navigationBar)
         }
     }
 }
 
-//struct SettingsView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SettingsView()
-//    }
-//}
+struct SettingsView_Previews: PreviewProvider {
+    static var previews: some View {
+        SettingsView(title: "Title")
+    }
+}

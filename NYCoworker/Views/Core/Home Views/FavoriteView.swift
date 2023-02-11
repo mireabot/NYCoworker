@@ -12,7 +12,7 @@ struct FavoriteView: View {
     var body: some View {
         NavigationStack {
             ScrollView(.vertical, showsIndicators: false) {
-                VStack(spacing: 10) {
+                LazyVStack(spacing: 10) {
                     ForEach(0..<3){_ in
                         FavoriteLocationCell()
                     }

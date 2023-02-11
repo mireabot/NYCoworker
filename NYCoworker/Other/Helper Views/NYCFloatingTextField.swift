@@ -65,3 +65,27 @@ struct FloatingTextField_Previews: PreviewProvider {
     }
 }
 #endif
+
+struct NYCTextField: View {
+    let title: String
+    var placeholder: String?
+    @Binding var text: String
+    var body: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            
+            Text(title)
+                .foregroundColor(Resources.Colors.customBlack)
+                .font(Resources.Fonts.regular(withSize: 15))
+            
+            TextField(placeholder ?? "", text: $text)
+                .frame(height: 50, alignment: .leading)
+                .padding(.horizontal, 16)
+                .textFieldStyle(PlainTextFieldStyle())
+                .background(
+                    RoundedRectangle(cornerRadius: 16)
+                        .strokeBorder(Resources.Colors.lightGrey, lineWidth: 1)
+                )
+            
+        }
+    }
+}

@@ -46,6 +46,9 @@ enum Resources {
             static let help = Image("help")
             static let manageNotifications = Image("edit-notifications")
             static let changeLanguage = Image("language")
+            static let website = Image("website")
+            static let rate = Image("rate")
+            static let faq = Image("faq")
         }
         
         /// Images for social screen
@@ -71,5 +74,15 @@ enum Resources {
         static func bold(withSize size: CGFloat) -> Font {
             return Font.custom("Nunito-Bold", size: size)
         }
+    }
+}
+
+enum Strings {
+    /// Settings strings
+    enum Settings {
+        static let manageAccount = "Manage account"
+        static let helpSupport = "Help & Support"
+        static let manageNotifications = "Manage notifications"
+        static let language = "Change Language"
     }
 }
