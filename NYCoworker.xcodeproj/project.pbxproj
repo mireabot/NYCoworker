@@ -20,6 +20,7 @@
 		351B3A23299814B8007E7D00 /* ManageAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351B3A22299814B8007E7D00 /* ManageAccountView.swift */; };
 		351B3A2529981665007E7D00 /* HelpSupportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351B3A2429981665007E7D00 /* HelpSupportView.swift */; };
 		351B3A2729981B22007E7D00 /* NYCSettingsCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351B3A2629981B22007E7D00 /* NYCSettingsCard.swift */; };
+		351B3A2929982ABC007E7D00 /* LocationDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351B3A2829982ABC007E7D00 /* LocationDetailView.swift */; };
 		3538C623298353210017800B /* iPages in Frameworks */ = {isa = PBXBuildFile; productRef = 3538C622298353210017800B /* iPages */; };
 		3538C626298356270017800B /* LanguageSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3538C625298356270017800B /* LanguageSetup.swift */; };
 		3538C6292983569D0017800B /* NYCBottomSheetHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3538C6282983569D0017800B /* NYCBottomSheetHeader.swift */; };
@@ -45,6 +46,7 @@
 		359F80F9298C30D2000D792E /* NYCBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359F80F8298C30D2000D792E /* NYCBadgeView.swift */; };
 		359F80FB298C330B000D792E /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359F80FA298C330B000D792E /* FavoriteView.swift */; };
 		359F80FD298C492D000D792E /* FavoriteLocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359F80FC298C492D000D792E /* FavoriteLocationCell.swift */; };
+		35BA64B5299BF69D00E15206 /* ReviewCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BA64B4299BF69D00E15206 /* ReviewCard.swift */; };
 		35BC807A29970DC0001ACC35 /* ListModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BC807929970DC0001ACC35 /* ListModifier.swift */; };
 		35C479A6298C89D50089F342 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C479A5298C89D50089F342 /* SettingsView.swift */; };
 		35D9A5CE298981EE00A2F8D6 /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D9A5CD298981EE00A2F8D6 /* SettingsModel.swift */; };
@@ -75,6 +77,7 @@
 		351B3A22299814B8007E7D00 /* ManageAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageAccountView.swift; sourceTree = "<group>"; };
 		351B3A2429981665007E7D00 /* HelpSupportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpSupportView.swift; sourceTree = "<group>"; };
 		351B3A2629981B22007E7D00 /* NYCSettingsCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCSettingsCard.swift; sourceTree = "<group>"; };
+		351B3A2829982ABC007E7D00 /* LocationDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailView.swift; sourceTree = "<group>"; };
 		3538C625298356270017800B /* LanguageSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSetup.swift; sourceTree = "<group>"; };
 		3538C6282983569D0017800B /* NYCBottomSheetHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCBottomSheetHeader.swift; sourceTree = "<group>"; };
 		3538C62B298357490017800B /* AppLanguageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLanguageModel.swift; sourceTree = "<group>"; };
@@ -96,6 +99,7 @@
 		359F80F8298C30D2000D792E /* NYCBadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCBadgeView.swift; sourceTree = "<group>"; };
 		359F80FA298C330B000D792E /* FavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteView.swift; sourceTree = "<group>"; };
 		359F80FC298C492D000D792E /* FavoriteLocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteLocationCell.swift; sourceTree = "<group>"; };
+		35BA64B4299BF69D00E15206 /* ReviewCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCard.swift; sourceTree = "<group>"; };
 		35BC807929970DC0001ACC35 /* ListModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListModifier.swift; sourceTree = "<group>"; };
 		35C479A5298C89D50089F342 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		35D9A5CD298981EE00A2F8D6 /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
@@ -239,6 +243,7 @@
 			children = (
 				3538C62E298358890017800B /* LanguageCard.swift */,
 				35D9A5CF2989832200A2F8D6 /* SettingsCard.swift */,
+				35BA64B4299BF69D00E15206 /* ReviewCard.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -269,6 +274,7 @@
 				35737E6029888DF9003B68BE /* HomeView.swift */,
 				359F80FA298C330B000D792E /* FavoriteView.swift */,
 				350DE2752991C5F200573163 /* LocationListView.swift */,
+				351B3A2829982ABC007E7D00 /* LocationDetailView.swift */,
 			);
 			path = "Home Views";
 			sourceTree = "<group>";
@@ -445,6 +451,7 @@
 				35BC807A29970DC0001ACC35 /* ListModifier.swift in Sources */,
 				35C479A6298C89D50089F342 /* SettingsView.swift in Sources */,
 				359F80FD298C492D000D792E /* FavoriteLocationCell.swift in Sources */,
+				35BA64B5299BF69D00E15206 /* ReviewCard.swift in Sources */,
 				359A7932298EDCCB001B66CF /* ShareCardView.swift in Sources */,
 				3503BD86297F50AA00C0E365 /* AppDelegate.swift in Sources */,
 				35737E6129888DF9003B68BE /* HomeView.swift in Sources */,
@@ -454,6 +461,7 @@
 				35E7FB8B298486F400EFF282 /* ProfileSetup.swift in Sources */,
 				359F80F7298C2508000D792E /* LocationCell.swift in Sources */,
 				3503BD88297F50AA00C0E365 /* SceneDelegate.swift in Sources */,
+				351B3A2929982ABC007E7D00 /* LocationDetailView.swift in Sources */,
 				3538C62C298357490017800B /* AppLanguageModel.swift in Sources */,
 				350DE2782991C66600573163 /* Enums.swift in Sources */,
 				35E7FB9B2985ADF800EFF282 /* GeopositionPermission.swift in Sources */,

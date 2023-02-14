@@ -39,6 +39,7 @@ enum Resources {
             static let chevron = Image("chevron-right")
             static let share = Image("share")
             static let location = Image("location")
+            static let openMap = Image("open-map")
         }
         /// Images for settings
         enum Settings {
@@ -84,5 +85,12 @@ enum Strings {
         static let helpSupport = "Help & Support"
         static let manageNotifications = "Manage notifications"
         static let language = "Change Language"
+    }
+}
+
+
+enum LocationR {
+    enum General {
+        static let pin = Image("pin")
     }
 }

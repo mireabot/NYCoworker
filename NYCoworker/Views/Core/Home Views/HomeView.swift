@@ -11,6 +11,7 @@ import Shimmer
 struct HomeView: View {
     @State var presentFavoritesView = false
     @State var presentLocationList = false
+    @State var presentLocation = false
     @State var timer = false
     @State var locationTitle = ""
     @State var presentMap = false
@@ -56,6 +57,9 @@ struct HomeView: View {
                                 }
                                 else {
                                     LocationCell()
+                                        .onTapGesture {
+                                            presentLocation.toggle()
+                                        }
                                 }
                             }
                         }
@@ -93,6 +97,9 @@ struct HomeView: View {
         })
         .navigationDestination(isPresented: $presentLocationList, destination: {
             LocationListView(title: locationTitle)
+        })
+        .navigationDestination(isPresented: $presentLocation, destination: {
+            LocationDetailView()
         })
         .fullScreenCover(isPresented: $presentMap, content: {
             LocationsMapView()
