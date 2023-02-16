@@ -59,6 +59,8 @@
 		35E7FB992985AB9300EFF282 /* NotificationPermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E7FB982985AB9300EFF282 /* NotificationPermission.swift */; };
 		35E7FB9B2985ADF800EFF282 /* GeopositionPermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E7FB9A2985ADF800EFF282 /* GeopositionPermission.swift */; };
 		35E7FB9D2985B88700EFF282 /* GeoLocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E7FB9C2985B88700EFF282 /* GeoLocationModel.swift */; };
+		35F29397299E8ED500A85586 /* AmenityCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F29396299E8ED500A85586 /* AmenityCard.swift */; };
+		35F29399299E8F4A00A85586 /* AmenityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F29398299E8F4A00A85586 /* AmenityModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -112,6 +114,8 @@
 		35E7FB982985AB9300EFF282 /* NotificationPermission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPermission.swift; sourceTree = "<group>"; };
 		35E7FB9A2985ADF800EFF282 /* GeopositionPermission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeopositionPermission.swift; sourceTree = "<group>"; };
 		35E7FB9C2985B88700EFF282 /* GeoLocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoLocationModel.swift; sourceTree = "<group>"; };
+		35F29396299E8ED500A85586 /* AmenityCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmenityCard.swift; sourceTree = "<group>"; };
+		35F29398299E8F4A00A85586 /* AmenityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmenityModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -234,6 +238,7 @@
 				3538C62B298357490017800B /* AppLanguageModel.swift */,
 				35E7FB9C2985B88700EFF282 /* GeoLocationModel.swift */,
 				35D9A5CD298981EE00A2F8D6 /* SettingsModel.swift */,
+				35F29398299E8F4A00A85586 /* AmenityModel.swift */,
 			);
 			path = System;
 			sourceTree = "<group>";
@@ -244,6 +249,7 @@
 				3538C62E298358890017800B /* LanguageCard.swift */,
 				35D9A5CF2989832200A2F8D6 /* SettingsCard.swift */,
 				35BA64B4299BF69D00E15206 /* ReviewCard.swift */,
+				35F29396299E8ED500A85586 /* AmenityCard.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -456,9 +462,11 @@
 				3503BD86297F50AA00C0E365 /* AppDelegate.swift in Sources */,
 				35737E6129888DF9003B68BE /* HomeView.swift in Sources */,
 				35E7FB9129848FEE00EFF282 /* NYCActionButton.swift in Sources */,
+				35F29399299E8F4A00A85586 /* AmenityModel.swift in Sources */,
 				35E7FB992985AB9300EFF282 /* NotificationPermission.swift in Sources */,
 				351B3A2529981665007E7D00 /* HelpSupportView.swift in Sources */,
 				35E7FB8B298486F400EFF282 /* ProfileSetup.swift in Sources */,
+				35F29397299E8ED500A85586 /* AmenityCard.swift in Sources */,
 				359F80F7298C2508000D792E /* LocationCell.swift in Sources */,
 				3503BD88297F50AA00C0E365 /* SceneDelegate.swift in Sources */,
 				351B3A2929982ABC007E7D00 /* LocationDetailView.swift in Sources */,

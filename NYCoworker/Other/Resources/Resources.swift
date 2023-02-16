@@ -93,4 +93,11 @@ enum LocationR {
     enum General {
         static let pin = Image("pin")
     }
+    
+    enum Amenities {
+        static let wifi = Image("wi-fi")
+        static let ac = Image("ac")
+        static let charge = Image("charge")
+        static let meeting = Image("meeting")
+    }
 }
