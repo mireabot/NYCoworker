@@ -11,6 +11,7 @@ import Shimmer
 struct HomeView: View {
     @State var presentFavoritesView = false
     @State var presentLocationList = false
+    @State var presentNotifications = false
     @State var presentLocation = false
     @State var timer = false
     @State var locationTitle = ""
@@ -101,6 +102,9 @@ struct HomeView: View {
         .navigationDestination(isPresented: $presentLocation, destination: {
             LocationDetailView()
         })
+        .navigationDestination(isPresented: $presentNotifications, destination: {
+            NotificationsView()
+        })
         .fullScreenCover(isPresented: $presentMap, content: {
             LocationsMapView()
         })
@@ -120,6 +124,12 @@ struct HomeView: View {
             ToolbarItem(placement: .navigationBarTrailing) {
                 NYCCircleImageButton(size: 20, image: Image("rate")) {
                     presentFavoritesView.toggle()
+                }
+            }
+            
+            ToolbarItem(placement: .primaryAction) {
+                NYCCircleImageButton(size: 20, image: Image("bell")) {
+                    presentNotifications.toggle()
                 }
             }
         }

@@ -19,13 +19,30 @@ struct AmenityCard: View {
                 .font(Resources.Fonts.regular(withSize: 15))
         }
         .padding(2)
-//        .background(Resources.Colors.customGrey)
-//        .cornerRadius(5)
     }
 }
 
-struct AmenityCard_Previews: PreviewProvider {
-    static var previews: some View {
-        AmenityCard(data: amenityData[0])
+//struct AmenityCard_Previews: PreviewProvider {
+//    static var previews: some View {
+////        AmenityCard(data: amenityData[0])
+//        WorkingHoursCard(data: hoursData[5])
+//    }
+//}
+//
+
+struct WorkingHoursCard: View {
+    var data: WorkingHoursModel
+    var body: some View {
+        VStack(spacing: 5) {
+            Text(data.day)
+                .foregroundColor(Resources.Colors.darkGrey)
+                .font(Resources.Fonts.regular(withSize: 15))
+            Text(data.hours)
+                .foregroundColor(Resources.Colors.customBlack)
+                .font(Resources.Fonts.bold(withSize: 15))
+        }
+        .padding(10)
+        .background(Resources.Colors.customGrey)
+        .cornerRadius(5)
     }
 }

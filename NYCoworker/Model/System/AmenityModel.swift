@@ -30,8 +30,8 @@ struct WorkingHoursModel: Identifiable {
 
 let hoursData = [
     WorkingHoursModel(id: 0, day: "Monday", hours: "10AM - 9PM"),
-    WorkingHoursModel(id: 1, day: "Tuesday", hours: "10AM - 9PM"),
-    WorkingHoursModel(id: 2, day: "Wendsday", hours: "10AM - 9PM"),
+    WorkingHoursModel(id: 1, day: "Tuesday", hours: "11AM - 11PM"),
+    WorkingHoursModel(id: 2, day: "Wendsday", hours: "8:30AM - 9PM"),
     WorkingHoursModel(id: 3, day: "Thursday", hours: "10AM - 9PM"),
     WorkingHoursModel(id: 4, day: "Friday", hours: "10AM - 9PM"),
     WorkingHoursModel(id: 5, day: "Saturday", hours: "10AM - 9PM"),

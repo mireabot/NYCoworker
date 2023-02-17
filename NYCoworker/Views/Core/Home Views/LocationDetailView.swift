@@ -36,6 +36,9 @@ struct LocationDetailView: View {
                 ///Amenities list
                 amenities
                 
+                ///Working hours
+                workingHours
+                
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -138,6 +141,28 @@ struct LocationDetailView: View {
                 .font(Resources.Fonts.bold(withSize: 15))
             
             AmenitiesGridView()
+            
+            Rectangle()
+                .foregroundColor(Resources.Colors.customGrey)
+                .frame(height: 1)
+            
+        }
+        .padding([.leading,.trailing], 16)
+    }
+    
+    var workingHours: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Text("Working hours")
+                .foregroundColor(Resources.Colors.customBlack)
+                .font(Resources.Fonts.bold(withSize: 15))
+            
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 5) {
+                    ForEach(hoursData){ item in
+                        WorkingHoursCard(data: item)
+                    }
+                }
+            }
             
             Rectangle()
                 .foregroundColor(Resources.Colors.customGrey)
