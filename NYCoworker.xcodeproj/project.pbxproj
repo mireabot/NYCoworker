@@ -26,6 +26,10 @@
 		3538C6292983569D0017800B /* NYCBottomSheetHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3538C6282983569D0017800B /* NYCBottomSheetHeader.swift */; };
 		3538C62C298357490017800B /* AppLanguageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3538C62B298357490017800B /* AppLanguageModel.swift */; };
 		3538C62F298358890017800B /* LanguageCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3538C62E298358890017800B /* LanguageCard.swift */; };
+		356C52DA29A0460C00080D4C /* LocationMapCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356C52D929A0460C00080D4C /* LocationMapCard.swift */; };
+		356C52DC29A04BDB00080D4C /* LocationListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356C52DB29A04BDB00080D4C /* LocationListCell.swift */; };
+		356C52DE29A04E0B00080D4C /* NYCRateBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356C52DD29A04E0B00080D4C /* NYCRateBadge.swift */; };
+		356C52E129A052F900080D4C /* MapChoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356C52E029A052F900080D4C /* MapChoiceView.swift */; };
 		35737E5B29888866003B68BE /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35737E5A29888866003B68BE /* ProfileView.swift */; };
 		35737E5E29888DA5003B68BE /* Social View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35737E5D29888DA5003B68BE /* Social View.swift */; };
 		35737E6129888DF9003B68BE /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35737E6029888DF9003B68BE /* HomeView.swift */; };
@@ -45,7 +49,6 @@
 		359F80F7298C2508000D792E /* LocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359F80F6298C2508000D792E /* LocationCell.swift */; };
 		359F80F9298C30D2000D792E /* NYCBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359F80F8298C30D2000D792E /* NYCBadgeView.swift */; };
 		359F80FB298C330B000D792E /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359F80FA298C330B000D792E /* FavoriteView.swift */; };
-		359F80FD298C492D000D792E /* FavoriteLocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359F80FC298C492D000D792E /* FavoriteLocationCell.swift */; };
 		35BA64B5299BF69D00E15206 /* ReviewCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BA64B4299BF69D00E15206 /* ReviewCard.swift */; };
 		35BC807A29970DC0001ACC35 /* ListModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BC807929970DC0001ACC35 /* ListModifier.swift */; };
 		35C479A6298C89D50089F342 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C479A5298C89D50089F342 /* SettingsView.swift */; };
@@ -85,6 +88,10 @@
 		3538C6282983569D0017800B /* NYCBottomSheetHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCBottomSheetHeader.swift; sourceTree = "<group>"; };
 		3538C62B298357490017800B /* AppLanguageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLanguageModel.swift; sourceTree = "<group>"; };
 		3538C62E298358890017800B /* LanguageCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageCard.swift; sourceTree = "<group>"; };
+		356C52D929A0460C00080D4C /* LocationMapCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationMapCard.swift; sourceTree = "<group>"; };
+		356C52DB29A04BDB00080D4C /* LocationListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationListCell.swift; sourceTree = "<group>"; };
+		356C52DD29A04E0B00080D4C /* NYCRateBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCRateBadge.swift; sourceTree = "<group>"; };
+		356C52E029A052F900080D4C /* MapChoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapChoiceView.swift; sourceTree = "<group>"; };
 		35737E5A29888866003B68BE /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		35737E5D29888DA5003B68BE /* Social View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Social View.swift"; sourceTree = "<group>"; };
 		35737E6029888DF9003B68BE /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -101,7 +108,6 @@
 		359F80F6298C2508000D792E /* LocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCell.swift; sourceTree = "<group>"; };
 		359F80F8298C30D2000D792E /* NYCBadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCBadgeView.swift; sourceTree = "<group>"; };
 		359F80FA298C330B000D792E /* FavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteView.swift; sourceTree = "<group>"; };
-		359F80FC298C492D000D792E /* FavoriteLocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteLocationCell.swift; sourceTree = "<group>"; };
 		35BA64B4299BF69D00E15206 /* ReviewCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCard.swift; sourceTree = "<group>"; };
 		35BC807929970DC0001ACC35 /* ListModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListModifier.swift; sourceTree = "<group>"; };
 		35C479A5298C89D50089F342 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -230,6 +236,7 @@
 				359F80F8298C30D2000D792E /* NYCBadgeView.swift */,
 				359A792C298ECC6B001B66CF /* NYCSocialCard.swift */,
 				351B3A2629981B22007E7D00 /* NYCSettingsCard.swift */,
+				356C52DD29A04E0B00080D4C /* NYCRateBadge.swift */,
 			);
 			path = "Helper Views";
 			sourceTree = "<group>";
@@ -252,8 +259,18 @@
 				35D9A5CF2989832200A2F8D6 /* SettingsCard.swift */,
 				35BA64B4299BF69D00E15206 /* ReviewCard.swift */,
 				35F29396299E8ED500A85586 /* AmenityCard.swift */,
+				356C52D929A0460C00080D4C /* LocationMapCard.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		356C52DF29A052CD00080D4C /* BottomViews */ = {
+			isa = PBXGroup;
+			children = (
+				350DE273299143B500573163 /* LogoutView.swift */,
+				356C52E029A052F900080D4C /* MapChoiceView.swift */,
+			);
+			path = BottomViews;
 			sourceTree = "<group>";
 		};
 		35737E592988885B003B68BE /* Profile Views */ = {
@@ -262,7 +279,6 @@
 				351B3A21299814AA007E7D00 /* Settings Views */,
 				35737E5A29888866003B68BE /* ProfileView.swift */,
 				35C479A5298C89D50089F342 /* SettingsView.swift */,
-				350DE273299143B500573163 /* LogoutView.swift */,
 			);
 			path = "Profile Views";
 			sourceTree = "<group>";
@@ -309,6 +325,7 @@
 		359E6AA02981ECB200333BD7 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				356C52DF29A052CD00080D4C /* BottomViews */,
 				35737E5F29888DF1003B68BE /* Home Views */,
 				350DE2792991C9C400573163 /* MapViews */,
 				35737E5C29888D98003B68BE /* Social Views */,
@@ -333,7 +350,7 @@
 			isa = PBXGroup;
 			children = (
 				359F80F6298C2508000D792E /* LocationCell.swift */,
-				359F80FC298C492D000D792E /* FavoriteLocationCell.swift */,
+				356C52DB29A04BDB00080D4C /* LocationListCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -433,10 +450,12 @@
 			files = (
 				3503BD8A297F50AA00C0E365 /* ViewController.swift in Sources */,
 				359A7934298EF1C2001B66CF /* TabBarView.swift in Sources */,
+				356C52DE29A04E0B00080D4C /* NYCRateBadge.swift in Sources */,
 				359F80F4298C2253000D792E /* NYCSectionHeader.swift in Sources */,
 				3503BD9D297F5EE500C0E365 /* Resources.swift in Sources */,
 				359E6AA22981ED8B00333BD7 /* Onboarding.swift in Sources */,
 				359A792B298DFBB9001B66CF /* Modifiers.swift in Sources */,
+				356C52DC29A04BDB00080D4C /* LocationListCell.swift in Sources */,
 				359F80F2298AA911000D792E /* NYCCircleImageButton.swift in Sources */,
 				3538C6292983569D0017800B /* NYCBottomSheetHeader.swift in Sources */,
 				351B3A2729981B22007E7D00 /* NYCSettingsCard.swift in Sources */,
@@ -450,6 +469,7 @@
 				359F80F9298C30D2000D792E /* NYCBadgeView.swift in Sources */,
 				3538C62F298358890017800B /* LanguageCard.swift in Sources */,
 				359A792D298ECC6B001B66CF /* NYCSocialCard.swift in Sources */,
+				356C52E129A052F900080D4C /* MapChoiceView.swift in Sources */,
 				351B3A23299814B8007E7D00 /* ManageAccountView.swift in Sources */,
 				35D9A5D02989832200A2F8D6 /* SettingsCard.swift in Sources */,
 				35E7FB8D29848AE300EFF282 /* NYCFloatingTextField.swift in Sources */,
@@ -460,7 +480,6 @@
 				35D9A5CE298981EE00A2F8D6 /* SettingsModel.swift in Sources */,
 				35BC807A29970DC0001ACC35 /* ListModifier.swift in Sources */,
 				35C479A6298C89D50089F342 /* SettingsView.swift in Sources */,
-				359F80FD298C492D000D792E /* FavoriteLocationCell.swift in Sources */,
 				35BA64B5299BF69D00E15206 /* ReviewCard.swift in Sources */,
 				359A7932298EDCCB001B66CF /* ShareCardView.swift in Sources */,
 				3503BD86297F50AA00C0E365 /* AppDelegate.swift in Sources */,
@@ -468,6 +487,7 @@
 				35E7FB9129848FEE00EFF282 /* NYCActionButton.swift in Sources */,
 				35F29399299E8F4A00A85586 /* AmenityModel.swift in Sources */,
 				35E7FB992985AB9300EFF282 /* NotificationPermission.swift in Sources */,
+				356C52DA29A0460C00080D4C /* LocationMapCard.swift in Sources */,
 				351B3A2529981665007E7D00 /* HelpSupportView.swift in Sources */,
 				35E7FB8B298486F400EFF282 /* ProfileSetup.swift in Sources */,
 				35F29397299E8ED500A85586 /* AmenityCard.swift in Sources */,

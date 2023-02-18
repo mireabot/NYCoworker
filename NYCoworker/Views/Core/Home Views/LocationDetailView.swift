@@ -7,9 +7,11 @@
 
 import SwiftUI
 import iPages
+import BottomSheet
 
 struct LocationDetailView: View {
     @Environment(\.dismiss) var makeDismiss
+    @State var showMapChoice = false
     @State var currentImage: Int = 0
     var body: some View {
         NavigationStack {
@@ -39,7 +41,11 @@ struct LocationDetailView: View {
                 ///Working hours
                 workingHours
                 
+                ///Suggest info
+                suggestInfo
+                
             }
+            .hideTabbar(shouldHideTabbar: true)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button {
@@ -71,6 +77,9 @@ struct LocationDetailView: View {
             }
             .toolbarBackground(.white, for: .navigationBar)
             .navigationBarBackButtonHidden()
+            .bottomSheet(isPresented: $showMapChoice, height: 220, showTopIndicator: false) {
+                MapChoiceView()
+            }
         }
     }
     
@@ -101,7 +110,7 @@ struct LocationDetailView: View {
                 Spacer()
                 
                 NYCCircleImageButton(size: 24, image: Resources.Images.Navigation.openMap) {
-                    
+                    showMapChoice.toggle()
                 }
                 
             }
@@ -168,6 +177,30 @@ struct LocationDetailView: View {
                 .foregroundColor(Resources.Colors.customGrey)
                 .frame(height: 1)
             
+        }
+        .padding([.leading,.trailing], 16)
+    }
+    
+    var suggestInfo: some View {
+        VStack(alignment: .center, spacing: 10) {
+            Text("Found missing information?")
+                .foregroundColor(Resources.Colors.darkGrey)
+                .font(Resources.Fonts.regular(withSize: 15))
+            
+            Button {
+                
+            } label: {
+                HStack(spacing: 5) {
+                    Image("edit-account")
+                        .resizable()
+                        .frame(width: 16, height: 16)
+                        .foregroundColor(Resources.Colors.primary)
+                    Text("Make edit")
+                        .foregroundColor(Resources.Colors.primary)
+                        .font(Resources.Fonts.bold(withSize: 15))
+                }
+            }
+
         }
         .padding([.leading,.trailing], 16)
     }

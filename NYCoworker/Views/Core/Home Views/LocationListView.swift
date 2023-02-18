@@ -12,8 +12,18 @@ struct LocationListView: View {
     var title: String
     var body: some View {
         NavigationStack {
-            ScrollView(.vertical, showsIndicators: true) {
-                
+            VStack {
+                ScrollView(.vertical, showsIndicators: true) {
+                    VStack(spacing: 10) {
+                        ForEach(0..<3){_ in
+                            LocationListCell(type: .list) {
+                                print("Add to favorites")
+                            }
+                        }
+                    }
+                    .padding([.leading,.trailing], 16)
+                    Spacer()
+                }
             }
             .toolbarBackground(.white, for: .navigationBar)
             .toolbar {

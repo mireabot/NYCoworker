@@ -11,15 +11,18 @@ struct FavoriteView: View {
     @Environment(\.dismiss) var makeDismiss
     var body: some View {
         NavigationStack {
-            ScrollView(.vertical, showsIndicators: false) {
-                LazyVStack(spacing: 10) {
-                    ForEach(0..<3){_ in
-                        FavoriteLocationCell()
+            VStack {
+                ScrollView(.vertical, showsIndicators: true) {
+                    VStack(spacing: 10) {
+                        ForEach(0..<3){_ in
+                            LocationListCell(type: .favorite) {
+                                print("Remove from favs")
+                            }
+                        }
                     }
+                    .padding([.leading,.trailing], 16)
+                    Spacer()
                 }
-                .padding([.leading,.trailing], 16)
-                .padding(.top, 20)
-                Spacer()
             }
             .hideTabbar(shouldHideTabbar: true)
             .toolbar(content: {
@@ -39,7 +42,6 @@ struct FavoriteView: View {
                         .font(Resources.Fonts.bold(withSize: 17))
                 }
             })
-            
             .navigationBarBackButtonHidden()
             .toolbarBackground(.white, for: .navigationBar)
         }
