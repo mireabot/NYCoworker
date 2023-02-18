@@ -108,12 +108,12 @@ struct HomeView: View {
         .fullScreenCover(isPresented: $presentMap, content: {
             LocationsMapView()
         })
-        .onAppear {
-            timer = true
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
-                self.timer = false
-            }
-        }
+//        .onAppear {
+//            timer = true
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+//                self.timer = false
+//            }
+//        }
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 Image("appLogo")

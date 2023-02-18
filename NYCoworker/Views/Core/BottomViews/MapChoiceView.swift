@@ -9,24 +9,25 @@ import SwiftUI
 
 struct MapChoiceView: View {
     var body: some View {
-        VStack {
-            VStack(alignment: .center, spacing: 10) {
-                Text("Where you want to go?")
-                    .foregroundColor(Resources.Colors.customBlack)
-                    .font(Resources.Fonts.bold(withSize: 17))
-                
-                NYCActionButton(action: {
+        ActionSheetView(bgColor: .white) {
+            VStack {
+                VStack(alignment: .center, spacing: 10) {
+                    Text("Where you want to go?")
+                        .foregroundColor(Resources.Colors.customBlack)
+                        .font(Resources.Fonts.bold(withSize: 17))
                     
-                }, text: "Apple Maps")
-                
-                NYCActionButton(action: {
+                    NYCActionButton(action: {
+                        
+                    }, text: "Apple Maps")
                     
-                }, text: "Google Maps", buttonStyle: .secondary)
+                    NYCActionButton(action: {
+                        
+                    }, text: "Google Maps", buttonStyle: .secondary)
+                }
+                .frame(maxWidth: .infinity)
+                .padding([.leading,.trailing], 16)
             }
-            .frame(maxWidth: .infinity)
-            .padding([.leading,.trailing], 16)
-            .padding(.top, 10)
-            Spacer()
+            .padding([.top,.bottom], 10)
         }
     }
 }

@@ -7,12 +7,14 @@
 
 import SwiftUI
 import iPages
-import BottomSheet
+import PopupView
 
 struct LocationDetailView: View {
     @Environment(\.dismiss) var makeDismiss
     @State var showMapChoice = false
     @State var currentImage: Int = 0
+    @State var addToFavs = false
+    @State var showReviewCard = false
     var body: some View {
         NavigationStack {
             ScrollView(.vertical, showsIndicators: true) {
@@ -59,7 +61,8 @@ struct LocationDetailView: View {
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
-                        print("Save to favorites")
+//                        print("Save to favorites")
+                        addToFavs.toggle()
                     } label: {
                         Resources.Images.Settings.rate
                             .foregroundColor(Resources.Colors.customBlack)
@@ -77,8 +80,34 @@ struct LocationDetailView: View {
             }
             .toolbarBackground(.white, for: .navigationBar)
             .navigationBarBackButtonHidden()
-            .bottomSheet(isPresented: $showMapChoice, height: 220, showTopIndicator: false) {
+            .popup(isPresented: $showMapChoice) {
                 MapChoiceView()
+            } customize: {
+                $0
+                    .type(.toast)
+                    .position(.bottom)
+                    .closeOnTap(false)
+                    .closeOnTapOutside(true)
+                    .backgroundColor(.black.opacity(0.4))
+            }
+            .popup(isPresented: $showReviewCard) {
+                ReviewCard(variation: .full)
+            } customize: {
+                $0
+                    .type(.floater())
+                    .position(.bottom)
+                    .closeOnTap(true)
+                    .backgroundColor(.black.opacity(0.4))
+            }
+            .popup(isPresented: $addToFavs) {
+                NYCAlertView(title: "Added to favorites", alertStyle: .small)
+            } customize: {
+                $0
+                    .isOpaque(true)
+                    .autohideIn(1.5)
+                    .type(.floater())
+                    .position(.bottom)
+                    .animation(.spring(response: 0.4, blendDuration: 0.2))
             }
         }
     }
@@ -127,7 +156,7 @@ struct LocationDetailView: View {
             Text("What people say")
                 .foregroundColor(Resources.Colors.customBlack)
                 .font(Resources.Fonts.bold(withSize: 15))
-            ReviewCard()
+            ReviewCard(variation: .small)
             Button {
                 
             } label: {
@@ -249,7 +278,6 @@ struct HoursGridView: View {
                     }
                 }
             }
-//            .background(Color.blue)
             .frame(height: 80)
         }
     }

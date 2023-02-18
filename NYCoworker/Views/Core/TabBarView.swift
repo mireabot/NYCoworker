@@ -7,6 +7,7 @@
 
 import SwiftUI
 import BottomSheet
+import PopupView
 
 struct TabBarView: View {
     @State var showBottomsheet = false
@@ -31,9 +32,16 @@ struct TabBarView: View {
                 Label("Profile", image: "profile")
             }
         }
-        .bottomSheet(isPresented: $showBottomsheet, height: 200, showTopIndicator: false, content: {
+        .popup(isPresented: $showBottomsheet) {
             LogoutView()
-        })
+        } customize: {
+            $0
+                .type(.toast)
+                .position(.bottom)
+                .closeOnTap(false)
+                .closeOnTapOutside(true)
+                .backgroundColor(.black.opacity(0.4))
+        }
         .accentColor(Resources.Colors.primary)
         .onAppear() {
             UITabBar.appearance().backgroundColor = .white

@@ -6,13 +6,30 @@
 //
 
 import SwiftUI
+import PopupView
 
 struct NotificationsView: View {
     @Environment(\.dismiss) var makeDismiss
+    @State var show = false
     var body: some View {
         NavigationStack {
             VStack {
+                Button {
+                    show.toggle()
+                } label: {
+                    Text("push")
+                }
                 
+            }
+            .popup(isPresented: $show) {
+                NYCAlertView(title: "Added to favorites", alertStyle: .small)
+            } customize: {
+                $0
+                    .isOpaque(true)
+                    .autohideIn(1.5)
+                    .type(.floater())
+                    .position(.bottom)
+                    .animation(.spring(response: 0.4, blendDuration: 0.2))
             }
             .hideTabbar(shouldHideTabbar: true)
             .toolbar(content: {
@@ -23,7 +40,7 @@ struct NotificationsView: View {
                         Resources.Images.Navigation.arrowBack
                             .foregroundColor(Resources.Colors.primary)
                     }
-
+                    
                 }
                 
                 ToolbarItem(placement: .navigationBarLeading) {

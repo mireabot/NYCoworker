@@ -6,9 +6,11 @@
 //
 
 import SwiftUI
+import PopupView
 
 struct LocationListView: View {
     @Environment(\.dismiss) var makeDismiss
+    @State var addToFavs = false
     var title: String
     var body: some View {
         NavigationStack {
@@ -17,13 +19,23 @@ struct LocationListView: View {
                     VStack(spacing: 10) {
                         ForEach(0..<3){_ in
                             LocationListCell(type: .list) {
-                                print("Add to favorites")
+                                addToFavs.toggle()
                             }
                         }
                     }
                     .padding([.leading,.trailing], 16)
                     Spacer()
                 }
+            }
+            .popup(isPresented: $addToFavs) {
+                NYCAlertView(title: "Added to favorites", alertStyle: .small)
+            } customize: {
+                $0
+                    .isOpaque(true)
+                    .autohideIn(1.5)
+                    .type(.floater())
+                    .position(.top)
+                    .animation(.spring(response: 0.4, blendDuration: 0.2))
             }
             .toolbarBackground(.white, for: .navigationBar)
             .toolbar {

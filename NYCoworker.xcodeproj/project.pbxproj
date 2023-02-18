@@ -26,6 +26,9 @@
 		3538C6292983569D0017800B /* NYCBottomSheetHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3538C6282983569D0017800B /* NYCBottomSheetHeader.swift */; };
 		3538C62C298357490017800B /* AppLanguageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3538C62B298357490017800B /* AppLanguageModel.swift */; };
 		3538C62F298358890017800B /* LanguageCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3538C62E298358890017800B /* LanguageCard.swift */; };
+		3565689B29A12C16007CAF80 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = 3565689A29A12C16007CAF80 /* PopupView */; };
+		3565689D29A15673007CAF80 /* NYCAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3565689C29A15673007CAF80 /* NYCAlertView.swift */; };
+		356568A029A16C21007CAF80 /* BottomBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3565689F29A16C20007CAF80 /* BottomBaseView.swift */; };
 		356C52DA29A0460C00080D4C /* LocationMapCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356C52D929A0460C00080D4C /* LocationMapCard.swift */; };
 		356C52DC29A04BDB00080D4C /* LocationListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356C52DB29A04BDB00080D4C /* LocationListCell.swift */; };
 		356C52DE29A04E0B00080D4C /* NYCRateBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356C52DD29A04E0B00080D4C /* NYCRateBadge.swift */; };
@@ -88,6 +91,8 @@
 		3538C6282983569D0017800B /* NYCBottomSheetHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCBottomSheetHeader.swift; sourceTree = "<group>"; };
 		3538C62B298357490017800B /* AppLanguageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLanguageModel.swift; sourceTree = "<group>"; };
 		3538C62E298358890017800B /* LanguageCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageCard.swift; sourceTree = "<group>"; };
+		3565689C29A15673007CAF80 /* NYCAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCAlertView.swift; sourceTree = "<group>"; };
+		3565689F29A16C20007CAF80 /* BottomBaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBaseView.swift; sourceTree = "<group>"; };
 		356C52D929A0460C00080D4C /* LocationMapCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationMapCard.swift; sourceTree = "<group>"; };
 		356C52DB29A04BDB00080D4C /* LocationListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationListCell.swift; sourceTree = "<group>"; };
 		356C52DD29A04E0B00080D4C /* NYCRateBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCRateBadge.swift; sourceTree = "<group>"; };
@@ -133,6 +138,7 @@
 			files = (
 				359A7930298ED141001B66CF /* Shimmer in Frameworks */,
 				3538C623298353210017800B /* iPages in Frameworks */,
+				3565689B29A12C16007CAF80 /* PopupView in Frameworks */,
 				359213632995DC0C00B18A8D /* KeyboardAvoider in Frameworks */,
 				359A7929298DDD20001B66CF /* BottomSheet in Frameworks */,
 			);
@@ -237,6 +243,7 @@
 				359A792C298ECC6B001B66CF /* NYCSocialCard.swift */,
 				351B3A2629981B22007E7D00 /* NYCSettingsCard.swift */,
 				356C52DD29A04E0B00080D4C /* NYCRateBadge.swift */,
+				3565689C29A15673007CAF80 /* NYCAlertView.swift */,
 			);
 			path = "Helper Views";
 			sourceTree = "<group>";
@@ -264,9 +271,18 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
+		3565689E29A16C0A007CAF80 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				3565689F29A16C20007CAF80 /* BottomBaseView.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
 		356C52DF29A052CD00080D4C /* BottomViews */ = {
 			isa = PBXGroup;
 			children = (
+				3565689E29A16C0A007CAF80 /* Core */,
 				350DE273299143B500573163 /* LogoutView.swift */,
 				356C52E029A052F900080D4C /* MapChoiceView.swift */,
 			);
@@ -384,6 +400,7 @@
 				359A7928298DDD20001B66CF /* BottomSheet */,
 				359A792F298ED141001B66CF /* Shimmer */,
 				359213622995DC0C00B18A8D /* KeyboardAvoider */,
+				3565689A29A12C16007CAF80 /* PopupView */,
 			);
 			productName = NYCoworker;
 			productReference = 3503BD82297F50AA00C0E365 /* NYCoworker.app */;
@@ -418,6 +435,7 @@
 				359A7927298DDD20001B66CF /* XCRemoteSwiftPackageReference "bottom-sheet" */,
 				359A792E298ED141001B66CF /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */,
 				359213612995DC0C00B18A8D /* XCRemoteSwiftPackageReference "KeyboardAvoider" */,
+				3565689929A12C16007CAF80 /* XCRemoteSwiftPackageReference "PopupView" */,
 			);
 			productRefGroup = 3503BD83297F50AA00C0E365 /* Products */;
 			projectDirPath = "";
@@ -448,6 +466,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3565689D29A15673007CAF80 /* NYCAlertView.swift in Sources */,
+				356568A029A16C21007CAF80 /* BottomBaseView.swift in Sources */,
 				3503BD8A297F50AA00C0E365 /* ViewController.swift in Sources */,
 				359A7934298EF1C2001B66CF /* TabBarView.swift in Sources */,
 				356C52DE29A04E0B00080D4C /* NYCRateBadge.swift in Sources */,
@@ -730,6 +750,14 @@
 				minimumVersion = 0.0.9;
 			};
 		};
+		3565689929A12C16007CAF80 /* XCRemoteSwiftPackageReference "PopupView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/exyte/PopupView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		359213612995DC0C00B18A8D /* XCRemoteSwiftPackageReference "KeyboardAvoider" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/michaelhenry/KeyboardAvoider.git";
@@ -761,6 +789,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3538C621298353210017800B /* XCRemoteSwiftPackageReference "iPages" */;
 			productName = iPages;
+		};
+		3565689A29A12C16007CAF80 /* PopupView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3565689929A12C16007CAF80 /* XCRemoteSwiftPackageReference "PopupView" */;
+			productName = PopupView;
 		};
 		359213622995DC0C00B18A8D /* KeyboardAvoider */ = {
 			isa = XCSwiftPackageProductDependency;

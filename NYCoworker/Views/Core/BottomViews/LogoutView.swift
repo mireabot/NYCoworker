@@ -9,31 +9,33 @@ import SwiftUI
 
 struct LogoutView: View {
     var body: some View {
-        VStack {
-            VStack(alignment: .center, spacing: 15) {
-                Text("Are you sure you want to log out?")
-                    .foregroundColor(Resources.Colors.customBlack)
-                    .font(Resources.Fonts.bold(withSize: 17))
-                
-                VStack(alignment: .center, spacing: 10) {
-                    NYCActionButton(action: {
-                        
-                    }, text: "Log out", buttonStyle: .system)
+        ActionSheetView(bgColor: .white) {
+            VStack {
+                VStack(alignment: .center, spacing: 15) {
+                    Text("Are you sure you want to log out?")
+                        .foregroundColor(Resources.Colors.customBlack)
+                        .font(Resources.Fonts.bold(withSize: 17))
                     
-                    Button {
+                    VStack(alignment: .center, spacing: 10) {
+                        NYCActionButton(action: {
+                            
+                        }, text: "Log out", buttonStyle: .system)
                         
-                    } label: {
-                        Text("Never mind")
-                            .foregroundColor(Resources.Colors.darkGrey)
-                            .font(Resources.Fonts.bold(withSize: 17))
-                    }
+                        Button {
+                            
+                        } label: {
+                            Text("Never mind")
+                                .foregroundColor(Resources.Colors.darkGrey)
+                                .font(Resources.Fonts.bold(withSize: 17))
+                        }
 
+                    }
+                    
                 }
-                
+                .frame(maxWidth: .infinity)
+                .padding([.leading,.trailing], 16)
             }
-            .frame(maxWidth: .infinity)
-            .padding([.leading,.trailing], 16)
-            Spacer()
+            .padding([.top,.bottom], 10)
         }
     }
 }

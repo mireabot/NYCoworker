@@ -8,6 +8,11 @@
 import SwiftUI
 
 struct ReviewCard: View {
+    enum ReviewCardType {
+        case full
+        case small
+    }
+    var variation: ReviewCardType
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             /// Header
@@ -34,7 +39,7 @@ struct ReviewCard: View {
                 Text("Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.")
                     .foregroundColor(Resources.Colors.customBlack)
                     .font(Resources.Fonts.regular(withSize: 13))
-                    .lineLimit(3)
+                    .lineLimit(variation == .full ? 20 : 3)
             }
         }
         .padding(16)
@@ -46,6 +51,6 @@ struct ReviewCard: View {
 
 struct ReviewCard_Previews: PreviewProvider {
     static var previews: some View {
-        ReviewCard()
+        ReviewCard(variation: .full)
     }
 }

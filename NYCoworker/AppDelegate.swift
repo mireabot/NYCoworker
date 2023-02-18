@@ -44,7 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 struct SplashScreenView: View {
-    @State var isActive : Bool = false
+    @State var isActive : Bool = true
     @State private var size = 0.8
     @State private var opacity = 0.5
     
