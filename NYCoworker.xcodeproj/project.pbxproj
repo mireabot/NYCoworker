@@ -238,16 +238,12 @@
 		3538C627298356840017800B /* Helper Views */ = {
 			isa = PBXGroup;
 			children = (
-				3538C6282983569D0017800B /* NYCBottomSheetHeader.swift */,
-				35E7FB8C29848AE300EFF282 /* NYCFloatingTextField.swift */,
-				35E7FB9029848FEE00EFF282 /* NYCActionButton.swift */,
-				359F80F1298AA911000D792E /* NYCCircleImageButton.swift */,
-				359F80F3298C2253000D792E /* NYCSectionHeader.swift */,
-				359F80F8298C30D2000D792E /* NYCBadgeView.swift */,
-				359A792C298ECC6B001B66CF /* NYCSocialCard.swift */,
-				351B3A2629981B22007E7D00 /* NYCSettingsCard.swift */,
-				356C52DD29A04E0B00080D4C /* NYCRateBadge.swift */,
-				3565689C29A15673007CAF80 /* NYCAlertView.swift */,
+				35746CBB29A31D25007322AA /* Cards */,
+				35746CBA29A31D1C007322AA /* Alerts */,
+				35746CB929A31D10007322AA /* TextField */,
+				35746CB829A31CFB007322AA /* Headers */,
+				35746CB729A31CE6007322AA /* Badges */,
+				35746CB629A31CC7007322AA /* Buttons */,
 			);
 			path = "Helper Views";
 			sourceTree = "<group>";
@@ -331,6 +327,58 @@
 				35746CB429A3183B007322AA /* NotificationsEmptyView.swift */,
 			);
 			path = "Empty Views";
+			sourceTree = "<group>";
+		};
+		35746CB629A31CC7007322AA /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				359F80F1298AA911000D792E /* NYCCircleImageButton.swift */,
+				35E7FB9029848FEE00EFF282 /* NYCActionButton.swift */,
+			);
+			path = Buttons;
+			sourceTree = "<group>";
+		};
+		35746CB729A31CE6007322AA /* Badges */ = {
+			isa = PBXGroup;
+			children = (
+				356C52DD29A04E0B00080D4C /* NYCRateBadge.swift */,
+				359F80F8298C30D2000D792E /* NYCBadgeView.swift */,
+			);
+			path = Badges;
+			sourceTree = "<group>";
+		};
+		35746CB829A31CFB007322AA /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				359F80F3298C2253000D792E /* NYCSectionHeader.swift */,
+				3538C6282983569D0017800B /* NYCBottomSheetHeader.swift */,
+			);
+			path = Headers;
+			sourceTree = "<group>";
+		};
+		35746CB929A31D10007322AA /* TextField */ = {
+			isa = PBXGroup;
+			children = (
+				35E7FB8C29848AE300EFF282 /* NYCFloatingTextField.swift */,
+			);
+			path = TextField;
+			sourceTree = "<group>";
+		};
+		35746CBA29A31D1C007322AA /* Alerts */ = {
+			isa = PBXGroup;
+			children = (
+				3565689C29A15673007CAF80 /* NYCAlertView.swift */,
+			);
+			path = Alerts;
+			sourceTree = "<group>";
+		};
+		35746CBB29A31D25007322AA /* Cards */ = {
+			isa = PBXGroup;
+			children = (
+				359A792C298ECC6B001B66CF /* NYCSocialCard.swift */,
+				351B3A2629981B22007E7D00 /* NYCSettingsCard.swift */,
+			);
+			path = Cards;
 			sourceTree = "<group>";
 		};
 		358B93962980D35800160BFC /* Model */ = {
