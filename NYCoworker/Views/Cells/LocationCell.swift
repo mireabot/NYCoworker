@@ -32,7 +32,7 @@ struct LocationCell: View {
             }
             
             HStack(spacing: 3) {
-                NYCBadgeView(title: "New")
+                NYCBadgeView(badgeType: .withWord, title: "New")
             }
             
             Text("Public Hotel Hotel")

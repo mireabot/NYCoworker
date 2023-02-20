@@ -15,7 +15,7 @@ struct LocationMapCard: View {
                 .cornerRadius(10, corners: [.bottomLeft,.topLeft])
             HStack(alignment: .top) {
                 VStack(alignment: .leading, spacing: 2) {
-                    NYCBadgeView(title: "Library")
+                    NYCBadgeView(badgeType: .withWord, title: "Library")
                     Text("Intelligentsia Coffee")
                         .foregroundColor(Resources.Colors.customBlack)
                         .font(Resources.Fonts.regular(withSize: 17))

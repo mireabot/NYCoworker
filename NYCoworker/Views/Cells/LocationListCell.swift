@@ -44,9 +44,9 @@ struct LocationListCell: View {
             HStack(alignment: .top) {
                 VStack(alignment: .leading, spacing: 3) {
                     HStack(spacing: 3) {
-                        NYCBadgeView(title: "New")
-                        NYCBadgeView(title: "Popular")
-                        NYCBadgeWithIconView(title: "Open now")
+                        NYCBadgeView(badgeType: .withWord, title: "New")
+                        NYCBadgeView(badgeType: .withWord, title: "Popular")
+                        NYCBadgeView(badgeType: .workingHours, title: "Open now")
                     }
                     Text("Public Hotel")
                         .foregroundColor(Resources.Colors.customBlack)

@@ -36,6 +36,8 @@
 		35737E5B29888866003B68BE /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35737E5A29888866003B68BE /* ProfileView.swift */; };
 		35737E5E29888DA5003B68BE /* Social View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35737E5D29888DA5003B68BE /* Social View.swift */; };
 		35737E6129888DF9003B68BE /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35737E6029888DF9003B68BE /* HomeView.swift */; };
+		35746CB329A29F3E007322AA /* FavoritesEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35746CB229A29F3E007322AA /* FavoritesEmptyView.swift */; };
+		35746CB529A3183B007322AA /* NotificationsEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35746CB429A3183B007322AA /* NotificationsEmptyView.swift */; };
 		359213632995DC0C00B18A8D /* KeyboardAvoider in Frameworks */ = {isa = PBXBuildFile; productRef = 359213622995DC0C00B18A8D /* KeyboardAvoider */; };
 		359A7929298DDD20001B66CF /* BottomSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 359A7928298DDD20001B66CF /* BottomSheet */; };
 		359A792B298DFBB9001B66CF /* Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359A792A298DFBB9001B66CF /* Modifiers.swift */; };
@@ -100,6 +102,8 @@
 		35737E5A29888866003B68BE /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		35737E5D29888DA5003B68BE /* Social View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Social View.swift"; sourceTree = "<group>"; };
 		35737E6029888DF9003B68BE /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		35746CB229A29F3E007322AA /* FavoritesEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesEmptyView.swift; sourceTree = "<group>"; };
+		35746CB429A3183B007322AA /* NotificationsEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsEmptyView.swift; sourceTree = "<group>"; };
 		359A792A298DFBB9001B66CF /* Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifiers.swift; sourceTree = "<group>"; };
 		359A792C298ECC6B001B66CF /* NYCSocialCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCSocialCard.swift; sourceTree = "<group>"; };
 		359A7931298EDCCB001B66CF /* ShareCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareCardView.swift; sourceTree = "<group>"; };
@@ -320,6 +324,15 @@
 			path = "Home Views";
 			sourceTree = "<group>";
 		};
+		35746CB129A29F2F007322AA /* Empty Views */ = {
+			isa = PBXGroup;
+			children = (
+				35746CB229A29F3E007322AA /* FavoritesEmptyView.swift */,
+				35746CB429A3183B007322AA /* NotificationsEmptyView.swift */,
+			);
+			path = "Empty Views";
+			sourceTree = "<group>";
+		};
 		358B93962980D35800160BFC /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -341,6 +354,7 @@
 		359E6AA02981ECB200333BD7 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				35746CB129A29F2F007322AA /* Empty Views */,
 				356C52DF29A052CD00080D4C /* BottomViews */,
 				35737E5F29888DF1003B68BE /* Home Views */,
 				350DE2792991C9C400573163 /* MapViews */,
@@ -494,12 +508,14 @@
 				35D9A5D02989832200A2F8D6 /* SettingsCard.swift in Sources */,
 				35E7FB8D29848AE300EFF282 /* NYCFloatingTextField.swift in Sources */,
 				35737E5E29888DA5003B68BE /* Social View.swift in Sources */,
+				35746CB329A29F3E007322AA /* FavoritesEmptyView.swift in Sources */,
 				35E7FB8F29848B1C00EFF282 /* Extensions.swift in Sources */,
 				35737E5B29888866003B68BE /* ProfileView.swift in Sources */,
 				359F80FB298C330B000D792E /* FavoriteView.swift in Sources */,
 				35D9A5CE298981EE00A2F8D6 /* SettingsModel.swift in Sources */,
 				35BC807A29970DC0001ACC35 /* ListModifier.swift in Sources */,
 				35C479A6298C89D50089F342 /* SettingsView.swift in Sources */,
+				35746CB529A3183B007322AA /* NotificationsEmptyView.swift in Sources */,
 				35BA64B5299BF69D00E15206 /* ReviewCard.swift in Sources */,
 				359A7932298EDCCB001B66CF /* ShareCardView.swift in Sources */,
 				3503BD86297F50AA00C0E365 /* AppDelegate.swift in Sources */,

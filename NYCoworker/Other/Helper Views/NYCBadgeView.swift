@@ -8,8 +8,24 @@
 import SwiftUI
 
 struct NYCBadgeView: View {
+    enum BadgeStyle {
+        case withWord
+        case workingHours
+        case location
+    }
+    var badgeType: BadgeStyle
     var title: String
     var body: some View {
+        switch badgeType {
+        case .withWord:
+            badgeWithTitle
+        case .workingHours:
+            badgeWithIcon
+        case .location:
+            badgeWithTitle
+        }
+    }
+    var badgeWithTitle: some View {
         Text(title)
             .foregroundColor(Resources.Colors.primary)
             .font(Resources.Fonts.regular(withSize: 10))
@@ -18,17 +34,7 @@ struct NYCBadgeView: View {
             .background(Resources.Colors.customGrey)
             .cornerRadius(5)
     }
-}
-
-struct NYCBadgeView_Previews: PreviewProvider {
-    static var previews: some View {
-        NYCBadgeWithIconView(title: "Open now")
-    }
-}
-
-struct NYCBadgeWithIconView: View {
-    var title: String
-    var body: some View {
+    var badgeWithIcon: some View {
         HStack(spacing: 3) {
             Image("time")
                 .resizable()
@@ -46,3 +52,8 @@ struct NYCBadgeWithIconView: View {
     }
 }
 
+//struct NYCBadgeView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        NYCBadgeWithIconView(title: "Open now")
+//    }
+//}

@@ -131,7 +131,7 @@ struct LocationDetailView: View {
                         .foregroundColor(Resources.Colors.darkGrey)
                         .font(Resources.Fonts.regular(withSize: 13))
                     HStack(spacing: 3) {
-                        NYCBadgeView(title: "New")
+                        NYCBadgeView(badgeType: .withWord, title: "New")
                         NYCBadgeWithIconView(title: "Open now")
                     }
                 }

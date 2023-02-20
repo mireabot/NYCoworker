@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import PopupView
 
 struct ProfileView: View {
     @Binding var showPopup: Bool

@@ -12,17 +12,19 @@ struct FavoriteView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                ScrollView(.vertical, showsIndicators: true) {
-                    VStack(spacing: 10) {
-                        ForEach(0..<3){_ in
-                            LocationListCell(type: .favorite) {
-                                print("Remove from favs")
-                            }
-                        }
-                    }
-                    .padding([.leading,.trailing], 16)
-                    Spacer()
-                }
+//                ScrollView(.vertical, showsIndicators: true) {
+//                    VStack(spacing: 10) {
+//                        ForEach(0..<3){_ in
+//                            LocationListCell(type: .favorite) {
+//                                print("Remove from favs")
+//                            }
+//                        }
+//                    }
+//                    .padding([.leading,.trailing], 16)
+//                    Spacer()
+//                }
+                
+                FavoritesEmptyView()
             }
             .hideTabbar(shouldHideTabbar: true)
             .toolbar(content: {
