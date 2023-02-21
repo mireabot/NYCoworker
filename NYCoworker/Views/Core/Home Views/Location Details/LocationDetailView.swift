@@ -15,6 +15,7 @@ struct LocationDetailView: View {
     @State var currentImage: Int = 0
     @State var addToFavs = false
     @State var showReviewCard = false
+    @State var showReviewView = false
     var body: some View {
         NavigationStack {
             ScrollView(.vertical, showsIndicators: true) {
@@ -80,6 +81,9 @@ struct LocationDetailView: View {
             }
             .toolbarBackground(.white, for: .navigationBar)
             .navigationBarBackButtonHidden()
+            .fullScreenCover(isPresented: $showReviewView, content: {
+                AddReviewView()
+            })
             .popup(isPresented: $showMapChoice) {
                 MapChoiceView()
             } customize: {
@@ -91,12 +95,12 @@ struct LocationDetailView: View {
                     .backgroundColor(.black.opacity(0.4))
             }
             .popup(isPresented: $showReviewCard) {
-                ReviewCard(variation: .full)
+                ExpandedReviewView()
             } customize: {
                 $0
-                    .type(.floater())
+                    .type(.toast)
                     .position(.bottom)
-                    .closeOnTap(true)
+                    .closeOnTapOutside(true)
                     .backgroundColor(.black.opacity(0.4))
             }
             .popup(isPresented: $addToFavs) {
@@ -132,7 +136,7 @@ struct LocationDetailView: View {
                         .font(Resources.Fonts.regular(withSize: 13))
                     HStack(spacing: 3) {
                         NYCBadgeView(badgeType: .withWord, title: "New")
-                        NYCBadgeWithIconView(title: "Open now")
+                        NYCBadgeView(badgeType: .workingHours, title: "Open now")
                     }
                 }
                 
@@ -157,8 +161,13 @@ struct LocationDetailView: View {
                 .foregroundColor(Resources.Colors.customBlack)
                 .font(Resources.Fonts.bold(withSize: 15))
             ReviewCard(variation: .small)
+                .onTapGesture {
+                    showReviewCard.toggle()
+                }
             Button {
-                
+                withAnimation(.spring()) {
+                    showReviewView.toggle()
+                }
             } label: {
                 Text("Write review")
             }

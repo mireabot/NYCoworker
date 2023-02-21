@@ -58,3 +58,11 @@ extension View {
             .shadow(color: .black.opacity(0.16), radius: 24, x: 0, y: 0)
     }
 }
+
+extension Date {
+    func toString(_ format: String)->String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = format
+        return formatter.string(from: self)
+    }
+}

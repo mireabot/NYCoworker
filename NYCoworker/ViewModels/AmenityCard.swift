@@ -15,7 +15,7 @@ struct AmenityCard: View {
                 .resizable()
                 .frame(width: 24, height: 24)
             Text(data.title)
-                .foregroundColor(Resources.Colors.darkGrey)
+                .foregroundColor(Resources.Colors.customBlack)
                 .font(Resources.Fonts.regular(withSize: 15))
         }
         .padding(2)

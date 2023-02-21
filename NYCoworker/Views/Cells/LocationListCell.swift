@@ -24,7 +24,7 @@ struct LocationListCell: View {
                     .cornerRadius(10)
                 
                 HStack(alignment: .center) {
-                    NYCRateBadge(rate: 5)
+                    NYCRateBadge(rate: 5, badgeType: .card)
                     .offset(x: 6, y: 6)
                     Spacer()
                     Button {
