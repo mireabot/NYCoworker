@@ -9,43 +9,95 @@ import SwiftUI
 
 struct LocationMapCard: View {
     var body: some View {
-        HStack(alignment: .top) {
-            Rectangle()
-                .frame(width: 100, height: 100)
-                .cornerRadius(10, corners: [.bottomLeft,.topLeft])
-            HStack(alignment: .top) {
-                VStack(alignment: .leading, spacing: 2) {
-                    NYCBadgeView(badgeType: .withWord, title: "Library")
-                    Text("Intelligentsia Coffee")
-                        .foregroundColor(Resources.Colors.customBlack)
-                        .font(Resources.Fonts.regular(withSize: 17))
-                    Text("691 Eight Avenue")
-                        .foregroundColor(Resources.Colors.darkGrey)
-                        .font(Resources.Fonts.regular(withSize: 13))
-                }
-                .padding(.top, 5)
+        ZStack(alignment: .bottom) {
+            ZStack(alignment: .topTrailing) {
+                Image("load")
+                    .resizable()
+                    .frame(height: 200)
+                    .scaledToFit()
                 
-                Button {
-                    
-                } label: {
-                    Image("rate")
-                        .resizable()
-                        .frame(width: 18, height: 18)
-                        .foregroundColor(Resources.Colors.customBlack)
-                }
-                .padding(.top, 5)
-                .padding(.leading, 25)
-                .padding(.trailing, 5)
+                
+                        Button {
+                
+                        } label: {
+                            Image("rate")
+                                .resizable()
+                                .frame(width: 20, height: 20)
+                                .foregroundColor(.black)
+                        }
+                        .padding([.top,.trailing], 10)
             }
-
+            
+            VStack(alignment: .leading, spacing: 2) {
+                Text("Intelligentsia Coffee")
+                    .foregroundColor(Resources.Colors.customBlack)
+                    .font(Resources.Fonts.regular(withSize: 20))
+                    .frame(maxWidth: .infinity,alignment: .leading)
+                    .lineLimit(1)
+                Text("691 Eight Avenue")
+                    .foregroundColor(Resources.Colors.darkGrey)
+                    .font(Resources.Fonts.regular(withSize: 15))
+            }
+            .padding([.top,.bottom], 10)
+            .padding([.leading,.trailing], 10)
+            .background(Color.white)
+            .clipped()
+            .overlay(alignment: .topLeading) {
+                HStack(spacing: 5) {
+                    NYCBadgeView(badgeType: .location, title: "Library")
+                    Spacer()
+                    NYCRateBadge(rate: 4, badgeType: .card)
+                }
+                .offset(y: -15)
+                .padding([.leading,.trailing], 10)
+            }
         }
-        .background(Color.white)
         .cornerRadius(10)
+        .padding([.leading,.trailing], 16)
     }
 }
 
 struct LocationMapCard_Previews: PreviewProvider {
     static var previews: some View {
-        LocationMapCard()
+        ZStack(alignment: .bottom) {
+            Color.blue.edgesIgnoringSafeArea(.all)
+            
+            LocationMapCard()
+        }
     }
 }
+
+
+
+//HStack(alignment: .top) {
+//    Rectangle()
+//        .frame(width: 100, height: 100)
+//        .cornerRadius(10, corners: [.bottomLeft,.topLeft])
+//    HStack(alignment: .top) {
+//        VStack(alignment: .leading, spacing: 2) {
+//            NYCBadgeView(badgeType: .withWord, title: "Library")
+//            Text("Intelligentsia Coffee")
+//                .foregroundColor(Resources.Colors.customBlack)
+//                .font(Resources.Fonts.regular(withSize: 17))
+//            Text("691 Eight Avenue")
+//                .foregroundColor(Resources.Colors.darkGrey)
+//                .font(Resources.Fonts.regular(withSize: 13))
+//        }
+//        .padding(.top, 5)
+//
+//        Button {
+//
+//        } label: {
+//            Image("rate")
+//                .resizable()
+//                .frame(width: 18, height: 18)
+//                .foregroundColor(Resources.Colors.customBlack)
+//        }
+//        .padding(.top, 5)
+//        .padding(.leading, 25)
+//        .padding(.trailing, 5)
+//    }
+//
+//}
+//.background(Color.white)
+//.cornerRadius(10)
