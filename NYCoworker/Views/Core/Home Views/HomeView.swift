@@ -10,9 +10,7 @@ import Shimmer
 
 struct HomeView: View {
     @State var presentFavoritesView = false
-    @State var presentLocationList = false
     @State var presentNotifications = false
-    @State var presentLocation = false
     @State var timer = false
     @State var locationTitle = ""
     @State var presentMap = false
@@ -43,11 +41,9 @@ struct HomeView: View {
             VStack(alignment: .leading, spacing: 15) {
                 /// Category scrollview
                 VStack(alignment: .leading, spacing: 10) {
-                    NYCSectionHeader(title: Locations.libraries.rawValue, isExpandButton: true)
-                        .onTapGesture {
-                            locationTitle = Locations.libraries.rawValue
-                            presentLocationList.toggle()
-                        }
+                    NavigationLink(destination: LocationListView(title: Locations.libraries.rawValue)) {
+                        NYCSectionHeader(title: Locations.libraries.rawValue, isExpandButton: true)
+                    }
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 10) {
                             ForEach(0..<10) {_ in
@@ -57,10 +53,9 @@ struct HomeView: View {
                                         .shimmering(active: true, duration: 1.5, bounce: false)
                                 }
                                 else {
-                                    LocationCell()
-                                        .onTapGesture {
-                                            presentLocation.toggle()
-                                        }
+                                    NavigationLink(destination: LocationDetailView(), label: {
+                                        LocationCell()
+                                    })
                                 }
                             }
                         }
@@ -69,11 +64,9 @@ struct HomeView: View {
                 
                 /// Category scrollview
                 VStack(alignment: .leading, spacing: 10) {
-                    NYCSectionHeader(title: Locations.lobbies.rawValue, isExpandButton: true)
-                        .onTapGesture {
-                            locationTitle = Locations.lobbies.rawValue
-                            presentLocationList.toggle()
-                        }
+                    NavigationLink(destination: LocationListView(title: Locations.lobbies.rawValue)) {
+                        NYCSectionHeader(title: Locations.lobbies.rawValue, isExpandButton: true)
+                    }
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 10) {
                             ForEach(0..<10) {_ in
@@ -95,12 +88,6 @@ struct HomeView: View {
         }
         .navigationDestination(isPresented: $presentFavoritesView, destination: {
             FavoriteView()
-        })
-        .navigationDestination(isPresented: $presentLocationList, destination: {
-            LocationListView(title: locationTitle)
-        })
-        .navigationDestination(isPresented: $presentLocation, destination: {
-            LocationDetailView()
         })
         .navigationDestination(isPresented: $presentNotifications, destination: {
             NotificationsView()

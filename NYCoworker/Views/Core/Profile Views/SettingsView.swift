@@ -25,7 +25,7 @@ struct SettingsView: View {
                     Text("1")
                 }
             }
-            .hideTabbar(shouldHideTabbar: true)
+            .toolbar(.hidden, for: .tabBar)
             .toolbar(content: {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button {

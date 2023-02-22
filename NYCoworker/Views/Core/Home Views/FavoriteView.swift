@@ -12,27 +12,27 @@ struct FavoriteView: View {
     var body: some View {
         NavigationStack {
             favoritesView()
-            .hideTabbar(shouldHideTabbar: true)
-            .toolbar(content: {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button {
-                        makeDismiss()
-                    } label: {
-                        Resources.Images.Navigation.arrowBack
-                            .foregroundColor(Resources.Colors.primary)
+                .toolbar(.hidden, for: .tabBar)
+                .toolbar(content: {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button {
+                            makeDismiss()
+                        } label: {
+                            Resources.Images.Navigation.arrowBack
+                                .foregroundColor(Resources.Colors.primary)
+                        }
+                        
                     }
                     
-                }
-                
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Text("Your favorites")
-                        .foregroundColor(Resources.Colors.customBlack)
-                        .font(Resources.Fonts.bold(withSize: 17))
-                }
-            })
-            .navigationBarBackButtonHidden()
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbarBackground(.white, for: .navigationBar)
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Text("Your favorites")
+                            .foregroundColor(Resources.Colors.customBlack)
+                            .font(Resources.Fonts.bold(withSize: 17))
+                    }
+                })
+                .navigationBarBackButtonHidden()
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbarBackground(.white, for: .navigationBar)
         }
     }
     
@@ -48,8 +48,10 @@ struct FavoriteView: View {
         ScrollView(.vertical, showsIndicators: true) {
             LazyVStack(spacing: 10) {
                 ForEach(0..<3){_ in
-                    LocationListCell(type: .favorite) {
-                        print("Remove from favs")
+                    NavigationLink(destination: LocationDetailView()) {
+                        LocationListCell(type: .favorite) {
+                            print("Remove from favs")
+                        }
                     }
                 }
             }
