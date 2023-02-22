@@ -11,21 +11,7 @@ struct FavoriteView: View {
     @Environment(\.dismiss) var makeDismiss
     var body: some View {
         NavigationStack {
-            VStack {
-//                ScrollView(.vertical, showsIndicators: true) {
-//                    VStack(spacing: 10) {
-//                        ForEach(0..<3){_ in
-//                            LocationListCell(type: .favorite) {
-//                                print("Remove from favs")
-//                            }
-//                        }
-//                    }
-//                    .padding([.leading,.trailing], 16)
-//                    Spacer()
-//                }
-                
-                FavoritesEmptyView()
-            }
+            favoritesView()
             .hideTabbar(shouldHideTabbar: true)
             .toolbar(content: {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -35,7 +21,7 @@ struct FavoriteView: View {
                         Resources.Images.Navigation.arrowBack
                             .foregroundColor(Resources.Colors.primary)
                     }
-
+                    
                 }
                 
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -45,7 +31,29 @@ struct FavoriteView: View {
                 }
             })
             .navigationBarBackButtonHidden()
+            .navigationBarTitleDisplayMode(.inline)
             .toolbarBackground(.white, for: .navigationBar)
+        }
+    }
+    
+    @ViewBuilder
+    func emptyState() -> some View {
+        VStack {
+            FavoritesEmptyView()
+        }
+    }
+    
+    @ViewBuilder
+    func favoritesView() -> some View {
+        ScrollView(.vertical, showsIndicators: true) {
+            LazyVStack(spacing: 10) {
+                ForEach(0..<3){_ in
+                    LocationListCell(type: .favorite) {
+                        print("Remove from favs")
+                    }
+                }
+            }
+            .padding([.leading,.trailing], 16)
         }
     }
 }

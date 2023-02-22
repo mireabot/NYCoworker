@@ -81,6 +81,7 @@ struct LocationDetailView: View {
             }
             .toolbarBackground(.white, for: .navigationBar)
             .navigationBarBackButtonHidden()
+            .navigationBarTitleDisplayMode(.inline)
             .fullScreenCover(isPresented: $showReviewView, content: {
                 AddReviewView()
             })

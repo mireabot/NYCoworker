@@ -14,18 +14,15 @@ struct LocationListView: View {
     var title: String
     var body: some View {
         NavigationStack {
-            VStack {
-                ScrollView(.vertical, showsIndicators: true) {
-                    VStack(spacing: 10) {
-                        ForEach(0..<3){_ in
-                            LocationListCell(type: .list) {
-                                addToFavs.toggle()
-                            }
+            ScrollView(.vertical, showsIndicators: true) {
+                LazyVStack(spacing: 10) {
+                    ForEach(0..<3){_ in
+                        LocationListCell(type: .list) {
+                            addToFavs.toggle()
                         }
                     }
-                    .padding([.leading,.trailing], 16)
-                    Spacer()
                 }
+                .padding([.leading,.trailing], 16)
             }
             .popup(isPresented: $addToFavs) {
                 NYCAlertView(title: "Added to favorites", alertStyle: .small)
@@ -56,6 +53,7 @@ struct LocationListView: View {
                 }
             }
             .navigationBarBackButtonHidden()
+            .navigationBarTitleDisplayMode(.inline)
             .hideTabbar(shouldHideTabbar: true)
         }
     }
