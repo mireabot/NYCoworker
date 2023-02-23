@@ -62,7 +62,6 @@ struct LocationDetailView: View {
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
-//                        print("Save to favorites")
                         addToFavs.toggle()
                     } label: {
                         Resources.Images.Settings.rate

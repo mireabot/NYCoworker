@@ -8,9 +8,14 @@
 import SwiftUI
 
 struct NYCCircleImageButton: View {
+    enum ColorType {
+        case black
+        case green
+    }
     var size: CGFloat
     var image: Image
-        var action: () -> Void
+    var color: ColorType? = .green
+    var action: () -> Void
     var body: some View {
         Button {
             action()
@@ -18,7 +23,7 @@ struct NYCCircleImageButton: View {
             image
                 .resizable()
                 .frame(width: size, height: size)
-                .foregroundColor(Resources.Colors.primary)
+                .foregroundColor(color == .green ? Resources.Colors.primary : Resources.Colors.customBlack)
                 .padding(6)
                 .background(Resources.Colors.customGrey)
                 .cornerRadius(size)

@@ -21,13 +21,13 @@ struct LocationsMapView: View {
             .toolbarBackground(.clear, for: .navigationBar)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    NYCCircleImageButton(size: 24, image: Resources.Images.Navigation.close) {
+                    NYCCircleImageButton(size: 24, image: Resources.Images.Navigation.close,color: .black) {
                         makeDismiss()
                     }
                 }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    NYCCircleImageButton(size: 24, image: Resources.Images.Navigation.location) {
+                    NYCCircleImageButton(size: 24, image: Resources.Images.Navigation.location, color: .black) {
                         
                     }
                 }

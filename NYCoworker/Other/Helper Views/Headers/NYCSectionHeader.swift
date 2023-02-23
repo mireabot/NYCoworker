@@ -17,6 +17,7 @@ struct NYCSectionHeader: View {
                 .font(Resources.Fonts.bold(withSize: 22))
             Image("chevron-right")
                 .resizable()
+                .foregroundColor(Resources.Colors.customBlack)
                 .frame(width: 15, height: 15)
                 .padding(5)
                 .background(Resources.Colors.customGrey)
