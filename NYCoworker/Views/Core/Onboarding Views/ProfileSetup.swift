@@ -13,7 +13,6 @@ struct ProfileSetup: View {
     @State var personType: String = "Student"
     @State var prepareToNavigate: Bool = false
     @Environment(\.dismiss) var makeDismiss
-    
     enum Field: Hashable {
         case nameField
         case occupationField
@@ -21,7 +20,7 @@ struct ProfileSetup: View {
     @FocusState private var focusedField: Field?
     var body: some View {
         NavigationStack {
-            VStack {
+            ScrollView(.vertical, showsIndicators: false) {
                 /// Header
                 HStack {
                     VStack(alignment: .leading, spacing: 5) {
@@ -36,7 +35,7 @@ struct ProfileSetup: View {
                     Spacer()
                 }
                 .padding(.leading, 16)
-                .padding(.top, 30)
+                .padding(.top, 10)
                 
                 /// Main section - Name, Occupation, Personality
                 VStack(alignment: .leading) {
@@ -128,8 +127,6 @@ struct ProfileSetup: View {
                     .padding(.trailing, 16)
                 }
                 
-                Spacer()
-                
                 /// Action button
                 Button(action: {
                     makeAction()
@@ -140,7 +137,10 @@ struct ProfileSetup: View {
                 .padding([.leading,.trailing], 16)
                 .disabled(nameTextFieldText == "")
                 .buttonStyle(NYCActionButtonStyle())
+                .padding(.top, 10)
             }
+            .addTransition()
+            .scrollDisabled(true)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button {
@@ -154,7 +154,7 @@ struct ProfileSetup: View {
                     
                 }
             }
-            .ignoresSafeArea(.keyboard)
+//            .ignoresSafeArea(.keyboard)
             .navigationDestination(isPresented: $prepareToNavigate) {
                 NotificationPermission()
             }

@@ -10,8 +10,13 @@ import SwiftUI
 struct ManageAccountView: View {
     @Binding var nameText: String
     @Binding var occupationText: String
+    enum Field: Hashable {
+        case nameField
+        case occupationField
+    }
+    @FocusState private var focusedField: Field?
     var body: some View {
-        VStack {
+        ScrollView(.vertical, showsIndicators: false) {
             VStack {
                 Image("p1")
                     .resizable()
@@ -30,10 +35,10 @@ struct ManageAccountView: View {
             
             VStack(spacing: 20) {
                 NYCTextField(title: "Your name", placeholder: "Your name", text: $nameText)
+                    .focused($focusedField, equals: .nameField)
                 NYCTextField(title: "Your occupation", placeholder: "Your occupation", text: $occupationText)
+                    .focused($focusedField, equals: .occupationField)
             }.padding([.leading,.trailing], 16)
-            
-            Spacer()
             
             Button(action: {
 //                        makeAction()
@@ -44,7 +49,12 @@ struct ManageAccountView: View {
             .padding([.leading,.trailing], 16)
             .disabled(nameText == "")
             .buttonStyle(NYCActionButtonStyle())
+            .padding(.top, 20)
             
+        }
+        .scrollDisabled(true)
+        .onTapGesture {
+            focusedField = nil
         }
     }
 }

@@ -37,6 +37,7 @@ struct NotificationPermission: View {
             .padding(.bottom, 10)
             .padding([.leading,.trailing], 16)
         }
+        .addTransition()
         .toolbar(.hidden)
         .navigationDestination(isPresented: $prepareToNavigate) {
             GeopositionPermission()

@@ -28,6 +28,10 @@ extension View {
     func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
         clipShape( RoundedCorner(radius: radius, corners: corners))
     }
+    
+    func addTransition() -> some View {
+        self.transition(.move(edge: .trailing))
+    }
 }
 struct RoundedCorner: Shape {
 
