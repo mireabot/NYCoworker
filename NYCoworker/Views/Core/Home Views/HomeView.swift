@@ -92,7 +92,7 @@ struct HomeView: View {
         .navigationDestination(isPresented: $presentNotifications, destination: {
             NotificationsView()
         })
-        .fullScreenCover(isPresented: $presentMap, content: {
+        .navigationDestination(isPresented: $presentMap, destination: {
             LocationsMapView()
         })
 //        .onAppear {

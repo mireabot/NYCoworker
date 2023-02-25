@@ -18,10 +18,12 @@ struct LocationsMapView: View {
                     .padding(.bottom, 30)
                 
             }
+            .toolbar(.hidden, for: .tabBar)
+            .navigationBarBackButtonHidden()
             .toolbarBackground(.clear, for: .navigationBar)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    NYCCircleImageButton(size: 24, image: Resources.Images.Navigation.close,color: .black) {
+                    NYCCircleImageButton(size: 24, image: Resources.Images.Navigation.arrowBack, color: .black) {
                         makeDismiss()
                     }
                 }
