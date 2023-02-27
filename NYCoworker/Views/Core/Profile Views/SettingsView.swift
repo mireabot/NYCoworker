@@ -21,6 +21,8 @@ struct SettingsView: View {
                     ManageAccountView(nameText: $nameTextFieldText, occupationText: $occupationTextFieldText)
                 case Strings.Settings.helpSupport:
                     HelpSupportView()
+                case Strings.Settings.manageNotifications:
+                    ManageNotificationsView()
                 default:
                     Text("1")
                 }
