@@ -52,6 +52,12 @@ enum Resources {
             static let faq = Image("faq")
         }
         
+        /// Flags of languages
+        enum Flags {
+            static let english = Image("English")
+            static let russian = Image("Russian")
+        }
+        
         /// Images for social screen
         enum Social {
             static let search = Image("search")

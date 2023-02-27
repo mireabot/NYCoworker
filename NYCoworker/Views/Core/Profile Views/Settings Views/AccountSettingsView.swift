@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ManageAccountView: View {
+struct AccountSettingsView: View {
     @Binding var nameText: String
     @Binding var occupationText: String
     enum Field: Hashable {

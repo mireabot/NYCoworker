@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ManageNotificationsView: View {
+struct NotificationsSettingsView: View {
     @State var isOn = true
     var body: some View {
         VStack {
@@ -24,6 +24,7 @@ struct ManageNotificationsView: View {
             } label: {
                 Text("Update")
             }
+            .disabled(true)
             .buttonStyle(NYCActionButtonStyle())
             .padding([.leading,.trailing], 16)
             .padding(.bottom, 20)
@@ -34,6 +35,6 @@ struct ManageNotificationsView: View {
 
 struct ManageNotificationsView_Previews: PreviewProvider {
     static var previews: some View {
-        ManageNotificationsView()
+        NotificationsSettingsView()
     }
 }

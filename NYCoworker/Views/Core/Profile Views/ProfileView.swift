@@ -17,7 +17,8 @@ struct ProfileView: View {
             /// Profile section
             VStack {
                 VStack(alignment: .center, spacing: 5) {
-                    Circle()
+                    Image("p1")
+                        .resizable()
                         .frame(width: 100, height: 100)
                     Text("Michael")
                         .foregroundColor(Resources.Colors.customBlack)

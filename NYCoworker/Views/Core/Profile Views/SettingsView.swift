@@ -18,13 +18,15 @@ struct SettingsView: View {
             VStack {
                 switch title {
                 case Strings.Settings.manageAccount :
-                    ManageAccountView(nameText: $nameTextFieldText, occupationText: $occupationTextFieldText)
+                    AccountSettingsView(nameText: $nameTextFieldText, occupationText: $occupationTextFieldText)
                 case Strings.Settings.helpSupport:
-                    HelpSupportView()
+                    SupportSettingsView()
                 case Strings.Settings.manageNotifications:
-                    ManageNotificationsView()
+                    NotificationsSettingsView()
+                case Strings.Settings.language:
+                    LanguageSettingsView()
                 default:
-                    Text("1")
+                    EmptyView()
                 }
             }
             .toolbar(.hidden, for: .tabBar)

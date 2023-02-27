@@ -160,10 +160,18 @@ struct LocationDetailView: View {
             Text("What people say")
                 .foregroundColor(Resources.Colors.customBlack)
                 .font(Resources.Fonts.bold(withSize: 15))
-            ReviewCard(variation: .small)
-                .onTapGesture {
-                    showReviewCard.toggle()
+            iPages {
+                ForEach(reviewData) { review in
+                    ReviewCard(variation: .small, data: review)
+                        .onTapGesture {
+                            showReviewCard.toggle()
+                        }
                 }
+            }
+            .hideDots(true)
+            .animated(true)
+            .wraps(true)
+            .frame(height: 180)
             Button {
                 withAnimation(.spring()) {
                     showReviewView.toggle()

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct HelpSupportView: View {
+struct SupportSettingsView: View {
     var body: some View {
         VStack {
             VStack {
@@ -40,6 +40,6 @@ struct HelpSupportView: View {
 
 struct HelpSupportView_Previews: PreviewProvider {
     static var previews: some View {
-        HelpSupportView()
+        SupportSettingsView()
     }
 }
