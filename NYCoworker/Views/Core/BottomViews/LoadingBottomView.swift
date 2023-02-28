@@ -9,17 +9,17 @@ import SwiftUI
 
 struct LoadingBottomView: View {
     var body: some View {
-        ActionSheetView(bgColor: .white) {
-            VStack {
-                NYCLoadingSpinner()
-                    .padding(.top, 30)
-                
-                Text("Hand tight")
-                    .foregroundColor(Resources.Colors.customBlack)
-                    .font(Resources.Fonts.bold(withSize: 22))
-                    .padding(.top, 30)
-            }
+        VStack {
+            NYCLoadingSpinner(isAnimating: .constant(true), style: .large)
+            
+            Text("Hand tight")
+                .foregroundColor(Resources.Colors.customBlack)
+                .font(Resources.Fonts.bold(withSize: 20))
+                .padding(.top, 20)
         }
+        .padding(30)
+        .background(Color.white)
+        .cornerRadius(15)
     }
 }
 

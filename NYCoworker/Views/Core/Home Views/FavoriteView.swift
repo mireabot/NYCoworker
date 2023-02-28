@@ -6,9 +6,11 @@
 //
 
 import SwiftUI
+import PopupView
 
 struct FavoriteView: View {
     @Environment(\.dismiss) var makeDismiss
+    @State var showLoading = false
     var body: some View {
         NavigationStack {
             favoritesView()
@@ -30,6 +32,14 @@ struct FavoriteView: View {
                             .font(Resources.Fonts.bold(withSize: 17))
                     }
                 })
+                .popup(isPresented: $showLoading) {
+                    LoadingBottomView()
+                } customize: {
+                    $0
+                        .closeOnTap(false)
+                        .closeOnTapOutside(true)
+                        .backgroundColor(.black.opacity(0.4))
+                }
                 .navigationBarBackButtonHidden()
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbarBackground(.white, for: .navigationBar)
@@ -50,7 +60,7 @@ struct FavoriteView: View {
                 ForEach(0..<3){_ in
                     NavigationLink(destination: LocationDetailView()) {
                         LocationListCell(type: .favorite) {
-                            print("Remove from favs")
+                            showLoading.toggle()
                         }
                     }
                 }
