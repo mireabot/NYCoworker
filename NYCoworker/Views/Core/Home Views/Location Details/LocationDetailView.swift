@@ -16,6 +16,7 @@ struct LocationDetailView: View {
     @State var addToFavs = false
     @State var showReviewCard = false
     @State var showReviewView = false
+    @State var reviewInfo = reviewData[0]
     var body: some View {
         NavigationStack {
             ScrollView(.vertical, showsIndicators: true) {
@@ -81,9 +82,6 @@ struct LocationDetailView: View {
             .toolbarBackground(.white, for: .navigationBar)
             .navigationBarBackButtonHidden()
             .navigationBarTitleDisplayMode(.inline)
-            .fullScreenCover(isPresented: $showReviewView, content: {
-                AddReviewView()
-            })
             .popup(isPresented: $showMapChoice) {
                 MapChoiceView()
             } customize: {
@@ -95,7 +93,7 @@ struct LocationDetailView: View {
                     .backgroundColor(.black.opacity(0.4))
             }
             .popup(isPresented: $showReviewCard) {
-                ExpandedReviewView()
+                ExpandedReviewView(data: reviewInfo)
             } customize: {
                 $0
                     .type(.toast)
@@ -104,7 +102,7 @@ struct LocationDetailView: View {
                     .backgroundColor(.black.opacity(0.4))
             }
             .popup(isPresented: $addToFavs) {
-                NYCAlertView(title: "Added to favorites", alertStyle: .small)
+                NYCAlertNotificationView(title: "Added to favorites", alertStyle: .small)
             } customize: {
                 $0
                     .isOpaque(true)
@@ -164,6 +162,7 @@ struct LocationDetailView: View {
                 ForEach(reviewData) { review in
                     ReviewCard(variation: .small, data: review)
                         .onTapGesture {
+                            reviewInfo = review
                             showReviewCard.toggle()
                         }
                 }
@@ -172,14 +171,6 @@ struct LocationDetailView: View {
             .animated(true)
             .wraps(true)
             .frame(height: 180)
-            Button {
-                withAnimation(.spring()) {
-                    showReviewView.toggle()
-                }
-            } label: {
-                Text("Write review")
-            }
-            .buttonStyle(NYCActionButtonStyle())
             
             Rectangle()
                 .foregroundColor(Resources.Colors.customGrey)

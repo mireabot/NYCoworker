@@ -8,54 +8,42 @@
 import SwiftUI
 import CoreLocation
 
-class LocationModel: NSObject, ObservableObject {
-    private let manager = CLLocationManager()
-    @Published var userLocation: CLLocation?
-    @Published var status: Bool?
-    static let shared = LocationModel()
+class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
+    @Published var locationManager = CLLocationManager()
     
+    @Published var userLocation : CLLocation!
+    @Published var noLocation = false
+    @Published var permissionDenied = false
     
-    override init() {
-        super.init()
-        manager.delegate = self
-        manager.desiredAccuracy = kCLLocationAccuracyBest
-        manager.startUpdatingLocation()
-    }
-    
-    func requestLocation(compleationHandler:()->Void) {
-        manager.requestWhenInUseAuthorization()
-        compleationHandler()
-    }
-}
-
-extension LocationModel : CLLocationManagerDelegate {
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        switch status {
-        case .notDetermined:
-            print(".notDetermined")
-            self.status = false
-        case .restricted:
-            print(".restricted")
-            self.status = false
-        case .denied:
-            print(".denied")
-            self.status = false
-        case .authorizedAlways:
-            print(".authorizedAlways")
-            self.status = true
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        
+        // checking Location Access....
+        
+        switch manager.authorizationStatus {
         case .authorizedWhenInUse:
-            print(".authorizedWhenInUse")
-            self.status = true
-        case .authorized:
             print("authorized")
-            self.status = true
-        @unknown default:
-            fatalError("Error")
+            self.noLocation = false
+            manager.requestLocation()
+        case .denied:
+            print("denied")
+            self.noLocation = true
+            self.permissionDenied.toggle()
+        default:
+            print("unknown")
+            self.noLocation = false
+            // Direct Call
+            locationManager.requestWhenInUseAuthorization()
+            // Modifying Info.plist...
         }
     }
     
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        
+        print(error.localizedDescription)
+    }
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let location = locations.last else { return }
-        self.userLocation = location
+        // reading User Location And Extracting Details....
+        self.userLocation = locations.last
     }
 }

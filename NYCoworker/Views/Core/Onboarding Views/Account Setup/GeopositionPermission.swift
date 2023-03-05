@@ -6,9 +6,10 @@
 //
 
 import SwiftUI
+import PopupView
 
 struct GeopositionPermission: View {
-    @ObservedObject var locationManager = LocationModel.shared
+    @StateObject var locationManager = LocationManager()
     var body: some View {
         VStack {
             /// Content stack
@@ -29,24 +30,21 @@ struct GeopositionPermission: View {
             .padding(.top, 30)
             
             Spacer()
-            
-            NYCActionButton(action: {
-                LocationModel.shared.requestLocation {
-                    checkForLocationAccess()
-                }
-            }, text: "Continue")
-            .padding(.bottom, 10)
-            .padding([.leading,.trailing], 16)
         }
         .addTransition()
-        .toolbar(.hidden)
-    }
-    
-    func checkForLocationAccess() {
-        if locationManager.status! {
-            print("Ok")
+        .onAppear {
+            locationManager.locationManager.delegate = locationManager
         }
-        else { print("Not ok")}
+        .popup(isPresented: $locationManager.permissionDenied) {
+            NYCAlertView(type: .geoposition) {
+                locationManager.permissionDenied.toggle()
+            }
+        } customize: {
+            $0
+                .closeOnTap(false)
+                .closeOnTapOutside(true)
+                .backgroundColor(.black.opacity(0.4))
+        }
     }
 }
 

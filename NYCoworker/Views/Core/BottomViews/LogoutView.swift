@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct LogoutView: View {
+    @AppStorage("userSigned") var userLogged: Bool = false
     var body: some View {
         ActionSheetView(bgColor: .white) {
             VStack {
@@ -18,7 +19,9 @@ struct LogoutView: View {
                     
                     VStack(alignment: .center, spacing: 10) {
                         NYCActionButton(action: {
-                            
+                            withAnimation(.spring()) {
+                                userLogged = false
+                            }
                         }, text: "Log out", buttonStyle: .system)
                         
                         Button {

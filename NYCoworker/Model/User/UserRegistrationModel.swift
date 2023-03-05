@@ -7,8 +7,9 @@
 
 import SwiftUI
 
-class UserRegistrationModel {
-    var name: String?
-    var occupation: String?
-    var personality: String?
+class UserRegistrationModel: ObservableObject {
+    @Published var name = ""
+    @Published var occupation = ""
+    @Published var gender = ""
+    @Published var accountType = ""
 }

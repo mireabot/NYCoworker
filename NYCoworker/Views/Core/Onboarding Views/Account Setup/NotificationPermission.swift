@@ -7,9 +7,10 @@
 
 import SwiftUI
 import UserNotifications
+import PopupView
 
 struct NotificationPermission: View {
-    @State var prepareToNavigate: Bool = false
+    @State var showAlert: Bool = false
     var body: some View {
         VStack {
             /// Content stack
@@ -30,17 +31,20 @@ struct NotificationPermission: View {
             .padding(.top, 30)
             
             Spacer()
-            
-            NYCActionButton(action: {
-                requestNotification()
-            }, text: "Continue")
-            .padding(.bottom, 10)
-            .padding([.leading,.trailing], 16)
         }
         .addTransition()
-        .toolbar(.hidden)
-        .navigationDestination(isPresented: $prepareToNavigate) {
-            GeopositionPermission()
+        .onAppear {
+            requestNotification()
+        }
+        .popup(isPresented: $showAlert) {
+            NYCAlertView(type: .notification) {
+                showAlert.toggle()
+            }
+        } customize: {
+            $0
+                .closeOnTap(false)
+                .closeOnTapOutside(true)
+                .backgroundColor(.black.opacity(0.4))
         }
     }
     
@@ -49,11 +53,11 @@ struct NotificationPermission: View {
         
         center.requestAuthorization(options: [.alert,.badge,.sound]) { granted, error in
             if granted {
-                prepareToNavigate.toggle()
+                print("Access granted")
             }
             else {
                 print(error ?? "Unknown")
-                prepareToNavigate.toggle()
+                showAlert.toggle()
             }
         }
     }

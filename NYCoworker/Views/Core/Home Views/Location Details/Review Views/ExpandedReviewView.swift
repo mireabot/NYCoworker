@@ -8,15 +8,16 @@
 import SwiftUI
 
 struct ExpandedReviewView: View {
+    var data: ReviewData
     var body: some View {
         ActionSheetView(bgColor: .white) {
             VStack(alignment: .leading, spacing: 10) {
                 /// Header
                 HStack(alignment: .center, spacing: 10) {
-                    Image("p1")
+                    data.userIcon
                         .resizable()
                         .frame(width: 50, height: 50)
-                    Text("Saleb")
+                    Text(data.userName)
                         .foregroundColor(Resources.Colors.customBlack)
                         .font(Resources.Fonts.regular(withSize: 17))
                 }
@@ -42,8 +43,8 @@ struct ExpandedReviewView: View {
     }
 }
 
-struct ExpandedReviewView_Previews: PreviewProvider {
-    static var previews: some View {
-        ExpandedReviewView()
-    }
-}
+//struct ExpandedReviewView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ExpandedReviewView()
+//    }
+//}

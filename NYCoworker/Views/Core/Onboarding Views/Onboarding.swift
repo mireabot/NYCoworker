@@ -13,6 +13,7 @@ struct Onboarding: View {
     @State private var showingCredits = false
     let heights = stride(from: 0.4, through: 0.4, by: 0.1).map { PresentationDetent.fraction($0) }
     @State var prepareToNavigate: Bool = false
+    let onboardingCoordinator = OnboardingCoordinator()
     var body: some View {
         NavigationStack {
             VStack {
@@ -82,7 +83,8 @@ struct Onboarding: View {
                     .presentationDetents(Set(heights))
             }
             .navigationDestination(isPresented: $prepareToNavigate) {
-                ProfileSetup()
+                onboardingCoordinator.start()
+                                .environmentObject(onboardingCoordinator)
             }
         }
     }

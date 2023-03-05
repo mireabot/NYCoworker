@@ -10,7 +10,7 @@ import SwiftUI
 
 enum Resources {
     
-    static let isLogged = true
+    static let isLogged = false
     
     /// Colors resource pack
     enum Colors {
