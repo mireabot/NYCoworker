@@ -16,7 +16,7 @@ struct LocationDetailView: View {
     @State var addToFavs = false
     @State var showReviewCard = false
     @State var showReviewView = false
-    @State var reviewInfo = reviewData[1]
+    @State var reviewInfo = reviewData[0]
     var body: some View {
         NavigationStack {
             ScrollView(.vertical, showsIndicators: true) {
@@ -53,7 +53,6 @@ struct LocationDetailView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button {
-                        print("Go back")
                         makeDismiss()
                     } label: {
                         Resources.Images.Navigation.arrowBack
@@ -93,7 +92,16 @@ struct LocationDetailView: View {
                     .backgroundColor(.black.opacity(0.4))
             }
             .popup(isPresented: $showReviewCard) {
-                ExpandedReviewView(data: reviewInfo)
+                ExpandedReviewView(data: reviewInfo, type: .singleCard)
+            } customize: {
+                $0
+                    .type(.toast)
+                    .position(.bottom)
+                    .closeOnTapOutside(true)
+                    .backgroundColor(.black.opacity(0.4))
+            }
+            .popup(isPresented: $showReviewView) {
+                ExpandedReviewView(data: reviewInfo, type: .fullList)
             } customize: {
                 $0
                     .type(.toast)
@@ -155,21 +163,24 @@ struct LocationDetailView: View {
     
     var reviews: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text("What people say")
-                .foregroundColor(Resources.Colors.customBlack)
-                .font(Resources.Fonts.bold(withSize: 15))
+            HStack {
+                Text("What people say")
+                    .foregroundColor(Resources.Colors.customBlack)
+                    .font(Resources.Fonts.bold(withSize: 15))
+                Spacer()
+                Button {
+                    showReviewView.toggle()
+                } label: {
+                    Text("See all")
+                        .foregroundColor(Resources.Colors.primary)
+                        .font(Resources.Fonts.bold(withSize: 13))
+                }
+
+            }
             ReviewCard(variation: .small, data: reviewInfo)
                 .onTapGesture {
-//                    reviewInfo = review
                     showReviewCard.toggle()
                 }
-//            iPages {
-//
-//            }
-//            .hideDots(true)
-//            .animated(true)
-//            .wraps(true)
-//            .frame(height: 180)
             
             Rectangle()
                 .foregroundColor(Resources.Colors.customGrey)
@@ -185,7 +196,7 @@ struct LocationDetailView: View {
                 .foregroundColor(Resources.Colors.customBlack)
                 .font(Resources.Fonts.bold(withSize: 15))
             
-            AmenitiesGridView()
+            amenitiesGridView()
             
             Rectangle()
                 .foregroundColor(Resources.Colors.customGrey)
@@ -240,23 +251,14 @@ struct LocationDetailView: View {
         }
         .padding([.leading,.trailing], 16)
     }
-}
-
-struct LocationDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        LocationDetailView()
-    }
-}
-
-
-struct AmenitiesGridView: View {
-
-    let rows = [
-        GridItem(.flexible(),alignment: .leading),
-        GridItem(.flexible(),alignment: .leading)
-    ]
-
-    var body: some View {
+    
+    @ViewBuilder
+    func amenitiesGridView() -> some View {
+        let rows = [
+            GridItem(.flexible(),alignment: .leading),
+            GridItem(.flexible(),alignment: .leading)
+        ]
+        
         LazyHGrid(rows: rows, alignment: .center, spacing: 10) {
             ForEach(amenityData) { item in
                 AmenityCard(data: item)
@@ -266,26 +268,8 @@ struct AmenitiesGridView: View {
     }
 }
 
-struct HoursGridView: View {
-
-    let rows = [
-        GridItem(.flexible(),alignment: .leading),
-        GridItem(.flexible(),alignment: .leading),
-        GridItem(.flexible(),alignment: .leading),
-        GridItem(.flexible(),alignment: .leading),
-    ]
-
-    var body: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            LazyHGrid(rows: rows, alignment: .center, spacing: 10) {
-                ForEach(hoursData) { item in
-                    HStack {
-                        Text("\(item.day) - \(item.hours)")
-                            .frame(maxWidth: .infinity)
-                    }
-                }
-            }
-            .frame(height: 80)
-        }
+struct LocationDetailView_Previews: PreviewProvider {
+    static var previews: some View {
+        LocationDetailView()
     }
 }

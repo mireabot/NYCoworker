@@ -29,6 +29,8 @@
 		354651C329A839E7003F7AE8 /* NYCLoadingSpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354651C229A839E7003F7AE8 /* NYCLoadingSpinner.swift */; };
 		354651C529A83B1F003F7AE8 /* LoadingBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354651C429A83B1F003F7AE8 /* LoadingBottomView.swift */; };
 		3550FA2E29B3CA9F0091B558 /* OnboardingNavigationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3550FA2D29B3CA9F0091B558 /* OnboardingNavigationCoordinator.swift */; };
+		355C11BE29B78EB7001F092B /* NotificationCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355C11BD29B78EB7001F092B /* NotificationCard.swift */; };
+		355C11C029B7A44E001F092B /* ErrorEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355C11BF29B7A44E001F092B /* ErrorEmptyView.swift */; };
 		355EA17729AD666B00D62B01 /* NotificationsSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355EA17629AD666B00D62B01 /* NotificationsSettingsView.swift */; };
 		355EA17929AD6FAF00D62B01 /* NYCLanguageCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355EA17829AD6FAF00D62B01 /* NYCLanguageCard.swift */; };
 		355EA17B29AD72DF00D62B01 /* LanguageSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355EA17A29AD72DF00D62B01 /* LanguageSettingsView.swift */; };
@@ -113,6 +115,8 @@
 		354651C229A839E7003F7AE8 /* NYCLoadingSpinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCLoadingSpinner.swift; sourceTree = "<group>"; };
 		354651C429A83B1F003F7AE8 /* LoadingBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingBottomView.swift; sourceTree = "<group>"; };
 		3550FA2D29B3CA9F0091B558 /* OnboardingNavigationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingNavigationCoordinator.swift; sourceTree = "<group>"; };
+		355C11BD29B78EB7001F092B /* NotificationCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCard.swift; sourceTree = "<group>"; };
+		355C11BF29B7A44E001F092B /* ErrorEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorEmptyView.swift; sourceTree = "<group>"; };
 		355EA17629AD666B00D62B01 /* NotificationsSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsSettingsView.swift; sourceTree = "<group>"; };
 		355EA17829AD6FAF00D62B01 /* NYCLanguageCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCLanguageCard.swift; sourceTree = "<group>"; };
 		355EA17A29AD72DF00D62B01 /* LanguageSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSettingsView.swift; sourceTree = "<group>"; };
@@ -300,6 +304,7 @@
 		3538C62D298358560017800B /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				355C11BC29B78EAC001F092B /* Notifications */,
 				35D3821629B6AA8200B66EDA /* Location */,
 				3538C62E298358890017800B /* LanguageCard.swift */,
 				35D9A5CF2989832200A2F8D6 /* SettingsCard.swift */,
@@ -332,6 +337,14 @@
 				3550FA2D29B3CA9F0091B558 /* OnboardingNavigationCoordinator.swift */,
 			);
 			path = Coordinators;
+			sourceTree = "<group>";
+		};
+		355C11BC29B78EAC001F092B /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				355C11BD29B78EB7001F092B /* NotificationCard.swift */,
+			);
+			path = Notifications;
 			sourceTree = "<group>";
 		};
 		3565689E29A16C0A007CAF80 /* Core */ = {
@@ -390,6 +403,7 @@
 			children = (
 				35746CB229A29F3E007322AA /* FavoritesEmptyView.swift */,
 				35746CB429A3183B007322AA /* NotificationsEmptyView.swift */,
+				355C11BF29B7A44E001F092B /* ErrorEmptyView.swift */,
 			);
 			path = "Empty Views";
 			sourceTree = "<group>";
@@ -660,6 +674,7 @@
 				359F80F4298C2253000D792E /* NYCSectionHeader.swift in Sources */,
 				3503BD9D297F5EE500C0E365 /* Resources.swift in Sources */,
 				359E6AA22981ED8B00333BD7 /* Onboarding.swift in Sources */,
+				355C11BE29B78EB7001F092B /* NotificationCard.swift in Sources */,
 				359A792B298DFBB9001B66CF /* Modifiers.swift in Sources */,
 				35EF059B29B0F2EC0098110B /* NavigationDotsView.swift in Sources */,
 				356C52DC29A04BDB00080D4C /* LocationListCell.swift in Sources */,
@@ -673,6 +688,7 @@
 				35DFA24129A518B700258BB7 /* AddReviewView.swift in Sources */,
 				350DE2762991C5F200573163 /* LocationListView.swift in Sources */,
 				350DE27B2991CA7600573163 /* LocationsMapView.swift in Sources */,
+				355C11C029B7A44E001F092B /* ErrorEmptyView.swift in Sources */,
 				35E7FB9D2985B88700EFF282 /* GeoLocationModel.swift in Sources */,
 				35F2939B299F195400A85586 /* NotificationsView.swift in Sources */,
 				359F80F9298C30D2000D792E /* NYCBadgeView.swift in Sources */,

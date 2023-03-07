@@ -8,25 +8,20 @@
 import SwiftUI
 
 struct LocationMapCard: View {
-    @EnvironmentObject private var vm: LocationsViewModel
     let location: LocationModel
+    var buttonAction: () -> Void
     var body: some View {
         ZStack(alignment: .bottom) {
             ZStack(alignment: .topTrailing) {
-                Image("load")
+                Image("\(String(describing: location.images[0]))")
                     .resizable()
                     .frame(height: 200)
                     .scaledToFit()
                 
                 
-                        Button {
-                            vm.pushNextLocation()
-                        } label: {
-                            Image("rate")
-                                .resizable()
-                                .frame(width: 20, height: 20)
-                                .foregroundColor(.black)
-                        }
+                NYCCircleImageButton(size: 20, image: Resources.Images.Settings.rate, action: {
+                    buttonAction()
+                })
                         .padding([.top,.trailing], 10)
             }
             

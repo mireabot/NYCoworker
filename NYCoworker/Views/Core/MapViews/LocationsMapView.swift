@@ -7,10 +7,12 @@
 
 import SwiftUI
 import MapKit
+import PopupView
 
 struct LocationsMapView: View {
     @Environment(\.dismiss) var makeDismiss
     @ObservedObject var locationVM: LocationsViewModel
+    @State var showAlert = false
     var body: some View {
         NavigationStack {
             ZStack(alignment: .bottom) {
@@ -18,8 +20,7 @@ struct LocationsMapView: View {
                     MapAnnotation(coordinate: location.coordinates) {
                         Image("mapPin")
                             .resizable()
-                            .frame(width: 30, height: 30)
-                            .foregroundColor(Resources.Colors.primary)
+                            .frame(width: 40, height: 40)
                             .scaleEffect(locationVM.mapLocation == location ? 1 : 0.7)
                             .onTapGesture {
                                 locationVM.showNextLocation(location: location)
@@ -30,25 +31,27 @@ struct LocationsMapView: View {
                 ZStack {
                     ForEach(locationVM.locations) { location in
                         if locationVM.mapLocation == location {
-                            LocationMapCard(location: location)
-                                .transition(.asymmetric(insertion: .move(edge: .trailing),removal: .move(edge: .leading)))
-                                .onTapGesture {
-                                    print("Open location screen")
-                                }
+                            NavigationLink(destination: LocationDetailView()) {
+                                LocationMapCard(location: location, buttonAction: {
+                                    showAlert.toggle()
+                                })
+                                    .transition(.asymmetric(insertion: .move(edge: .trailing),removal: .move(edge: .leading)))
+                            }
                         }
                     }
                 }
                 .padding(.bottom, 30)
-                .gesture(DragGesture(minimumDistance: 3.0, coordinateSpace: .local)
-                    .onEnded { value in
-                        print(value.translation)
-                        switch(value.translation.width, value.translation.height) {
-                        case (...0, -30...30):  locationVM.pushNextLocation()
-                            default:  print("no clue")
-                        }
-                    }
-                )
                 
+            }
+            .popup(isPresented: $showAlert) {
+                NYCAlertNotificationView(title: "Added to favorites", alertStyle: .small)
+            } customize: {
+                $0
+                    .isOpaque(true)
+                    .autohideIn(1.5)
+                    .type(.floater())
+                    .position(.top)
+                    .animation(.spring(response: 0.4, blendDuration: 0.2))
             }
             .toolbar(.hidden, for: .tabBar)
             .navigationBarBackButtonHidden()

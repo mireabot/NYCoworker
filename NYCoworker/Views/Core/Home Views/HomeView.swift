@@ -126,6 +126,7 @@ struct HomeView: View {
         }
         .toolbarBackground(.white, for: .navigationBar, .automatic)
         .hideTabbar(shouldHideTabbar: false)
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
