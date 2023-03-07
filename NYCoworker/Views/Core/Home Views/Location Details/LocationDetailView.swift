@@ -16,7 +16,7 @@ struct LocationDetailView: View {
     @State var addToFavs = false
     @State var showReviewCard = false
     @State var showReviewView = false
-    @State var reviewInfo = reviewData[0]
+    @State var reviewInfo = reviewData[1]
     var body: some View {
         NavigationStack {
             ScrollView(.vertical, showsIndicators: true) {
@@ -158,19 +158,18 @@ struct LocationDetailView: View {
             Text("What people say")
                 .foregroundColor(Resources.Colors.customBlack)
                 .font(Resources.Fonts.bold(withSize: 15))
-            iPages {
-                ForEach(reviewData) { review in
-                    ReviewCard(variation: .small, data: review)
-                        .onTapGesture {
-                            reviewInfo = review
-                            showReviewCard.toggle()
-                        }
+            ReviewCard(variation: .small, data: reviewInfo)
+                .onTapGesture {
+//                    reviewInfo = review
+                    showReviewCard.toggle()
                 }
-            }
-            .hideDots(true)
-            .animated(true)
-            .wraps(true)
-            .frame(height: 180)
+//            iPages {
+//
+//            }
+//            .hideDots(true)
+//            .animated(true)
+//            .wraps(true)
+//            .frame(height: 180)
             
             Rectangle()
                 .foregroundColor(Resources.Colors.customGrey)

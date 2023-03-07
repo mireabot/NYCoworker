@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Shimmer
+import MapKit
 
 struct HomeView: View {
     @State var presentFavoritesView = false
@@ -14,6 +15,8 @@ struct HomeView: View {
     @State var timer = false
     @State var locationTitle = ""
     @State var presentMap = false
+    @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 40.7181597, longitude: -73.9845737), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
+    @StateObject var locationVM : LocationsViewModel = .shared
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             /// Map section
@@ -21,9 +24,10 @@ struct HomeView: View {
                 NYCSectionHeader(title: "Locations nearby", isExpandButton: false)
                 
                 ZStack {
-                    Rectangle()
+                    Map(coordinateRegion: $region)
                         .frame(width: UIScreen.main.bounds.width - 16, height: 100)
                         .cornerRadius(10)
+                        .disabled(true)
                     
                     Button {
                         presentMap.toggle()
@@ -93,7 +97,7 @@ struct HomeView: View {
             NotificationsView()
         })
         .navigationDestination(isPresented: $presentMap, destination: {
-            LocationsMapView()
+            LocationsMapView(locationVM: .shared)
         })
 //        .onAppear {
 //            timer = true

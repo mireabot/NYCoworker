@@ -6,16 +6,48 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct LocationsMapView: View {
     @Environment(\.dismiss) var makeDismiss
+    @ObservedObject var locationVM: LocationsViewModel
     var body: some View {
         NavigationStack {
             ZStack(alignment: .bottom) {
-                Color.blue.edgesIgnoringSafeArea(.all)
+                Map(coordinateRegion: $locationVM.mapRegion, annotationItems: locationVM.locations, annotationContent: { location in
+                    MapAnnotation(coordinate: location.coordinates) {
+                        Image("mapPin")
+                            .resizable()
+                            .frame(width: 30, height: 30)
+                            .foregroundColor(Resources.Colors.primary)
+                            .scaleEffect(locationVM.mapLocation == location ? 1 : 0.7)
+                            .onTapGesture {
+                                locationVM.showNextLocation(location: location)
+                            }
+                    }
+                }).edgesIgnoringSafeArea(.all)
                 
-                LocationMapCard()
-                    .padding(.bottom, 30)
+                ZStack {
+                    ForEach(locationVM.locations) { location in
+                        if locationVM.mapLocation == location {
+                            LocationMapCard(location: location)
+                                .transition(.asymmetric(insertion: .move(edge: .trailing),removal: .move(edge: .leading)))
+                                .onTapGesture {
+                                    print("Open location screen")
+                                }
+                        }
+                    }
+                }
+                .padding(.bottom, 30)
+                .gesture(DragGesture(minimumDistance: 3.0, coordinateSpace: .local)
+                    .onEnded { value in
+                        print(value.translation)
+                        switch(value.translation.width, value.translation.height) {
+                        case (...0, -30...30):  locationVM.pushNextLocation()
+                            default:  print("no clue")
+                        }
+                    }
+                )
                 
             }
             .toolbar(.hidden, for: .tabBar)
@@ -38,8 +70,8 @@ struct LocationsMapView: View {
     }
 }
 
-struct LocationsMapView_Previews: PreviewProvider {
-    static var previews: some View {
-        LocationsMapView()
-    }
-}
+//struct LocationsMapView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        LocationsMapView()
+//    }
+//}

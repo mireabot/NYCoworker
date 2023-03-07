@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct LocationMapCard: View {
+    @EnvironmentObject private var vm: LocationsViewModel
+    let location: LocationModel
     var body: some View {
         ZStack(alignment: .bottom) {
             ZStack(alignment: .topTrailing) {
@@ -18,7 +20,7 @@ struct LocationMapCard: View {
                 
                 
                         Button {
-                
+                            vm.pushNextLocation()
                         } label: {
                             Image("rate")
                                 .resizable()
@@ -29,12 +31,12 @@ struct LocationMapCard: View {
             }
             
             VStack(alignment: .leading, spacing: 2) {
-                Text("Intelligentsia Coffee")
+                Text(location.name)
                     .foregroundColor(Resources.Colors.customBlack)
                     .font(Resources.Fonts.regular(withSize: 20))
                     .frame(maxWidth: .infinity,alignment: .leading)
                     .lineLimit(1)
-                Text("691 Eight Avenue")
+                Text(location.address)
                     .foregroundColor(Resources.Colors.darkGrey)
                     .font(Resources.Fonts.regular(withSize: 15))
             }
@@ -44,9 +46,9 @@ struct LocationMapCard: View {
             .clipped()
             .overlay(alignment: .topLeading) {
                 HStack(spacing: 5) {
-                    NYCBadgeView(badgeType: .location, title: "Library")
+                    NYCBadgeView(badgeType: .location, title: location.locationType.rawValue)
                     Spacer()
-                    NYCRateBadge(rate: 4, badgeType: .card)
+                    NYCRateBadge(rate: location.reviewsNumber, badgeType: .card)
                 }
                 .offset(y: -15)
                 .padding([.leading,.trailing], 10)
@@ -57,16 +59,16 @@ struct LocationMapCard: View {
     }
 }
 
-struct LocationMapCard_Previews: PreviewProvider {
-    static var previews: some View {
-        ZStack(alignment: .bottom) {
-            Color.blue.edgesIgnoringSafeArea(.all)
-            
-            LocationMapCard()
-        }
-    }
-}
-
+//struct LocationMapCard_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ZStack(alignment: .bottom) {
+//            Color.blue.edgesIgnoringSafeArea(.all)
+//
+//            LocationMapCard()
+//        }
+//    }
+//}
+//
 
 
 //HStack(alignment: .top) {

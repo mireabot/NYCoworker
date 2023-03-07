@@ -63,6 +63,8 @@
 		35BA64B5299BF69D00E15206 /* ReviewCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BA64B4299BF69D00E15206 /* ReviewCard.swift */; };
 		35BC807A29970DC0001ACC35 /* ListModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BC807929970DC0001ACC35 /* ListModifier.swift */; };
 		35C479A6298C89D50089F342 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C479A5298C89D50089F342 /* SettingsView.swift */; };
+		35D3821529B6A7C000B66EDA /* LocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D3821429B6A7C000B66EDA /* LocationModel.swift */; };
+		35D3821829B6AA8C00B66EDA /* LocationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D3821729B6AA8C00B66EDA /* LocationsViewModel.swift */; };
 		35D9A5CE298981EE00A2F8D6 /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D9A5CD298981EE00A2F8D6 /* SettingsModel.swift */; };
 		35D9A5D02989832200A2F8D6 /* SettingsCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D9A5CF2989832200A2F8D6 /* SettingsCard.swift */; };
 		35DFA23E29A3BFC900258BB7 /* ExpandedReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35DFA23D29A3BFC800258BB7 /* ExpandedReviewView.swift */; };
@@ -142,6 +144,8 @@
 		35BA64B4299BF69D00E15206 /* ReviewCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCard.swift; sourceTree = "<group>"; };
 		35BC807929970DC0001ACC35 /* ListModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListModifier.swift; sourceTree = "<group>"; };
 		35C479A5298C89D50089F342 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		35D3821429B6A7C000B66EDA /* LocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModel.swift; sourceTree = "<group>"; };
+		35D3821729B6AA8C00B66EDA /* LocationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsViewModel.swift; sourceTree = "<group>"; };
 		35D9A5CD298981EE00A2F8D6 /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
 		35D9A5CF2989832200A2F8D6 /* SettingsCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCard.swift; sourceTree = "<group>"; };
 		35DFA23D29A3BFC800258BB7 /* ExpandedReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandedReviewView.swift; sourceTree = "<group>"; };
@@ -296,6 +300,7 @@
 		3538C62D298358560017800B /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				35D3821629B6AA8200B66EDA /* Location */,
 				3538C62E298358890017800B /* LanguageCard.swift */,
 				35D9A5CF2989832200A2F8D6 /* SettingsCard.swift */,
 				35BA64B4299BF69D00E15206 /* ReviewCard.swift */,
@@ -449,6 +454,7 @@
 		358B93962980D35800160BFC /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				35D3821329B6A7B700B66EDA /* Location */,
 				35E7FB922985A9C200EFF282 /* User */,
 				3538C62A298357310017800B /* System */,
 			);
@@ -496,6 +502,22 @@
 				356C52DB29A04BDB00080D4C /* LocationListCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		35D3821329B6A7B700B66EDA /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				35D3821429B6A7C000B66EDA /* LocationModel.swift */,
+			);
+			path = Location;
+			sourceTree = "<group>";
+		};
+		35D3821629B6AA8200B66EDA /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				35D3821729B6AA8C00B66EDA /* LocationsViewModel.swift */,
+			);
+			path = Location;
 			sourceTree = "<group>";
 		};
 		35DFA23C29A3BF8C00258BB7 /* Location Details */ = {
@@ -695,7 +717,9 @@
 				350DE2782991C66600573163 /* Enums.swift in Sources */,
 				354651C329A839E7003F7AE8 /* NYCLoadingSpinner.swift in Sources */,
 				3550FA2E29B3CA9F0091B558 /* OnboardingNavigationCoordinator.swift in Sources */,
+				35D3821829B6AA8C00B66EDA /* LocationsViewModel.swift in Sources */,
 				35DFA24529A5822B00258BB7 /* VisitDatePickerView.swift in Sources */,
+				35D3821529B6A7C000B66EDA /* LocationModel.swift in Sources */,
 				35E7FB9B2985ADF800EFF282 /* GeopositionPermission.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
