@@ -11,9 +11,17 @@ import CoreLocation
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var locationManager = CLLocationManager()
     
-    @Published var userLocation : CLLocation!
+    @Published var userLocation: CLLocation?
     @Published var noLocation = false
     @Published var permissionDenied = false
+    
+    override init() {
+        super.init()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+    }
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         
@@ -37,13 +45,13 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         }
     }
     
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        
-        print(error.localizedDescription)
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.last {
+            userLocation = location
+        }
     }
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        // reading User Location And Extracting Details....
-        self.userLocation = locations.last
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("LocationManager error: \(error.localizedDescription)")
     }
 }

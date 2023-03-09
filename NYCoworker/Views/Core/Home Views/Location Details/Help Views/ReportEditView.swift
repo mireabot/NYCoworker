@@ -29,9 +29,11 @@ struct ReportEditView: View {
                 Button {
                     self.buttonLoader = true
                     DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
-                        self.buttonLoader = false
-                        makeDismiss()
-                        showAlert = true
+                        withAnimation(.spring()) {
+                            self.buttonLoader = false
+                            makeDismiss()
+                            showAlert = true
+                        }
                     }
                 } label: {
                     Text("Submit")
@@ -51,7 +53,9 @@ struct ReportEditView: View {
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
-                        makeDismiss()
+                        withAnimation(.spring()) {
+                            makeDismiss()
+                        }
                     } label: {
                         Resources.Images.Navigation.close
                             .foregroundColor(Resources.Colors.customBlack)

@@ -64,11 +64,13 @@ struct LocationsMapView: View {
                     }
                 }
                 
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    NYCCircleImageButton(size: 24, image: Resources.Images.Navigation.location, color: .black) {
-                        locationManager.updateLocation()
-                    }
-                }
+//                ToolbarItem(placement: .navigationBarTrailing) {
+//                    NYCCircleImageButton(size: 24, image: Resources.Images.Navigation.location, color: .black) {
+//                        if let location = locationManager.userLocation {
+//                            locationVM.mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude), span: locationVM.span)
+//                        }
+//                    }
+//                }
             }
         }
     }

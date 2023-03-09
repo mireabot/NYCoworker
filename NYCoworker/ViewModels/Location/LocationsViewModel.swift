@@ -59,4 +59,9 @@ final class LocationsViewModel: ObservableObject {
             showNextLocation(location: nextLocation)
         }
     }
+    
+    func resetLocation() {
+        let location = LocationDataModel.locations
+        mapLocation = location[0]
+    }
 }

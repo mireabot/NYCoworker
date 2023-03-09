@@ -24,7 +24,7 @@ struct LocationDetailView: View {
             ScrollView(.vertical, showsIndicators: true) {
                 VStack {
                     iPages(selection: $currentImage) {
-                        Rectangle().fill(Color.red)
+                        Image("sample")
                         Rectangle().fill(Color.blue)
                         Rectangle().fill(Color.gray)
                     }
@@ -48,7 +48,7 @@ struct LocationDetailView: View {
                 workingHours
                 
                 ///Suggest info
-                suggestInfo
+//                suggestInfo
                 
             }
             .hideTabbar(shouldHideTabbar: true)
@@ -189,13 +189,14 @@ struct LocationDetailView: View {
                     Text("See all")
                         .foregroundColor(Resources.Colors.primary)
                         .font(Resources.Fonts.bold(withSize: 13))
-                }
+                }.opacity(0)
 
             }
-            ReviewCard(variation: .small, data: reviewInfo)
-                .onTapGesture {
-                    showReviewCard.toggle()
-                }
+            ReviewEmptyView()
+//            ReviewCard(variation: .small, data: reviewInfo)
+//                .onTapGesture {
+//                    showReviewCard.toggle()
+//                }
             
             Rectangle()
                 .foregroundColor(Resources.Colors.customGrey)

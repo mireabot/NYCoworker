@@ -49,6 +49,8 @@
 		35746CB529A3183B007322AA /* NotificationsEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35746CB429A3183B007322AA /* NotificationsEmptyView.swift */; };
 		3583BD4529AA99E600B984EA /* NYCNotificationCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3583BD4429AA99E600B984EA /* NYCNotificationCard.swift */; };
 		359213632995DC0C00B18A8D /* KeyboardAvoider in Frameworks */ = {isa = PBXBuildFile; productRef = 359213622995DC0C00B18A8D /* KeyboardAvoider */; };
+		359348DA29BA378D00B7739A /* ReviewEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359348D929BA378D00B7739A /* ReviewEmptyView.swift */; };
+		359348DD29BA421900B7739A /* ReviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359348DC29BA421900B7739A /* ReviewModel.swift */; };
 		359A792B298DFBB9001B66CF /* Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359A792A298DFBB9001B66CF /* Modifiers.swift */; };
 		359A792D298ECC6B001B66CF /* NYCSocialCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359A792C298ECC6B001B66CF /* NYCSocialCard.swift */; };
 		359A7930298ED141001B66CF /* Shimmer in Frameworks */ = {isa = PBXBuildFile; productRef = 359A792F298ED141001B66CF /* Shimmer */; };
@@ -134,6 +136,8 @@
 		35746CB229A29F3E007322AA /* FavoritesEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesEmptyView.swift; sourceTree = "<group>"; };
 		35746CB429A3183B007322AA /* NotificationsEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsEmptyView.swift; sourceTree = "<group>"; };
 		3583BD4429AA99E600B984EA /* NYCNotificationCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCNotificationCard.swift; sourceTree = "<group>"; };
+		359348D929BA378D00B7739A /* ReviewEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewEmptyView.swift; sourceTree = "<group>"; };
+		359348DC29BA421900B7739A /* ReviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewModel.swift; sourceTree = "<group>"; };
 		359A792A298DFBB9001B66CF /* Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifiers.swift; sourceTree = "<group>"; };
 		359A792C298ECC6B001B66CF /* NYCSocialCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCSocialCard.swift; sourceTree = "<group>"; };
 		359A7931298EDCCB001B66CF /* ShareCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareCardView.swift; sourceTree = "<group>"; };
@@ -269,10 +273,8 @@
 		3538C624298356120017800B /* Onboarding Views */ = {
 			isa = PBXGroup;
 			children = (
+				359348E529BA44AB00B7739A /* Core */,
 				35EF059C29B0F3F70098110B /* Account Setup */,
-				359E6AA12981ED8B00333BD7 /* Onboarding.swift */,
-				35EF059D29B0F40A0098110B /* AccoutSetupView.swift */,
-				3538C625298356270017800B /* LanguageSetup.swift */,
 			);
 			path = "Onboarding Views";
 			sourceTree = "<group>";
@@ -306,13 +308,10 @@
 		3538C62D298358560017800B /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				359348E129BA437800B7739A /* Settings */,
+				359348DE29BA432800B7739A /* Reviews */,
 				355C11BC29B78EAC001F092B /* Notifications */,
 				35D3821629B6AA8200B66EDA /* Location */,
-				3538C62E298358890017800B /* LanguageCard.swift */,
-				35D9A5CF2989832200A2F8D6 /* SettingsCard.swift */,
-				35BA64B4299BF69D00E15206 /* ReviewCard.swift */,
-				35F29396299E8ED500A85586 /* AmenityCard.swift */,
-				356C52D929A0460C00080D4C /* LocationMapCard.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -380,9 +379,8 @@
 		35737E592988885B003B68BE /* Profile Views */ = {
 			isa = PBXGroup;
 			children = (
+				359348E429BA449D00B7739A /* Core */,
 				351B3A21299814AA007E7D00 /* Settings Views */,
-				35737E5A29888866003B68BE /* ProfileView.swift */,
-				35C479A5298C89D50089F342 /* SettingsView.swift */,
 			);
 			path = "Profile Views";
 			sourceTree = "<group>";
@@ -399,11 +397,8 @@
 		35737E5F29888DF1003B68BE /* Home Views */ = {
 			isa = PBXGroup;
 			children = (
+				359348E329BA447F00B7739A /* Core */,
 				35DFA23C29A3BF8C00258BB7 /* Location Details */,
-				35737E6029888DF9003B68BE /* HomeView.swift */,
-				359F80FA298C330B000D792E /* FavoriteView.swift */,
-				350DE2752991C5F200573163 /* LocationListView.swift */,
-				35F2939A299F195400A85586 /* NotificationsView.swift */,
 			);
 			path = "Home Views";
 			sourceTree = "<group>";
@@ -414,6 +409,7 @@
 				35746CB229A29F3E007322AA /* FavoritesEmptyView.swift */,
 				35746CB429A3183B007322AA /* NotificationsEmptyView.swift */,
 				355C11BF29B7A44E001F092B /* ErrorEmptyView.swift */,
+				359348D929BA378D00B7739A /* ReviewEmptyView.swift */,
 			);
 			path = "Empty Views";
 			sourceTree = "<group>";
@@ -478,6 +474,7 @@
 		358B93962980D35800160BFC /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				359348DB29BA420D00B7739A /* Review */,
 				35D3821329B6A7B700B66EDA /* Location */,
 				35E7FB922985A9C200EFF282 /* User */,
 				3538C62A298357310017800B /* System */,
@@ -492,6 +489,69 @@
 				359E6AA02981ECB200333BD7 /* Core */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		359348DB29BA420D00B7739A /* Review */ = {
+			isa = PBXGroup;
+			children = (
+				359348DC29BA421900B7739A /* ReviewModel.swift */,
+			);
+			path = Review;
+			sourceTree = "<group>";
+		};
+		359348DE29BA432800B7739A /* Reviews */ = {
+			isa = PBXGroup;
+			children = (
+				35BA64B4299BF69D00E15206 /* ReviewCard.swift */,
+			);
+			path = Reviews;
+			sourceTree = "<group>";
+		};
+		359348E129BA437800B7739A /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				3538C62E298358890017800B /* LanguageCard.swift */,
+				35D9A5CF2989832200A2F8D6 /* SettingsCard.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		359348E229BA446700B7739A /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				351B3A2829982ABC007E7D00 /* LocationDetailView.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		359348E329BA447F00B7739A /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				35737E6029888DF9003B68BE /* HomeView.swift */,
+				359F80FA298C330B000D792E /* FavoriteView.swift */,
+				350DE2752991C5F200573163 /* LocationListView.swift */,
+				35F2939A299F195400A85586 /* NotificationsView.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		359348E429BA449D00B7739A /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				35737E5A29888866003B68BE /* ProfileView.swift */,
+				35C479A5298C89D50089F342 /* SettingsView.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		359348E529BA44AB00B7739A /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				359E6AA12981ED8B00333BD7 /* Onboarding.swift */,
+				35EF059D29B0F40A0098110B /* AccoutSetupView.swift */,
+				3538C625298356270017800B /* LanguageSetup.swift */,
+			);
+			path = Core;
 			sourceTree = "<group>";
 		};
 		359E6AA02981ECB200333BD7 /* Core */ = {
@@ -539,6 +599,8 @@
 		35D3821629B6AA8200B66EDA /* Location */ = {
 			isa = PBXGroup;
 			children = (
+				35F29396299E8ED500A85586 /* AmenityCard.swift */,
+				356C52D929A0460C00080D4C /* LocationMapCard.swift */,
 				35D3821729B6AA8C00B66EDA /* LocationsViewModel.swift */,
 			);
 			path = Location;
@@ -547,9 +609,9 @@
 		35DFA23C29A3BF8C00258BB7 /* Location Details */ = {
 			isa = PBXGroup;
 			children = (
+				359348E229BA446700B7739A /* Core */,
 				3566264429B9444B00EA11E0 /* Help Views */,
 				35DFA23F29A518AC00258BB7 /* Review Views */,
-				351B3A2829982ABC007E7D00 /* LocationDetailView.swift */,
 			);
 			path = "Location Details";
 			sourceTree = "<group>";
@@ -718,6 +780,7 @@
 				35737E5B29888866003B68BE /* ProfileView.swift in Sources */,
 				359F80FB298C330B000D792E /* FavoriteView.swift in Sources */,
 				35D9A5CE298981EE00A2F8D6 /* SettingsModel.swift in Sources */,
+				359348DD29BA421900B7739A /* ReviewModel.swift in Sources */,
 				35BC807A29970DC0001ACC35 /* ListModifier.swift in Sources */,
 				35C479A6298C89D50089F342 /* SettingsView.swift in Sources */,
 				355EA17B29AD72DF00D62B01 /* LanguageSettingsView.swift in Sources */,
@@ -726,6 +789,7 @@
 				35EF059829B0F0310098110B /* NYCNavigationButton.swift in Sources */,
 				35EF05A029B0FB780098110B /* PersonTypeSetup.swift in Sources */,
 				35DFA23E29A3BFC900258BB7 /* ExpandedReviewView.swift in Sources */,
+				359348DA29BA378D00B7739A /* ReviewEmptyView.swift in Sources */,
 				359A7932298EDCCB001B66CF /* ShareCardView.swift in Sources */,
 				3503BD86297F50AA00C0E365 /* AppDelegate.swift in Sources */,
 				35737E6129888DF9003B68BE /* HomeView.swift in Sources */,

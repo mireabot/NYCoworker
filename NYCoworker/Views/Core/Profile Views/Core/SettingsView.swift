@@ -26,7 +26,7 @@ struct SettingsView: View {
                 case Strings.Settings.language:
                     LanguageSettingsView()
                 default:
-                    EmptyView()
+                    ErrorEmptyView()
                 }
             }
             .toolbar(.hidden, for: .tabBar)

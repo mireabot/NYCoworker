@@ -12,7 +12,7 @@ struct ExpandedReviewView: View {
         case singleCard
         case fullList
     }
-    var data: ReviewData
+    var data: ReviewModel
     var type: ExpandedReviewViewType?
     var body: some View {
         ActionSheetView(bgColor: .white) {
@@ -27,7 +27,7 @@ struct ExpandedReviewView: View {
         }
     }
     @ViewBuilder
-    func singleCardView(withData data: ReviewData) -> some View {
+    func singleCardView(withData data: ReviewModel) -> some View {
         VStack(alignment: .leading, spacing: 10) {
             /// Header
             HStack(alignment: .center, spacing: 10) {
