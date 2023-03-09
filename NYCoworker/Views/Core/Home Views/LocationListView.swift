@@ -25,7 +25,7 @@ struct LocationListView: View {
                 .padding([.leading,.trailing], 16)
             }
             .popup(isPresented: $addToFavs) {
-                NYCAlertNotificationView(title: "Added to favorites", alertStyle: .small)
+                NYCAlertNotificationView(alertStyle: .addedToFavorites)
             } customize: {
                 $0
                     .isOpaque(true)

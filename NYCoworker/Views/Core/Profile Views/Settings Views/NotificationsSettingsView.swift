@@ -25,7 +25,7 @@ struct NotificationsSettingsView: View {
                 Text("Update")
             }
             .disabled(true)
-            .buttonStyle(NYCActionButtonStyle())
+            .buttonStyle(NYCActionButtonStyle(showLoader: .constant(false)))
             .padding([.leading,.trailing], 16)
             .padding(.bottom, 20)
 

@@ -8,26 +8,47 @@
 import SwiftUI
 
 struct NYCAlertNotificationView: View {
-    var title : String
     enum AlertStyle {
-        case small
+        case addedToFavorites
+        case dataUploaded
+        case reportSubmitted
+        
+        var title: String {
+            switch self {
+            case .addedToFavorites:
+                return "Added to favorites"
+            case .dataUploaded:
+                return "Successfully updated"
+            case .reportSubmitted:
+                return "Report submitted"
+            }
+        }
+        
+        var icon: Image {
+            switch self {
+            case .addedToFavorites:
+                return Image("favs")
+            case .dataUploaded:
+                return Image("dataUploaded")
+            case .reportSubmitted:
+                return Image("dataUploaded")
+            }
+        }
     }
     var alertStyle: AlertStyle
     var body: some View {
-        switch alertStyle {
-        case .small:
-            smallAlert
-        }
+        createAlert()
     }
     
-    var smallAlert: some View {
+    @ViewBuilder
+    func createAlert() -> some View {
         HStack {
             HStack(alignment: .center, spacing: 5) {
-                Image("favs")
+                alertStyle.icon
                     .resizable()
                     .frame(width: 20, height: 20)
                     .foregroundColor(Color.white)
-                Text(title)
+                Text(alertStyle.title)
                     .foregroundColor(Color.white)
                     .font(Resources.Fonts.regular(withSize: 17))
             }
@@ -86,7 +107,7 @@ struct NYCAlertView: View {
             } label: {
                 Text("Got it")
             }
-            .buttonStyle(NYCActionButtonStyle())
+            .buttonStyle(NYCActionButtonStyle(showLoader: .constant(false)))
             .padding([.leading,.trailing], 40)
             .padding(.top, 10)
 

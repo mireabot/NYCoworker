@@ -34,7 +34,7 @@ struct HomeView: View {
                     } label: {
                         Text("Open map")
                     }
-                    .buttonStyle(NYCActionButtonStyle())
+                    .buttonStyle(NYCActionButtonStyle(showLoader: .constant(false)))
                     .padding([.leading,.trailing], 90)
                 }
             }

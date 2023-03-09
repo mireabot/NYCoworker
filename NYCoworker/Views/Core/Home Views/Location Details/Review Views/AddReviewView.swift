@@ -44,7 +44,7 @@ struct AddReviewView: View {
                     Text("Submit")
                 }
                 .disabled(reviewText == "" ? true : false)
-                .buttonStyle(NYCActionButtonStyle())
+                .buttonStyle(NYCActionButtonStyle(showLoader: .constant(false)))
                 .padding(.bottom, 10)
                 .padding([.leading,.trailing], 16)
                 

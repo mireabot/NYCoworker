@@ -17,6 +17,8 @@ struct LocationDetailView: View {
     @State var showReviewCard = false
     @State var showReviewView = false
     @State var reviewInfo = reviewData[0]
+    @State var reportEdit = false
+    @State var reportSubmitted = false
     var body: some View {
         NavigationStack {
             ScrollView(.vertical, showsIndicators: true) {
@@ -81,6 +83,9 @@ struct LocationDetailView: View {
             .toolbarBackground(.white, for: .navigationBar)
             .navigationBarBackButtonHidden()
             .navigationBarTitleDisplayMode(.inline)
+            .fullScreenCover(isPresented: $reportEdit, content: {
+                ReportEditView(showAlert: $reportSubmitted)
+            })
             .popup(isPresented: $showMapChoice) {
                 MapChoiceView()
             } customize: {
@@ -110,13 +115,23 @@ struct LocationDetailView: View {
                     .backgroundColor(.black.opacity(0.4))
             }
             .popup(isPresented: $addToFavs) {
-                NYCAlertNotificationView(title: "Added to favorites", alertStyle: .small)
+                NYCAlertNotificationView(alertStyle: .addedToFavorites)
             } customize: {
                 $0
                     .isOpaque(true)
                     .autohideIn(1.5)
                     .type(.floater())
                     .position(.bottom)
+                    .animation(.spring(response: 0.4, blendDuration: 0.2))
+            }
+            .popup(isPresented: $reportSubmitted) {
+                NYCAlertNotificationView(alertStyle: .reportSubmitted)
+            } customize: {
+                $0
+                    .isOpaque(true)
+                    .autohideIn(1.5)
+                    .type(.floater())
+                    .position(.top)
                     .animation(.spring(response: 0.4, blendDuration: 0.2))
             }
         }
@@ -235,7 +250,7 @@ struct LocationDetailView: View {
                 .font(Resources.Fonts.regular(withSize: 15))
             
             Button {
-                
+                reportEdit.toggle()
             } label: {
                 HStack(spacing: 5) {
                     Image("edit-account")

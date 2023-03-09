@@ -12,4 +12,13 @@ class UserRegistrationModel: ObservableObject {
     @Published var occupation = ""
     @Published var gender = ""
     @Published var accountType = ""
+    
+    func createUser(completionHandler: () -> Void) {
+        print("Processing server request")
+        print(name)
+        print(occupation)
+        print(gender)
+        print(accountType)
+        completionHandler()
+    }
 }

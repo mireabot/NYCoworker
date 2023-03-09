@@ -15,6 +15,7 @@ struct AccountSettingsView: View {
         case occupationField
     }
     @FocusState private var focusedField: Field?
+    @State private var isLoading = false
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack {
@@ -40,16 +41,20 @@ struct AccountSettingsView: View {
                     .focused($focusedField, equals: .occupationField)
             }.padding([.leading,.trailing], 16)
             
-            Button(action: {
-//                        makeAction()
-            }, label: {
-                Text("Continue")
-            })
-            .padding(.bottom, 10)
-            .padding([.leading,.trailing], 16)
+            
+            Button {
+                self.isLoading = true
+                print("Making update")
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                    self.isLoading = false
+                }
+            } label: {
+                Text("Save")
+            }
             .disabled(nameText == "")
-            .buttonStyle(NYCActionButtonStyle())
+            .buttonStyle(NYCActionButtonStyle(showLoader: $isLoading))
             .padding(.top, 20)
+            .padding([.leading,.trailing], 16)
             
         }
         .scrollDisabled(true)
