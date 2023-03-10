@@ -11,9 +11,14 @@ import PopupView
 struct FavoriteView: View {
     @Environment(\.dismiss) var makeDismiss
     @State var showLoading = false
+    init() {
+        UITableView.appearance().allowsSelection = false
+        UITableViewCell.appearance().selectionStyle = .none
+    }
     var body: some View {
         NavigationStack {
-            favoritesView()
+            //            favoritesView()
+            favoritesListView()
                 .toolbar(.hidden, for: .tabBar)
                 .toolbar(content: {
                     ToolbarItem(placement: .navigationBarLeading) {
@@ -67,6 +72,32 @@ struct FavoriteView: View {
             }
             .padding([.leading,.trailing], 16)
         }
+    }
+    
+    @ViewBuilder
+    func favoritesListView() -> some View {
+        List {
+            ForEach(0..<3){_ in
+                ZStack(alignment: .leading) {
+                    NavigationLink(destination: LocationDetailView()) {
+                        EmptyView()
+                    }.opacity(0)
+                    
+                    LocationListCell(type: .favorite, buttonAction: {})
+                        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                            Button(role: .destructive) {
+                                
+                            } label: {
+                                Text("Delete")
+                                    .font(Resources.Fonts.regular(withSize: 15))
+                            }
+                            .tint(Resources.Colors.secondary)
+
+                        }
+                }
+            }.listRowSeparator(.hidden)
+        }
+        .listStyle(.plain)
     }
 }
 
