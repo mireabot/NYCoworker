@@ -94,3 +94,22 @@ struct InitView: View {
         }
     }
 }
+
+struct ContentView1: View {
+    @State private var isPresentingSheet = false
+    @State private var selectDetent: PresentationDetent = .bottom
+    var body: some View {
+        Button(action: {
+            isPresentingSheet = true
+        }) {
+            Text("Open Bottom Sheet")
+        }
+        .sheet(isPresented: $isPresentingSheet) {
+            LanguageSetup()
+                .presentationDetents(
+                    [.bottom, .mediumBottomBar],
+                    selection: $selectDetent
+                )
+        }
+    }
+}

@@ -15,15 +15,13 @@ struct ExpandedReviewView: View {
     var data: ReviewModel
     var type: ExpandedReviewViewType?
     var body: some View {
-        ActionSheetView(bgColor: .white) {
-            switch type {
-            case .singleCard:
-                singleCardView(withData: data)
-            case .fullList:
-                fullListView()
-            case .none:
-                ErrorEmptyView()
-            }
+        switch type {
+        case .singleCard:
+            singleCardView(withData: data)
+        case .fullList:
+            fullListView()
+        case .none:
+            ErrorEmptyView()
         }
     }
     @ViewBuilder
@@ -55,24 +53,27 @@ struct ExpandedReviewView: View {
                     .font(Resources.Fonts.regular(withSize: 13))
             }
         }
-        .padding(16)
+        .padding([.leading,.trailing], 16)
     }
     
     @ViewBuilder
     func fullListView() -> some View {
-        ScrollView(.vertical, showsIndicators: true) {
-            LazyVStack {
-                ForEach(reviewData) { review in
-                    ReviewCard(variation: .full, data: review)
+        VStack {
+            NYCBottomSheetHeader(title: "All reviews").paddingForHeader()
+            ScrollView(.vertical, showsIndicators: true) {
+                LazyVStack {
+                    ForEach(reviewData) { review in
+                        ReviewCard(variation: .full, data: review)
+                    }
                 }
+                .padding([.leading,.trailing], 16)
+                .padding(.top, 10)
             }
-            .padding([.leading,.trailing], 16)
-            .padding(.top, 10)
         }
     }
 }
-    //struct ExpandedReviewView_Previews: PreviewProvider {
-    //    static var previews: some View {
-    //        ExpandedReviewView()
-    //    }
-    //}
+struct ExpandedReviewView_Previews: PreviewProvider {
+    static var previews: some View {
+        ExpandedReviewView(data: reviewData[0],type: .fullList)
+    }
+}

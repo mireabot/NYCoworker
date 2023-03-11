@@ -32,16 +32,10 @@ struct TabBarView: View {
                 Label("Profile", image: "profile")
             }
         }
-        .popup(isPresented: $showBottomsheet) {
+        .sheet(isPresented: $showBottomsheet, content: {
             LogoutView()
-        } customize: {
-            $0
-                .type(.toast)
-                .position(.bottom)
-                .closeOnTap(false)
-                .closeOnTapOutside(true)
-                .backgroundColor(.black.opacity(0.4))
-        }
+                .presentationDetents([.bottom])
+        })
         .accentColor(Resources.Colors.primary)
         .onAppear() {
             UITabBar.appearance().backgroundColor = .white

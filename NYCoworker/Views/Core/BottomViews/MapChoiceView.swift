@@ -9,13 +9,10 @@ import SwiftUI
 
 struct MapChoiceView: View {
     var body: some View {
-        ActionSheetView(bgColor: .white) {
+        GeometryReader { geometry in
             VStack {
+                NYCBottomSheetHeader(title: "Where you want to go?").padding(.top, 15)
                 VStack(alignment: .center, spacing: 10) {
-                    Text("Where you want to go?")
-                        .foregroundColor(Resources.Colors.customBlack)
-                        .font(Resources.Fonts.bold(withSize: 17))
-                    
                     NYCActionButton(action: {
                         
                     }, text: "Apple Maps")
@@ -26,8 +23,11 @@ struct MapChoiceView: View {
                 }
                 .frame(maxWidth: .infinity)
                 .padding([.leading,.trailing], 16)
+                .padding(.top, 10)
             }
-            .padding([.top,.bottom], 10)
+            .onAppear {
+                print(geometry.size.height)
+            }
         }
     }
 }

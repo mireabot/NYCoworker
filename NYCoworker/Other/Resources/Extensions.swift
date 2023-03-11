@@ -61,6 +61,10 @@ extension View {
             .shadow(color: .black.opacity(0.08), radius: 2, x: 0, y: 0)
             .shadow(color: .black.opacity(0.16), radius: 24, x: 0, y: 0)
     }
+    
+    func paddingForHeader() -> some View {
+        self.padding(.top, 20)
+    }
 }
 
 extension Date {
@@ -68,5 +72,22 @@ extension Date {
         let formatter = DateFormatter()
         formatter.dateFormat = format
         return formatter.string(from: self)
+    }
+}
+
+//MARK: - Bottom sheet presentation
+extension PresentationDetent {
+    static let bottom = Self.custom(BottomBarDetent.self)
+    static let mediumBottomBar = Self.medium
+    static let largeBottomBar = Self.large
+}
+
+private struct BottomBarDetent: CustomPresentationDetent {
+    static func height(in context: Context) -> CGFloat? {
+        max(200, context.maxDetentValue * 0.1)
+    }
+    
+    static func height(in context: Context, withHeight height: CGFloat? = nil) -> CGFloat? {
+        max(height ?? 200, context.maxDetentValue * 0.1)
     }
 }

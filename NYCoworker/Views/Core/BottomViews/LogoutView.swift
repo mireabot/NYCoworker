@@ -10,36 +10,31 @@ import SwiftUI
 struct LogoutView: View {
     @AppStorage("userSigned") var userLogged: Bool = false
     var body: some View {
-        ActionSheetView(bgColor: .white) {
+        GeometryReader { geometry in
             VStack {
-                VStack(alignment: .center, spacing: 15) {
-                    Text("Are you sure you want to log out?")
-                        .foregroundColor(Resources.Colors.customBlack)
-                        .font(Resources.Fonts.bold(withSize: 17))
-                    
-                    VStack(alignment: .center, spacing: 10) {
-                        NYCActionButton(action: {
-                            withAnimation(.spring()) {
-                                userLogged = false
-                            }
-                        }, text: "Log out", buttonStyle: .system)
-                        
-                        Button {
-                            
-                        } label: {
-                            Text("Never mind")
-                                .foregroundColor(Resources.Colors.darkGrey)
-                                .font(Resources.Fonts.bold(withSize: 17))
+                NYCBottomSheetHeader(title: "Are you sure you want to log out?").padding(.top, 15)
+                VStack(alignment: .center, spacing: 10) {
+                    NYCActionButton(action: {
+                        withAnimation(.spring()) {
+                            userLogged = false
                         }
-
-                    }
+                    }, text: "Log out", buttonStyle: .system)
                     
+                    Button {
+                        
+                    } label: {
+                        Text("Never mind")
+                            .foregroundColor(Resources.Colors.darkGrey)
+                            .font(Resources.Fonts.bold(withSize: 17))
+                    }
+
                 }
                 .frame(maxWidth: .infinity)
                 .padding([.leading,.trailing], 16)
+                .padding(.top, 10)
             }
-            .padding([.top,.bottom], 10)
         }
+        
     }
 }
 

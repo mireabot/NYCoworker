@@ -11,6 +11,7 @@ import PopupView
 
 struct LocationDetailView: View {
     @Environment(\.dismiss) var makeDismiss
+    @State var selectDetent : PresentationDetent = .bottom
     @State var showMapChoice = false
     @State var currentImage: Int = 0
     @State var addToFavs = false
@@ -25,6 +26,8 @@ struct LocationDetailView: View {
                 VStack {
                     iPages(selection: $currentImage) {
                         Image("sample")
+                            .resizable()
+                            .scaledToFill()
                         Rectangle().fill(Color.blue)
                         Rectangle().fill(Color.gray)
                     }
@@ -86,34 +89,20 @@ struct LocationDetailView: View {
             .fullScreenCover(isPresented: $reportEdit, content: {
                 ReportEditView(showAlert: $reportSubmitted)
             })
-            .popup(isPresented: $showMapChoice) {
-                MapChoiceView()
-            } customize: {
-                $0
-                    .type(.toast)
-                    .position(.bottom)
-                    .closeOnTap(false)
-                    .closeOnTapOutside(true)
-                    .backgroundColor(.black.opacity(0.4))
-            }
-            .popup(isPresented: $showReviewCard) {
-                ExpandedReviewView(data: reviewInfo, type: .singleCard)
-            } customize: {
-                $0
-                    .type(.toast)
-                    .position(.bottom)
-                    .closeOnTapOutside(true)
-                    .backgroundColor(.black.opacity(0.4))
-            }
-            .popup(isPresented: $showReviewView) {
+            .sheet(isPresented: $showReviewView, content: {
                 ExpandedReviewView(data: reviewInfo, type: .fullList)
-            } customize: {
-                $0
-                    .type(.toast)
-                    .position(.bottom)
-                    .closeOnTapOutside(true)
-                    .backgroundColor(.black.opacity(0.4))
-            }
+                    .presentationDetents(
+                        [.bottom, .mediumBottomBar],
+                        selection: $selectDetent
+                    )
+            })
+            .sheet(isPresented: $showMapChoice, content: {
+                MapChoiceView()
+                    .presentationDetents(
+                        [.bottom],
+                        selection: $selectDetent
+                    )
+            })
             .popup(isPresented: $addToFavs) {
                 NYCAlertNotificationView(alertStyle: .addedToFavorites)
             } customize: {
@@ -189,14 +178,12 @@ struct LocationDetailView: View {
                     Text("See all")
                         .foregroundColor(Resources.Colors.primary)
                         .font(Resources.Fonts.bold(withSize: 13))
-                }.opacity(0)
+                }
+//                .opacity(0)
 
             }
-            ReviewEmptyView()
-//            ReviewCard(variation: .small, data: reviewInfo)
-//                .onTapGesture {
-//                    showReviewCard.toggle()
-//                }
+//            ReviewEmptyView()
+            ReviewCard(variation: .small, data: reviewInfo)
             
             Rectangle()
                 .foregroundColor(Resources.Colors.customGrey)
