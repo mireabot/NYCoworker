@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ProfileSetup: View {
     @EnvironmentObject var model: UserRegistrationModel
+    @FocusState private var fieldIsFocused: Bool
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             /// Header
@@ -29,12 +30,15 @@ struct ProfileSetup: View {
             
             /// Main section - Name, Occupation, Personality
             VStack(alignment: .leading) {
-                NYCTextField(title: "Your name", placeholder: "Ex. Michael", text: $model.name)
-                NYCTextField(title: "Describe occupation", placeholder: "Ex. Freelancer", text: $model.occupation)
+                NYCTextField(title: "Your name", placeholder: "Ex. Michael", text: $model.name).focused($fieldIsFocused)
+                NYCTextField(title: "Describe occupation", placeholder: "Ex. Freelancer", text: $model.occupation).focused($fieldIsFocused)
             }
             .padding([.leading,.trailing], 16)
             .padding(.top, 30)
             
+        }
+        .onTapGesture {
+            fieldIsFocused = false
         }
         .addTransition()
         .scrollDisabled(true)

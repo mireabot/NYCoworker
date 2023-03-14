@@ -11,24 +11,24 @@ struct NotificationsSettingsView: View {
     @State var isOn = true
     var body: some View {
         VStack {
-            VStack(spacing: 25) {
-                NYCNotificationCard(isOn: $isOn)
-                NYCNotificationCard(isOn: $isOn)
-            }
-            .padding(.top, 20)
-            
-            Spacer()
-            
-            Button {
+            VStack {
+                VStack(spacing: 25) {
+                    NYCNotificationCard(isOn: $isOn)
+                    NYCNotificationCard(isOn: $isOn)
+                }
+                .padding(.top, 20)
                 
-            } label: {
-                Text("Update")
+                Button {
+                    
+                } label: {
+                    Text("Update")
+                }
+                .disabled(true)
+                .buttonStyle(NYCActionButtonStyle(showLoader: .constant(false)))
+                .padding([.leading,.trailing], 16)
+                .padding(.top, 40)
+                Spacer()
             }
-            .disabled(true)
-            .buttonStyle(NYCActionButtonStyle(showLoader: .constant(false)))
-            .padding([.leading,.trailing], 16)
-            .padding(.bottom, 20)
-
         }
     }
 }

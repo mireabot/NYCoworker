@@ -10,23 +10,24 @@ import SwiftUI
 struct LanguageSettingsView: View {
     var body: some View {
         VStack {
-            VStack(spacing: 25) {
-                NYCLanguageCard(title: "English", icon: Resources.Images.Flags.english)
-                NYCLanguageCard(title: "Русский", icon: Resources.Images.Flags.russian)
-            }
-            .padding(.top, 20)
-            
-            Spacer()
-            
-            Button {
+            VStack {
+                VStack(spacing: 25) {
+                    NYCLanguageCard(title: "English", icon: Resources.Images.Flags.english)
+                    NYCLanguageCard(title: "Русский", icon: Resources.Images.Flags.russian)
+                }
+                .padding(.top, 20)
                 
-            } label: {
-                Text("Update")
+                Button {
+                    
+                } label: {
+                    Text("Update")
+                }
+                .disabled(true)
+                .buttonStyle(NYCActionButtonStyle(showLoader: .constant(false)))
+                .padding([.leading,.trailing], 16)
+                .padding(.top, 40)
+                Spacer()
             }
-            .disabled(true)
-            .buttonStyle(NYCActionButtonStyle(showLoader: .constant(false)))
-            .padding([.leading,.trailing], 16)
-            .padding(.bottom, 20)
         }
     }
 }

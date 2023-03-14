@@ -92,7 +92,7 @@ struct LocationDetailView: View {
             .sheet(isPresented: $showReviewView, content: {
                 ExpandedReviewView(data: reviewInfo, type: .fullList)
                     .presentationDetents(
-                        [.bottom, .mediumBottomBar],
+                        [.mediumBottomBar, .largeBottomBar],
                         selection: $selectDetent
                     )
             })
