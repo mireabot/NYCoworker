@@ -20,72 +20,14 @@ struct HomeView: View {
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             /// Map section
-            VStack(alignment: .leading, spacing: 15) {
-                NYCSectionHeader(title: "Locations nearby", isExpandButton: false)
-                
-                ZStack {
-                    Map(coordinateRegion: $region)
-                        .frame(width: UIScreen.main.bounds.width - 16, height: 100)
-                        .cornerRadius(10)
-                        .disabled(true)
-                    
-                    Button {
-                        presentMap.toggle()
-                    } label: {
-                        Text("Open map")
-                    }
-                    .buttonStyle(NYCActionButtonStyle(showLoader: .constant(false)))
-                    .padding([.leading,.trailing], 90)
-                }
-            }
-            .padding([.leading,.trailing], 20)
-            .padding(.top, 20)
-            
+            mapView()
             /// Locations section
             VStack(alignment: .leading, spacing: 15) {
                 /// Category scrollview
-                VStack(alignment: .leading, spacing: 10) {
-                    NavigationLink(destination: LocationListView(title: Locations.libraries.rawValue)) {
-                        NYCSectionHeader(title: Locations.libraries.rawValue, isExpandButton: true)
-                    }
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        LazyHStack(spacing: 10) {
-                            ForEach(locationVM.librariesLocations) { data in
-                                if timer {
-                                    LocationCell(data: data, type: .small)
-                                        .redacted(reason: .placeholder)
-                                        .shimmering(active: true, duration: 1.5, bounce: false)
-                                }
-                                else {
-                                    NavigationLink(destination: LocationDetailView(), label: {
-                                        LocationCell(data: data,type: .small)
-                                    })
-                                }
-                            }
-                        }
-                    }
-                }
+                locationLibrariesCollection()
                 
                 /// Category scrollview
-                VStack(alignment: .leading, spacing: 10) {
-                    NavigationLink(destination: LocationListView(title: Locations.lobbies.rawValue)) {
-                        NYCSectionHeader(title: Locations.lobbies.rawValue, isExpandButton: true)
-                    }
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        LazyHStack(spacing: 10) {
-                            ForEach(locationVM.locations) { data in
-                                if timer {
-                                    LocationCell(data: data, type: .large)
-                                        .redacted(reason: .placeholder)
-                                        .shimmering(active: true, duration: 1.5, bounce: false)
-                                }
-                                else {
-                                    LocationCell(data: data, type: .large)
-                                }
-                            }
-                        }
-                    }
-                }
+                locationLobbiesCollection()
             }
             .padding([.leading,.trailing], 20)
             .padding(.top, 50)
@@ -133,5 +75,80 @@ struct HomeView: View {
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
+    }
+}
+
+
+extension HomeView {
+    @ViewBuilder
+    func locationLibrariesCollection() -> some View {
+        VStack(alignment: .leading, spacing: 10) {
+            NavigationLink(destination: LocationListView(title: Locations.libraries.rawValue)) {
+                NYCSectionHeader(title: Locations.libraries.rawValue, isExpandButton: true)
+            }
+            ScrollView(.horizontal, showsIndicators: false) {
+                LazyHStack(spacing: 10) {
+                    ForEach(locationVM.librariesLocations) { data in
+                        if timer {
+                            LocationCell(data: data, type: .small)
+                                .redacted(reason: .placeholder)
+                                .shimmering(active: true, duration: 1.5, bounce: false)
+                        }
+                        else {
+                            NavigationLink(destination: LocationDetailView(), label: {
+                                LocationCell(data: data,type: .small)
+                            })
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    @ViewBuilder
+    func locationLobbiesCollection() -> some View {
+        VStack(alignment: .leading, spacing: 10) {
+            NavigationLink(destination: LocationListView(title: Locations.lobbies.rawValue)) {
+                NYCSectionHeader(title: Locations.lobbies.rawValue, isExpandButton: true)
+            }
+            ScrollView(.horizontal, showsIndicators: false) {
+                LazyHStack(spacing: 10) {
+                    ForEach(locationVM.locations) { data in
+                        if timer {
+                            LocationCell(data: data, type: .large)
+                                .redacted(reason: .placeholder)
+                                .shimmering(active: true, duration: 1.5, bounce: false)
+                        }
+                        else {
+                            LocationCell(data: data, type: .large)
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    @ViewBuilder
+    func mapView() -> some View {
+        VStack(alignment: .leading, spacing: 15) {
+            NYCSectionHeader(title: "Locations nearby", isExpandButton: false)
+            
+            ZStack {
+                Map(coordinateRegion: $region)
+                    .frame(width: UIScreen.main.bounds.width - 16, height: 100)
+                    .cornerRadius(10)
+                    .disabled(true)
+                
+                Button {
+                    presentMap.toggle()
+                } label: {
+                    Text("Open map")
+                }
+                .buttonStyle(NYCActionButtonStyle(showLoader: .constant(false)))
+                .padding([.leading,.trailing], 90)
+            }
+        }
+        .padding([.leading,.trailing], 20)
+        .padding(.top, 20)
     }
 }

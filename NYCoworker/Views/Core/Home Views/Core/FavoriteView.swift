@@ -18,7 +18,6 @@ struct FavoriteView: View {
     @StateObject var locationVM : LocationsViewModel = .shared
     var body: some View {
         NavigationStack {
-            //            favoritesView()
             favoritesListView()
                 .toolbar(.hidden, for: .tabBar)
                 .toolbar(content: {
@@ -58,22 +57,6 @@ struct FavoriteView: View {
             FavoritesEmptyView()
         }
     }
-    
-//    @ViewBuilder
-//    func favoritesView() -> some View {
-//        ScrollView(.vertical, showsIndicators: true) {
-//            LazyVStack(spacing: 10) {
-//                ForEach(0..<3){_ in
-//                    NavigationLink(destination: LocationDetailView()) {
-//                        LocationListCell(type: .favorite, data: <#LocationModel#>) {
-//                            showLoading.toggle()
-//                        }
-//                    }
-//                }
-//            }
-//            .padding([.leading,.trailing], 16)
-//        }
-//    }
     
     @ViewBuilder
     func favoritesListView() -> some View {

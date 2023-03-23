@@ -21,9 +21,6 @@
 		351B3A2529981665007E7D00 /* SupportSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351B3A2429981665007E7D00 /* SupportSettingsView.swift */; };
 		351B3A2729981B22007E7D00 /* NYCSettingsCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351B3A2629981B22007E7D00 /* NYCSettingsCard.swift */; };
 		351B3A2929982ABC007E7D00 /* LocationDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351B3A2829982ABC007E7D00 /* LocationDetailView.swift */; };
-		3533326829CCF7C700337B1E /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3533326729CCF7C700337B1E /* Router.swift */; };
-		3533326A29CCF7D900337B1E /* RoutingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3533326929CCF7D900337B1E /* RoutingView.swift */; };
-		3533326C29CCF7E700337B1E /* ViewSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3533326B29CCF7E700337B1E /* ViewSpec.swift */; };
 		3538C623298353210017800B /* iPages in Frameworks */ = {isa = PBXBuildFile; productRef = 3538C622298353210017800B /* iPages */; };
 		3538C626298356270017800B /* LanguageSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3538C625298356270017800B /* LanguageSetup.swift */; };
 		3538C6292983569D0017800B /* NYCBottomSheetHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3538C6282983569D0017800B /* NYCBottomSheetHeader.swift */; };
@@ -115,9 +112,6 @@
 		351B3A2429981665007E7D00 /* SupportSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportSettingsView.swift; sourceTree = "<group>"; };
 		351B3A2629981B22007E7D00 /* NYCSettingsCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCSettingsCard.swift; sourceTree = "<group>"; };
 		351B3A2829982ABC007E7D00 /* LocationDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailView.swift; sourceTree = "<group>"; };
-		3533326729CCF7C700337B1E /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
-		3533326929CCF7D900337B1E /* RoutingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutingView.swift; sourceTree = "<group>"; };
-		3533326B29CCF7E700337B1E /* ViewSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewSpec.swift; sourceTree = "<group>"; };
 		3538C625298356270017800B /* LanguageSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSetup.swift; sourceTree = "<group>"; };
 		3538C6282983569D0017800B /* NYCBottomSheetHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCBottomSheetHeader.swift; sourceTree = "<group>"; };
 		3538C62B298357490017800B /* AppLanguageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLanguageModel.swift; sourceTree = "<group>"; };
@@ -278,24 +272,6 @@
 			path = "Settings Views";
 			sourceTree = "<group>";
 		};
-		3533326529CCF7B100337B1E /* Router */ = {
-			isa = PBXGroup;
-			children = (
-				3533326629CCF7BC00337B1E /* System */,
-			);
-			path = Router;
-			sourceTree = "<group>";
-		};
-		3533326629CCF7BC00337B1E /* System */ = {
-			isa = PBXGroup;
-			children = (
-				3533326729CCF7C700337B1E /* Router.swift */,
-				3533326929CCF7D900337B1E /* RoutingView.swift */,
-				3533326B29CCF7E700337B1E /* ViewSpec.swift */,
-			);
-			path = System;
-			sourceTree = "<group>";
-		};
 		3538C624298356120017800B /* Onboarding Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -353,7 +329,6 @@
 		3550FA2B29B3CA7E0091B558 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
-				3533326529CCF7B100337B1E /* Router */,
 				3550FA2C29B3CA8A0091B558 /* Coordinators */,
 			);
 			path = Navigation;
@@ -788,7 +763,6 @@
 				35EF059B29B0F2EC0098110B /* NavigationDotsView.swift in Sources */,
 				356C52DC29A04BDB00080D4C /* LocationListCell.swift in Sources */,
 				359F80F2298AA911000D792E /* NYCCircleImageButton.swift in Sources */,
-				3533326C29CCF7E700337B1E /* ViewSpec.swift in Sources */,
 				3538C6292983569D0017800B /* NYCBottomSheetHeader.swift in Sources */,
 				351B3A2729981B22007E7D00 /* NYCSettingsCard.swift in Sources */,
 				350DE274299143B500573163 /* LogoutView.swift in Sources */,
@@ -829,7 +803,6 @@
 				359348DA29BA378D00B7739A /* ReviewEmptyView.swift in Sources */,
 				359A7932298EDCCB001B66CF /* ShareCardView.swift in Sources */,
 				3503BD86297F50AA00C0E365 /* AppDelegate.swift in Sources */,
-				3533326A29CCF7D900337B1E /* RoutingView.swift in Sources */,
 				35737E6129888DF9003B68BE /* HomeView.swift in Sources */,
 				35E7FB9129848FEE00EFF282 /* NYCActionButton.swift in Sources */,
 				35F29399299E8F4A00A85586 /* AmenityModel.swift in Sources */,
@@ -839,7 +812,6 @@
 				351B3A2529981665007E7D00 /* SupportSettingsView.swift in Sources */,
 				35E7FB8B298486F400EFF282 /* ProfileSetup.swift in Sources */,
 				35F29397299E8ED500A85586 /* AmenityCard.swift in Sources */,
-				3533326829CCF7C700337B1E /* Router.swift in Sources */,
 				359F80F7298C2508000D792E /* LocationCell.swift in Sources */,
 				35AD1AEE29CBB4780076AE54 /* RatingDotsView.swift in Sources */,
 				3503BD88297F50AA00C0E365 /* SceneDelegate.swift in Sources */,
