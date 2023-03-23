@@ -11,13 +11,14 @@ import PopupView
 struct LocationListView: View {
     @Environment(\.dismiss) var makeDismiss
     @State var addToFavs = false
+    @StateObject var locationVM : LocationsViewModel = .shared
     var title: String
     var body: some View {
         NavigationStack {
             ScrollView(.vertical, showsIndicators: true) {
                 LazyVStack(spacing: 10) {
-                    ForEach(0..<3){_ in
-                        LocationListCell(type: .list) {
+                    ForEach(locationVM.librariesLocations){ location in
+                        LocationListCell(type: .list, data: location) {
                             addToFavs.toggle()
                         }
                     }

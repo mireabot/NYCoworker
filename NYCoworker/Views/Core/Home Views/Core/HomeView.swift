@@ -49,16 +49,16 @@ struct HomeView: View {
                         NYCSectionHeader(title: Locations.libraries.rawValue, isExpandButton: true)
                     }
                     ScrollView(.horizontal, showsIndicators: false) {
-                        HStack(spacing: 10) {
-                            ForEach(0..<10) {_ in
+                        LazyHStack(spacing: 10) {
+                            ForEach(locationVM.librariesLocations) { data in
                                 if timer {
-                                    LocationCell()
+                                    LocationCell(data: data, type: .small)
                                         .redacted(reason: .placeholder)
                                         .shimmering(active: true, duration: 1.5, bounce: false)
                                 }
                                 else {
                                     NavigationLink(destination: LocationDetailView(), label: {
-                                        LocationCell()
+                                        LocationCell(data: data,type: .small)
                                     })
                                 }
                             }
@@ -72,15 +72,15 @@ struct HomeView: View {
                         NYCSectionHeader(title: Locations.lobbies.rawValue, isExpandButton: true)
                     }
                     ScrollView(.horizontal, showsIndicators: false) {
-                        HStack(spacing: 10) {
-                            ForEach(0..<10) {_ in
+                        LazyHStack(spacing: 10) {
+                            ForEach(locationVM.locations) { data in
                                 if timer {
-                                    LocationCell()
+                                    LocationCell(data: data, type: .large)
                                         .redacted(reason: .placeholder)
                                         .shimmering(active: true, duration: 1.5, bounce: false)
                                 }
                                 else {
-                                    LocationCell()
+                                    LocationCell(data: data, type: .large)
                                 }
                             }
                         }

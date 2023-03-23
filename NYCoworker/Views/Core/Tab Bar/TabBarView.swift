@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import BottomSheet
 import PopupView
 
 struct TabBarView: View {

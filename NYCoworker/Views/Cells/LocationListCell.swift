@@ -7,17 +7,29 @@
 
 import SwiftUI
 
+/// Location cell for list views / favorites and detail list by location category
+///
+///  - Parameters:
+///    - type: Type of cell taken from enum CellType
+///    - data: Data about location taken from LocationModel
+///    - buttonAction: Action from button inside cell -> passes func to root view
 struct LocationListCell: View {
+    /// Enum defines cell type
+    ///
+    ///  - Parameters:
+    ///     - list: Used in detailed view when showed all locations of exact type · Adds action button for cell
+    ///     - favorite: Used in list of favorite location · Hides action button
     enum CellType {
         case list
         case favorite
     }
     var type: CellType
+    var data: LocationModel
     var buttonAction: () -> Void
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             ZStack(alignment: .topTrailing) {
-                Image("load")
+                Image(data.images[0])
                     .resizable()
                     .scaledToFill()
                     .frame(height: 150)
@@ -46,17 +58,16 @@ struct LocationListCell: View {
                     HStack(spacing: 3) {
                         NYCBadgeView(badgeType: .withWord, title: "New")
                         NYCBadgeView(badgeType: .withWord, title: "Popular")
-                        NYCBadgeView(badgeType: .workingHours, title: "Open now")
                     }
-                    Text("Public Hotel")
+                    Text(data.name)
                         .foregroundColor(Resources.Colors.customBlack)
                         .font(Resources.Fonts.regular(withSize: 20))
-                    Text("691 Eight Avenue")
+                    Text(data.address)
                         .foregroundColor(Resources.Colors.darkGrey)
                         .font(Resources.Fonts.regular(withSize: 13))
                 }
                 Spacer()
-                Text("1,7 mi")
+                Text("\(data.distance)")
                     .foregroundColor(Resources.Colors.darkGrey)
                     .font(Resources.Fonts.regular(withSize: 15))
             }

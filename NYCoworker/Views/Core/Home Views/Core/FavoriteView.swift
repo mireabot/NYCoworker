@@ -15,6 +15,7 @@ struct FavoriteView: View {
         UITableView.appearance().allowsSelection = false
         UITableViewCell.appearance().selectionStyle = .none
     }
+    @StateObject var locationVM : LocationsViewModel = .shared
     var body: some View {
         NavigationStack {
             //            favoritesView()
@@ -58,32 +59,32 @@ struct FavoriteView: View {
         }
     }
     
-    @ViewBuilder
-    func favoritesView() -> some View {
-        ScrollView(.vertical, showsIndicators: true) {
-            LazyVStack(spacing: 10) {
-                ForEach(0..<3){_ in
-                    NavigationLink(destination: LocationDetailView()) {
-                        LocationListCell(type: .favorite) {
-                            showLoading.toggle()
-                        }
-                    }
-                }
-            }
-            .padding([.leading,.trailing], 16)
-        }
-    }
+//    @ViewBuilder
+//    func favoritesView() -> some View {
+//        ScrollView(.vertical, showsIndicators: true) {
+//            LazyVStack(spacing: 10) {
+//                ForEach(0..<3){_ in
+//                    NavigationLink(destination: LocationDetailView()) {
+//                        LocationListCell(type: .favorite, data: <#LocationModel#>) {
+//                            showLoading.toggle()
+//                        }
+//                    }
+//                }
+//            }
+//            .padding([.leading,.trailing], 16)
+//        }
+//    }
     
     @ViewBuilder
     func favoritesListView() -> some View {
         List {
-            ForEach(0..<3){_ in
+            ForEach(locationVM.locations){ location in
                 ZStack(alignment: .leading) {
                     NavigationLink(destination: LocationDetailView()) {
                         EmptyView()
                     }.opacity(0)
                     
-                    LocationListCell(type: .favorite, buttonAction: {})
+                    LocationListCell(type: .favorite, data: location, buttonAction: {})
                         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                             Button(role: .destructive) {
                                 

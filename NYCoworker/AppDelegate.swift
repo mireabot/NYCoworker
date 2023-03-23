@@ -7,7 +7,6 @@
 
 import UIKit
 import SwiftUI
-import BottomSheet
 
 @main
 struct NYCoworkerApp: App {

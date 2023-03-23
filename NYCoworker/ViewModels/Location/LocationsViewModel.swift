@@ -12,6 +12,7 @@ import MapKit
 final class LocationsViewModel: ObservableObject {
     static let shared: LocationsViewModel = .init()
     @Published var locations: [LocationModel]
+    @Published var librariesLocations: [LocationModel]
     @Published var mapLocation: LocationModel {
         didSet {
             updateRegion(location: mapLocation)
@@ -23,7 +24,9 @@ final class LocationsViewModel: ObservableObject {
     
     init() {
         let locations = LocationDataModel.locations
+        let libraries = LocationDataModel.libraries
         self.locations = locations
+        self.librariesLocations = libraries
         self.mapLocation = locations.first!
         self.updateRegion(location: locations.first!)
     }
