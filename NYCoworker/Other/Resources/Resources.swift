@@ -7,10 +7,12 @@
 
 import UIKit
 import SwiftUI
+import MapKit
 
 enum Resources {
     
     static let isLogged = false
+    static let mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 40.7181597, longitude: -73.9845737), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
     
     /// Colors resource pack
     enum Colors {

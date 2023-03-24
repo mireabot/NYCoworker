@@ -36,7 +36,6 @@
 		355EA17B29AD72DF00D62B01 /* LanguageSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355EA17A29AD72DF00D62B01 /* LanguageSettingsView.swift */; };
 		3565689B29A12C16007CAF80 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = 3565689A29A12C16007CAF80 /* PopupView */; };
 		3565689D29A15673007CAF80 /* NYCAlertNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3565689C29A15673007CAF80 /* NYCAlertNotificationView.swift */; };
-		356568A029A16C21007CAF80 /* BottomBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3565689F29A16C20007CAF80 /* BottomBaseView.swift */; };
 		3566264629B9445800EA11E0 /* ReportEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3566264529B9445800EA11E0 /* ReportEditView.swift */; };
 		356C52DA29A0460C00080D4C /* LocationMapCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356C52D929A0460C00080D4C /* LocationMapCard.swift */; };
 		356C52DC29A04BDB00080D4C /* LocationListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356C52DB29A04BDB00080D4C /* LocationListCell.swift */; };
@@ -129,7 +128,6 @@
 		355EA17829AD6FAF00D62B01 /* NYCLanguageCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCLanguageCard.swift; sourceTree = "<group>"; };
 		355EA17A29AD72DF00D62B01 /* LanguageSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSettingsView.swift; sourceTree = "<group>"; };
 		3565689C29A15673007CAF80 /* NYCAlertNotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCAlertNotificationView.swift; sourceTree = "<group>"; };
-		3565689F29A16C20007CAF80 /* BottomBaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBaseView.swift; sourceTree = "<group>"; };
 		3566264529B9445800EA11E0 /* ReportEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportEditView.swift; sourceTree = "<group>"; };
 		356C52D929A0460C00080D4C /* LocationMapCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationMapCard.swift; sourceTree = "<group>"; };
 		356C52DB29A04BDB00080D4C /* LocationListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationListCell.swift; sourceTree = "<group>"; };
@@ -359,14 +357,6 @@
 			path = Notifications;
 			sourceTree = "<group>";
 		};
-		3565689E29A16C0A007CAF80 /* Core */ = {
-			isa = PBXGroup;
-			children = (
-				3565689F29A16C20007CAF80 /* BottomBaseView.swift */,
-			);
-			path = Core;
-			sourceTree = "<group>";
-		};
 		3566264429B9444B00EA11E0 /* Help Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -378,7 +368,6 @@
 		356C52DF29A052CD00080D4C /* BottomViews */ = {
 			isa = PBXGroup;
 			children = (
-				3565689E29A16C0A007CAF80 /* Core */,
 				350DE273299143B500573163 /* LogoutView.swift */,
 				356C52E029A052F900080D4C /* MapChoiceView.swift */,
 				35DFA24429A5822B00258BB7 /* VisitDatePickerView.swift */,
@@ -769,7 +758,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3565689D29A15673007CAF80 /* NYCAlertNotificationView.swift in Sources */,
-				356568A029A16C21007CAF80 /* BottomBaseView.swift in Sources */,
 				3503BD8A297F50AA00C0E365 /* ViewController.swift in Sources */,
 				354651C529A83B1F003F7AE8 /* LoadingBottomView.swift in Sources */,
 				359A7934298EF1C2001B66CF /* TabBarView.swift in Sources */,

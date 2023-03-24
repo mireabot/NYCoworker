@@ -28,10 +28,6 @@ struct TabBarView: View {
                 Label("Profile", image: "profile")
             }
         }
-        .sheet(isPresented: $showBottomsheet, content: {
-            LogoutView()
-                .presentationDetents([.bottom])
-        })
         .accentColor(Resources.Colors.primary)
         .onAppear() {
             if #available(iOS 13.0, *) {

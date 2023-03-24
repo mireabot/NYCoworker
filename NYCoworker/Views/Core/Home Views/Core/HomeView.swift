@@ -10,15 +10,9 @@ import Shimmer
 import MapKit
 
 struct HomeView: View {
-    @State var presentFavoritesView = false
-    @State var presentNotifications = false
     @State var timer = false
-    @State var locationTitle = ""
-    @State var presentMap = false
-    @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 40.7181597, longitude: -73.9845737), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
     @StateObject var locationVM : LocationsViewModel = .shared
     @StateObject private var router: NYCRouter
-    
     init(router: NYCRouter) {
         _router = StateObject(wrappedValue: router)
     }
@@ -36,17 +30,8 @@ struct HomeView: View {
                     locationLobbiesCollection()
                 }
                 .padding([.leading,.trailing], 20)
-                .padding(.top, 50)
+                .padding(.top, 30)
             }
-            //            .navigationDestination(isPresented: $presentFavoritesView, destination: {
-            //                FavoriteView()
-            //            })
-            //            .navigationDestination(isPresented: $presentNotifications, destination: {
-            //                NotificationsView()
-            //            })
-            //            .navigationDestination(isPresented: $presentMap, destination: {
-            //                LocationsMapView(locationVM: .shared)
-            //            })
             //        .onAppear {
             //            timer = true
             //            DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
@@ -150,7 +135,7 @@ extension HomeView {
         VStack(alignment: .leading, spacing: 15) {
             NYCSectionHeader(title: "Locations nearby", isExpandButton: false)
             ZStack {
-                Map(coordinateRegion: $region)
+                Map(coordinateRegion: .constant(Resources.mapRegion))
                     .frame(width: UIScreen.main.bounds.width - 16, height: 100)
                     .cornerRadius(10)
                     .disabled(true)

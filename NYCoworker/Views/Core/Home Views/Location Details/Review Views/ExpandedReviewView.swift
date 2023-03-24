@@ -21,7 +21,7 @@ struct ExpandedReviewView: View {
         case .fullList:
             fullListView()
         case .none:
-            ErrorEmptyView()
+            EmptyView()
         }
     }
     @ViewBuilder

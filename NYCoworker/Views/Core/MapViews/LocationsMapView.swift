@@ -25,7 +25,7 @@ struct LocationsMapView: View {
                     MapAnnotation(coordinate: location.coordinates) {
                         Image("mapPin")
                             .resizable()
-                            .frame(width: 40, height: 40)
+                            .frame(width: 45, height: 45)
                             .scaleEffect(locationVM.mapLocation == location ? 1 : 0.7)
                             .onTapGesture {
                                 locationVM.showNextLocation(location: location)

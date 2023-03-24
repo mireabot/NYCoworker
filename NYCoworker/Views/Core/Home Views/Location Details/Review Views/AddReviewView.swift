@@ -50,15 +50,6 @@ struct AddReviewView: View {
                 
 
             }
-            .popup(isPresented: $showDate, view: {
-                VisitDatePickerView(date: $visitDate, isPresented: $showDate)
-            }, customize: {
-                $0
-                    .type(.toast)
-                    .position(.bottom)
-                    .closeOnTapOutside(true)
-                    .backgroundColor(.black.opacity(0.4))
-            })
             .navigationBarBackButtonHidden()
             .toolbarBackground(.white, for: .navigationBar)
             .toolbar {

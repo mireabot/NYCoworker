@@ -85,7 +85,7 @@ struct InitView: View {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @AppStorage("userSigned") var userLogged: Bool = false
     var body: some View {
-        if userLogged && !Resources.isLogged {
+        if userLogged  {
             TabBarView()
         }
         else {
