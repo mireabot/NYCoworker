@@ -11,30 +11,28 @@ import PopupView
 struct NotificationsView: View {
     @Environment(\.dismiss) var makeDismiss
     var body: some View {
-        NavigationStack {
-            notificationsList()
-                .hideTabbar(shouldHideTabbar: true)
-                .toolbar(content: {
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        Button {
-                            makeDismiss()
-                        } label: {
-                            Resources.Images.Navigation.arrowBack
-                                .foregroundColor(Resources.Colors.primary)
-                        }
-                        
+        notificationsList()
+            .hideTabbar(shouldHideTabbar: true)
+            .toolbar(content: {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        makeDismiss()
+                    } label: {
+                        Resources.Images.Navigation.arrowBack
+                            .foregroundColor(Resources.Colors.primary)
                     }
                     
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        Text("Notifications")
-                            .foregroundColor(Resources.Colors.customBlack)
-                            .font(Resources.Fonts.bold(withSize: 17))
-                    }
-                })
-            
-                .navigationBarBackButtonHidden()
-                .toolbarBackground(.white, for: .navigationBar)
-        }
+                }
+                
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Text("Notifications")
+                        .foregroundColor(Resources.Colors.customBlack)
+                        .font(Resources.Fonts.bold(withSize: 17))
+                }
+            })
+        
+            .navigationBarBackButtonHidden()
+            .toolbarBackground(.white, for: .navigationBar)
     }
     
     @ViewBuilder

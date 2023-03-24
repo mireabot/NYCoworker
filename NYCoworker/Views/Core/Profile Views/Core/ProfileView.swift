@@ -9,76 +9,83 @@ import SwiftUI
 import PopupView
 
 struct ProfileView: View {
-    @Binding var showPopup: Bool
+    @State var showPopup = false
     @State var showSettings = false
     @State var settingsTitle = ""
+    @StateObject private var router: NYCRouter
+    init(router: NYCRouter) {
+        _router = StateObject(wrappedValue: router)
+    }
     var body: some View {
-        VStack {
-            /// Profile section
+        RoutingView(router: router) {
             VStack {
-                VStack(alignment: .center, spacing: 5) {
-                    Image("p1")
-                        .resizable()
-                        .frame(width: 100, height: 100)
-                    Text("Michael")
-                        .foregroundColor(Resources.Colors.customBlack)
-                        .font(Resources.Fonts.bold(withSize: 20))
-                    Text("Coworker from 2023")
-                        .foregroundColor(Resources.Colors.darkGrey)
-                        .font(Resources.Fonts.regular(withSize: 13))
-                }
-                .padding(.bottom, 20)
-                
-                VStack(alignment: .leading) {
-                    Text("Settings")
-                        .foregroundColor(Resources.Colors.customBlack)
-                        .font(Resources.Fonts.regular(withSize: 16))
-                    
-                    ForEach(settigsData) { data in
-                        VStack {
-                            SettingsCard(data: data)
-                                .onTapGesture {
-                                    print(data.title)
-                                    settingsTitle = data.title
-                                    showSettings.toggle()
-                                }
-                        }
-                    }
-                }
-                .padding([.leading,.trailing], 16)
-                
-                
-                /// Bottom content
-                HStack {
-                    VStack(alignment: .leading, spacing: 5) {
-                        Button {
-                            showPopup.toggle()
-                        } label: {
-                            Text("Log out")
-                                .foregroundColor(Resources.Colors.actionRed)
-                                .font(Resources.Fonts.bold(withSize: 20))
-                        }
-
-                        Text("Version 1.0")
+                /// Profile section
+                VStack {
+                    VStack(alignment: .center, spacing: 5) {
+                        Image("p1")
+                            .resizable()
+                            .frame(width: 100, height: 100)
+                        Text("Michael")
+                            .foregroundColor(Resources.Colors.customBlack)
+                            .font(Resources.Fonts.bold(withSize: 20))
+                        Text("Coworker from 2023")
                             .foregroundColor(Resources.Colors.darkGrey)
-                            .font(Resources.Fonts.regular(withSize: 16))
+                            .font(Resources.Fonts.regular(withSize: 13))
                     }
+                    .padding(.bottom, 20)
                     
-                    Spacer()
+                    VStack(alignment: .leading) {
+                        Text("Settings")
+                            .foregroundColor(Resources.Colors.customBlack)
+                            .font(Resources.Fonts.regular(withSize: 16))
+                        
+                        ForEach(settigsData) { data in
+                            VStack {
+                                SettingsCard(data: data)
+                                    .onTapGesture {
+                                        print(data.title)
+                                        settingsTitle = data.title
+                                        router.navigateTo(.settingsView(settingsTitle))
+                                    }
+                            }
+                        }
+                    }
+                    .padding([.leading,.trailing], 16)
+                    
+                    
+                    /// Bottom content
+                    HStack {
+                        VStack(alignment: .leading, spacing: 5) {
+                            Button {
+                                showPopup.toggle()
+                            } label: {
+                                Text("Log out")
+                                    .foregroundColor(Resources.Colors.actionRed)
+                                    .font(Resources.Fonts.bold(withSize: 20))
+                            }
+
+                            Text("Version 1.0")
+                                .foregroundColor(Resources.Colors.darkGrey)
+                                .font(Resources.Fonts.regular(withSize: 16))
+                        }
+                        
+                        Spacer()
+                    }
+                    .padding(.leading, 16)
+                    .padding(.top, 10)
                 }
-                .padding(.leading, 16)
-                .padding(.top, 10)
+                
+                Spacer()
             }
-            
-            Spacer()
-        }
-        .hideTabbar(shouldHideTabbar: false)
-        .navigationDestination(isPresented: $showSettings, destination: {
-            SettingsView(title: settingsTitle)
-        })
-        .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                NYCHeader(title: "Profile")
+            .sheet(isPresented: $showPopup, content: {
+                LogoutView()
+                    .presentationDetents([.bottom])
+            })
+            .hideTabbar(shouldHideTabbar: false)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    NYCHeader(title: "Profile")
+                }
             }
         }
     }

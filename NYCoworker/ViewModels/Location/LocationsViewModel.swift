@@ -51,20 +51,28 @@ final class LocationsViewModel: ObservableObject {
             guard let location = locations.first else {
                 return
             }
-            Task { @MainActor in
-                showNextLocation(location: location)
-            }
+            showNextLocation(location: location)
             return
         }
         
         let nextLocation = locations[nextIndex]
-        Task { @MainActor in
-            showNextLocation(location: nextLocation)
-        }
+        showNextLocation(location: nextLocation)
     }
     
     func resetLocation() {
         let location = LocationDataModel.locations
         mapLocation = location[0]
+    }
+}
+
+extension LocationsViewModel: Hashable, Identifiable {
+    public func hash(into hasher: inout Hasher) {
+        return hasher.combine(identifier)
+    }
+    var identifier: String {
+        return UUID().uuidString
+    }
+    public static func == (lhs: LocationsViewModel, rhs: LocationsViewModel) -> Bool {
+        return lhs.identifier == rhs.identifier
     }
 }

@@ -77,6 +77,10 @@
 		35DFA24129A518B700258BB7 /* AddReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35DFA24029A518B700258BB7 /* AddReviewView.swift */; };
 		35DFA24329A572BD00258BB7 /* NYCResizableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35DFA24229A572BD00258BB7 /* NYCResizableTextField.swift */; };
 		35DFA24529A5822B00258BB7 /* VisitDatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35DFA24429A5822B00258BB7 /* VisitDatePickerView.swift */; };
+		35E5792129CE51A000291C05 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E5792029CE51A000291C05 /* Router.swift */; };
+		35E5792329CE51B100291C05 /* RoutingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E5792229CE51B100291C05 /* RoutingView.swift */; };
+		35E5792529CE51CA00291C05 /* RoutingViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E5792429CE51CA00291C05 /* RoutingViews.swift */; };
+		35E5792729CE52AB00291C05 /* NYCRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E5792629CE52AB00291C05 /* NYCRouter.swift */; };
 		35E7FB8B298486F400EFF282 /* ProfileSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E7FB8A298486F400EFF282 /* ProfileSetup.swift */; };
 		35E7FB8D29848AE300EFF282 /* NYCFloatingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E7FB8C29848AE300EFF282 /* NYCFloatingTextField.swift */; };
 		35E7FB8F29848B1C00EFF282 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E7FB8E29848B1C00EFF282 /* Extensions.swift */; };
@@ -164,6 +168,10 @@
 		35DFA24029A518B700258BB7 /* AddReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReviewView.swift; sourceTree = "<group>"; };
 		35DFA24229A572BD00258BB7 /* NYCResizableTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCResizableTextField.swift; sourceTree = "<group>"; };
 		35DFA24429A5822B00258BB7 /* VisitDatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitDatePickerView.swift; sourceTree = "<group>"; };
+		35E5792029CE51A000291C05 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		35E5792229CE51B100291C05 /* RoutingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutingView.swift; sourceTree = "<group>"; };
+		35E5792429CE51CA00291C05 /* RoutingViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutingViews.swift; sourceTree = "<group>"; };
+		35E5792629CE52AB00291C05 /* NYCRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCRouter.swift; sourceTree = "<group>"; };
 		35E7FB8A298486F400EFF282 /* ProfileSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSetup.swift; sourceTree = "<group>"; };
 		35E7FB8C29848AE300EFF282 /* NYCFloatingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCFloatingTextField.swift; sourceTree = "<group>"; };
 		35E7FB8E29848B1C00EFF282 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -329,6 +337,7 @@
 		3550FA2B29B3CA7E0091B558 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				35E5791F29CE519300291C05 /* Router */,
 				3550FA2C29B3CA8A0091B558 /* Coordinators */,
 			);
 			path = Navigation;
@@ -635,6 +644,17 @@
 			path = "Review Views";
 			sourceTree = "<group>";
 		};
+		35E5791F29CE519300291C05 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				35E5792029CE51A000291C05 /* Router.swift */,
+				35E5792229CE51B100291C05 /* RoutingView.swift */,
+				35E5792429CE51CA00291C05 /* RoutingViews.swift */,
+				35E5792629CE52AB00291C05 /* NYCRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
 		35E7FB922985A9C200EFF282 /* User */ = {
 			isa = PBXGroup;
 			children = (
@@ -767,6 +787,7 @@
 				351B3A2729981B22007E7D00 /* NYCSettingsCard.swift in Sources */,
 				350DE274299143B500573163 /* LogoutView.swift in Sources */,
 				3538C626298356270017800B /* LanguageSetup.swift in Sources */,
+				35E5792529CE51CA00291C05 /* RoutingViews.swift in Sources */,
 				35EF059E29B0F40A0098110B /* AccoutSetupView.swift in Sources */,
 				35E7FB942985A9D500EFF282 /* UserRegistrationModel.swift in Sources */,
 				35DFA24129A518B700258BB7 /* AddReviewView.swift in Sources */,
@@ -787,6 +808,7 @@
 				35E7FB8D29848AE300EFF282 /* NYCFloatingTextField.swift in Sources */,
 				35737E5E29888DA5003B68BE /* Social View.swift in Sources */,
 				35746CB329A29F3E007322AA /* FavoritesEmptyView.swift in Sources */,
+				35E5792729CE52AB00291C05 /* NYCRouter.swift in Sources */,
 				35E7FB8F29848B1C00EFF282 /* Extensions.swift in Sources */,
 				35737E5B29888866003B68BE /* ProfileView.swift in Sources */,
 				359F80FB298C330B000D792E /* FavoriteView.swift in Sources */,
@@ -803,6 +825,7 @@
 				359348DA29BA378D00B7739A /* ReviewEmptyView.swift in Sources */,
 				359A7932298EDCCB001B66CF /* ShareCardView.swift in Sources */,
 				3503BD86297F50AA00C0E365 /* AppDelegate.swift in Sources */,
+				35E5792329CE51B100291C05 /* RoutingView.swift in Sources */,
 				35737E6129888DF9003B68BE /* HomeView.swift in Sources */,
 				35E7FB9129848FEE00EFF282 /* NYCActionButton.swift in Sources */,
 				35F29399299E8F4A00A85586 /* AmenityModel.swift in Sources */,
@@ -812,6 +835,7 @@
 				351B3A2529981665007E7D00 /* SupportSettingsView.swift in Sources */,
 				35E7FB8B298486F400EFF282 /* ProfileSetup.swift in Sources */,
 				35F29397299E8ED500A85586 /* AmenityCard.swift in Sources */,
+				35E5792129CE51A000291C05 /* Router.swift in Sources */,
 				359F80F7298C2508000D792E /* LocationCell.swift in Sources */,
 				35AD1AEE29CBB4780076AE54 /* RatingDotsView.swift in Sources */,
 				3503BD88297F50AA00C0E365 /* SceneDelegate.swift in Sources */,

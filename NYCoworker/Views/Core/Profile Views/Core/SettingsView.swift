@@ -12,45 +12,46 @@ struct SettingsView: View {
     @State var nameTextFieldText = ""
     @State var occupationTextFieldText = ""
     @State var personType: String = "Student"
-    var title: String
+    private var title: String
+    init(title: String) {
+        self.title = title
+    }
     var body: some View {
-        NavigationStack {
-            VStack {
-                switch title {
-                case Strings.Settings.manageAccount :
-                    AccountSettingsView(nameText: $nameTextFieldText, occupationText: $occupationTextFieldText)
-                case Strings.Settings.helpSupport:
-                    SupportSettingsView()
-                case Strings.Settings.manageNotifications:
-                    NotificationsSettingsView()
-                case Strings.Settings.language:
-                    LanguageSettingsView()
-                default:
-                    ErrorEmptyView()
-                }
+        VStack {
+            switch title {
+            case Strings.Settings.manageAccount :
+                AccountSettingsView(nameText: $nameTextFieldText, occupationText: $occupationTextFieldText)
+            case Strings.Settings.helpSupport:
+                SupportSettingsView()
+            case Strings.Settings.manageNotifications:
+                NotificationsSettingsView()
+            case Strings.Settings.language:
+                LanguageSettingsView()
+            default:
+                ErrorEmptyView()
             }
-            .toolbar(.hidden, for: .tabBar)
-            .toolbar(content: {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button {
-                        makeDismiss()
-                    } label: {
-                        Resources.Images.Navigation.arrowBack
-                            .foregroundColor(Resources.Colors.primary)
-                    }
-                    
+        }
+        .toolbar(.hidden, for: .tabBar)
+        .toolbar(content: {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button {
+                    makeDismiss()
+                } label: {
+                    Resources.Images.Navigation.arrowBack
+                        .foregroundColor(Resources.Colors.primary)
                 }
                 
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Text(title)
-                        .foregroundColor(Resources.Colors.customBlack)
-                        .font(Resources.Fonts.bold(withSize: 17))
-                }
-            })
-            .ignoresSafeArea(.keyboard)
-            .navigationBarBackButtonHidden()
-            .toolbarBackground(.white, for: .navigationBar)
-        }
+            }
+            
+            ToolbarItem(placement: .navigationBarLeading) {
+                Text(title)
+                    .foregroundColor(Resources.Colors.customBlack)
+                    .font(Resources.Fonts.bold(withSize: 17))
+            }
+        })
+        .ignoresSafeArea(.keyboard)
+        .navigationBarBackButtonHidden()
+        .toolbarBackground(.white, for: .navigationBar)
     }
 }
 

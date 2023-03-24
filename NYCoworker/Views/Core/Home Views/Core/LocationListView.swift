@@ -12,15 +12,24 @@ struct LocationListView: View {
     @Environment(\.dismiss) var makeDismiss
     @State var addToFavs = false
     @StateObject var locationVM : LocationsViewModel = .shared
-    var title: String
+    private var title: String
+    @StateObject private var router: NYCRouter
+    init(title: String, router: NYCRouter) {
+        self.title = title
+        _router = StateObject(wrappedValue: router)
+    }
     var body: some View {
-        NavigationStack {
+        RoutingView(router: router) {
             ScrollView(.vertical, showsIndicators: true) {
                 LazyVStack(spacing: 10) {
                     ForEach(locationVM.librariesLocations){ location in
                         LocationListCell(type: .list, data: location) {
                             addToFavs.toggle()
                         }
+                        .onTapGesture {
+                            router.navigateTo(.locationDetail)
+                        }
+
                     }
                 }
                 .padding([.leading,.trailing], 16)

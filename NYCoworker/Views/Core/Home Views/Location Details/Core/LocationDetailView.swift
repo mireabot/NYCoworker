@@ -21,108 +21,106 @@ struct LocationDetailView: View {
     @State var reportEdit = false
     @State var reportSubmitted = false
     var body: some View {
-        NavigationStack {
-            ScrollView(.vertical, showsIndicators: true) {
-                VStack {
-                    iPages(selection: $currentImage) {
-                        Image("sample")
-                            .resizable()
-                            .scaledToFill()
-                        Rectangle().fill(Color.blue)
-                        Rectangle().fill(Color.gray)
-                    }
-                    .dotsAlignment(.bottom)
-                    .dotsTintColors(currentPage: Resources.Colors.primary, otherPages: Resources.Colors.customGrey)
-                    .animated(true)
-                    .wraps(true)
-                    .frame(height: 250)
+        ScrollView(.vertical, showsIndicators: true) {
+            VStack {
+                iPages(selection: $currentImage) {
+                    Image("sample")
+                        .resizable()
+                        .scaledToFill()
+                    Rectangle().fill(Color.blue)
+                    Rectangle().fill(Color.gray)
                 }
-                
-                /// Location info
-                locationInfo
-                
-                /// Reviews
-                reviews
-                
-                ///Amenities list
-                amenities
-                
-                ///Working hours
-                workingHours
-                
-                ///Suggest info
+                .dotsAlignment(.bottom)
+                .dotsTintColors(currentPage: Resources.Colors.primary, otherPages: Resources.Colors.customGrey)
+                .animated(true)
+                .wraps(true)
+                .frame(height: 250)
+            }
+            
+            /// Location info
+            locationInfo
+            
+            /// Reviews
+            reviews
+            
+            ///Amenities list
+            amenities
+            
+            ///Working hours
+            workingHours
+            
+            ///Suggest info
 //                suggestInfo
+            
+        }
+        .hideTabbar(shouldHideTabbar: true)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button {
+                    makeDismiss()
+                } label: {
+                    Resources.Images.Navigation.arrowBack
+                        .foregroundColor(Resources.Colors.customBlack)
+                }
                 
             }
-            .hideTabbar(shouldHideTabbar: true)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button {
-                        makeDismiss()
-                    } label: {
-                        Resources.Images.Navigation.arrowBack
-                            .foregroundColor(Resources.Colors.customBlack)
-                    }
-                    
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    addToFavs.toggle()
+                } label: {
+                    Resources.Images.Settings.rate
+                        .foregroundColor(Resources.Colors.customBlack)
                 }
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button {
-                        addToFavs.toggle()
-                    } label: {
-                        Resources.Images.Settings.rate
-                            .foregroundColor(Resources.Colors.customBlack)
-                    }
-                    
-                }
-                ToolbarItem(placement: .primaryAction) {
-                    Button {
-                        print("Share link")
-                    } label: {
-                        Resources.Images.Navigation.share
-                            .foregroundColor(Resources.Colors.customBlack)
-                    }
+                
+            }
+            ToolbarItem(placement: .primaryAction) {
+                Button {
+                    print("Share link")
+                } label: {
+                    Resources.Images.Navigation.share
+                        .foregroundColor(Resources.Colors.customBlack)
                 }
             }
-            .toolbarBackground(.white, for: .navigationBar)
-            .navigationBarBackButtonHidden()
-            .navigationBarTitleDisplayMode(.inline)
-            .fullScreenCover(isPresented: $reportEdit, content: {
-                ReportEditView(showAlert: $reportSubmitted)
-            })
-            .sheet(isPresented: $showReviewView, content: {
-                ExpandedReviewView(data: reviewInfo, type: .fullList)
-                    .presentationDetents(
-                        [.mediumBottomBar, .largeBottomBar],
-                        selection: $selectDetent
-                    )
-            })
-            .sheet(isPresented: $showMapChoice, content: {
-                MapChoiceView()
-                    .presentationDetents(
-                        [.bottom],
-                        selection: $selectDetent
-                    )
-            })
-            .popup(isPresented: $addToFavs) {
-                NYCAlertNotificationView(alertStyle: .addedToFavorites)
-            } customize: {
-                $0
-                    .isOpaque(true)
-                    .autohideIn(1.5)
-                    .type(.floater())
-                    .position(.bottom)
-                    .animation(.spring(response: 0.4, blendDuration: 0.2))
-            }
-            .popup(isPresented: $reportSubmitted) {
-                NYCAlertNotificationView(alertStyle: .reportSubmitted)
-            } customize: {
-                $0
-                    .isOpaque(true)
-                    .autohideIn(1.5)
-                    .type(.floater())
-                    .position(.top)
-                    .animation(.spring(response: 0.4, blendDuration: 0.2))
-            }
+        }
+        .toolbarBackground(.white, for: .navigationBar)
+        .navigationBarBackButtonHidden()
+        .navigationBarTitleDisplayMode(.inline)
+        .fullScreenCover(isPresented: $reportEdit, content: {
+            ReportEditView(showAlert: $reportSubmitted)
+        })
+        .sheet(isPresented: $showReviewView, content: {
+            ExpandedReviewView(data: reviewInfo, type: .fullList)
+                .presentationDetents(
+                    [.mediumBottomBar, .largeBottomBar],
+                    selection: $selectDetent
+                )
+        })
+        .sheet(isPresented: $showMapChoice, content: {
+            MapChoiceView()
+                .presentationDetents(
+                    [.bottom],
+                    selection: $selectDetent
+                )
+        })
+        .popup(isPresented: $addToFavs) {
+            NYCAlertNotificationView(alertStyle: .addedToFavorites)
+        } customize: {
+            $0
+                .isOpaque(true)
+                .autohideIn(1.5)
+                .type(.floater())
+                .position(.bottom)
+                .animation(.spring(response: 0.4, blendDuration: 0.2))
+        }
+        .popup(isPresented: $reportSubmitted) {
+            NYCAlertNotificationView(alertStyle: .reportSubmitted)
+        } customize: {
+            $0
+                .isOpaque(true)
+                .autohideIn(1.5)
+                .type(.floater())
+                .position(.top)
+                .animation(.spring(response: 0.4, blendDuration: 0.2))
         }
     }
     

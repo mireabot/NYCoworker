@@ -11,13 +11,15 @@ import PopupView
 struct FavoriteView: View {
     @Environment(\.dismiss) var makeDismiss
     @State var showLoading = false
-    init() {
+    @StateObject var locationVM : LocationsViewModel = .shared
+    @StateObject private var router: NYCRouter
+    init(router: NYCRouter) {
+        _router = StateObject(wrappedValue: router)
         UITableView.appearance().allowsSelection = false
         UITableViewCell.appearance().selectionStyle = .none
     }
-    @StateObject var locationVM : LocationsViewModel = .shared
     var body: some View {
-        NavigationStack {
+        RoutingView(router: router) {
             favoritesListView()
                 .toolbar(.hidden, for: .tabBar)
                 .toolbar(content: {
@@ -63,11 +65,10 @@ struct FavoriteView: View {
         List {
             ForEach(locationVM.locations){ location in
                 ZStack(alignment: .leading) {
-                    NavigationLink(destination: LocationDetailView()) {
-                        EmptyView()
-                    }.opacity(0)
-                    
                     LocationListCell(type: .favorite, data: location, buttonAction: {})
+                        .onTapGesture {
+                            router.navigateTo(.locationDetail)
+                        }
                         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                             Button(role: .destructive) {
                                 
@@ -76,7 +77,6 @@ struct FavoriteView: View {
                                     .font(Resources.Fonts.regular(withSize: 15))
                             }
                             .tint(Resources.Colors.secondary)
-
                         }
                 }
             }.listRowSeparator(.hidden)
@@ -87,6 +87,6 @@ struct FavoriteView: View {
 
 struct FavoriteView_Previews: PreviewProvider {
     static var previews: some View {
-        FavoriteView()
+        FavoriteView(router: NYCRouter(isPresented: .constant(.main)))
     }
 }

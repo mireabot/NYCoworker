@@ -11,11 +11,15 @@ import PopupView
 
 struct LocationsMapView: View {
     @Environment(\.dismiss) var makeDismiss
-    @ObservedObject var locationVM: LocationsViewModel
+    @StateObject var locationVM: LocationsViewModel = .shared
     @State var showAlert = false
     @StateObject var locationManager = LocationManager()
+    @StateObject private var router: NYCRouter
+    init(router: NYCRouter) {
+        _router = StateObject(wrappedValue: router)
+    }
     var body: some View {
-        NavigationStack {
+        RoutingView(router: router) {
             ZStack(alignment: .bottom) {
                 Map(coordinateRegion: $locationVM.mapRegion, showsUserLocation: true, annotationItems: locationVM.locations, annotationContent: { location in
                     MapAnnotation(coordinate: location.coordinates) {
