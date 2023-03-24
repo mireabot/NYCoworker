@@ -14,7 +14,7 @@ class NYCRouter: Router {
     }
     
     func presentDetail(description: String) {
-        navigateTo(.detail(description))
+        navigateTo(.detail)
     }
     
     func presentAlert() {
@@ -33,14 +33,14 @@ private extension NYCRouter {
         switch spec {
         case .list:
             EmptyView()
-        case .detail(let description):
+        case .detail:
             EmptyView()
         case .alert:
            EmptyView()
         case .mapView:
             LocationsMapView(router: router(route: route))
-        case .locationDetail:
-            LocationDetailView()
+        case .locationDetail(let model):
+            LocationDetailView(locationData: model)
         case .locationList(let title):
            LocationListView(title: title, router: router(route: route))
         case .settingsView(let settingsTitle):

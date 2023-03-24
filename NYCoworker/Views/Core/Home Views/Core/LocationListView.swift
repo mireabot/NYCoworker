@@ -27,7 +27,7 @@ struct LocationListView: View {
                             addToFavs.toggle()
                         }
                         .onTapGesture {
-                            router.navigateTo(.locationDetail)
+                            router.navigateTo(.locationDetail(location))
                         }
 
                     }

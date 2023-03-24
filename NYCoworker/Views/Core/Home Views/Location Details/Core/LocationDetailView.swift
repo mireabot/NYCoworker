@@ -20,6 +20,7 @@ struct LocationDetailView: View {
     @State var reviewInfo = reviewData[0]
     @State var reportEdit = false
     @State var reportSubmitted = false
+    var locationData : LocationModel
     var body: some View {
         ScrollView(.vertical, showsIndicators: true) {
             VStack {
@@ -128,7 +129,7 @@ struct LocationDetailView: View {
         VStack {
             HStack {
                 VStack(alignment: .leading, spacing: 5) {
-                    Text("Public Hotel")
+                    Text(locationData.name)
                         .foregroundColor(Resources.Colors.customBlack)
                         .font(Resources.Fonts.bold(withSize: 22))
                     HStack(spacing: 1) {
@@ -269,8 +270,8 @@ struct LocationDetailView: View {
     }
 }
 
-struct LocationDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        LocationDetailView()
-    }
-}
+//struct LocationDetailView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        LocationDetailView()
+//    }
+//}

@@ -22,7 +22,7 @@ import MapKit
 ///    - distance: counts from current user's location to final destination when app launches
 ///
 /// - Returns: LocationModel struct object
-struct LocationModel: Identifiable, Equatable {
+struct LocationModel: Identifiable, Equatable, Hashable {
     let name: String
     let coordinates: CLLocationCoordinate2D
     let address: String
@@ -33,6 +33,10 @@ struct LocationModel: Identifiable, Equatable {
     
     var id: String {
         name
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(name)
     }
     
     static func == (lhs: LocationModel, rhs: LocationModel) -> Bool {

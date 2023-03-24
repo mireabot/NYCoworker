@@ -8,21 +8,19 @@
 import Foundation
 
 enum RoutingViews: Equatable, Hashable {
-    
     case main
     case list
-    case detail(String)
+    case detail
     case alert
     case mapView
     case locationList(String)
-    case locationDetail
+    case locationDetail(LocationModel)
     case settingsView(String)
     case notificationsView
     case favoritesView
 }
 
 extension RoutingViews: Identifiable {
-    
     var id: Self { self }
 }
 

@@ -107,7 +107,7 @@ extension HomeView {
                         else {
                             LocationCell(data: data,type: .small)
                                 .onTapGesture {
-                                    router.navigateTo(.locationDetail)
+                                    router.navigateTo(.locationDetail(data))
                                 }
                         }
                     }
@@ -136,7 +136,7 @@ extension HomeView {
                         else {
                             LocationCell(data: data, type: .large)
                                 .onTapGesture {
-                                    router.navigateTo(.locationDetail)
+                                    router.navigateTo(.locationDetail(data))
                                 }
                         }
                     }

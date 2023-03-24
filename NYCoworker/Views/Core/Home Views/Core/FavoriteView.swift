@@ -67,7 +67,7 @@ struct FavoriteView: View {
                 ZStack(alignment: .leading) {
                     LocationListCell(type: .favorite, data: location, buttonAction: {})
                         .onTapGesture {
-                            router.navigateTo(.locationDetail)
+//                            router.navigateTo(.locationDetail)
                         }
                         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                             Button(role: .destructive) {

@@ -36,12 +36,13 @@ struct LocationsMapView: View {
                 ZStack {
                     ForEach(locationVM.locations) { location in
                         if locationVM.mapLocation == location {
-                            NavigationLink(destination: LocationDetailView()) {
-                                LocationMapCard(location: location, buttonAction: {
-                                    showAlert.toggle()
-                                })
-                                    .transition(.asymmetric(insertion: .move(edge: .trailing),removal: .move(edge: .leading)))
-                            }
+                            LocationMapCard(location: location, buttonAction: {
+                                showAlert.toggle()
+                            })
+                                .transition(.asymmetric(insertion: .move(edge: .trailing),removal: .move(edge: .leading)))
+                                .onTapGesture {
+                                    router.navigateTo(.locationDetail(location))
+                                }
                         }
                     }
                 }
