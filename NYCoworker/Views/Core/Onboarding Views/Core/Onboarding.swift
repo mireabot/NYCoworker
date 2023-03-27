@@ -10,7 +10,6 @@ import iPages
 
 struct Onboarding: View {
     @State var currentPage: Int = 0
-    @State private var showingCredits = false
     let heights = stride(from: 0.4, through: 0.4, by: 0.1).map { PresentationDetent.fraction($0) }
     @State var prepareToNavigate: Bool = false
     let onboardingCoordinator = OnboardingCoordinator()
@@ -24,28 +23,6 @@ struct Onboarding: View {
                         .frame(width: 70, height: 70)
                     
                     Spacer()
-                    
-                    Button {
-                        showingCredits.toggle()
-                    } label: {
-                        HStack(spacing: 5) {
-                            Image("language")
-                                .renderingMode(.template)
-                                .resizable()
-                                .foregroundColor(Resources.Colors.lightGrey)
-                                .frame(width: 20, height: 20)
-                            
-                            Text("English")
-                                .font(Resources.Fonts.regular(withSize: 13))
-                                .foregroundColor(Resources.Colors.darkGrey)
-                            
-                        }
-                        .padding(8)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 15)
-                                .stroke(Resources.Colors.lightGrey)
-                        )
-                    }
                     
                 }
                 .padding([.leading,.trailing], 16)
@@ -77,10 +54,6 @@ struct Onboarding: View {
                 }
                 .padding(.bottom, 10)
                 .padding([.trailing,.leading], 16)
-            }
-            .sheet(isPresented: $showingCredits) {
-                LanguageSetup()
-                    .presentationDetents(Set(heights))
             }
             .navigationDestination(isPresented: $prepareToNavigate) {
                 onboardingCoordinator.start()

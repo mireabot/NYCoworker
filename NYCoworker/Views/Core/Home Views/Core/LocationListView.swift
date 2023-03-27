@@ -13,27 +13,26 @@ struct LocationListView: View {
     @State var addToFavs = false
     @StateObject var locationVM : LocationsViewModel = .shared
     private var title: String
-    @StateObject private var router: NYCRouter
-    init(title: String, router: NYCRouter) {
+    init(title: String) {
         self.title = title
-        _router = StateObject(wrappedValue: router)
     }
     var body: some View {
-        RoutingView(router: router) {
+        NavigationStack {
             ScrollView(.vertical, showsIndicators: true) {
                 LazyVStack(spacing: 10) {
                     ForEach(locationVM.librariesLocations){ location in
-                        LocationListCell(type: .list, data: location) {
-                            addToFavs.toggle()
+                        NavigationLink(value: location) {
+                            LocationListCell(type: .list, data: location) {
+                                addToFavs.toggle()
+                            }
                         }
-                        .onTapGesture {
-                            router.navigateTo(.locationDetail(location))
-                        }
-
                     }
                 }
                 .padding([.leading,.trailing], 16)
             }
+            .navigationDestination(for: LocationModel.self, destination: { locationData in
+                LocationDetailView(locationData: locationData)
+            })
             .popup(isPresented: $addToFavs) {
                 NYCAlertNotificationView(alertStyle: .addedToFavorites)
             } customize: {
@@ -62,10 +61,10 @@ struct LocationListView: View {
                         .font(Resources.Fonts.bold(withSize: 17))
                 }
             }
-            .navigationBarBackButtonHidden()
             .navigationBarTitleDisplayMode(.inline)
             .hideTabbar(shouldHideTabbar: true)
         }
+        .navigationBarBackButtonHidden()
     }
 }
 

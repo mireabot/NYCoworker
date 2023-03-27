@@ -11,13 +11,8 @@ import PopupView
 struct ProfileView: View {
     @State var showPopup = false
     @State var showSettings = false
-    @State var settingsTitle = ""
-    @StateObject private var router: NYCRouter
-    init(router: NYCRouter) {
-        _router = StateObject(wrappedValue: router)
-    }
     var body: some View {
-        RoutingView(router: router) {
+        NavigationStack {
             VStack {
                 VStack {
                     profileHeader()
@@ -28,6 +23,9 @@ struct ProfileView: View {
                 }
                 Spacer()
             }
+            .navigationDestination(for: SettingsModel.self, destination: { settingsData in
+                SettingsView(title: settingsData.title)
+            })
             .sheet(isPresented: $showPopup, content: {
                 LogoutView()
                     .presentationDetents([.bottom])
@@ -66,14 +64,11 @@ extension ProfileView {
                 .foregroundColor(Resources.Colors.customBlack)
                 .font(Resources.Fonts.regular(withSize: 16))
             
-            ForEach(settigsData) { data in
+            ForEach(settigsData, id: \.title) { data in
                 VStack {
-                    SettingsCard(data: data)
-                        .onTapGesture {
-                            print(data.title)
-                            settingsTitle = data.title
-                            router.navigateTo(.settingsView(settingsTitle))
-                        }
+                    NavigationLink(value: data) {
+                        SettingsCard(data: data)
+                    }
                 }
             }
         }

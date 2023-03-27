@@ -12,14 +12,8 @@ struct FavoriteView: View {
     @Environment(\.dismiss) var makeDismiss
     @State var showLoading = false
     @StateObject var locationVM : LocationsViewModel = .shared
-    @StateObject private var router: NYCRouter
-    init(router: NYCRouter) {
-        _router = StateObject(wrappedValue: router)
-        UITableView.appearance().allowsSelection = false
-        UITableViewCell.appearance().selectionStyle = .none
-    }
     var body: some View {
-        RoutingView(router: router) {
+        NavigationStack {
             favoritesListView()
                 .toolbar(.hidden, for: .tabBar)
                 .toolbar(content: {
@@ -47,10 +41,11 @@ struct FavoriteView: View {
                         .closeOnTapOutside(true)
                         .backgroundColor(.black.opacity(0.4))
                 }
-                .navigationBarBackButtonHidden()
                 .navigationBarTitleDisplayMode(.inline)
-                .toolbarBackground(.white, for: .navigationBar)
+                
         }
+        .navigationBarBackButtonHidden()
+        .toolbarBackground(.white, for: .navigationBar)
     }
     
     @ViewBuilder
@@ -84,6 +79,6 @@ struct FavoriteView: View {
 
 struct FavoriteView_Previews: PreviewProvider {
     static var previews: some View {
-        FavoriteView(router: NYCRouter(isPresented: .constant(.main)))
+        FavoriteView()
     }
 }

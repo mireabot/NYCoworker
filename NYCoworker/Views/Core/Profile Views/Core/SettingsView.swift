@@ -25,8 +25,6 @@ struct SettingsView: View {
                 SupportSettingsView()
             case Strings.Settings.manageNotifications:
                 NotificationsSettingsView()
-            case Strings.Settings.language:
-                LanguageSettingsView()
             default:
                 EmptyView()
             }

@@ -10,10 +10,9 @@ import PopupView
 
 struct TabBarView: View {
     @State var showBottomsheet = false
-    @StateObject private var router = NYCRouter(isPresented: .constant(.main))
     var body: some View {
         TabView {
-            HomeView(router: router)
+            HomeView()
             .tabItem {
                 Label("Explore", image: "home")
             }
@@ -23,7 +22,7 @@ struct TabBarView: View {
             .tabItem {
                 Label("Coworkers", image: "social")
             }
-            ProfileView(router: router)
+            ProfileView()
             .tabItem {
                 Label("Profile", image: "profile")
             }

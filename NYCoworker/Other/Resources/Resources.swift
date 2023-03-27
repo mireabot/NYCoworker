@@ -92,7 +92,6 @@ enum Strings {
         static let manageAccount = "Manage account"
         static let helpSupport = "Help & Support"
         static let manageNotifications = "Manage notifications"
-        static let language = "Change Language"
     }
 }
 

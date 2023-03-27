@@ -12,12 +12,9 @@ import MapKit
 struct HomeView: View {
     @State var timer = false
     @StateObject var locationVM : LocationsViewModel = .shared
-    @StateObject private var router: NYCRouter
-    init(router: NYCRouter) {
-        _router = StateObject(wrappedValue: router)
-    }
+    @State var showMap = false
     var body: some View {
-        RoutingView(router: router) {
+        NavigationView {
             ScrollView(.vertical, showsIndicators: false) {
                 /// Map section
                 mapView()
@@ -46,14 +43,14 @@ struct HomeView: View {
                 }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    NYCCircleImageButton(size: 20, image: Image("rate")) {
-                        router.navigateTo(.favoritesView)
+                    NavigationLink(destination: FavoriteView()) {
+                        NYCCircleImageButton(size: 20, image: Image("rate")) {}.disabled(true)
                     }
                 }
                 
                 ToolbarItem(placement: .primaryAction) {
-                    NYCCircleImageButton(size: 20, image: Image("bell")) {
-                        router.navigateTo(.notificationsView)
+                    NavigationLink(destination: NotificationsView()) {
+                        NYCCircleImageButton(size: 20, image: Image("bell")) {}.disabled(true)
                     }
                 }
             }
@@ -66,7 +63,7 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView(router: NYCRouter(isPresented: .constant(.main)))
+        HomeView()
     }
 }
 
@@ -75,11 +72,12 @@ extension HomeView {
     @ViewBuilder
     func locationLibrariesCollection() -> some View {
         VStack(alignment: .leading, spacing: 10) {
-            Button(action: {
-                router.navigateTo(.locationList(Locations.libraries.rawValue))
-            }, label: {
+            NavigationLink {
+                LocationListView(title: Locations.libraries.rawValue)
+            } label: {
                 NYCSectionHeader(title: Locations.libraries.rawValue, isExpandButton: true)
-            })
+            }
+
             
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack(spacing: 10) {
@@ -90,10 +88,9 @@ extension HomeView {
                                 .shimmering(active: true, duration: 1.5, bounce: false)
                         }
                         else {
-                            LocationCell(data: data,type: .small)
-                                .onTapGesture {
-                                    router.navigateTo(.locationDetail(data))
-                                }
+                            NavigationLink(destination: LocationDetailView(locationData: data)) {
+                                LocationCell(data: data, type: .small)
+                            }
                         }
                     }
                 }
@@ -104,9 +101,7 @@ extension HomeView {
     @ViewBuilder
     func locationLobbiesCollection() -> some View {
         VStack(alignment: .leading, spacing: 10) {
-            Button {
-                router.navigateTo(.locationList(Locations.lobbies.rawValue))
-            } label: {
+            NavigationLink(destination: LocationListView(title: Locations.lobbies.rawValue)) {
                 NYCSectionHeader(title: Locations.lobbies.rawValue, isExpandButton: true)
             }
             
@@ -119,10 +114,9 @@ extension HomeView {
                                 .shimmering(active: true, duration: 1.5, bounce: false)
                         }
                         else {
-                            LocationCell(data: data, type: .large)
-                                .onTapGesture {
-                                    router.navigateTo(.locationDetail(data))
-                                }
+                            NavigationLink(destination: LocationDetailView(locationData: data)) {
+                                LocationCell(data: data, type: .large)
+                            }
                         }
                     }
                 }
@@ -140,12 +134,14 @@ extension HomeView {
                     .cornerRadius(10)
                     .disabled(true)
                 
-                Button {
-                    router.navigateTo(.mapView)
-                } label: {
+                NavigationLink(destination: LocationsMapView(), label: {
                     Text("Open map")
-                }
-                .buttonStyle(NYCActionButtonStyle(showLoader: .constant(false)))
+                        .foregroundColor(Color.white)
+                        .padding([.top,.bottom], 15)
+                        .frame(maxWidth: .infinity)
+                        .background(RoundedRectangle(cornerRadius: 5).fill(Resources.Colors.primary))
+                        .cornerRadius(10)
+                })
                 .padding([.leading,.trailing], 90)
             }
         }

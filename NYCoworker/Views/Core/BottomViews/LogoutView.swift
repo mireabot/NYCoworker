@@ -9,6 +9,7 @@ import SwiftUI
 
 struct LogoutView: View {
     @AppStorage("userSigned") var userLogged: Bool = false
+    @Environment(\.dismiss) var makeDismiss
     var body: some View {
         GeometryReader { geometry in
             VStack {
@@ -21,7 +22,7 @@ struct LogoutView: View {
                     }, text: "Log out", buttonStyle: .system)
                     
                     Button {
-                        
+                        makeDismiss()
                     } label: {
                         Text("Never mind")
                             .foregroundColor(Resources.Colors.darkGrey)

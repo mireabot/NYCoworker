@@ -14,12 +14,8 @@ struct LocationsMapView: View {
     @StateObject var locationVM: LocationsViewModel = .shared
     @State var showAlert = false
     @StateObject var locationManager = LocationManager()
-    @StateObject private var router: NYCRouter
-    init(router: NYCRouter) {
-        _router = StateObject(wrappedValue: router)
-    }
     var body: some View {
-        RoutingView(router: router) {
+        NavigationStack {
             ZStack(alignment: .bottom) {
                 Map(coordinateRegion: $locationVM.mapRegion, showsUserLocation: true, annotationItems: locationVM.locations, annotationContent: { location in
                     MapAnnotation(coordinate: location.coordinates) {
@@ -36,19 +32,20 @@ struct LocationsMapView: View {
                 ZStack {
                     ForEach(locationVM.locations) { location in
                         if locationVM.mapLocation == location {
-                            LocationMapCard(location: location, buttonAction: {
-                                showAlert.toggle()
-                            })
-                                .transition(.asymmetric(insertion: .move(edge: .trailing),removal: .move(edge: .leading)))
-                                .onTapGesture {
-                                    router.navigateTo(.locationDetail(location))
-                                }
+                            NavigationLink(destination: LocationDetailView(locationData: location)) {
+                                LocationMapCard(location: location, buttonAction: {
+                                    showAlert.toggle()
+                                }).transition(.asymmetric(insertion: .move(edge: .trailing),removal: .move(edge: .leading)))
+                            }
                         }
                     }
                 }
                 .padding(.bottom, 30)
                 
             }
+            .navigationDestination(for: LocationModel.self, destination: { locationData in
+                LocationDetailView(locationData: locationData)
+            })
             .popup(isPresented: $showAlert) {
                 NYCAlertNotificationView(alertStyle: .addedToFavorites)
             } customize: {
@@ -60,24 +57,17 @@ struct LocationsMapView: View {
                     .animation(.spring(response: 0.4, blendDuration: 0.2))
             }
             .toolbar(.hidden, for: .tabBar)
-            .navigationBarBackButtonHidden()
             .toolbarBackground(.clear, for: .navigationBar)
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     NYCCircleImageButton(size: 24, image: Resources.Images.Navigation.arrowBack, color: .black) {
                         makeDismiss()
                     }
                 }
-                
-//                ToolbarItem(placement: .navigationBarTrailing) {
-//                    NYCCircleImageButton(size: 24, image: Resources.Images.Navigation.location, color: .black) {
-//                        if let location = locationManager.userLocation {
-//                            locationVM.mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude), span: locationVM.span)
-//                        }
-//                    }
-//                }
             }
         }
+        .navigationBarBackButtonHidden()
     }
 }
 

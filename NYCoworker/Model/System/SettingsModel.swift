@@ -7,15 +7,17 @@
 
 import SwiftUI
 
-struct SettingsModel: Identifiable {
-    var id: Int
-    let title: String
-    let icon: Image
+struct SettingsModel: Hashable {
+    var title: String
+    var icon: Image
+    
+    public func hash(into hasher: inout Hasher) {
+        return hasher.combine(title)
+    }
 }
 
 let settigsData = [
-    SettingsModel(id: 0, title: Strings.Settings.manageAccount, icon: Resources.Images.Settings.manageAccount),
-    SettingsModel(id: 1, title: Strings.Settings.helpSupport, icon: Resources.Images.Settings.help),
-    SettingsModel(id: 2, title: Strings.Settings.manageNotifications, icon: Resources.Images.Settings.manageNotifications),
-    SettingsModel(id: 3, title: Strings.Settings.language, icon: Resources.Images.Settings.changeLanguage),
+    SettingsModel(title: Strings.Settings.manageAccount, icon: Resources.Images.Settings.manageAccount),
+    SettingsModel(title: Strings.Settings.helpSupport, icon: Resources.Images.Settings.help),
+    SettingsModel(title: Strings.Settings.manageNotifications, icon: Resources.Images.Settings.manageNotifications)
 ]
