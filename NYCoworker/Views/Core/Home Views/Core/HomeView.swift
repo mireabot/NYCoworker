@@ -13,6 +13,7 @@ struct HomeView: View {
     @State var timer = false
     @StateObject var locationVM : LocationsViewModel = .shared
     @State var showMap = false
+    @State private var notificationService = NotificationService()
     var body: some View {
         NavigationView {
             ScrollView(.vertical, showsIndicators: false) {
@@ -49,7 +50,7 @@ struct HomeView: View {
                 }
                 
                 ToolbarItem(placement: .primaryAction) {
-                    NavigationLink(destination: NotificationsView()) {
+                    NavigationLink(destination: NotificationsView().environmentObject(NotificationModel(notificationService: notificationService))) {
                         NYCCircleImageButton(size: 20, image: Image("bell")) {}.disabled(true)
                     }
                 }

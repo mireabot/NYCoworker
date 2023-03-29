@@ -8,19 +8,20 @@
 import SwiftUI
 
 struct NotificationCard: View {
+    var data: Notification
     var body: some View {
         VStack {
             HStack {
                 VStack(alignment: .leading, spacing: 10) {
                     HStack(alignment: .center) {
-                        Text("New locations added!")
+                        Text(data.title)
                             .foregroundColor(Resources.Colors.customBlack)
                             .font(Resources.Fonts.bold(withSize: 17))
                         Circle()
                             .frame(width: 10, height: 10)
                             .foregroundColor(Resources.Colors.primary)
                     }
-                    Text("We added new locations to our guide and you can check them in home screen")
+                    Text(data.text)
                         .foregroundColor(Resources.Colors.darkGrey)
                         .font(Resources.Fonts.regular(withSize: 15))
                     Text("03/07/2023")
@@ -40,8 +41,8 @@ struct NotificationCard: View {
     }
 }
 
-struct NotificationCard_Previews: PreviewProvider {
-    static var previews: some View {
-        NotificationCard()
-    }
-}
+//struct NotificationCard_Previews: PreviewProvider {
+//    static var previews: some View {
+//        NotificationCard()
+//    }
+//}

@@ -10,6 +10,7 @@ import PopupView
 
 struct NotificationsView: View {
     @Environment(\.dismiss) var makeDismiss
+    @EnvironmentObject private var model: NotificationModel
     var body: some View {
         notificationsList()
             .hideTabbar(shouldHideTabbar: true)
@@ -30,20 +31,32 @@ struct NotificationsView: View {
                         .font(Resources.Fonts.bold(withSize: 17))
                 }
             })
-        
+            .task {
+                do {
+                    try await model.getAll()
+                }
+                catch {
+                    print(error.localizedDescription)
+                }
+            }
             .navigationBarBackButtonHidden()
             .toolbarBackground(.white, for: .navigationBar)
     }
     
     @ViewBuilder
     func notificationsList() -> some View {
-        ScrollView(.vertical, showsIndicators: true) {
-            LazyVStack(spacing: 10) {
-                ForEach(0..<4) { item in
-                    NotificationCard()
+        if model.notifications.isEmpty {
+            emptyView()
+        }
+        else {
+            ScrollView(.vertical, showsIndicators: true) {
+                LazyVStack(spacing: 10) {
+                    ForEach(model.notifications, id: \.title) { item in
+                        NotificationCard(data: item)
+                    }
                 }
+                .padding(.top, 10)
             }
-            .padding(.top, 10)
         }
     }
     

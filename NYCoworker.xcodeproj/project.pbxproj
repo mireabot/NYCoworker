@@ -17,6 +17,8 @@
 		350DE2762991C5F200573163 /* LocationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350DE2752991C5F200573163 /* LocationListView.swift */; };
 		350DE2782991C66600573163 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350DE2772991C66600573163 /* Enums.swift */; };
 		350DE27B2991CA7600573163 /* LocationsMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350DE27A2991CA7600573163 /* LocationsMapView.swift */; };
+		351872CC29D3C510004B564A /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351872CB29D3C510004B564A /* NotificationService.swift */; };
+		351872CF29D3C547004B564A /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351872CE29D3C547004B564A /* Notification.swift */; };
 		351B3A23299814B8007E7D00 /* AccountSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351B3A22299814B8007E7D00 /* AccountSettingsView.swift */; };
 		351B3A2529981665007E7D00 /* SupportSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351B3A2429981665007E7D00 /* SupportSettingsView.swift */; };
 		351B3A2729981B22007E7D00 /* NYCSettingsCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351B3A2629981B22007E7D00 /* NYCSettingsCard.swift */; };
@@ -111,6 +113,8 @@
 		350DE2752991C5F200573163 /* LocationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationListView.swift; sourceTree = "<group>"; };
 		350DE2772991C66600573163 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		350DE27A2991CA7600573163 /* LocationsMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsMapView.swift; sourceTree = "<group>"; };
+		351872CB29D3C510004B564A /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		351872CE29D3C547004B564A /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		351B3A22299814B8007E7D00 /* AccountSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsView.swift; sourceTree = "<group>"; };
 		351B3A2429981665007E7D00 /* SupportSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportSettingsView.swift; sourceTree = "<group>"; };
 		351B3A2629981B22007E7D00 /* NYCSettingsCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCSettingsCard.swift; sourceTree = "<group>"; };
@@ -222,6 +226,7 @@
 		3503BD84297F50AA00C0E365 /* NYCoworker */ = {
 			isa = PBXGroup;
 			children = (
+				351872C929D3C449004B564A /* Network */,
 				3550FA2B29B3CA7E0091B558 /* Navigation */,
 				358B93962980D35800160BFC /* Model */,
 				358B93992980D42700160BFC /* Views */,
@@ -266,6 +271,30 @@
 				350DE27A2991CA7600573163 /* LocationsMapView.swift */,
 			);
 			path = MapViews;
+			sourceTree = "<group>";
+		};
+		351872C929D3C449004B564A /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				351872CA29D3C45E004B564A /* Services */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		351872CA29D3C45E004B564A /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				351872CB29D3C510004B564A /* NotificationService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		351872CD29D3C53C004B564A /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				351872CE29D3C547004B564A /* Notification.swift */,
+			);
+			path = Notifications;
 			sourceTree = "<group>";
 		};
 		351B3A21299814AA007E7D00 /* Settings Views */ = {
@@ -482,6 +511,7 @@
 		358B93962980D35800160BFC /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				351872CD29D3C53C004B564A /* Notifications */,
 				359348DB29BA420D00B7739A /* Review */,
 				35D3821329B6A7B700B66EDA /* Location */,
 				35E7FB922985A9C200EFF282 /* User */,
@@ -774,6 +804,7 @@
 				35DFA24129A518B700258BB7 /* AddReviewView.swift in Sources */,
 				350DE2762991C5F200573163 /* LocationListView.swift in Sources */,
 				350DE27B2991CA7600573163 /* LocationsMapView.swift in Sources */,
+				351872CC29D3C510004B564A /* NotificationService.swift in Sources */,
 				355C11C029B7A44E001F092B /* ErrorEmptyView.swift in Sources */,
 				35E7FB9D2985B88700EFF282 /* GeoLocationModel.swift in Sources */,
 				35F2939B299F195400A85586 /* NotificationsView.swift in Sources */,
@@ -798,6 +829,7 @@
 				35C479A6298C89D50089F342 /* SettingsView.swift in Sources */,
 				355EA17B29AD72DF00D62B01 /* LanguageSettingsView.swift in Sources */,
 				35746CB529A3183B007322AA /* NotificationsEmptyView.swift in Sources */,
+				351872CF29D3C547004B564A /* Notification.swift in Sources */,
 				35BA64B5299BF69D00E15206 /* ReviewCard.swift in Sources */,
 				35EF059829B0F0310098110B /* NYCNavigationButton.swift in Sources */,
 				35EF05A029B0FB780098110B /* PersonTypeSetup.swift in Sources */,
@@ -964,7 +996,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 9S2MZXD36G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NYCoworker/Info.plist;
@@ -999,7 +1031,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 9S2MZXD36G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NYCoworker/Info.plist;
