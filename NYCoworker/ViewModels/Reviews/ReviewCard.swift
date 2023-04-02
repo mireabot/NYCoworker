@@ -13,35 +13,36 @@ struct ReviewCard: View {
         case small
     }
     var variation: ReviewCardType
-    var data: ReviewModel
+    var data: Review
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             /// Header
             HStack(alignment: .center, spacing: 10) {
-                data.userIcon
+                Image("p1")
                     .resizable()
                     .frame(width: 50, height: 50)
                 Text(data.userName)
                     .foregroundColor(Resources.Colors.customBlack)
                     .font(Resources.Fonts.regular(withSize: 17))
-                Image("review-pos")
+                Image(data.type == .pos ? "review-pos" : "review-neg")
                     .resizable()
                     .frame(width: 16, height: 16)
-                    .foregroundColor(Resources.Colors.actionGreen)
+                    .foregroundColor(data.type == .pos ? Resources.Colors.actionGreen : Resources.Colors.actionRed)
             }
             /// Review info
             HStack {
-                Text("Posted \(data.datePosted) · Visited \(data.dateVisited)")
+                Text("Posted \(data.datePostedString) · Visited \(data.dateVisitedString)")
                     .foregroundColor(Resources.Colors.darkGrey)
                     .font(Resources.Fonts.regular(withSize: 12))
             }
             /// Review text
             HStack {
-                Text(data.reviewText)
+                Text(data.text)
                     .foregroundColor(Resources.Colors.customBlack)
                     .font(Resources.Fonts.regular(withSize: 13))
                     .lineLimit(variation == .full ? 20 : 3)
             }
+            .frame(maxWidth: .infinity,alignment: .leading)
         }
         .padding(16)
         .background(Resources.Colors.customGrey)

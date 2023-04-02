@@ -10,7 +10,8 @@ import PopupView
 
 struct NotificationsView: View {
     @Environment(\.dismiss) var makeDismiss
-    @EnvironmentObject private var model: NotificationModel
+    @State var isLoading = true
+    @StateObject var notificationService = NotificationService()
     var body: some View {
         notificationsList()
             .hideTabbar(shouldHideTabbar: true)
@@ -32,12 +33,12 @@ struct NotificationsView: View {
                 }
             })
             .task {
-                do {
-                    try await model.getAll()
-                }
-                catch {
-                    print(error.localizedDescription)
-                }
+                guard notificationService.notifications.isEmpty else { return }
+                await notificationService.fetchNotifications(completion: {
+                    DispatchQueue.main.async {
+                        isLoading = false
+                    }
+                })
             }
             .navigationBarBackButtonHidden()
             .toolbarBackground(.white, for: .navigationBar)
@@ -45,17 +46,22 @@ struct NotificationsView: View {
     
     @ViewBuilder
     func notificationsList() -> some View {
-        if model.notifications.isEmpty {
-            emptyView()
+        if isLoading {
+            ProgressView()
         }
         else {
-            ScrollView(.vertical, showsIndicators: true) {
-                LazyVStack(spacing: 10) {
-                    ForEach(model.notifications, id: \.title) { item in
-                        NotificationCard(data: item)
+            if notificationService.notifications.isEmpty {
+                emptyView()
+            }
+            else {
+                ScrollView(.vertical, showsIndicators: true) {
+                    LazyVStack(spacing: 10) {
+                        ForEach(notificationService.notifications, id: \.datePosted) { item in
+                            NotificationCard(data: item)
+                        }
                     }
+                    .padding(.top, 10)
                 }
-                .padding(.top, 10)
             }
         }
     }

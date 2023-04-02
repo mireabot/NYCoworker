@@ -10,23 +10,7 @@ import FirebaseFirestoreSwift
 import Firebase
 
 struct Notification: Codable {
-    let title: String
-    let text: String
-}
-
-
-@MainActor
-class NotificationModel: ObservableObject {
-    @Published var notifications: [Notification] = []
-    let notificationService: NotificationService
-    
-    init(notificationService: NotificationService) {
-        self.notificationService = notificationService
-    }
-    
-    func getAll() async throws {
-        notificationService.getNotifications { notificationsData in
-            self.notifications = notificationsData
-        }
-    }
+    var title: String
+    var text: String
+    @ServerTimestamp var datePosted: Timestamp?
 }

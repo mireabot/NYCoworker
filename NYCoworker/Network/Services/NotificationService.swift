@@ -9,30 +9,29 @@ import Foundation
 import FirebaseFirestoreSwift
 import FirebaseFirestore
 
-class NotificationService {
+class NotificationService: ObservableObject {
     private var db = Firestore.firestore()
+    @Published var notifications: [Notification] = []
     
-    func getNotifications(completion: @escaping ([Notification]) -> Void) {
-        db.collection("Notifications").getDocuments { (snapshot, error) in
-            guard let documents = snapshot?.documents else {
-                print("Error retrieving notifications: \(error?.localizedDescription ?? "Unknown error")")
-                completion([])
-                return
+    /// Fetching notifications from database
+    /// Sorted by date posted
+    ///  - Returns:
+    ///  - completion - any action
+    func fetchNotifications(completion: @escaping () -> Void) async {
+        do {
+            var query: Query!
+            query = db.collection(Endpoints.notifications.rawValue).order(by: "datePosted", descending: true)
+            let docs = try await query.getDocuments()
+            let notificationsFetched = docs.documents.compactMap { doc -> Notification? in
+                try? doc.data(as: Notification.self)
             }
-            
-            var notifications = [Notification]()
-            for document in documents {
-                let data = document.data()
-                guard let jsonData = try? JSONSerialization.data(withJSONObject: data),
-                      let notification = try? JSONDecoder().decode(Notification.self, from: jsonData) else {
-                    print("Error parsing notification data for document \(document.documentID)")
-                    continue
-                }
-                
-                notifications.append(notification)
-            }
-            
-            completion(notifications)
+            await MainActor.run(body: {
+                notifications = notificationsFetched
+                completion()
+            })
+        }
+        catch {
+            print(error.localizedDescription)
         }
     }
 }

@@ -14,6 +14,7 @@ struct HomeView: View {
     @StateObject var locationVM : LocationsViewModel = .shared
     @State var showMap = false
     @State private var notificationService = NotificationService()
+    @State private var reviewService = ReviewService()
     var body: some View {
         NavigationView {
             ScrollView(.vertical, showsIndicators: false) {
@@ -30,12 +31,6 @@ struct HomeView: View {
                 .padding([.leading,.trailing], 20)
                 .padding(.top, 30)
             }
-            //        .onAppear {
-            //            timer = true
-            //            DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
-            //                self.timer = false
-            //            }
-            //        }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Image("appLogo")
@@ -50,7 +45,7 @@ struct HomeView: View {
                 }
                 
                 ToolbarItem(placement: .primaryAction) {
-                    NavigationLink(destination: NotificationsView().environmentObject(NotificationModel(notificationService: notificationService))) {
+                    NavigationLink(destination: NotificationsView()) {
                         NYCCircleImageButton(size: 20, image: Image("bell")) {}.disabled(true)
                     }
                 }

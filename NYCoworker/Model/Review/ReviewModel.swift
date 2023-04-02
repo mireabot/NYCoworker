@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import FirebaseFirestoreSwift
+import Firebase
 
 /// Data model for reviews about locations
 ///
@@ -21,18 +23,28 @@ import SwiftUI
 ///    - reviewText: text of review
 ///
 /// - Returns: ReviewModel struct object with parameters
-struct ReviewModel: Identifiable {
-    var id: Int
-    var userIcon: Image
-    var userName: String
-    var reviewType: String
-    var datePosted: String
-    var dateVisited: String
-    var reviewText: String
-}
 
-let reviewData = [
-    ReviewModel(id: 0, userIcon: Image("p3"), userName: "Saleb", reviewType: "positive", datePosted: "30 Jan 2023", dateVisited: "10 Jan 2023", reviewText: "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet."),
-    ReviewModel(id: 1, userIcon: Image("p1"), userName: "Alex", reviewType: "positive", datePosted: "30 Jan 2023", dateVisited: "10 Jan 2023", reviewText: "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet."),
-    ReviewModel(id: 2, userIcon: Image("p2"), userName: "May", reviewType: "positive", datePosted: "30 Jan 2023", dateVisited: "10 Jan 2023", reviewText: "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet."),
-]
+struct Review: Codable {
+    var id: String
+    @ServerTimestamp var datePosted: Timestamp?
+    @ServerTimestamp var dateVisited: Timestamp?
+    var text: String
+    var type: ReviewType
+    var userName: String
+    var userImage: String
+    var datePostedString: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MM/dd/yyyy"
+        return formatter.string(from: datePosted?.dateValue() ?? Date())
+    }
+    var dateVisitedString: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MM/dd/yyyy"
+        return formatter.string(from: dateVisited?.dateValue() ?? Date())
+    }
+    
+    enum ReviewType: String, Codable {
+        case pos = "positive"
+        case neg = "negative"
+    }
+}

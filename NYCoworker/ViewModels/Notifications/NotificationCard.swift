@@ -24,7 +24,7 @@ struct NotificationCard: View {
                     Text(data.text)
                         .foregroundColor(Resources.Colors.darkGrey)
                         .font(Resources.Fonts.regular(withSize: 15))
-                    Text("03/07/2023")
+                    Text(data.datePosted?.dateValue() ?? Date(), style: .date)
                         .foregroundColor(Resources.Colors.darkGrey)
                         .font(Resources.Fonts.regular(withSize: 13))
                         .padding(.top, 10)

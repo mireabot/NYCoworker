@@ -7,10 +7,14 @@
 
 import SwiftUI
 import PopupView
+import Shimmer
 
 struct ProfileView: View {
     @State var showPopup = false
     @State var showSettings = false
+    @State private var userID = "GdtxTGfjweRU6BPejeWT"
+    @StateObject private var userService = UserService()
+    @State var isLoading = true
     var body: some View {
         NavigationStack {
             VStack {
@@ -22,6 +26,14 @@ struct ProfileView: View {
                     profileFooter()
                 }
                 Spacer()
+            }
+            .task {
+                guard userService.user.isEmpty else { return }
+                await userService.fetchUser(documentId: userID, completion: {
+                    DispatchQueue.main.async {
+                        isLoading = false
+                    }
+                })
             }
             .navigationDestination(for: SettingsModel.self, destination: { settingsData in
                 SettingsView(title: settingsData.title)
@@ -43,18 +55,36 @@ struct ProfileView: View {
 extension ProfileView {
     @ViewBuilder
     func profileHeader()-> some View {
-        VStack(alignment: .center, spacing: 5) {
-            Image("p1")
-                .resizable()
-                .frame(width: 100, height: 100)
-            Text("Michael")
-                .foregroundColor(Resources.Colors.customBlack)
-                .font(Resources.Fonts.bold(withSize: 20))
-            Text("Coworker from 2023")
-                .foregroundColor(Resources.Colors.darkGrey)
-                .font(Resources.Fonts.regular(withSize: 13))
+        if isLoading {
+            VStack(alignment: .center, spacing: 5) {
+                Image("p1")
+                    .resizable()
+                    .frame(width: 100, height: 100)
+                Text("Michael")
+                    .foregroundColor(Resources.Colors.customBlack)
+                    .font(Resources.Fonts.bold(withSize: 20))
+                Text("Coworker from 2023")
+                    .foregroundColor(Resources.Colors.darkGrey)
+                    .font(Resources.Fonts.regular(withSize: 13))
+            }
+            .redacted(reason: .placeholder)
+            .shimmering(active: true)
         }
-        .padding(.bottom, 20)
+        else {
+            ForEach(userService.user,id: \.userID) { userData in
+                VStack(alignment: .center, spacing: 5) {
+                    Image("p1")
+                        .resizable()
+                        .frame(width: 100, height: 100)
+                    Text(userData.name)
+                        .foregroundColor(Resources.Colors.customBlack)
+                        .font(Resources.Fonts.bold(withSize: 20))
+                    Text("Coworker from 2023")
+                        .foregroundColor(Resources.Colors.darkGrey)
+                        .font(Resources.Fonts.regular(withSize: 13))
+                }
+            }
+        }
     }
     
     @ViewBuilder

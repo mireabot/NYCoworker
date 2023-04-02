@@ -57,6 +57,10 @@
 		359A7930298ED141001B66CF /* Shimmer in Frameworks */ = {isa = PBXBuildFile; productRef = 359A792F298ED141001B66CF /* Shimmer */; };
 		359A7932298EDCCB001B66CF /* ShareCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359A7931298EDCCB001B66CF /* ShareCardView.swift */; };
 		359A7934298EF1C2001B66CF /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359A7933298EF1C2001B66CF /* TabBarView.swift */; };
+		359D87C629D76E9700E827F3 /* ReviewService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359D87C529D76E9700E827F3 /* ReviewService.swift */; };
+		359D87C829D8912700E827F3 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359D87C729D8912700E827F3 /* User.swift */; };
+		359D87CA29D8919C00E827F3 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359D87C929D8919C00E827F3 /* UserService.swift */; };
+		359D87CD29D906CC00E827F3 /* Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359D87CC29D906CC00E827F3 /* Endpoints.swift */; };
 		359E6AA22981ED8B00333BD7 /* Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359E6AA12981ED8B00333BD7 /* Onboarding.swift */; };
 		359E6AA72981FEB800333BD7 /* Nunito-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 359E6AA62981FDD300333BD7 /* Nunito-Bold.ttf */; };
 		359E6AA82981FEB800333BD7 /* Nunito-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 359E6AA52981FDC800333BD7 /* Nunito-SemiBold.ttf */; };
@@ -149,6 +153,10 @@
 		359A792C298ECC6B001B66CF /* NYCSocialCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCSocialCard.swift; sourceTree = "<group>"; };
 		359A7931298EDCCB001B66CF /* ShareCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareCardView.swift; sourceTree = "<group>"; };
 		359A7933298EF1C2001B66CF /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
+		359D87C529D76E9700E827F3 /* ReviewService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewService.swift; sourceTree = "<group>"; };
+		359D87C729D8912700E827F3 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		359D87C929D8919C00E827F3 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		359D87CC29D906CC00E827F3 /* Endpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoints.swift; sourceTree = "<group>"; };
 		359E6AA12981ED8B00333BD7 /* Onboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding.swift; sourceTree = "<group>"; };
 		359E6AA42981FDBA00333BD7 /* Nunito-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Regular.ttf"; sourceTree = "<group>"; };
 		359E6AA52981FDC800333BD7 /* Nunito-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-SemiBold.ttf"; sourceTree = "<group>"; };
@@ -277,6 +285,7 @@
 			isa = PBXGroup;
 			children = (
 				351872CA29D3C45E004B564A /* Services */,
+				359D87CB29D906BE00E827F3 /* Helpers */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -285,6 +294,8 @@
 			isa = PBXGroup;
 			children = (
 				351872CB29D3C510004B564A /* NotificationService.swift */,
+				359D87C529D76E9700E827F3 /* ReviewService.swift */,
+				359D87C929D8919C00E827F3 /* UserService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -592,6 +603,14 @@
 			path = Core;
 			sourceTree = "<group>";
 		};
+		359D87CB29D906BE00E827F3 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				359D87CC29D906CC00E827F3 /* Endpoints.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		359E6AA02981ECB200333BD7 /* Core */ = {
 			isa = PBXGroup;
 			children = (
@@ -667,6 +686,7 @@
 			isa = PBXGroup;
 			children = (
 				35E7FB932985A9D500EFF282 /* UserRegistrationModel.swift */,
+				359D87C729D8912700E827F3 /* User.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -795,6 +815,7 @@
 				35EF059B29B0F2EC0098110B /* NavigationDotsView.swift in Sources */,
 				356C52DC29A04BDB00080D4C /* LocationListCell.swift in Sources */,
 				359F80F2298AA911000D792E /* NYCCircleImageButton.swift in Sources */,
+				359D87C629D76E9700E827F3 /* ReviewService.swift in Sources */,
 				3538C6292983569D0017800B /* NYCBottomSheetHeader.swift in Sources */,
 				351B3A2729981B22007E7D00 /* NYCSettingsCard.swift in Sources */,
 				350DE274299143B500573163 /* LogoutView.swift in Sources */,
@@ -809,6 +830,7 @@
 				35E7FB9D2985B88700EFF282 /* GeoLocationModel.swift in Sources */,
 				35F2939B299F195400A85586 /* NotificationsView.swift in Sources */,
 				359F80F9298C30D2000D792E /* NYCBadgeView.swift in Sources */,
+				359D87CA29D8919C00E827F3 /* UserService.swift in Sources */,
 				3566264629B9445800EA11E0 /* ReportEditView.swift in Sources */,
 				3538C62F298358890017800B /* LanguageCard.swift in Sources */,
 				359A792D298ECC6B001B66CF /* NYCSocialCard.swift in Sources */,
@@ -831,6 +853,7 @@
 				35746CB529A3183B007322AA /* NotificationsEmptyView.swift in Sources */,
 				351872CF29D3C547004B564A /* Notification.swift in Sources */,
 				35BA64B5299BF69D00E15206 /* ReviewCard.swift in Sources */,
+				359D87CD29D906CC00E827F3 /* Endpoints.swift in Sources */,
 				35EF059829B0F0310098110B /* NYCNavigationButton.swift in Sources */,
 				35EF05A029B0FB780098110B /* PersonTypeSetup.swift in Sources */,
 				35DFA23E29A3BFC900258BB7 /* ExpandedReviewView.swift in Sources */,
@@ -848,6 +871,7 @@
 				35F29397299E8ED500A85586 /* AmenityCard.swift in Sources */,
 				359F80F7298C2508000D792E /* LocationCell.swift in Sources */,
 				35AD1AEE29CBB4780076AE54 /* RatingDotsView.swift in Sources */,
+				359D87C829D8912700E827F3 /* User.swift in Sources */,
 				3503BD88297F50AA00C0E365 /* SceneDelegate.swift in Sources */,
 				351B3A2929982ABC007E7D00 /* LocationDetailView.swift in Sources */,
 				3538C62C298357490017800B /* AppLanguageModel.swift in Sources */,

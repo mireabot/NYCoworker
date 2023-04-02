@@ -17,9 +17,10 @@ struct LocationDetailView: View {
     @State var addToFavs = false
     @State var showReviewCard = false
     @State var showReviewView = false
-    @State var reviewInfo = reviewData[0]
     @State var reportEdit = false
     @State var reportSubmitted = false
+    @State var isLoading = true
+    @StateObject private var reviewService = ReviewService()
     var locationData : LocationModel
     var body: some View {
         ScrollView(.vertical, showsIndicators: true) {
@@ -53,6 +54,15 @@ struct LocationDetailView: View {
             ///Suggest info
 //                suggestInfo
             
+        }
+        .task {
+            guard reviewService.reviews.isEmpty else { return }
+            await reviewService.fetchReviews(completion: {
+                print("Reviews fetched")
+                DispatchQueue.main.async {
+                    isLoading = false
+                }
+            })
         }
         .hideTabbar(shouldHideTabbar: true)
         .toolbar {
@@ -90,7 +100,8 @@ struct LocationDetailView: View {
             ReportEditView(showAlert: $reportSubmitted)
         })
         .sheet(isPresented: $showReviewView, content: {
-            ExpandedReviewView(data: reviewInfo, type: .fullList)
+            ExpandedReviewView(type: .fullList)
+                .environmentObject(reviewService)
                 .presentationDetents(
                     [.mediumBottomBar, .largeBottomBar],
                     selection: $selectDetent
@@ -178,11 +189,15 @@ struct LocationDetailView: View {
                         .foregroundColor(Resources.Colors.primary)
                         .font(Resources.Fonts.bold(withSize: 13))
                 }
-//                .opacity(0)
+                .opacity(reviewService.reviews.count == 1 ? 0 : 1)
 
             }
-//            ReviewEmptyView()
-            ReviewCard(variation: .small, data: reviewInfo)
+            if isLoading {
+                ReviewEmptyView()
+            }
+            else {
+                ReviewCard(variation: .small, data: reviewService.reviews[0])
+            }
             
             Rectangle()
                 .foregroundColor(Resources.Colors.customGrey)
