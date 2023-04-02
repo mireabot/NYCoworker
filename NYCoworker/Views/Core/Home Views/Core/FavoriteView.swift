@@ -11,10 +11,10 @@ import PopupView
 struct FavoriteView: View {
     @Environment(\.dismiss) var makeDismiss
     @State var showLoading = false
-    @StateObject var locationVM : LocationsViewModel = .shared
     var body: some View {
         NavigationStack {
-            favoritesListView()
+//            favoritesListView()
+            emptyState()
                 .toolbar(.hidden, for: .tabBar)
                 .toolbar(content: {
                     ToolbarItem(placement: .navigationBarLeading) {
@@ -55,26 +55,26 @@ struct FavoriteView: View {
         }
     }
     
-    @ViewBuilder
-    func favoritesListView() -> some View {
-        List {
-            ForEach(locationVM.locations){ location in
-                ZStack(alignment: .leading) {
-                    LocationListCell(type: .favorite, data: location, buttonAction: {})
-                        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                            Button(role: .destructive) {
-                                
-                            } label: {
-                                Text("Delete")
-                                    .font(Resources.Fonts.regular(withSize: 15))
-                            }
-                            .tint(Resources.Colors.secondary)
-                        }
-                }
-            }.listRowSeparator(.hidden)
-        }
-        .listStyle(.plain)
-    }
+//    @ViewBuilder
+//    func favoritesListView() -> some View {
+//        List {
+//            ForEach(locationVM.locations){ location in
+//                ZStack(alignment: .leading) {
+////                    LocationListCell(type: .favorite, data: location, buttonAction: {})
+////                        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+////                            Button(role: .destructive) {
+////
+////                            } label: {
+////                                Text("Delete")
+////                                    .font(Resources.Fonts.regular(withSize: 15))
+////                            }
+////                            .tint(Resources.Colors.secondary)
+////                        }
+//                }
+//            }.listRowSeparator(.hidden)
+//        }
+//        .listStyle(.plain)
+//    }
 }
 
 struct FavoriteView_Previews: PreviewProvider {

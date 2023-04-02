@@ -24,12 +24,11 @@ struct LocationListCell: View {
         case favorite
     }
     var type: CellType
-    var data: LocationModel
     var buttonAction: () -> Void
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             ZStack(alignment: .topTrailing) {
-                Image(data.images[0])
+                Image("load")
                     .resizable()
                     .scaledToFill()
                     .frame(height: 150)
@@ -59,15 +58,15 @@ struct LocationListCell: View {
                         NYCBadgeView(badgeType: .withWord, title: "New")
                         NYCBadgeView(badgeType: .withWord, title: "Popular")
                     }
-                    Text(data.name)
+                    Text("name")
                         .foregroundColor(Resources.Colors.customBlack)
                         .font(Resources.Fonts.regular(withSize: 20))
-                    Text(data.address)
+                    Text("name")
                         .foregroundColor(Resources.Colors.darkGrey)
                         .font(Resources.Fonts.regular(withSize: 13))
                 }
                 Spacer()
-                Text("\(data.distance)")
+                Text("2mi")
                     .foregroundColor(Resources.Colors.darkGrey)
                     .font(Resources.Fonts.regular(withSize: 15))
             }

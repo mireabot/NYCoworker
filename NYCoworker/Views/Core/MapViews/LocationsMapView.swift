@@ -8,42 +8,33 @@
 import SwiftUI
 import MapKit
 import PopupView
+import CoreLocation
 
-struct LocationsMapView: View {
+struct LocationsMap: View {
+    @EnvironmentObject var locationsService: LocationService
+    @State var selectedLocation: Location?
     @Environment(\.dismiss) var makeDismiss
-    @StateObject var locationVM: LocationsViewModel = .shared
     @State var showAlert = false
-    @StateObject var locationManager = LocationManager()
     var body: some View {
         NavigationStack {
             ZStack(alignment: .bottom) {
-                Map(coordinateRegion: $locationVM.mapRegion, showsUserLocation: true, annotationItems: locationVM.locations, annotationContent: { location in
-                    MapAnnotation(coordinate: location.coordinates) {
-                        Image("mapPin")
-                            .resizable()
-                            .frame(width: 45, height: 45)
-                            .scaleEffect(locationVM.mapLocation == location ? 1 : 0.7)
-                            .onTapGesture {
-                                locationVM.showNextLocation(location: location)
-                            }
-                    }
-                }).edgesIgnoringSafeArea(.all)
+                LocationMapView(locations: locationsService.locations, selectedLocation: $selectedLocation, region: getRegion())
+                    .ignoresSafeArea()
                 
                 ZStack {
-                    ForEach(locationVM.locations) { location in
-                        if locationVM.mapLocation == location {
+                    ForEach(locationsService.locations){ location in
+                        if selectedLocation == location {
                             NavigationLink(destination: LocationDetailView(locationData: location)) {
-                                LocationMapCard(location: location, buttonAction: {
+                                LocationMapCard(location: location) {
                                     showAlert.toggle()
-                                }).transition(.asymmetric(insertion: .move(edge: .trailing),removal: .move(edge: .leading)))
+                                }
+                                .transition(.asymmetric(insertion: .move(edge: .trailing),removal: .move(edge: .leading)))
                             }
                         }
                     }
-                }
-                .padding(.bottom, 30)
-                
+                }.padding(.bottom, 30)
             }
-            .navigationDestination(for: LocationModel.self, destination: { locationData in
+            .navigationDestination(for: Location.self, destination: { locationData in
                 LocationDetailView(locationData: locationData)
             })
             .popup(isPresented: $showAlert) {
@@ -69,10 +60,45 @@ struct LocationsMapView: View {
         }
         .navigationBarBackButtonHidden()
     }
+    
+    private func getRegion() -> MKCoordinateRegion {
+        let center = CLLocationCoordinate2D(latitude: locationsService.locations.first?.locationCoordinates.latitude ?? 0.0, longitude: locationsService.locations.first?.locationCoordinates.longitude ?? 0.0)
+        let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+        return MKCoordinateRegion(center: center, span: span)
+    }
 }
 
-//struct LocationsMapView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        LocationsMapView()
-//    }
-//}
+struct LocationMapView: View {
+    var locations: [Location]
+    @Binding var selectedLocation: Location?
+    @State var region: MKCoordinateRegion
+    var body: some View {
+        Map(coordinateRegion: $region,
+            annotationItems: locations) { location in
+            MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: location.locationCoordinates.latitude, longitude: location.locationCoordinates.longitude)) {
+                Button(action: {
+                    DispatchQueue.main.async {
+                        withAnimation(.easeOut) {
+                            selectedLocation = location
+                            updateRegion(location: location)
+                        }
+                    }
+                }, label: {
+                    Image("mapPin")
+                        .resizable()
+                        .frame(width: 45, height: 45)
+                        .scaleEffect(selectedLocation == location ? 1 : 0.7)
+                })
+            }
+        }
+            .onAppear {
+                selectedLocation = locations.first!
+            }
+    }
+    
+    func updateRegion(location: Location) {
+        let center = CLLocationCoordinate2D(latitude: location.locationCoordinates.latitude, longitude: location.locationCoordinates.longitude)
+        let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+        region = MKCoordinateRegion(center: center, span: span)
+    }
+}

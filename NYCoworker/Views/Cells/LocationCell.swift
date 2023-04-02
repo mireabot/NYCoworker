@@ -19,7 +19,7 @@ struct LocationCell: View {
         case small
         case large
     }
-    var data: LocationModel
+    var data: Location
     let type: LocationCellType?
     var body: some View {
         switch type {
@@ -40,11 +40,11 @@ extension LocationCell {
     ///  - Parameters:
     ///     - data: Location data from LocationModel
     @ViewBuilder
-    func largeCard(withData data: LocationModel) -> some View {
+    func largeCard(withData data: Location) -> some View {
         VStack(alignment: .leading, spacing: 2) {
             ZStack(alignment: .bottomLeading) {
                 ZStack(alignment: .topTrailing) {
-                    Image(data.images[0])
+                    Image("sample")
                         .resizable()
                         .scaledToFill()
                         .frame(width: 180, height: 100)
@@ -64,20 +64,19 @@ extension LocationCell {
                     }
                 }
                 HStack(spacing: 5) {
-                    NYCBadgeView(badgeType: .withWord, title: "New")
+                    ForEach(data.locationTags,id: \.self){ title in
+                        NYCBadgeView(badgeType: .withWord, title: title)
+                    }
                 }
                 .offset(x: 6, y: -6)
             }
             VStack(alignment: .leading, spacing: 2) {
-                Text(data.name)
+                Text(data.locationName)
                     .foregroundColor(Resources.Colors.customBlack)
                     .font(Resources.Fonts.regular(withSize: 15))
                     .lineLimit(0)
                 HStack {
-                    Text(data.distance)
-                        .foregroundColor(Resources.Colors.darkGrey)
-                        .font(Resources.Fonts.regular(withSize: 12))
-                    RatingDotsView(number: data.reviewsNumber)
+                    RatingDotsView(number: data.reviews)
                 }
             }
         }
@@ -86,10 +85,10 @@ extension LocationCell {
     ///  - Parameters:
     ///     - data: Location data from LocationModel
     @ViewBuilder
-    func smallCard(withData data: LocationModel) -> some View {
+    func smallCard(withData data: Location) -> some View {
         VStack(alignment: .leading, spacing: 3) {
             ZStack(alignment: .topTrailing) {
-                Image(data.images[0])
+                Image("sample")
                     .resizable()
                     .scaledToFill()
                     .frame(width: 120, height: 100)
@@ -110,19 +109,18 @@ extension LocationCell {
             }
             
             HStack(spacing: 3) {
-                NYCBadgeView(badgeType: .withWord, title: "New")
+                ForEach(data.locationTags,id: \.self) { title in
+                    NYCBadgeView(badgeType: .withWord, title: title)
+                }
             }
             
-            Text(data.name)
+            Text(data.locationName)
                 .foregroundColor(Resources.Colors.customBlack)
                 .font(Resources.Fonts.regular(withSize: 13))
                 .lineLimit(0)
             
             HStack(spacing: 4) {
-                Text("\(data.distance) ·")
-                    .foregroundColor(Resources.Colors.darkGrey)
-                    .font(Resources.Fonts.regular(withSize: 12))
-                RatingDotsView(number: data.reviewsNumber)
+                RatingDotsView(number: data.reviews)
             }
         }
         .frame(width: 120)

@@ -13,10 +13,10 @@ class ReviewService: ObservableObject {
     private var db = Firestore.firestore()
     @Published var reviews: [Review] = []
     
-    func fetchReviews(completion: @escaping () -> Void) async {
+    func fetchReviews(locationID: String, completion: @escaping () -> Void) async {
         do {
             var query: Query!
-            query = db.collection(Endpoints.reviews.rawValue).order(by: "datePosted", descending: true)
+            query = db.collection(Endpoints.reviews.rawValue).whereField("id", isEqualTo: locationID).order(by: "datePosted", descending: true)
             let docs = try await query.getDocuments()
             let fetchedReviews = docs.documents.compactMap { doc -> Review? in
                 try? doc.data(as: Review.self)

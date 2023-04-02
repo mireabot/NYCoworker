@@ -6,15 +6,17 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct MapChoiceView: View {
+    var geoPoint: CLLocationCoordinate2D
     var body: some View {
         GeometryReader { geometry in
             VStack {
                 NYCBottomSheetHeader(title: "Where you want to go?").padding(.top, 15)
                 VStack(alignment: .center, spacing: 10) {
                     NYCActionButton(action: {
-                        
+                        print(geoPoint)
                     }, text: "Apple Maps")
                     
                     NYCActionButton(action: {
@@ -32,8 +34,8 @@ struct MapChoiceView: View {
     }
 }
 
-struct MapChoiceView_Previews: PreviewProvider {
-    static var previews: some View {
-        MapChoiceView()
-    }
-}
+//struct MapChoiceView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        MapChoiceView()
+//    }
+//}

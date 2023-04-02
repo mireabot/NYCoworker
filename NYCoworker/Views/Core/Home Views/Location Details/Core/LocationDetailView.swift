@@ -8,6 +8,7 @@
 import SwiftUI
 import iPages
 import PopupView
+import CoreLocation
 
 struct LocationDetailView: View {
     @Environment(\.dismiss) var makeDismiss
@@ -21,7 +22,7 @@ struct LocationDetailView: View {
     @State var reportSubmitted = false
     @State var isLoading = true
     @StateObject private var reviewService = ReviewService()
-    var locationData : LocationModel
+    var locationData : Location
     var body: some View {
         ScrollView(.vertical, showsIndicators: true) {
             VStack {
@@ -57,7 +58,7 @@ struct LocationDetailView: View {
         }
         .task {
             guard reviewService.reviews.isEmpty else { return }
-            await reviewService.fetchReviews(completion: {
+            await reviewService.fetchReviews(locationID: "\(locationData.locationID)", completion: {
                 print("Reviews fetched")
                 DispatchQueue.main.async {
                     isLoading = false
@@ -108,7 +109,7 @@ struct LocationDetailView: View {
                 )
         })
         .sheet(isPresented: $showMapChoice, content: {
-            MapChoiceView()
+            MapChoiceView(geoPoint: CLLocationCoordinate2D(latitude: locationData.locationCoordinates.latitude, longitude: locationData.locationCoordinates.longitude))
                 .presentationDetents(
                     [.bottom],
                     selection: $selectDetent
@@ -140,14 +141,14 @@ struct LocationDetailView: View {
         VStack {
             HStack {
                 VStack(alignment: .leading, spacing: 5) {
-                    Text(locationData.name)
+                    Text(locationData.locationName)
                         .foregroundColor(Resources.Colors.customBlack)
                         .font(Resources.Fonts.bold(withSize: 22))
                     HStack(spacing: 1) {
                         LocationR.General.pin
                             .resizable()
                             .frame(width: 18,height: 18)
-                        Text("691 Eight Avenue, New York, NY 10036")
+                        Text(locationData.locationAddress)
                             .foregroundColor(Resources.Colors.darkGrey)
                             .font(Resources.Fonts.regular(withSize: 13))
                     }
@@ -155,8 +156,9 @@ struct LocationDetailView: View {
                         .foregroundColor(Resources.Colors.darkGrey)
                         .font(Resources.Fonts.regular(withSize: 13))
                     HStack(spacing: 3) {
-                        NYCBadgeView(badgeType: .withWord, title: "New")
-                        NYCBadgeView(badgeType: .workingHours, title: "Open now")
+                        ForEach(locationData.locationTags,id: \.self) { title in
+                            NYCBadgeView(badgeType: .withWord, title: title)
+                        }
                     }
                 }
                 
@@ -189,14 +191,19 @@ struct LocationDetailView: View {
                         .foregroundColor(Resources.Colors.primary)
                         .font(Resources.Fonts.bold(withSize: 13))
                 }
-                .opacity(reviewService.reviews.count == 1 ? 0 : 1)
+                .opacity(reviewService.reviews.count <= 1 ? 0 : 1)
 
             }
             if isLoading {
                 ReviewEmptyView()
             }
             else {
-                ReviewCard(variation: .small, data: reviewService.reviews[0])
+                if reviewService.reviews.isEmpty {
+                    ReviewEmptyView()
+                }
+                else {
+                    ReviewCard(variation: .small, data: reviewService.reviews[0])
+                }
             }
             
             Rectangle()
@@ -231,8 +238,18 @@ struct LocationDetailView: View {
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 5) {
-                    ForEach(hoursData){ item in
-                        WorkingHoursCard(data: item)
+                    ForEach(locationData.locationHours,id: \.self){ item in
+                        VStack(spacing: 5) {
+                            Text(item.weekDay)
+                                .foregroundColor(Resources.Colors.darkGrey)
+                                .font(Resources.Fonts.regular(withSize: 15))
+                            Text(item.hours)
+                                .foregroundColor(Resources.Colors.customBlack)
+                                .font(Resources.Fonts.bold(withSize: 15))
+                        }
+                        .padding(10)
+                        .background(Resources.Colors.customGrey)
+                        .cornerRadius(5)
                     }
                 }
             }
@@ -277,8 +294,16 @@ struct LocationDetailView: View {
         ]
         
         LazyHGrid(rows: rows, alignment: .center, spacing: 10) {
-            ForEach(amenityData) { item in
-                AmenityCard(data: item)
+            ForEach(locationData.locationAmenities,id: \.self) { item in
+                HStack(alignment: .center, spacing: 5) {
+                    Image(item)
+                        .resizable()
+                        .frame(width: 24, height: 24)
+                    Text(item)
+                        .foregroundColor(Resources.Colors.customBlack)
+                        .font(Resources.Fonts.regular(withSize: 15))
+                }
+                .padding(2)
             }
         }
         .frame(height: 80)

@@ -10,11 +10,9 @@ import Shimmer
 import MapKit
 
 struct HomeView: View {
-    @State var timer = false
-    @StateObject var locationVM : LocationsViewModel = .shared
+    @State var isLoading = true
     @State var showMap = false
-    @State private var notificationService = NotificationService()
-    @State private var reviewService = ReviewService()
+    @StateObject private var locationService = LocationService()
     var body: some View {
         NavigationView {
             ScrollView(.vertical, showsIndicators: false) {
@@ -30,6 +28,12 @@ struct HomeView: View {
                 }
                 .padding([.leading,.trailing], 20)
                 .padding(.top, 30)
+            }
+            .task {
+                guard locationService.locations.isEmpty else { return }
+                await locationService.fetchLoactions {
+                    isLoading = false
+                }
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -77,13 +81,15 @@ extension HomeView {
             
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack(spacing: 10) {
-                    ForEach(locationVM.librariesLocations) { data in
-                        if timer {
-                            LocationCell(data: data, type: .small)
+                    if isLoading {
+                        ForEach(0..<4) { _ in
+                            LoadingLocationCell()
                                 .redacted(reason: .placeholder)
                                 .shimmering(active: true, duration: 1.5, bounce: false)
                         }
-                        else {
+                    }
+                    else {
+                        ForEach(locationService.locations,id: \.locationName) { data in
                             NavigationLink(destination: LocationDetailView(locationData: data)) {
                                 LocationCell(data: data, type: .small)
                             }
@@ -103,13 +109,15 @@ extension HomeView {
             
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack(spacing: 10) {
-                    ForEach(locationVM.locations) { data in
-                        if timer {
-                            LocationCell(data: data, type: .large)
+                    if isLoading {
+                        ForEach(0..<4) { _ in
+                            LoadingLocationCell()
                                 .redacted(reason: .placeholder)
                                 .shimmering(active: true, duration: 1.5, bounce: false)
                         }
-                        else {
+                    }
+                    else {
+                        ForEach(locationService.locations,id: \.locationName) { data in
                             NavigationLink(destination: LocationDetailView(locationData: data)) {
                                 LocationCell(data: data, type: .large)
                             }
@@ -130,7 +138,7 @@ extension HomeView {
                     .cornerRadius(10)
                     .disabled(true)
                 
-                NavigationLink(destination: LocationsMapView(), label: {
+                NavigationLink(destination: LocationsMap().environmentObject(locationService), label: {
                     Text("Open map")
                         .foregroundColor(Color.white)
                         .padding([.top,.bottom], 15)

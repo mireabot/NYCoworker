@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct LocationMapCard: View {
-    let location: LocationModel
+    let location: Location
     var buttonAction: () -> Void
     var body: some View {
         ZStack(alignment: .bottom) {
             ZStack(alignment: .topTrailing) {
-                Image("\(String(describing: location.images[0]))")
+                Image("\(String(describing: location.locationImages[0]))")
                     .resizable()
                     .frame(height: 200)
                     .scaledToFit()
@@ -26,12 +26,12 @@ struct LocationMapCard: View {
             }
             
             VStack(alignment: .leading, spacing: 2) {
-                Text(location.name)
+                Text(location.locationName)
                     .foregroundColor(Resources.Colors.customBlack)
                     .font(Resources.Fonts.regular(withSize: 20))
                     .frame(maxWidth: .infinity,alignment: .leading)
                     .lineLimit(1)
-                Text(location.address)
+                Text(location.locationAddress)
                     .foregroundColor(Resources.Colors.darkGrey)
                     .font(Resources.Fonts.regular(withSize: 15))
             }
@@ -43,7 +43,7 @@ struct LocationMapCard: View {
                 HStack(spacing: 5) {
                     NYCBadgeView(badgeType: .location, title: location.locationType.rawValue)
                     Spacer()
-                    NYCRateBadge(rate: location.reviewsNumber, badgeType: .card)
+                    NYCRateBadge(rate: location.reviews, badgeType: .card)
                 }
                 .offset(y: -15)
                 .padding([.leading,.trailing], 10)

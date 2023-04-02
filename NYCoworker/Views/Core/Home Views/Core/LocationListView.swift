@@ -11,7 +11,6 @@ import PopupView
 struct LocationListView: View {
     @Environment(\.dismiss) var makeDismiss
     @State var addToFavs = false
-    @StateObject var locationVM : LocationsViewModel = .shared
     private var title: String
     init(title: String) {
         self.title = title
@@ -20,19 +19,20 @@ struct LocationListView: View {
         NavigationStack {
             ScrollView(.vertical, showsIndicators: true) {
                 LazyVStack(spacing: 10) {
-                    ForEach(locationVM.librariesLocations){ location in
-                        NavigationLink(value: location) {
-                            LocationListCell(type: .list, data: location) {
-                                addToFavs.toggle()
-                            }
-                        }
-                    }
+//                    ForEach(locationVM.locations){ location in
+//                        NavigationLink(value: location) {
+//                            LocationListCell(type: .list, data: location) {
+//                                addToFavs.toggle()
+//                            }
+//                        }
+//                        Text(location.id)
+//                    }
                 }
                 .padding([.leading,.trailing], 16)
             }
-            .navigationDestination(for: LocationModel.self, destination: { locationData in
-                LocationDetailView(locationData: locationData)
-            })
+//            .navigationDestination(for: LocationModel.self, destination: { locationData in
+//                LocationDetailView(locationData: locationData)
+//            })
             .popup(isPresented: $addToFavs) {
                 NYCAlertNotificationView(alertStyle: .addedToFavorites)
             } customize: {

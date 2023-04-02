@@ -28,6 +28,8 @@
 		3538C6292983569D0017800B /* NYCBottomSheetHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3538C6282983569D0017800B /* NYCBottomSheetHeader.swift */; };
 		3538C62C298357490017800B /* AppLanguageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3538C62B298357490017800B /* AppLanguageModel.swift */; };
 		3538C62F298358890017800B /* LanguageCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3538C62E298358890017800B /* LanguageCard.swift */; };
+		3542F59B29D9DF410086CB4F /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3542F59A29D9DF410086CB4F /* LocationService.swift */; };
+		3542F59D29DA1A820086CB4F /* LoadingLocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3542F59C29DA1A820086CB4F /* LoadingLocationCell.swift */; };
 		354651C329A839E7003F7AE8 /* NYCLoadingSpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354651C229A839E7003F7AE8 /* NYCLoadingSpinner.swift */; };
 		354651C529A83B1F003F7AE8 /* LoadingBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354651C429A83B1F003F7AE8 /* LoadingBottomView.swift */; };
 		3550FA2E29B3CA9F0091B558 /* OnboardingNavigationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3550FA2D29B3CA9F0091B558 /* OnboardingNavigationCoordinator.swift */; };
@@ -79,7 +81,6 @@
 		35C1668029D1307600963257 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 35C1667F29D1307600963257 /* FirebaseFirestoreSwift */; };
 		35C479A6298C89D50089F342 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C479A5298C89D50089F342 /* SettingsView.swift */; };
 		35D3821529B6A7C000B66EDA /* LocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D3821429B6A7C000B66EDA /* LocationModel.swift */; };
-		35D3821829B6AA8C00B66EDA /* LocationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D3821729B6AA8C00B66EDA /* LocationsViewModel.swift */; };
 		35D9A5CE298981EE00A2F8D6 /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D9A5CD298981EE00A2F8D6 /* SettingsModel.swift */; };
 		35D9A5D02989832200A2F8D6 /* SettingsCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D9A5CF2989832200A2F8D6 /* SettingsCard.swift */; };
 		35DFA23E29A3BFC900258BB7 /* ExpandedReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35DFA23D29A3BFC800258BB7 /* ExpandedReviewView.swift */; };
@@ -127,6 +128,8 @@
 		3538C6282983569D0017800B /* NYCBottomSheetHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCBottomSheetHeader.swift; sourceTree = "<group>"; };
 		3538C62B298357490017800B /* AppLanguageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLanguageModel.swift; sourceTree = "<group>"; };
 		3538C62E298358890017800B /* LanguageCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageCard.swift; sourceTree = "<group>"; };
+		3542F59A29D9DF410086CB4F /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
+		3542F59C29DA1A820086CB4F /* LoadingLocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingLocationCell.swift; sourceTree = "<group>"; };
 		354651C229A839E7003F7AE8 /* NYCLoadingSpinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCLoadingSpinner.swift; sourceTree = "<group>"; };
 		354651C429A83B1F003F7AE8 /* LoadingBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingBottomView.swift; sourceTree = "<group>"; };
 		3550FA2D29B3CA9F0091B558 /* OnboardingNavigationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingNavigationCoordinator.swift; sourceTree = "<group>"; };
@@ -172,7 +175,6 @@
 		35C1667829D12FD500963257 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		35C479A5298C89D50089F342 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		35D3821429B6A7C000B66EDA /* LocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModel.swift; sourceTree = "<group>"; };
-		35D3821729B6AA8C00B66EDA /* LocationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsViewModel.swift; sourceTree = "<group>"; };
 		35D9A5CD298981EE00A2F8D6 /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
 		35D9A5CF2989832200A2F8D6 /* SettingsCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCard.swift; sourceTree = "<group>"; };
 		35DFA23D29A3BFC800258BB7 /* ExpandedReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandedReviewView.swift; sourceTree = "<group>"; };
@@ -296,6 +298,7 @@
 				351872CB29D3C510004B564A /* NotificationService.swift */,
 				359D87C529D76E9700E827F3 /* ReviewService.swift */,
 				359D87C929D8919C00E827F3 /* UserService.swift */,
+				3542F59A29D9DF410086CB4F /* LocationService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -450,6 +453,7 @@
 				35746CB429A3183B007322AA /* NotificationsEmptyView.swift */,
 				355C11BF29B7A44E001F092B /* ErrorEmptyView.swift */,
 				359348D929BA378D00B7739A /* ReviewEmptyView.swift */,
+				3542F59C29DA1A820086CB4F /* LoadingLocationCell.swift */,
 			);
 			path = "Empty Views";
 			sourceTree = "<group>";
@@ -658,7 +662,6 @@
 			children = (
 				35F29396299E8ED500A85586 /* AmenityCard.swift */,
 				356C52D929A0460C00080D4C /* LocationMapCard.swift */,
-				35D3821729B6AA8C00B66EDA /* LocationsViewModel.swift */,
 			);
 			path = Location;
 			sourceTree = "<group>";
@@ -847,6 +850,7 @@
 				359F80FB298C330B000D792E /* FavoriteView.swift in Sources */,
 				35D9A5CE298981EE00A2F8D6 /* SettingsModel.swift in Sources */,
 				359348DD29BA421900B7739A /* ReviewModel.swift in Sources */,
+				3542F59D29DA1A820086CB4F /* LoadingLocationCell.swift in Sources */,
 				35BC807A29970DC0001ACC35 /* ListModifier.swift in Sources */,
 				35C479A6298C89D50089F342 /* SettingsView.swift in Sources */,
 				355EA17B29AD72DF00D62B01 /* LanguageSettingsView.swift in Sources */,
@@ -860,6 +864,7 @@
 				359348DA29BA378D00B7739A /* ReviewEmptyView.swift in Sources */,
 				359A7932298EDCCB001B66CF /* ShareCardView.swift in Sources */,
 				3503BD86297F50AA00C0E365 /* AppDelegate.swift in Sources */,
+				3542F59B29D9DF410086CB4F /* LocationService.swift in Sources */,
 				35737E6129888DF9003B68BE /* HomeView.swift in Sources */,
 				35E7FB9129848FEE00EFF282 /* NYCActionButton.swift in Sources */,
 				35F29399299E8F4A00A85586 /* AmenityModel.swift in Sources */,
@@ -879,7 +884,6 @@
 				350DE2782991C66600573163 /* Enums.swift in Sources */,
 				354651C329A839E7003F7AE8 /* NYCLoadingSpinner.swift in Sources */,
 				3550FA2E29B3CA9F0091B558 /* OnboardingNavigationCoordinator.swift in Sources */,
-				35D3821829B6AA8C00B66EDA /* LocationsViewModel.swift in Sources */,
 				35DFA24529A5822B00258BB7 /* VisitDatePickerView.swift in Sources */,
 				35D3821529B6A7C000B66EDA /* LocationModel.swift in Sources */,
 				35E7FB9B2985ADF800EFF282 /* GeopositionPermission.swift in Sources */,
