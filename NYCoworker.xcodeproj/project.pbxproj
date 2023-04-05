@@ -59,6 +59,8 @@
 		359A7930298ED141001B66CF /* Shimmer in Frameworks */ = {isa = PBXBuildFile; productRef = 359A792F298ED141001B66CF /* Shimmer */; };
 		359A7932298EDCCB001B66CF /* ShareCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359A7931298EDCCB001B66CF /* ShareCardView.swift */; };
 		359A7934298EF1C2001B66CF /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359A7933298EF1C2001B66CF /* TabBarView.swift */; };
+		359B2FAD29DA53EB0097E1DC /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 359B2FAC29DA53EB0097E1DC /* FirebaseStorage */; };
+		359B2FB029DB45300097E1DC /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 359B2FAF29DB45300097E1DC /* SDWebImageSwiftUI */; };
 		359D87C629D76E9700E827F3 /* ReviewService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359D87C529D76E9700E827F3 /* ReviewService.swift */; };
 		359D87C829D8912700E827F3 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359D87C729D8912700E827F3 /* User.swift */; };
 		359D87CA29D8919C00E827F3 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359D87C929D8919C00E827F3 /* UserService.swift */; };
@@ -207,8 +209,10 @@
 				359A7930298ED141001B66CF /* Shimmer in Frameworks */,
 				35C1667C29D1307600963257 /* FirebaseAuth in Frameworks */,
 				3538C623298353210017800B /* iPages in Frameworks */,
+				359B2FB029DB45300097E1DC /* SDWebImageSwiftUI in Frameworks */,
 				35C1668029D1307600963257 /* FirebaseFirestoreSwift in Frameworks */,
 				3565689B29A12C16007CAF80 /* PopupView in Frameworks */,
+				359B2FAD29DA53EB0097E1DC /* FirebaseStorage in Frameworks */,
 				359213632995DC0C00B18A8D /* KeyboardAvoider in Frameworks */,
 				35C1667E29D1307600963257 /* FirebaseFirestore in Frameworks */,
 			);
@@ -222,6 +226,7 @@
 			children = (
 				3503BD84297F50AA00C0E365 /* NYCoworker */,
 				3503BD83297F50AA00C0E365 /* Products */,
+				359B2FAB29DA53EB0097E1DC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -607,6 +612,13 @@
 			path = Core;
 			sourceTree = "<group>";
 		};
+		359B2FAB29DA53EB0097E1DC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		359D87CB29D906BE00E827F3 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -738,6 +750,8 @@
 				35C1667B29D1307600963257 /* FirebaseAuth */,
 				35C1667D29D1307600963257 /* FirebaseFirestore */,
 				35C1667F29D1307600963257 /* FirebaseFirestoreSwift */,
+				359B2FAC29DA53EB0097E1DC /* FirebaseStorage */,
+				359B2FAF29DB45300097E1DC /* SDWebImageSwiftUI */,
 			);
 			productName = NYCoworker;
 			productReference = 3503BD82297F50AA00C0E365 /* NYCoworker.app */;
@@ -773,6 +787,7 @@
 				359213612995DC0C00B18A8D /* XCRemoteSwiftPackageReference "KeyboardAvoider" */,
 				3565689929A12C16007CAF80 /* XCRemoteSwiftPackageReference "PopupView" */,
 				35C1667A29D1307600963257 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				359B2FAE29DB45300097E1DC /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 			);
 			productRefGroup = 3503BD83297F50AA00C0E365 /* Products */;
 			projectDirPath = "";
@@ -1024,7 +1039,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 9S2MZXD36G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NYCoworker/Info.plist;
@@ -1059,7 +1074,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 9S2MZXD36G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NYCoworker/Info.plist;
@@ -1144,6 +1159,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		359B2FAE29DB45300097E1DC /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		35C1667A29D1307600963257 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -1174,6 +1197,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 359A792E298ED141001B66CF /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */;
 			productName = Shimmer;
+		};
+		359B2FAC29DA53EB0097E1DC /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 35C1667A29D1307600963257 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+		359B2FAF29DB45300097E1DC /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 359B2FAE29DB45300097E1DC /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
 		};
 		35C1667B29D1307600963257 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;

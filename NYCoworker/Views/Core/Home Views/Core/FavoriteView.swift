@@ -33,14 +33,6 @@ struct FavoriteView: View {
                             .font(Resources.Fonts.bold(withSize: 17))
                     }
                 })
-                .popup(isPresented: $showLoading) {
-                    LoadingBottomView()
-                } customize: {
-                    $0
-                        .closeOnTap(false)
-                        .closeOnTapOutside(true)
-                        .backgroundColor(.black.opacity(0.4))
-                }
                 .navigationBarTitleDisplayMode(.inline)
                 
         }

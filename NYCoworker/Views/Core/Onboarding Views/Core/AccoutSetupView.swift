@@ -11,7 +11,6 @@ import PopupView
 struct AccoutSetupView: View {
     @State var currentStep = 0
     @StateObject var model = UserRegistrationModel()
-    @AppStorage("userSigned") var userLogged: Bool = false
     @State var showLoad = false
     var body: some View {
         VStack {
@@ -33,14 +32,9 @@ struct AccoutSetupView: View {
             navBar
         }
         .navigationBarBackButtonHidden()
-        .popup(isPresented: $showLoad) {
-            LoadingBottomView(title: "Setting you up")
-        } customize: {
-            $0
-                .closeOnTap(false)
-                .closeOnTapOutside(true)
-                .backgroundColor(.black.opacity(0.4))
-        }
+        .overlay(content: {
+            LoadingBottomView(title: "Setting you up", show: $showLoad)
+        })
     }
     
     var navBar: some View {
@@ -62,11 +56,8 @@ struct AccoutSetupView: View {
                         withAnimation(.spring()) {
                             showLoad.toggle()
                             model.createUser {
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                DispatchQueue.main.async {
                                     showLoad.toggle()
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                                        userLogged = true
-                                    }
                                 }
                             }
                         }

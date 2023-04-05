@@ -90,8 +90,10 @@ extension HomeView {
                     }
                     else {
                         ForEach(locationService.locations,id: \.locationName) { data in
-                            NavigationLink(destination: LocationDetailView(locationData: data)) {
-                                LocationCell(data: data, type: .small)
+                            if data.locationType == .library {
+                                NavigationLink(destination: LocationDetailView(locationData: data)) {
+                                    LocationCell(data: data, type: .small)
+                                }
                             }
                         }
                     }
@@ -118,8 +120,10 @@ extension HomeView {
                     }
                     else {
                         ForEach(locationService.locations,id: \.locationName) { data in
-                            NavigationLink(destination: LocationDetailView(locationData: data)) {
-                                LocationCell(data: data, type: .large)
+                            if data.locationType == .hotel {
+                                NavigationLink(destination: LocationDetailView(locationData: data)) {
+                                    LocationCell(data: data, type: .large)
+                                }
                             }
                         }
                     }

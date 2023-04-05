@@ -10,6 +10,8 @@ import PopupView
 
 struct TabBarView: View {
     @State var showBottomsheet = false
+    @AppStorage("UserID") var userId : String = ""
+    @StateObject private var userService = UserService()
     var body: some View {
         TabView {
             HomeView()
@@ -23,9 +25,16 @@ struct TabBarView: View {
                 Label("Coworkers", image: "social")
             }
             ProfileView()
+                .environmentObject(userService)
             .tabItem {
                 Label("Profile", image: "profile")
             }
+        }
+        .task {
+            guard userService.user.userID.isEmpty else { return }
+            await userService.fetchUser(documentId: userId, completion: {
+                print("User fetched")
+            })
         }
         .accentColor(Resources.Colors.primary)
         .onAppear() {

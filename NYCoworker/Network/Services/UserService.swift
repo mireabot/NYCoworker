@@ -11,16 +11,11 @@ import FirebaseFirestore
 
 class UserService: ObservableObject {
     private var db = Firestore.firestore()
-    @Published var user: [User] = []
+    @Published var user: User = User(userID: "", avatarURL: URL(fileURLWithPath: ""), name: "", occupation: "", favoriteLocations: [])
     
     func fetchUser(documentId: String, completion: @escaping () -> Void) async {
         do {
-            var query: Query!
-            query = db.collection(Endpoints.users.rawValue)
-            let docs = try await query.whereField("userID", isEqualTo: documentId).getDocuments()
-            let fetchedUser = docs.documents.compactMap { doc -> User? in
-                try? doc.data(as: User.self)
-            }
+            let fetchedUser = try await db.collection(Endpoints.users.rawValue).document(documentId).getDocument(as: User.self)
             await MainActor.run(body: {
                 user = fetchedUser
                 completion()

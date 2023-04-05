@@ -80,31 +80,13 @@ struct SplashScreenView: View {
 struct InitView: View {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @AppStorage("userSigned") var userLogged: Bool = false
+    @AppStorage("UserID") var userId : String = ""
     var body: some View {
-        if userLogged  {
+        if userLogged && !userId.isEmpty  {
             TabBarView()
         }
         else {
             Onboarding()
-        }
-    }
-}
-
-struct ContentView1: View {
-    @State private var isPresentingSheet = false
-    @State private var selectDetent: PresentationDetent = .bottom
-    var body: some View {
-        Button(action: {
-            isPresentingSheet = true
-        }) {
-            Text("Open Bottom Sheet")
-        }
-        .sheet(isPresented: $isPresentingSheet) {
-            LanguageSetup()
-                .presentationDetents(
-                    [.bottom, .mediumBottomBar],
-                    selection: $selectDetent
-                )
         }
     }
 }
