@@ -10,29 +10,31 @@ import PopupView
 
 struct LocationListView: View {
     @Environment(\.dismiss) var makeDismiss
+    @EnvironmentObject var locationService: LocationService
     @State var addToFavs = false
     private var title: String
-    init(title: String) {
+    var locationType: LocationType
+    @AppStorage("UserID") var userId : String = ""
+    init(title: String, type: LocationType) {
         self.title = title
+        self.locationType = type
     }
     var body: some View {
         NavigationStack {
             ScrollView(.vertical, showsIndicators: true) {
                 LazyVStack(spacing: 10) {
-//                    ForEach(locationVM.locations){ location in
-//                        NavigationLink(value: location) {
-//                            LocationListCell(type: .list, data: location) {
-//                                addToFavs.toggle()
-//                            }
-//                        }
-//                        Text(location.id)
-//                    }
+                    if locationType == .hotel {
+                        hotelsLocations()
+                    }
+                    else {
+                        libraryLocations()
+                    }
                 }
                 .padding([.leading,.trailing], 16)
             }
-//            .navigationDestination(for: LocationModel.self, destination: { locationData in
-//                LocationDetailView(locationData: locationData)
-//            })
+            .navigationDestination(for: Location.self, destination: { locationData in
+                LocationDetailView(locationData: locationData)
+            })
             .popup(isPresented: $addToFavs) {
                 NYCAlertNotificationView(alertStyle: .addedToFavorites)
             } customize: {
@@ -65,6 +67,48 @@ struct LocationListView: View {
             .hideTabbar(shouldHideTabbar: true)
         }
         .navigationBarBackButtonHidden()
+    }
+    
+    @ViewBuilder
+    func hotelsLocations() -> some View {
+        ForEach(locationService.locations){ location in
+            if location.locationType == .hotel {
+                NavigationLink(value: location) {
+                    LocationListCell(type: .list, data: location) {
+                        Task {
+                            do {
+                                try await locationService.addFavoriteLocation(locationID: location.locationID, userID: userId) {
+                                    addToFavs.toggle()
+                                }
+                            } catch {
+                                print(error.localizedDescription)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    @ViewBuilder
+    func libraryLocations() -> some View {
+        ForEach(locationService.locations){ location in
+            if location.locationType == .library {
+                NavigationLink(value: location) {
+                    LocationListCell(type: .list, data: location) {
+                        Task {
+                            do {
+                                try await locationService.addFavoriteLocation(locationID: location.locationID, userID: userId) {
+                                    addToFavs.toggle()
+                                }
+                            } catch {
+                                print(error.localizedDescription)
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 

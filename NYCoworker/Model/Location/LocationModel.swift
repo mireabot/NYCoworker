@@ -31,7 +31,7 @@ struct Location: Identifiable, Codable, Equatable, Hashable {
     var locationID: String
     var locationAmenities: [String]
     var locationHours: [WorkingHours]
-    var locationImages: [String]
+    var locationImages: [URL]
     var locationTags: [String]
     var reviews: Int
     var locationAddress: String

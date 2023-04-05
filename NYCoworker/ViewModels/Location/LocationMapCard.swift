@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct LocationMapCard: View {
     let location: Location
@@ -13,10 +14,13 @@ struct LocationMapCard: View {
     var body: some View {
         ZStack(alignment: .bottom) {
             ZStack(alignment: .topTrailing) {
-                Image("\(String(describing: location.locationImages[0]))")
-                    .resizable()
-                    .frame(height: 200)
-                    .scaledToFit()
+                WebImage(url: location.locationImages[0]).placeholder {
+                    Image("load")
+                        .resizable()
+                }
+                .resizable()
+                .frame(height: 200)
+                .scaledToFit()
                 
                 
                 NYCCircleImageButton(size: 20, image: Resources.Images.Settings.rate, action: {

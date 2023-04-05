@@ -9,6 +9,7 @@ import SwiftUI
 import iPages
 import PopupView
 import CoreLocation
+import SDWebImageSwiftUI
 
 struct LocationDetailView: View {
     @Environment(\.dismiss) var makeDismiss
@@ -16,7 +17,6 @@ struct LocationDetailView: View {
     @State var showMapChoice = false
     @State var currentImage: Int = 0
     @State var addToFavs = false
-    @State var showReviewCard = false
     @State var showReviewView = false
     @State var reportEdit = false
     @State var reportSubmitted = false
@@ -27,11 +27,14 @@ struct LocationDetailView: View {
         ScrollView(.vertical, showsIndicators: true) {
             VStack {
                 iPages(selection: $currentImage) {
-                    Image("sample")
+                    ForEach(locationData.locationImages,id: \.self) { image in
+                        WebImage(url: image).placeholder {
+                            Image("load")
+                                .resizable()
+                        }
                         .resizable()
-                        .scaledToFill()
-                    Rectangle().fill(Color.blue)
-                    Rectangle().fill(Color.gray)
+                        .aspectRatio(contentMode: .fill)
+                    }
                 }
                 .dotsAlignment(.bottom)
                 .dotsTintColors(currentPage: Resources.Colors.primary, otherPages: Resources.Colors.customGrey)
@@ -53,7 +56,7 @@ struct LocationDetailView: View {
             workingHours
             
             ///Suggest info
-//                suggestInfo
+            //                suggestInfo
             
         }
         .task {
@@ -192,7 +195,7 @@ struct LocationDetailView: View {
                         .font(Resources.Fonts.bold(withSize: 13))
                 }
                 .opacity(reviewService.reviews.count <= 1 ? 0 : 1)
-
+                
             }
             if isLoading {
                 ReviewEmptyView()
@@ -281,7 +284,7 @@ struct LocationDetailView: View {
                         .font(Resources.Fonts.bold(withSize: 15))
                 }
             }
-
+            
         }
         .padding([.leading,.trailing], 16)
     }

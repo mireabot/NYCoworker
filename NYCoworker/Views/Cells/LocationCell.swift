@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+import SDWebImageSwiftUI
 /// Location cell viewModel
 ///
 /// Used in home screen locations collection
@@ -44,11 +44,14 @@ extension LocationCell {
         VStack(alignment: .leading, spacing: 2) {
             ZStack(alignment: .bottomLeading) {
                 ZStack(alignment: .topTrailing) {
-                    Image("sample")
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 180, height: 100)
-                        .cornerRadius(10)
+                    WebImage(url: data.locationImages[0]).placeholder {
+                        Image("load")
+                            .resizable()
+                    }
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 180, height: 100)
+                    .cornerRadius(10)
                     
                     Button {
                         print("Button tapped")
@@ -88,11 +91,15 @@ extension LocationCell {
     func smallCard(withData data: Location) -> some View {
         VStack(alignment: .leading, spacing: 3) {
             ZStack(alignment: .topTrailing) {
-                Image("sample")
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 120, height: 100)
-                    .cornerRadius(10)
+                WebImage(url: data.locationImages[0]).placeholder {
+                    Image("load")
+                        .resizable()
+                }
+                .resizable()
+                .scaledToFill()
+                .frame(width: 120, height: 100)
+                .cornerRadius(10)
+                
                 Button {
                     print("Button tapped")
                 } label: {

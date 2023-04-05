@@ -47,8 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 struct SplashScreenView: View {
-    @State var isActive : Bool = true
-    @State private var opacity = 0.5
+    @State var isActive : Bool = false
     var body: some View {
         if isActive {
             InitView()
@@ -57,13 +56,7 @@ struct SplashScreenView: View {
                 VStack {
                     Image("appLogo")
                         .resizable()
-                        .frame(width: 50, height: 50)
-                }
-                .opacity(opacity)
-                .onAppear {
-                    withAnimation(.easeIn(duration: 1.2)) {
-                        self.opacity = 1.00
-                    }
+                        .frame(width: 70, height: 70)
                 }
             }
             .onAppear {

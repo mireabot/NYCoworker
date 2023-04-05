@@ -73,11 +73,11 @@ extension HomeView {
     func locationLibrariesCollection() -> some View {
         VStack(alignment: .leading, spacing: 10) {
             NavigationLink {
-                LocationListView(title: Locations.libraries.rawValue)
+                LocationListView(title: Locations.libraries.rawValue, type: .library).environmentObject(locationService)
             } label: {
                 NYCSectionHeader(title: Locations.libraries.rawValue, isExpandButton: true)
             }
-
+            
             
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack(spacing: 10) {
@@ -105,10 +105,11 @@ extension HomeView {
     @ViewBuilder
     func locationLobbiesCollection() -> some View {
         VStack(alignment: .leading, spacing: 10) {
-            NavigationLink(destination: LocationListView(title: Locations.lobbies.rawValue)) {
+            NavigationLink {
+                LocationListView(title: Locations.lobbies.rawValue, type: .hotel).environmentObject(locationService)
+            } label: {
                 NYCSectionHeader(title: Locations.lobbies.rawValue, isExpandButton: true)
             }
-            
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack(spacing: 10) {
                     if isLoading {

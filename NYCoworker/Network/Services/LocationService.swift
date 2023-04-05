@@ -31,5 +31,14 @@ class LocationService: ObservableObject {
             print(error.localizedDescription)
         }
     }
+    
+    func addFavoriteLocation(locationID: String, userID: String, completion: @escaping () -> Void) async throws {
+        do {
+            try await db.collection("User").document(userID).setData(["favoriteLocations": FieldValue.arrayUnion([locationID])], merge: true)
+            completion()
+        } catch {
+            throw error
+        }
+    }
 }
 

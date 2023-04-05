@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+import SDWebImageSwiftUI
 /// Location cell for list views / favorites and detail list by location category
 ///
 ///  - Parameters:
@@ -24,18 +24,22 @@ struct LocationListCell: View {
         case favorite
     }
     var type: CellType
+    var data: Location
     var buttonAction: () -> Void
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             ZStack(alignment: .topTrailing) {
-                Image("load")
-                    .resizable()
-                    .scaledToFill()
-                    .frame(height: 150)
-                    .cornerRadius(10)
+                WebImage(url: data.locationImages[0]).placeholder {
+                    Image("load")
+                        .resizable()
+                }
+                .resizable()
+                .scaledToFill()
+                .frame(height: 150)
+                .cornerRadius(10)
                 
                 HStack(alignment: .center) {
-                    NYCRateBadge(rate: 5, badgeType: .card)
+                    NYCRateBadge(rate: data.reviews, badgeType: .card)
                     .offset(x: 6, y: 6)
                     Spacer()
                     Button {
@@ -55,13 +59,14 @@ struct LocationListCell: View {
             HStack(alignment: .top) {
                 VStack(alignment: .leading, spacing: 3) {
                     HStack(spacing: 3) {
-                        NYCBadgeView(badgeType: .withWord, title: "New")
-                        NYCBadgeView(badgeType: .withWord, title: "Popular")
+                        ForEach(data.locationTags,id: \.self) { title in
+                            NYCBadgeView(badgeType: .withWord, title: title)
+                        }
                     }
-                    Text("name")
+                    Text(data.locationName)
                         .foregroundColor(Resources.Colors.customBlack)
                         .font(Resources.Fonts.regular(withSize: 20))
-                    Text("name")
+                    Text(data.locationAddress)
                         .foregroundColor(Resources.Colors.darkGrey)
                         .font(Resources.Fonts.regular(withSize: 13))
                 }
