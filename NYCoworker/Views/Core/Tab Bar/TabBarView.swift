@@ -15,6 +15,7 @@ struct TabBarView: View {
     var body: some View {
         TabView {
             HomeView()
+                .environmentObject(userService)
             .tabItem {
                 Label("Explore", image: "home")
             }

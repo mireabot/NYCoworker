@@ -13,10 +13,8 @@ class NotificationService: ObservableObject {
     private var db = Firestore.firestore()
     @Published var notifications: [Notification] = []
     
-    /// Fetching notifications from database
-    /// Sorted by date posted
-    ///  - Returns:
-    ///  - completion - any action
+    /// Fetching notifications from database sorted by date posted
+    ///- returns: set of notifications
     func fetchNotifications(completion: @escaping () -> Void) async {
         do {
             var query: Query!

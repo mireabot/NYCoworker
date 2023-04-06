@@ -10,11 +10,15 @@ import PopupView
 
 struct FavoriteView: View {
     @Environment(\.dismiss) var makeDismiss
-    @State var showLoading = false
+    @State var isLoading = true
+    @EnvironmentObject var userService : UserService
+    @StateObject private var locationService = LocationService()
     var body: some View {
         NavigationStack {
-//            favoritesListView()
-            emptyState()
+            favoriteList()
+                .navigationDestination(for: Location.self, destination: { location in
+                    LocationDetailView(locationData: location)
+                })
                 .toolbar(.hidden, for: .tabBar)
                 .toolbar(content: {
                     ToolbarItem(placement: .navigationBarLeading) {
@@ -34,7 +38,7 @@ struct FavoriteView: View {
                     }
                 })
                 .navigationBarTitleDisplayMode(.inline)
-                
+            
         }
         .navigationBarBackButtonHidden()
         .toolbarBackground(.white, for: .navigationBar)
@@ -46,27 +50,45 @@ struct FavoriteView: View {
             FavoritesEmptyView()
         }
     }
-    
-//    @ViewBuilder
-//    func favoritesListView() -> some View {
-//        List {
-//            ForEach(locationVM.locations){ location in
-//                ZStack(alignment: .leading) {
-////                    LocationListCell(type: .favorite, data: location, buttonAction: {})
-////                        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-////                            Button(role: .destructive) {
-////
-////                            } label: {
-////                                Text("Delete")
-////                                    .font(Resources.Fonts.regular(withSize: 15))
-////                            }
-////                            .tint(Resources.Colors.secondary)
-////                        }
-//                }
-//            }.listRowSeparator(.hidden)
-//        }
-//        .listStyle(.plain)
-//    }
+    @ViewBuilder
+    func favoriteList() -> some View {
+        VStack {
+            if isLoading {
+                ProgressView()
+            }
+            else {
+                if locationService.favoriteLocations.isEmpty {
+                    emptyState()
+                }
+                else {
+                    List(locationService.favoriteLocations,id: \.locationName) { data in
+                        ZStack(alignment: .leading) {
+                            LocationListCell(type: .favorite, data: data, buttonAction: {})
+                                .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                                    Button(role: .destructive) {
+                                        
+                                    } label: {
+                                        Text("Delete")
+                                            .font(Resources.Fonts.regular(withSize: 15))
+                                    }
+                                    .tint(Resources.Colors.secondary)
+                                }
+                            NavigationLink(destination: LocationDetailView(locationData: data)) {
+                                EmptyView()
+                            }
+                        }
+                        .listRowSeparator(.hidden)
+                    }
+                    .listStyle(.plain)
+                }
+            }
+        }
+        .task {
+            await locationService.fetchFavoriteLocations(for: userService.user) {
+                isLoading = false
+            }
+        }
+    }
 }
 
 struct FavoriteView_Previews: PreviewProvider {

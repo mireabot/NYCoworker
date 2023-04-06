@@ -13,6 +13,9 @@ class ReviewService: ObservableObject {
     private var db = Firestore.firestore()
     @Published var reviews: [Review] = []
     
+    ///Fetching all reviews which has ID matching with location's ID
+    ///- parameter locationID: ID of location which searched in Reviews database
+    ///- returns: set of reviews
     func fetchReviews(locationID: String, completion: @escaping () -> Void) async {
         do {
             var query: Query!

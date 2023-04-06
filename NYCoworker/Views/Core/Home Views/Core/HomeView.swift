@@ -13,6 +13,7 @@ struct HomeView: View {
     @State var isLoading = true
     @State var showMap = false
     @StateObject private var locationService = LocationService()
+    @EnvironmentObject var userService : UserService
     var body: some View {
         NavigationView {
             ScrollView(.vertical, showsIndicators: false) {
@@ -43,7 +44,7 @@ struct HomeView: View {
                 }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink(destination: FavoriteView()) {
+                    NavigationLink(destination: FavoriteView().environmentObject(userService)) {
                         NYCCircleImageButton(size: 20, image: Image("rate")) {}.disabled(true)
                     }
                 }
