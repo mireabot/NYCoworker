@@ -74,6 +74,18 @@ class LocationService: ObservableObject {
         }
     }
     
+    func deleteFavoriteLocation(at index: Int, for userID: String, completion: @escaping () -> Void) async throws {
+        do {
+            let documentSnapshot = try await db.collection("User").document(userID).getDocument()
+            var locationsArray = documentSnapshot.data().flatMap({ $0["favoriteLocations"] as? [String] }) ?? []
+            locationsArray.remove(at: index)
+            try await db.collection("User").document(userID).setData(from: ["favoriteLocations": locationsArray], merge: true)
+            completion()
+        } catch {
+            throw error
+        }
+    }
+    
     func clearData() {
         locations = []
         favoriteLocations = []

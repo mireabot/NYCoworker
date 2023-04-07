@@ -45,6 +45,7 @@ enum Resources {
             static let share = Image("share")
             static let location = Image("location")
             static let openMap = Image("open-map")
+            static let refresh = Image("refresh")
         }
         /// Images for settings
         enum Settings {

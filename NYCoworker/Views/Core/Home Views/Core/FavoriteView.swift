@@ -11,8 +11,10 @@ import PopupView
 struct FavoriteView: View {
     @Environment(\.dismiss) var makeDismiss
     @State var isLoading = true
+    @State var isUpdating = false
     @EnvironmentObject var userService : UserService
-    @StateObject private var locationService = LocationService()
+    @StateObject var locationService = LocationService()
+    @AppStorage("UserID") var userId : String = ""
     var body: some View {
         NavigationStack {
             favoriteList()
@@ -36,6 +38,18 @@ struct FavoriteView: View {
                             .foregroundColor(Resources.Colors.customBlack)
                             .font(Resources.Fonts.bold(withSize: 17))
                     }
+                    
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button {
+                            Task {
+                                await extractedFunc()
+                            }
+                        } label: {
+                            Resources.Images.Navigation.refresh
+                                .foregroundColor(Resources.Colors.primary)
+                        }
+                        
+                    }
                 })
                 .navigationBarTitleDisplayMode(.inline)
             
@@ -50,6 +64,17 @@ struct FavoriteView: View {
             FavoritesEmptyView()
         }
     }
+    fileprivate func extractedFunc() async {
+        isLoading = true
+        locationService.favoriteLocations = []
+        await userService.fetchUser(documentId: userId, completion: {
+            print("User fetched again")
+        })
+        await locationService.fetchFavoriteLocations(for: userService.user) {
+            isLoading = false
+        }
+    }
+    
     @ViewBuilder
     func favoriteList() -> some View {
         VStack {
@@ -61,28 +86,50 @@ struct FavoriteView: View {
                     emptyState()
                 }
                 else {
-                    List(locationService.favoriteLocations,id: \.locationName) { data in
-                        ZStack(alignment: .leading) {
-                            LocationListCell(type: .favorite, data: data, buttonAction: {})
-                                .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                                    Button(role: .destructive) {
-                                        
-                                    } label: {
-                                        Text("Delete")
-                                            .font(Resources.Fonts.regular(withSize: 15))
-                                    }
-                                    .tint(Resources.Colors.secondary)
+                    List{
+                        ForEach(locationService.favoriteLocations, id: \.id) { data in
+                            ZStack(alignment: .leading) {
+                                LocationListCell(type: .favorite, data: data, buttonAction: {})
+                                NavigationLink(destination: LocationDetailView(locationData: data)) {
+                                    EmptyView()
                                 }
-                            NavigationLink(destination: LocationDetailView(locationData: data)) {
-                                EmptyView()
                             }
+                            .listRowSeparator(.hidden)
                         }
-                        .listRowSeparator(.hidden)
+//                        .onDelete(perform: { indexSet in
+//                            for index in indexSet {
+//                                isUpdating = true
+//                                Task {
+//                                    try await locationService.deleteFavoriteLocation(at: index, for: userId) {
+//                                        isUpdating = false
+//                                    }
+//                                }
+//                            }
+//                        })
+//                        .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+//                            ForEach(locationService.favoriteLocations.indices,id: \.self) { index in
+//                                Button(role: .destructive) {
+//                                    isUpdating = true
+//                                    Task {
+//                                        try await locationService.deleteFavoriteLocation(at: index, for: userId) {
+//                                            isUpdating = false
+//                                        }
+//                                    }
+//                                } label: {
+//                                    Text("Delete")
+//                                        .font(Resources.Fonts.regular(withSize: 15))
+//                                }
+//                                .tint(Resources.Colors.secondary)
+//                            }
+//                        }
                     }
                     .listStyle(.plain)
                 }
             }
         }
+        .overlay(content: {
+            LoadingBottomView(title: "Hold on a minute", show: $isUpdating)
+        })
         .task {
             await locationService.fetchFavoriteLocations(for: userService.user) {
                 isLoading = false
@@ -96,3 +143,11 @@ struct FavoriteView_Previews: PreviewProvider {
         FavoriteView()
     }
 }
+
+//Button(role: .destructive) {
+//    isUpdating = true
+//} label: {
+//    Text("Delete")
+//        .font(Resources.Fonts.regular(withSize: 15))
+//}
+//.tint(Resources.Colors.secondary)
