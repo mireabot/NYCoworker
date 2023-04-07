@@ -73,5 +73,11 @@ class LocationService: ObservableObject {
             print(error.localizedDescription)
         }
     }
+    
+    func clearData() {
+        locations = []
+        favoriteLocations = []
+        print("Data cleared")
+    }
 }
 

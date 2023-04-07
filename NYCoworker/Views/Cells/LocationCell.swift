@@ -7,6 +7,8 @@
 
 import SwiftUI
 import SDWebImageSwiftUI
+import CoreLocation
+import Firebase
 /// Location cell viewModel
 ///
 /// Used in home screen locations collection
@@ -78,7 +80,11 @@ extension LocationCell {
                     .foregroundColor(Resources.Colors.customBlack)
                     .font(Resources.Fonts.regular(withSize: 15))
                     .lineLimit(0)
-                HStack {
+                HStack(spacing: 4) {
+                    Text(String(format: "%.1f", calculateDistance(from: Resources.userLocation, to: data.locationCoordinates)) + " mi")
+                        .foregroundColor(Resources.Colors.darkGrey)
+                        .font(Resources.Fonts.regular(withSize: 12))
+                    
                     RatingDotsView(number: data.reviews)
                 }
             }
@@ -127,6 +133,9 @@ extension LocationCell {
                 .lineLimit(0)
             
             HStack(spacing: 4) {
+                Text(String(format: "%.1f", calculateDistance(from: Resources.userLocation, to: data.locationCoordinates)) + " mi")
+                    .foregroundColor(Resources.Colors.darkGrey)
+                    .font(Resources.Fonts.regular(withSize: 12))
                 RatingDotsView(number: data.reviews)
             }
         }
@@ -140,3 +149,12 @@ extension LocationCell {
 //        LocationCellLarge()
 //    }
 //}
+
+extension LocationCell {
+    func calculateDistance(from userLocation: CLLocation, to locationGeoPoint: GeoPoint) -> Double {
+        let location = CLLocation(latitude: locationGeoPoint.latitude, longitude: locationGeoPoint.longitude)
+        let distance = userLocation.distance(from: location) / 1000 // convert to kilometers
+        let distanceInMiles = distance * 0.621371 // convert to miles
+        return round(distanceInMiles * 100) / 100 // round to 2 decimal places
+    }
+}

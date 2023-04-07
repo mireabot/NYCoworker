@@ -7,6 +7,8 @@
 
 import SwiftUI
 import SDWebImageSwiftUI
+import CoreLocation
+import Firebase
 /// Location cell for list views / favorites and detail list by location category
 ///
 ///  - Parameters:
@@ -40,7 +42,7 @@ struct LocationListCell: View {
                 
                 HStack(alignment: .center) {
                     NYCRateBadge(rate: data.reviews, badgeType: .card)
-                    .offset(x: 6, y: 6)
+                        .offset(x: 6, y: 6)
                     Spacer()
                     Button {
                         buttonAction()
@@ -71,11 +73,20 @@ struct LocationListCell: View {
                         .font(Resources.Fonts.regular(withSize: 13))
                 }
                 Spacer()
-                Text("2mi")
+                Text(String(format: "%.1f", calculateDistance(from: Resources.userLocation, to: data.locationCoordinates)) + " mi")
                     .foregroundColor(Resources.Colors.darkGrey)
                     .font(Resources.Fonts.regular(withSize: 15))
             }
         }
+    }
+}
+
+extension LocationListCell {
+    func calculateDistance(from userLocation: CLLocation, to locationGeoPoint: GeoPoint) -> Double {
+        let location = CLLocation(latitude: locationGeoPoint.latitude, longitude: locationGeoPoint.longitude)
+        let distance = userLocation.distance(from: location) / 1000 // convert to kilometers
+        let distanceInMiles = distance * 0.621371 // convert to miles
+        return round(distanceInMiles * 100) / 100 // round to 2 decimal places
     }
 }
 

@@ -299,7 +299,7 @@ struct LocationDetailView: View {
         LazyHGrid(rows: rows, alignment: .center, spacing: 10) {
             ForEach(locationData.locationAmenities,id: \.self) { item in
                 HStack(alignment: .center, spacing: 5) {
-                    Image(item)
+                    Image(image(image: item))
                         .resizable()
                         .frame(width: 24, height: 24)
                     Text(item)
@@ -310,6 +310,19 @@ struct LocationDetailView: View {
             }
         }
         .frame(height: 80)
+    }
+    
+    func image(image: String) -> String {
+        switch image {
+        case "W/C":
+            return "WC"
+        case "A/C":
+            return "AC"
+        case "Pets allowed":
+            return "Pets"
+        default:
+            return image
+        }
     }
 }
 

@@ -8,6 +8,7 @@
 import UIKit
 import SwiftUI
 import Firebase
+import CoreLocation
 
 @main
 struct NYCoworkerApp: App {
@@ -48,6 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 struct SplashScreenView: View {
     @State var isActive : Bool = false
+    @ObservedObject var locationManager = LocationManager()
     var body: some View {
         if isActive {
             InitView()
@@ -60,6 +62,8 @@ struct SplashScreenView: View {
                 }
             }
             .onAppear {
+                Resources.userLocation = locationManager.userLocation ?? CLLocation(latitude: 0.0, longitude: 0.0)
+                print(Resources.userLocation)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                     withAnimation {
                         self.isActive = true

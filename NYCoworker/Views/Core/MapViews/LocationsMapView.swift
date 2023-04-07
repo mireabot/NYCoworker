@@ -74,7 +74,7 @@ struct LocationMapView: View {
     @State var region: MKCoordinateRegion
     var body: some View {
         Map(coordinateRegion: $region,
-            annotationItems: locations) { location in
+            showsUserLocation: true, annotationItems: locations) { location in
             MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: location.locationCoordinates.latitude, longitude: location.locationCoordinates.longitude)) {
                 Button(action: {
                     DispatchQueue.main.async {
