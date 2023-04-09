@@ -18,6 +18,5 @@ struct SettingsModel: Hashable {
 
 let settigsData = [
     SettingsModel(title: Strings.Settings.manageAccount, icon: Resources.Images.Settings.manageAccount),
-    SettingsModel(title: Strings.Settings.helpSupport, icon: Resources.Images.Settings.help),
-    SettingsModel(title: Strings.Settings.manageNotifications, icon: Resources.Images.Settings.manageNotifications)
+    SettingsModel(title: Strings.Settings.helpSupport, icon: Resources.Images.Settings.help)
 ]

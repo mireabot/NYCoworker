@@ -40,7 +40,7 @@ struct LocationDetailView: View {
                 .dotsTintColors(currentPage: Resources.Colors.primary, otherPages: Resources.Colors.customGrey)
                 .animated(true)
                 .wraps(true)
-                .frame(height: 250)
+                .frame(width: UIScreen.main.bounds.width, height: 250)
             }
             
             /// Location info

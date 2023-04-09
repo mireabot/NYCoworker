@@ -23,8 +23,6 @@ struct SettingsView: View {
                 AccountSettingsView(nameText: $nameTextFieldText, occupationText: $occupationTextFieldText)
             case Strings.Settings.helpSupport:
                 SupportSettingsView()
-            case Strings.Settings.manageNotifications:
-                NotificationsSettingsView()
             default:
                 EmptyView()
             }

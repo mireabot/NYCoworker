@@ -7,6 +7,7 @@
 
 import SwiftUI
 import PopupView
+import Firebase
 
 struct FavoriteView: View {
     @Environment(\.dismiss) var makeDismiss
@@ -86,44 +87,21 @@ struct FavoriteView: View {
                     emptyState()
                 }
                 else {
-                    List{
-                        ForEach(locationService.favoriteLocations, id: \.id) { data in
-                            ZStack(alignment: .leading) {
-                                LocationListCell(type: .favorite, data: data, buttonAction: {})
+                    ScrollView(.vertical, showsIndicators: true) {
+                        LazyVStack {
+                            ForEach(locationService.favoriteLocations, id: \.id) { data in
                                 NavigationLink(destination: LocationDetailView(locationData: data)) {
-                                    EmptyView()
+                                    LocationListCell(type: .favorite, data: data, buttonAction: {
+                                        removeFromfavs(locationID: data.locationID)
+                                        Task {
+                                            await extractedFunc()
+                                        }
+                                    })
                                 }
                             }
-                            .listRowSeparator(.hidden)
                         }
-//                        .onDelete(perform: { indexSet in
-//                            for index in indexSet {
-//                                isUpdating = true
-//                                Task {
-//                                    try await locationService.deleteFavoriteLocation(at: index, for: userId) {
-//                                        isUpdating = false
-//                                    }
-//                                }
-//                            }
-//                        })
-//                        .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-//                            ForEach(locationService.favoriteLocations.indices,id: \.self) { index in
-//                                Button(role: .destructive) {
-//                                    isUpdating = true
-//                                    Task {
-//                                        try await locationService.deleteFavoriteLocation(at: index, for: userId) {
-//                                            isUpdating = false
-//                                        }
-//                                    }
-//                                } label: {
-//                                    Text("Delete")
-//                                        .font(Resources.Fonts.regular(withSize: 15))
-//                                }
-//                                .tint(Resources.Colors.secondary)
-//                            }
-//                        }
                     }
-                    .listStyle(.plain)
+                    .padding([.leading,.trailing], 16)
                 }
             }
         }
@@ -136,6 +114,19 @@ struct FavoriteView: View {
             }
         }
     }
+    
+    func removeFromfavs(locationID: String) {
+        Task {
+            if userService.user.favoriteLocations.contains(locationID) {
+                Firestore.firestore().collection(Endpoints.users.rawValue).document(userId).updateData([
+                    "favoriteLocations": FieldValue.arrayRemove([locationID])
+                ])
+            }
+            else {
+                return
+            }
+        }
+    }
 }
 
 struct FavoriteView_Previews: PreviewProvider {
@@ -143,11 +134,3 @@ struct FavoriteView_Previews: PreviewProvider {
         FavoriteView()
     }
 }
-
-//Button(role: .destructive) {
-//    isUpdating = true
-//} label: {
-//    Text("Delete")
-//        .font(Resources.Fonts.regular(withSize: 15))
-//}
-//.tint(Resources.Colors.secondary)

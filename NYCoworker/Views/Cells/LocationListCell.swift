@@ -47,7 +47,7 @@ struct LocationListCell: View {
                     Button {
                         buttonAction()
                     } label: {
-                        Image("add")
+                        Image(type == .list ? "add" : "close")
                             .resizable()
                             .foregroundColor(Resources.Colors.customBlack)
                             .frame(width: 20, height: 20)
@@ -55,7 +55,8 @@ struct LocationListCell: View {
                             .background(Color.white)
                             .cornerRadius(20)
                             .offset(x: -6, y: 6)
-                    }.opacity(type == .list ? 1 : 0)
+                    }
+//                    .opacity(type == .list ? 1 : 0)
                 }
             }
             HStack(alignment: .top) {
