@@ -9,18 +9,16 @@ import SwiftUI
 
 struct SettingsView: View {
     @Environment(\.dismiss) var makeDismiss
-    @State var nameTextFieldText = ""
-    @State var occupationTextFieldText = ""
-    @State var personType: String = "Student"
     private var title: String
     init(title: String) {
         self.title = title
     }
+    @EnvironmentObject var userService : UserService
     var body: some View {
         VStack {
             switch title {
             case Strings.Settings.manageAccount :
-                AccountSettingsView(nameText: $nameTextFieldText, occupationText: $occupationTextFieldText)
+                AccountSettingsView().environmentObject(userService)
             case Strings.Settings.helpSupport:
                 SupportSettingsView()
             default:

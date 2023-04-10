@@ -28,7 +28,7 @@ struct ProfileView: View {
                 Spacer()
             }
             .navigationDestination(for: SettingsModel.self, destination: { settingsData in
-                SettingsView(title: settingsData.title)
+                SettingsView(title: settingsData.title).environmentObject(userService)
             })
             .sheet(isPresented: $showPopup, content: {
                 LogoutView()
@@ -91,7 +91,7 @@ extension ProfileView {
                 Button {
                     showPopup.toggle()
                 } label: {
-                    Text("Log out")
+                    Text("Delete account")
                         .foregroundColor(Resources.Colors.actionRed)
                         .font(Resources.Fonts.bold(withSize: 20))
                 }

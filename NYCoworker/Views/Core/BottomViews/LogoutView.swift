@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct LogoutView: View {
     @AppStorage("userSigned") var userLogged: Bool = false
@@ -13,13 +14,15 @@ struct LogoutView: View {
     var body: some View {
         GeometryReader { geometry in
             VStack {
-                NYCBottomSheetHeader(title: "Are you sure you want to log out?").padding(.top, 15)
+                NYCBottomSheetHeader(title: "Are you sure you want to delete account?").padding(.top, 15)
                 VStack(alignment: .center, spacing: 10) {
                     NYCActionButton(action: {
                         withAnimation(.spring()) {
-                            userLogged = false
+                            Auth.auth().currentUser?.delete(completion: { error in
+                                userLogged = false
+                            })
                         }
-                    }, text: "Log out", buttonStyle: .system)
+                    }, text: "Delete", buttonStyle: .system)
                     
                     Button {
                         makeDismiss()
