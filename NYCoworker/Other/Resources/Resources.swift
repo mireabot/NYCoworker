@@ -17,6 +17,8 @@ enum Resources {
     
     static var userLocation : CLLocation = CLLocation(latitude: 0.0, longitude: 0.0)
     
+    static var adminMode = true
+    
     /// Colors resource pack
     enum Colors {
         static let primary = Color(uiColor: UIColor(red: 0.11, green: 0.47, blue: 0.45, alpha: 1.00))

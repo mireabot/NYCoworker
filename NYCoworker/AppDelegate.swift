@@ -48,7 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 struct SplashScreenView: View {
-    @State var isActive : Bool = false
+    @State var isActive : Bool = true
     @ObservedObject var locationManager = LocationManager()
     var body: some View {
         if isActive {

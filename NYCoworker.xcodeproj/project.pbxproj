@@ -74,6 +74,7 @@
 		359F80F7298C2508000D792E /* LocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359F80F6298C2508000D792E /* LocationCell.swift */; };
 		359F80F9298C30D2000D792E /* NYCBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359F80F8298C30D2000D792E /* NYCBadgeView.swift */; };
 		359F80FB298C330B000D792E /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359F80FA298C330B000D792E /* FavoriteView.swift */; };
+		35A7981629E463C600359400 /* AdminHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A7981529E463C600359400 /* AdminHomeView.swift */; };
 		35AD1AEE29CBB4780076AE54 /* RatingDotsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AD1AED29CBB4780076AE54 /* RatingDotsView.swift */; };
 		35BA64B5299BF69D00E15206 /* ReviewCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BA64B4299BF69D00E15206 /* ReviewCard.swift */; };
 		35BC807A29970DC0001ACC35 /* ListModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BC807929970DC0001ACC35 /* ListModifier.swift */; };
@@ -171,6 +172,7 @@
 		359F80F6298C2508000D792E /* LocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCell.swift; sourceTree = "<group>"; };
 		359F80F8298C30D2000D792E /* NYCBadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCBadgeView.swift; sourceTree = "<group>"; };
 		359F80FA298C330B000D792E /* FavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteView.swift; sourceTree = "<group>"; };
+		35A7981529E463C600359400 /* AdminHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminHomeView.swift; sourceTree = "<group>"; };
 		35AD1AED29CBB4780076AE54 /* RatingDotsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingDotsView.swift; sourceTree = "<group>"; };
 		35BA64B4299BF69D00E15206 /* ReviewCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCard.swift; sourceTree = "<group>"; };
 		35BC807929970DC0001ACC35 /* ListModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListModifier.swift; sourceTree = "<group>"; };
@@ -543,6 +545,7 @@
 		358B93992980D42700160BFC /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				35A7981429E4638800359400 /* Admin */,
 				359F80F5298C24FB000D792E /* Cells */,
 				359E6AA02981ECB200333BD7 /* Core */,
 			);
@@ -659,6 +662,14 @@
 				356C52DB29A04BDB00080D4C /* LocationListCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		35A7981429E4638800359400 /* Admin */ = {
+			isa = PBXGroup;
+			children = (
+				35A7981529E463C600359400 /* AdminHomeView.swift */,
+			);
+			path = Admin;
 			sourceTree = "<group>";
 		};
 		35D3821329B6A7B700B66EDA /* Location */ = {
@@ -838,6 +849,7 @@
 				351B3A2729981B22007E7D00 /* NYCSettingsCard.swift in Sources */,
 				350DE274299143B500573163 /* LogoutView.swift in Sources */,
 				3538C626298356270017800B /* LanguageSetup.swift in Sources */,
+				35A7981629E463C600359400 /* AdminHomeView.swift in Sources */,
 				35EF059E29B0F40A0098110B /* AccoutSetupView.swift in Sources */,
 				35E7FB942985A9D500EFF282 /* UserRegistrationModel.swift in Sources */,
 				35DFA24129A518B700258BB7 /* AddReviewView.swift in Sources */,

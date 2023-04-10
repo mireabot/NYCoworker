@@ -6,8 +6,10 @@
 //
 
 import SwiftUI
+import StoreKit
 
 struct SupportSettingsView: View {
+    @Environment(\.requestReview) var requestReview
     var body: some View {
         VStack {
             VStack {
@@ -25,7 +27,9 @@ struct SupportSettingsView: View {
             VStack(spacing: 10) {
                 NYCSettingsCard(icon: Resources.Images.Settings.manageAccount, title: "Write feedback")
                 NYCSettingsCard(icon: Resources.Images.Settings.website, title: "Visit website")
-                NYCSettingsCard(icon: Resources.Images.Settings.rate, title: "Rate app")
+                NYCSettingsCard(icon: Resources.Images.Settings.rate, title: "Rate app").onTapGesture {
+                    requestReview()
+                }
             }
             .padding([.leading,.trailing], 16)
             

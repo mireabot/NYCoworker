@@ -30,6 +30,13 @@ struct TabBarView: View {
             .tabItem {
                 Label("Profile", image: "profile")
             }
+            
+            if Resources.adminMode {
+                AdminHomeView()
+                    .tabItem {
+                        Label("Admin", image: "profile")
+                    }
+            }
         }
         .task {
             guard userService.user.userID.isEmpty else { return }
