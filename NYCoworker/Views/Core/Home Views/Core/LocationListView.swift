@@ -23,11 +23,13 @@ struct LocationListView: View {
         NavigationStack {
             ScrollView(.vertical, showsIndicators: true) {
                 LazyVStack(spacing: 10) {
-                    if locationType == .hotel {
-                        hotelsLocations()
-                    }
-                    else {
+                    switch locationType {
+                    case .library:
                         libraryLocations()
+                    case .hotel:
+                        hotelsLocations()
+                    case .publicSpace:
+                        publicSpacesLocations()
                     }
                 }
                 .padding([.leading,.trailing], 16)
@@ -94,6 +96,27 @@ struct LocationListView: View {
     func libraryLocations() -> some View {
         ForEach(locationService.locations){ location in
             if location.locationType == .library {
+                NavigationLink(value: location) {
+                    LocationListCell(type: .list, data: location) {
+                        Task {
+                            do {
+                                try await locationService.addFavoriteLocation(locationID: location.locationID, userID: userId) {
+                                    addToFavs.toggle()
+                                }
+                            } catch {
+                                print(error.localizedDescription)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    @ViewBuilder
+    func publicSpacesLocations() -> some View {
+        ForEach(locationService.locations){ location in
+            if location.locationType == .publicSpace {
                 NavigationLink(value: location) {
                     LocationListCell(type: .list, data: location) {
                         Task {

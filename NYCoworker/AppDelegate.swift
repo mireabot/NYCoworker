@@ -14,10 +14,11 @@ import CoreLocation
 struct NYCoworkerApp: App {
     init() {
         FirebaseApp.configure()
-      }
+    }
+    @StateObject private var networkManager = NetworkMonitor()
     var body: some Scene {
         WindowGroup {
-            SplashScreenView()
+            ContentView().environmentObject(networkManager)
         }
     }
 }
@@ -84,6 +85,42 @@ struct InitView: View {
         }
         else {
             Onboarding()
+        }
+    }
+}
+
+
+import Network
+public class NetworkMonitor: ObservableObject {
+    private let networkMonitor = NWPathMonitor()
+    private let workQueue = DispatchQueue(label: "Monitor")
+    public var isConnected = false
+    
+    public init() {
+        networkMonitor.pathUpdateHandler = { path in
+            self.isConnected = path.status == .satisfied
+            Task {
+                await MainActor.run(body: {
+                    self.objectWillChange.send()
+                })
+            }
+        }
+        networkMonitor.start(queue: workQueue)
+    }
+}
+
+struct ContentView: View {
+    @EnvironmentObject private var networkManager: NetworkMonitor
+    @State var isLoading : Bool = true
+    var body: some View {
+        ZStack {
+            if networkManager.isConnected {
+//                SplashScreenView()
+                Text("Interner")
+            }
+            else {
+                Text("Error")
+            }
         }
     }
 }

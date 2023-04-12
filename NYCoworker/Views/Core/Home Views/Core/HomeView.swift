@@ -26,9 +26,13 @@ struct HomeView: View {
                     
                     /// Category scrollview
                     locationLobbiesCollection()
+                    
+                    /// Category scrollview
+                    locationPublicSpacesCollection()
                 }
                 .padding([.leading,.trailing], 20)
                 .padding(.top, 30)
+                .padding(.bottom, 10)
             }
             .task {
                 guard locationService.locations.isEmpty else { return }
@@ -123,6 +127,37 @@ extension HomeView {
                     else {
                         ForEach(locationService.locations,id: \.locationName) { data in
                             if data.locationType == .hotel {
+                                NavigationLink(destination: LocationDetailView(locationData: data)) {
+                                    LocationCell(data: data, type: .large)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    @ViewBuilder
+    func locationPublicSpacesCollection() -> some View {
+        VStack(alignment: .leading, spacing: 10) {
+            NavigationLink {
+                LocationListView(title: Locations.publicSpaces.rawValue, type: .publicSpace).environmentObject(locationService)
+            } label: {
+                NYCSectionHeader(title: Locations.publicSpaces.rawValue, isExpandButton: true)
+            }
+            ScrollView(.horizontal, showsIndicators: false) {
+                LazyHStack(spacing: 10) {
+                    if isLoading {
+                        ForEach(0..<4) { _ in
+                            LoadingLocationCell()
+                                .redacted(reason: .placeholder)
+                                .shimmering(active: true, duration: 1.5, bounce: false)
+                        }
+                    }
+                    else {
+                        ForEach(locationService.locations,id: \.locationName) { data in
+                            if data.locationType == .publicSpace {
                                 NavigationLink(destination: LocationDetailView(locationData: data)) {
                                     LocationCell(data: data, type: .large)
                                 }
