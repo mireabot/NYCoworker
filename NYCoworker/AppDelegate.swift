@@ -18,7 +18,7 @@ struct NYCoworkerApp: App {
     @StateObject private var networkManager = NetworkMonitor()
     var body: some Scene {
         WindowGroup {
-            ContentView().environmentObject(networkManager)
+            SplashScreenView()
         }
     }
 }
@@ -49,8 +49,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 struct SplashScreenView: View {
-    @State var isActive : Bool = true
-    @ObservedObject var locationManager = LocationManager()
+    @State var isActive : Bool = false
+    @State var errorMessage = ""
+    @State var showError = false
+    @AppStorage("userSigned") var userLogged: Bool = false
+    @AppStorage("UserID") var userId : String = ""
+    @AppStorage("UserMail") var userMail : String = ""
+    @AppStorage("UserPass") var userPass : String = ""
     var body: some View {
         if isActive {
             InitView()
@@ -63,15 +68,37 @@ struct SplashScreenView: View {
                 }
             }
             .onAppear {
-                Resources.userLocation = locationManager.userLocation ?? CLLocation(latitude: 0.0, longitude: 0.0)
-                print(Resources.userLocation)
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                    withAnimation {
-                        self.isActive = true
-                    }
+                logIn()
+            }
+        }
+    }
+    
+    func logIn() {
+        if userLogged {
+            Task {
+                do {
+                    try await Auth.auth().signIn(withEmail: userMail, password: userPass)
+                    isActive = true
+                }
+                catch {
+                    await setError(error)
                 }
             }
         }
+        else {
+            print("Not logged")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                isActive = true
+            }
+        }
+    }
+    
+    func setError(_ error: Error) async {
+        await MainActor.run(body: {
+            isActive = false
+            errorMessage = error.localizedDescription
+            showError.toggle()
+        })
     }
 }
 

@@ -7,10 +7,15 @@
 
 import SwiftUI
 import Firebase
+import FirebaseFirestoreSwift
+import FirebaseStorage
 
 struct LogoutView: View {
     @AppStorage("userSigned") var userLogged: Bool = false
     @Environment(\.dismiss) var makeDismiss
+    @State var isLoading = false
+    @State var errorMessage = ""
+    @State var showError = false
     var body: some View {
         GeometryReader { geometry in
             VStack {
@@ -18,9 +23,7 @@ struct LogoutView: View {
                 VStack(alignment: .center, spacing: 10) {
                     NYCActionButton(action: {
                         withAnimation(.spring()) {
-                            Auth.auth().currentUser?.delete(completion: { error in
-                                userLogged = false
-                            })
+                            deleteUser()
                         }
                     }, text: "Delete", buttonStyle: .system)
                     
@@ -38,7 +41,37 @@ struct LogoutView: View {
                 .padding(.top, 10)
             }
         }
-        
+        .overlay {
+            LoadingBottomView(show: $isLoading)
+        }
+        .alert(errorMessage, isPresented: $showError) {
+        }
+    }
+    
+    func deleteUser() {
+        isLoading = true
+        Task {
+            do {
+                guard let userID = Auth.auth().currentUser?.uid else { return }
+                let ref = Storage.storage().reference().child("UserImages").child(userID)
+                try await ref.delete()
+                
+                try await Firestore.firestore().collection("User").document(userID).delete()
+                try await Auth.auth().currentUser?.delete()
+                userLogged = false
+            }
+            catch {
+                await setError(error)
+            }
+        }
+    }
+    
+    func setError(_ error: Error) async {
+        await MainActor.run(body: {
+            isLoading = false
+            errorMessage = error.localizedDescription
+            showError.toggle()
+        })
     }
 }
 

@@ -23,6 +23,7 @@ struct LocationCell: View {
     }
     var data: Location
     let type: LocationCellType?
+    var buttonAction: () -> Void
     var body: some View {
         switch type {
         case .small:
@@ -56,7 +57,7 @@ extension LocationCell {
                     .cornerRadius(10)
                     
                     Button {
-                        print("Button tapped")
+                        buttonAction()
                     } label: {
                         Image("add")
                             .resizable()
@@ -107,7 +108,7 @@ extension LocationCell {
                 .cornerRadius(10)
                 
                 Button {
-                    print("Button tapped")
+                    buttonAction()
                 } label: {
                     Image("add")
                         .resizable()

@@ -18,12 +18,14 @@ class UserRegistrationModel: ObservableObject {
     @Published var profileImage: Data?
     
     @AppStorage("UserID") var userId : String = ""
+    @AppStorage("UserMail") var userMail : String = ""
+    @AppStorage("UserPass") var userPass : String = ""
     @AppStorage("userSigned") var userLogged: Bool = false
     
-    func createUser(completion: @escaping () -> Void) {
+    func createUser(mail: String, pass: String,completion: @escaping () -> Void) {
         Task {
             do {
-                try await Auth.auth().createUser(withEmail: "\(name + randomString(length: 7))@nycoworker.user", password: randomString(length: 10))
+                try await Auth.auth().createUser(withEmail: "\(mail)@nycoworker.user", password: pass)
                 guard let userID = Auth.auth().currentUser?.uid else { return }
                 guard let imageData = profileImage else { return }
                 let storageRef = Storage.storage().reference().child("UserImages").child(userID)
@@ -41,6 +43,8 @@ class UserRegistrationModel: ObservableObject {
                         print("User id \(self.userId)")
                         completion()
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                            self.userMail = "\(mail)@nycoworker.user"
+                            self.userPass = pass
                             self.userLogged = true
                         }
                     }

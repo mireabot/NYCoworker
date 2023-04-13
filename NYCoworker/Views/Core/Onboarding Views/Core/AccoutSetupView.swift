@@ -55,7 +55,9 @@ struct AccoutSetupView: View {
                     if self.currentStep == 4 {
                         withAnimation(.spring()) {
                             showLoad.toggle()
-                            model.createUser {
+                            let email = "\(model.randomString(length: 7))"
+                            let password = "\(model.randomString(length: 10))"
+                            model.createUser(mail: email, pass: password) {
                                 DispatchQueue.main.async {
                                     showLoad.toggle()
                                 }
@@ -66,7 +68,7 @@ struct AccoutSetupView: View {
                         self.currentStep += 1
                     }
                 }
-                .disabled(model.name.isEmpty || model.occupation.isEmpty ? true : false)
+                .disabled(model.name.isEmpty || model.occupation.isEmpty || ((model.profileImage?.isEmpty) == nil) ? true : false)
                 .opacity(self.currentStep == 5 ? 0 : 1)
             }
         }

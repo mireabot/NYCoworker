@@ -8,12 +8,16 @@
 import SwiftUI
 import Shimmer
 import MapKit
+import PopupView
 
 struct HomeView: View {
     @State var isLoading = true
     @State var showMap = false
+    @StateObject var locationManager = LocationManager()
     @StateObject private var locationService = LocationService()
     @EnvironmentObject var userService : UserService
+    @AppStorage("UserID") var userId : String = ""
+    @State var addToFavs = false
     var body: some View {
         NavigationView {
             ScrollView(.vertical, showsIndicators: false) {
@@ -29,14 +33,25 @@ struct HomeView: View {
                     
                     /// Category scrollview
                     locationPublicSpacesCollection()
+                        .padding(.bottom, 10)
                 }
                 .padding([.leading,.trailing], 20)
                 .padding(.top, 30)
-                .padding(.bottom, 10)
+            }
+            .popup(isPresented: $addToFavs) {
+                NYCAlertNotificationView(alertStyle: .addedToFavorites)
+            } customize: {
+                $0
+                    .isOpaque(true)
+                    .autohideIn(1.5)
+                    .type(.floater())
+                    .position(.top)
+                    .animation(.spring(response: 0.4, blendDuration: 0.2))
             }
             .task {
                 guard locationService.locations.isEmpty else { return }
                 await locationService.fetchLoactions {
+                    Resources.userLocation = locationManager.userLocation ?? CLLocation(latitude: 0.0, longitude: 0.0)
                     isLoading = false
                 }
             }
@@ -97,7 +112,10 @@ extension HomeView {
                         ForEach(locationService.locations,id: \.locationName) { data in
                             if data.locationType == .library {
                                 NavigationLink(destination: LocationDetailView(locationData: data)) {
-                                    LocationCell(data: data, type: .small)
+                                    LocationCell(data: data, type: .small, buttonAction: {
+                                        addLocationTofavs(location: data.locationID)
+                                        addToFavs.toggle()
+                                    })
                                 }
                             }
                         }
@@ -128,7 +146,10 @@ extension HomeView {
                         ForEach(locationService.locations,id: \.locationName) { data in
                             if data.locationType == .hotel {
                                 NavigationLink(destination: LocationDetailView(locationData: data)) {
-                                    LocationCell(data: data, type: .large)
+                                    LocationCell(data: data, type: .large, buttonAction: {
+                                        addLocationTofavs(location: data.locationID)
+                                        addToFavs.toggle()
+                                    })
                                 }
                             }
                         }
@@ -159,7 +180,10 @@ extension HomeView {
                         ForEach(locationService.locations,id: \.locationName) { data in
                             if data.locationType == .publicSpace {
                                 NavigationLink(destination: LocationDetailView(locationData: data)) {
-                                    LocationCell(data: data, type: .large)
+                                    LocationCell(data: data, type: .large, buttonAction: {
+                                        addLocationTofavs(location: data.locationID)
+                                        addToFavs.toggle()
+                                    })
                                 }
                             }
                         }
@@ -192,5 +216,16 @@ extension HomeView {
         }
         .padding([.leading,.trailing], 20)
         .padding(.top, 20)
+    }
+    
+    func addLocationTofavs(location: String) {
+        Task {
+            do {
+                try await locationService.addFavoriteLocation(locationID: location, userID: userId) {
+                }
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
     }
 }
