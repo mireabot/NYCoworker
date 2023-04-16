@@ -20,23 +20,23 @@ struct HomeView: View {
     @State var addToFavs = false
     var body: some View {
         NavigationView {
-            ScrollView(.vertical, showsIndicators: false) {
-                /// Map section
-                mapView()
-                /// Locations section
-                VStack(alignment: .leading, spacing: 15) {
-                    /// Category scrollview
-                    locationLibrariesCollection()
-                    
-                    /// Category scrollview
-                    locationLobbiesCollection()
-                    
-                    /// Category scrollview
-                    locationPublicSpacesCollection()
-                        .padding(.bottom, 10)
+            VStack(spacing: 0) {
+                ScrollView(.vertical, showsIndicators: false) {
+                    /// Map section
+                    mapView()
+                    /// Locations section
+                    VStack(alignment: .leading, spacing: 15) {
+                        /// Category scrollview
+                        locationLibrariesCollection()
+                        
+                        /// Category scrollview
+                        locationLobbiesCollection()
+                        
+                        /// Category scrollview
+                        locationPublicSpacesCollection()
+                    }
+                    .padding(.top, 15)
                 }
-                .padding([.leading,.trailing], 20)
-                .padding(.top, 30)
             }
             .popup(isPresented: $addToFavs) {
                 NYCAlertNotificationView(alertStyle: .addedToFavorites)
@@ -74,9 +74,9 @@ struct HomeView: View {
                     }
                 }
             }
+            .navigationBarTitleDisplayMode(.inline)
             .toolbarBackground(.white, for: .navigationBar, .automatic)
             .hideTabbar(shouldHideTabbar: false)
-            .navigationBarTitleDisplayMode(.inline)
         }
     }
 }
@@ -96,8 +96,7 @@ extension HomeView {
                 LocationListView(title: Locations.libraries.rawValue, type: .library).environmentObject(locationService)
             } label: {
                 NYCSectionHeader(title: Locations.libraries.rawValue, isExpandButton: true)
-            }
-            
+            }.padding(.leading, 20)
             
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack(spacing: 10) {
@@ -121,6 +120,7 @@ extension HomeView {
                         }
                     }
                 }
+                .padding([.leading,.trailing], 20)
             }
         }
     }
@@ -133,6 +133,7 @@ extension HomeView {
             } label: {
                 NYCSectionHeader(title: Locations.lobbies.rawValue, isExpandButton: true)
             }
+            .padding(.leading, 20)
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack(spacing: 10) {
                     if isLoading {
@@ -155,6 +156,7 @@ extension HomeView {
                         }
                     }
                 }
+                .padding([.leading,.trailing], 20)
             }
         }
     }
@@ -166,7 +168,7 @@ extension HomeView {
                 LocationListView(title: Locations.publicSpaces.rawValue, type: .publicSpace).environmentObject(locationService)
             } label: {
                 NYCSectionHeader(title: Locations.publicSpaces.rawValue, isExpandButton: true)
-            }
+            }.padding(.leading, 20)
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack(spacing: 10) {
                     if isLoading {
@@ -189,6 +191,7 @@ extension HomeView {
                         }
                     }
                 }
+                .padding([.leading,.trailing], 20)
             }
         }
     }

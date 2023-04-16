@@ -219,7 +219,7 @@ struct LocationDetailView: View {
     
     var amenities: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text("Place amenities")
+            Text("Amenities")
                 .foregroundColor(Resources.Colors.customBlack)
                 .font(Resources.Fonts.bold(withSize: 15))
             
@@ -238,6 +238,7 @@ struct LocationDetailView: View {
             Text("Working hours")
                 .foregroundColor(Resources.Colors.customBlack)
                 .font(Resources.Fonts.bold(withSize: 15))
+                .padding(.leading, 16)
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 5) {
@@ -255,14 +256,15 @@ struct LocationDetailView: View {
                         .cornerRadius(5)
                     }
                 }
+                .padding([.leading,.trailing], 16)
             }
             
             Rectangle()
                 .foregroundColor(Resources.Colors.customGrey)
                 .frame(height: 1)
+                .padding([.leading,.trailing], 16)
             
         }
-        .padding([.leading,.trailing], 16)
     }
     
     var suggestInfo: some View {

@@ -15,7 +15,6 @@ struct NYCoworkerApp: App {
     init() {
         FirebaseApp.configure()
     }
-    @StateObject private var networkManager = NetworkMonitor()
     var body: some Scene {
         WindowGroup {
             SplashScreenView()
@@ -82,6 +81,7 @@ struct SplashScreenView: View {
                 }
                 catch {
                     await setError(error)
+                    print("Error happened")
                 }
             }
         }
@@ -106,47 +106,66 @@ struct InitView: View {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @AppStorage("userSigned") var userLogged: Bool = false
     @AppStorage("UserID") var userId : String = ""
+    @State var appConfig: AppConfig?
+    @State var isMaintenanceMode = false
     var body: some View {
-        if userLogged && !userId.isEmpty  {
-            TabBarView()
-        }
-        else {
-            Onboarding()
-        }
-    }
-}
-
-
-import Network
-public class NetworkMonitor: ObservableObject {
-    private let networkMonitor = NWPathMonitor()
-    private let workQueue = DispatchQueue(label: "Monitor")
-    public var isConnected = false
-    
-    public init() {
-        networkMonitor.pathUpdateHandler = { path in
-            self.isConnected = path.status == .satisfied
-            Task {
-                await MainActor.run(body: {
-                    self.objectWillChange.send()
-                })
-            }
-        }
-        networkMonitor.start(queue: workQueue)
-    }
-}
-
-struct ContentView: View {
-    @EnvironmentObject private var networkManager: NetworkMonitor
-    @State var isLoading : Bool = true
-    var body: some View {
-        ZStack {
-            if networkManager.isConnected {
-//                SplashScreenView()
-                Text("Interner")
+        Group {
+            if userLogged && !userId.isEmpty  {
+                TabBarView()
+                    .fullScreenCover(isPresented: $isMaintenanceMode) {
+                        MaintenanceOverlayView()
+                    }
             }
             else {
-                Text("Error")
+                Onboarding()
+            }
+        }
+        .onAppear {
+            fetchAppConfig()
+        }
+    }
+    
+    func fetchAppConfig() {
+        let db = Firestore.firestore()
+        db.collection("AppConfig").document("iF6wRzrbgSP8YI9hbCLl").addSnapshotListener { snapshot, error in
+            if let error = error {
+                print("Error getting appConfig: \(error)")
+            } else if let data = snapshot?.data() {
+                // Decode AppConfig struct from database
+                do {
+                    let appConfig = try Firestore.Decoder().decode(AppConfig.self, from: data)
+                    self.appConfig = appConfig
+                    self.isMaintenanceMode = appConfig.maintainceMode
+                } catch {
+                    print("Error decoding appConfig: \(error)")
+                }
+            }
+        }
+    }
+}
+
+import Foundation
+import Network
+
+class MonitoringNetworkState: ObservableObject {
+    
+    private let monitor = NWPathMonitor()
+    private let queue = DispatchQueue.global(qos: .background)
+    
+    @Published var isConnected = false
+    
+    init() {
+        monitor.start(queue: queue)
+        
+        monitor.pathUpdateHandler = { path in
+            if path.status == .satisfied {
+                DispatchQueue.main.async {
+                    self.isConnected = true
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self.isConnected = false
+                }
             }
         }
     }

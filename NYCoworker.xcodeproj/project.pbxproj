@@ -23,6 +23,9 @@
 		351B3A2529981665007E7D00 /* SupportSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351B3A2429981665007E7D00 /* SupportSettingsView.swift */; };
 		351B3A2729981B22007E7D00 /* NYCSettingsCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351B3A2629981B22007E7D00 /* NYCSettingsCard.swift */; };
 		351B3A2929982ABC007E7D00 /* LocationDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351B3A2829982ABC007E7D00 /* LocationDetailView.swift */; };
+		3524973829EB1C5E009E1002 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 3524973729EB1C5E009E1002 /* Lottie */; };
+		3524973A29EB1CE9009E1002 /* MaintenanceOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3524973929EB1CE9009E1002 /* MaintenanceOverlayView.swift */; };
+		3524974229EB2669009E1002 /* makeup.json in Resources */ = {isa = PBXBuildFile; fileRef = 3524974129EB2669009E1002 /* makeup.json */; };
 		3538C623298353210017800B /* iPages in Frameworks */ = {isa = PBXBuildFile; productRef = 3538C622298353210017800B /* iPages */; };
 		3538C626298356270017800B /* LanguageSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3538C625298356270017800B /* LanguageSetup.swift */; };
 		3538C6292983569D0017800B /* NYCBottomSheetHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3538C6282983569D0017800B /* NYCBottomSheetHeader.swift */; };
@@ -51,6 +54,7 @@
 		35746CB329A29F3E007322AA /* FavoritesEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35746CB229A29F3E007322AA /* FavoritesEmptyView.swift */; };
 		35746CB529A3183B007322AA /* NotificationsEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35746CB429A3183B007322AA /* NotificationsEmptyView.swift */; };
 		3583BD4529AA99E600B984EA /* NYCNotificationCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3583BD4429AA99E600B984EA /* NYCNotificationCard.swift */; };
+		35915FEF29EB160700263946 /* AppConfigService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35915FEE29EB160700263946 /* AppConfigService.swift */; };
 		359213632995DC0C00B18A8D /* KeyboardAvoider in Frameworks */ = {isa = PBXBuildFile; productRef = 359213622995DC0C00B18A8D /* KeyboardAvoider */; };
 		359348DA29BA378D00B7739A /* ReviewEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359348D929BA378D00B7739A /* ReviewEmptyView.swift */; };
 		359348DD29BA421900B7739A /* ReviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359348DC29BA421900B7739A /* ReviewModel.swift */; };
@@ -127,6 +131,8 @@
 		351B3A2429981665007E7D00 /* SupportSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportSettingsView.swift; sourceTree = "<group>"; };
 		351B3A2629981B22007E7D00 /* NYCSettingsCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCSettingsCard.swift; sourceTree = "<group>"; };
 		351B3A2829982ABC007E7D00 /* LocationDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailView.swift; sourceTree = "<group>"; };
+		3524973929EB1CE9009E1002 /* MaintenanceOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaintenanceOverlayView.swift; sourceTree = "<group>"; };
+		3524974129EB2669009E1002 /* makeup.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = makeup.json; sourceTree = "<group>"; };
 		3538C625298356270017800B /* LanguageSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSetup.swift; sourceTree = "<group>"; };
 		3538C6282983569D0017800B /* NYCBottomSheetHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCBottomSheetHeader.swift; sourceTree = "<group>"; };
 		3538C62B298357490017800B /* AppLanguageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLanguageModel.swift; sourceTree = "<group>"; };
@@ -153,6 +159,7 @@
 		35746CB229A29F3E007322AA /* FavoritesEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesEmptyView.swift; sourceTree = "<group>"; };
 		35746CB429A3183B007322AA /* NotificationsEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsEmptyView.swift; sourceTree = "<group>"; };
 		3583BD4429AA99E600B984EA /* NYCNotificationCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCNotificationCard.swift; sourceTree = "<group>"; };
+		35915FEE29EB160700263946 /* AppConfigService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigService.swift; sourceTree = "<group>"; };
 		359348D929BA378D00B7739A /* ReviewEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewEmptyView.swift; sourceTree = "<group>"; };
 		359348DC29BA421900B7739A /* ReviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewModel.swift; sourceTree = "<group>"; };
 		359A792A298DFBB9001B66CF /* Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifiers.swift; sourceTree = "<group>"; };
@@ -213,6 +220,7 @@
 				3538C623298353210017800B /* iPages in Frameworks */,
 				359B2FB029DB45300097E1DC /* SDWebImageSwiftUI in Frameworks */,
 				35C1668029D1307600963257 /* FirebaseFirestoreSwift in Frameworks */,
+				3524973829EB1C5E009E1002 /* Lottie in Frameworks */,
 				3565689B29A12C16007CAF80 /* PopupView in Frameworks */,
 				359B2FAD29DA53EB0097E1DC /* FirebaseStorage in Frameworks */,
 				359213632995DC0C00B18A8D /* KeyboardAvoider in Frameworks */,
@@ -306,6 +314,7 @@
 				359D87C529D76E9700E827F3 /* ReviewService.swift */,
 				359D87C929D8919C00E827F3 /* UserService.swift */,
 				3542F59A29D9DF410086CB4F /* LocationService.swift */,
+				35915FEE29EB160700263946 /* AppConfigService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -722,6 +731,8 @@
 			children = (
 				35EF059A29B0F2EC0098110B /* NavigationDotsView.swift */,
 				35AD1AED29CBB4780076AE54 /* RatingDotsView.swift */,
+				3524973929EB1CE9009E1002 /* MaintenanceOverlayView.swift */,
+				3524974129EB2669009E1002 /* makeup.json */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -763,6 +774,7 @@
 				35C1667F29D1307600963257 /* FirebaseFirestoreSwift */,
 				359B2FAC29DA53EB0097E1DC /* FirebaseStorage */,
 				359B2FAF29DB45300097E1DC /* SDWebImageSwiftUI */,
+				3524973729EB1C5E009E1002 /* Lottie */,
 			);
 			productName = NYCoworker;
 			productReference = 3503BD82297F50AA00C0E365 /* NYCoworker.app */;
@@ -799,6 +811,7 @@
 				3565689929A12C16007CAF80 /* XCRemoteSwiftPackageReference "PopupView" */,
 				35C1667A29D1307600963257 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				359B2FAE29DB45300097E1DC /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+				3524973629EB1C5E009E1002 /* XCRemoteSwiftPackageReference "lottie-spm" */,
 			);
 			productRefGroup = 3503BD83297F50AA00C0E365 /* Products */;
 			projectDirPath = "";
@@ -814,6 +827,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3524974229EB2669009E1002 /* makeup.json in Resources */,
 				359E6AA72981FEB800333BD7 /* Nunito-Bold.ttf in Resources */,
 				359E6AA82981FEB800333BD7 /* Nunito-SemiBold.ttf in Resources */,
 				359E6AA92981FEB800333BD7 /* Nunito-Regular.ttf in Resources */,
@@ -872,6 +886,7 @@
 				35E7FB8D29848AE300EFF282 /* NYCFloatingTextField.swift in Sources */,
 				35737E5E29888DA5003B68BE /* Social View.swift in Sources */,
 				35746CB329A29F3E007322AA /* FavoritesEmptyView.swift in Sources */,
+				35915FEF29EB160700263946 /* AppConfigService.swift in Sources */,
 				35E7FB8F29848B1C00EFF282 /* Extensions.swift in Sources */,
 				35737E5B29888866003B68BE /* ProfileView.swift in Sources */,
 				359F80FB298C330B000D792E /* FavoriteView.swift in Sources */,
@@ -903,6 +918,7 @@
 				35F29397299E8ED500A85586 /* AmenityCard.swift in Sources */,
 				359F80F7298C2508000D792E /* LocationCell.swift in Sources */,
 				35AD1AEE29CBB4780076AE54 /* RatingDotsView.swift in Sources */,
+				3524973A29EB1CE9009E1002 /* MaintenanceOverlayView.swift in Sources */,
 				359D87C829D8912700E827F3 /* User.swift in Sources */,
 				3503BD88297F50AA00C0E365 /* SceneDelegate.swift in Sources */,
 				351B3A2929982ABC007E7D00 /* LocationDetailView.swift in Sources */,
@@ -1051,7 +1067,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = 9S2MZXD36G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NYCoworker/Info.plist;
@@ -1088,7 +1104,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = 9S2MZXD36G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NYCoworker/Info.plist;
@@ -1143,6 +1159,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		3524973629EB1C5E009E1002 /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-spm.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
 		3538C621298353210017800B /* XCRemoteSwiftPackageReference "iPages" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/benjaminsage/iPages.git";
@@ -1194,6 +1218,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		3524973729EB1C5E009E1002 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3524973629EB1C5E009E1002 /* XCRemoteSwiftPackageReference "lottie-spm" */;
+			productName = Lottie;
+		};
 		3538C622298353210017800B /* iPages */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3538C621298353210017800B /* XCRemoteSwiftPackageReference "iPages" */;
