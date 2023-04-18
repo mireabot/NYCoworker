@@ -14,12 +14,10 @@ import SDWebImageSwiftUI
 struct LocationDetailView: View {
     @Environment(\.dismiss) var makeDismiss
     @State var selectDetent : PresentationDetent = .bottom
-    @State var showMapChoice = false
     @State var currentImage: Int = 0
     @State var addToFavs = false
     @State var showReviewView = false
     @State var reportEdit = false
-    @State var reportSubmitted = false
     @State var isLoading = true
     @StateObject private var reviewService = ReviewService()
     var locationData : Location
@@ -59,6 +57,8 @@ struct LocationDetailView: View {
             //                suggestInfo
             
         }
+        .navigationBarBackButtonHidden()
+        .navigationBarTitleDisplayMode(.inline)
         .task {
             guard reviewService.reviews.isEmpty else { return }
             await reviewService.fetchReviews(locationID: "\(locationData.locationID)", completion: {
@@ -68,7 +68,6 @@ struct LocationDetailView: View {
                 }
             })
         }
-        .hideTabbar(shouldHideTabbar: true)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button {
@@ -98,23 +97,11 @@ struct LocationDetailView: View {
             }
         }
         .toolbarBackground(.white, for: .navigationBar)
-        .navigationBarBackButtonHidden()
-        .navigationBarTitleDisplayMode(.inline)
-        .fullScreenCover(isPresented: $reportEdit, content: {
-            ReportEditView(showAlert: $reportSubmitted)
-        })
         .sheet(isPresented: $showReviewView, content: {
             ExpandedReviewView(type: .fullList)
                 .environmentObject(reviewService)
                 .presentationDetents(
                     [.mediumBottomBar, .largeBottomBar],
-                    selection: $selectDetent
-                )
-        })
-        .sheet(isPresented: $showMapChoice, content: {
-            MapChoiceView(geoPoint: CLLocationCoordinate2D(latitude: locationData.locationCoordinates.latitude, longitude: locationData.locationCoordinates.longitude))
-                .presentationDetents(
-                    [.bottom],
                     selection: $selectDetent
                 )
         })
@@ -126,16 +113,6 @@ struct LocationDetailView: View {
                 .autohideIn(1.5)
                 .type(.floater())
                 .position(.bottom)
-                .animation(.spring(response: 0.4, blendDuration: 0.2))
-        }
-        .popup(isPresented: $reportSubmitted) {
-            NYCAlertNotificationView(alertStyle: .reportSubmitted)
-        } customize: {
-            $0
-                .isOpaque(true)
-                .autohideIn(1.5)
-                .type(.floater())
-                .position(.top)
                 .animation(.spring(response: 0.4, blendDuration: 0.2))
         }
     }
@@ -168,7 +145,7 @@ struct LocationDetailView: View {
                 Spacer()
                 
                 NYCCircleImageButton(size: 24, image: Resources.Images.Navigation.openMap) {
-                    showMapChoice.toggle()
+                    openInAppleMaps(address: locationData.locationAddress, withName: locationData.locationName)
                 }
                 
             }

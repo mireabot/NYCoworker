@@ -36,8 +36,14 @@ struct NYCAlertNotificationView: View {
         }
     }
     var alertStyle: AlertStyle
+    var title: String?
     var body: some View {
-        createAlert()
+        if alertStyle == .reportSubmitted {
+            createAlertError(withTitle: title ?? "Empty")
+        }
+        else {
+            createAlert()
+        }
     }
     
     @ViewBuilder
@@ -59,12 +65,33 @@ struct NYCAlertNotificationView: View {
         .cornerRadius(5)
         .padding([.leading,.trailing], 16)
     }
+    
+    @ViewBuilder
+    func createAlertError(withTitle title: String) -> some View {
+        HStack {
+            HStack(alignment: .center, spacing: 5) {
+                alertStyle.icon
+                    .resizable()
+                    .frame(width: 20, height: 20)
+                    .foregroundColor(Color.white)
+                Text(title)
+                    .foregroundColor(Color.white)
+                    .font(Resources.Fonts.regular(withSize: 17))
+            }
+            Spacer()
+        }
+        .padding(10)
+        .background(Resources.Colors.customBlack)
+        .cornerRadius(5)
+        .padding([.leading,.trailing], 16)
+    }
 }
 
 struct NYCAlertView_Previews: PreviewProvider {
     static var previews: some View {
-//        NYCAlertNotificationView(title: "Added to favorites", alertStyle: .small)
+        //        NYCAlertNotificationView(title: "Added to favorites", alertStyle: .small)
         NYCAlertView(type: .notification, action: {})
+        //        NYCBottomErrorAlert(show: .constant(true))
     }
 }
 
@@ -110,7 +137,7 @@ struct NYCAlertView: View {
             .buttonStyle(NYCActionButtonStyle(showLoader: .constant(false)))
             .padding([.leading,.trailing], 40)
             .padding(.top, 10)
-
+            
         }
         .padding()
         .background(Color.white)

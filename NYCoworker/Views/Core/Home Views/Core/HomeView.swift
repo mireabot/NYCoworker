@@ -20,8 +20,8 @@ struct HomeView: View {
     @State var addToFavs = false
     var body: some View {
         NavigationView {
-            VStack(spacing: 0) {
-                ScrollView(.vertical, showsIndicators: false) {
+            ScrollView(.vertical, showsIndicators: false) {
+                VStack(spacing: 0) {
                     /// Map section
                     mapView()
                     /// Locations section
@@ -35,8 +35,8 @@ struct HomeView: View {
                         /// Category scrollview
                         locationPublicSpacesCollection()
                     }
-                    .padding(.top, 15)
                 }
+//                .padding(.bottom, 10)
             }
             .popup(isPresented: $addToFavs) {
                 NYCAlertNotificationView(alertStyle: .addedToFavorites)
@@ -74,9 +74,11 @@ struct HomeView: View {
                     }
                 }
             }
+            .fullScreenCover(isPresented: $showMap, content: {
+                LocationsMap().environmentObject(locationService)
+            })
             .navigationBarTitleDisplayMode(.inline)
             .toolbarBackground(.white, for: .navigationBar, .automatic)
-            .hideTabbar(shouldHideTabbar: false)
         }
     }
 }
@@ -113,7 +115,6 @@ extension HomeView {
                                 NavigationLink(destination: LocationDetailView(locationData: data)) {
                                     LocationCell(data: data, type: .small, buttonAction: {
                                         addLocationTofavs(location: data.locationID)
-                                        addToFavs.toggle()
                                     })
                                 }
                             }
@@ -149,7 +150,6 @@ extension HomeView {
                                 NavigationLink(destination: LocationDetailView(locationData: data)) {
                                     LocationCell(data: data, type: .large, buttonAction: {
                                         addLocationTofavs(location: data.locationID)
-                                        addToFavs.toggle()
                                     })
                                 }
                             }
@@ -184,7 +184,6 @@ extension HomeView {
                                 NavigationLink(destination: LocationDetailView(locationData: data)) {
                                     LocationCell(data: data, type: .large, buttonAction: {
                                         addLocationTofavs(location: data.locationID)
-                                        addToFavs.toggle()
                                     })
                                 }
                             }
@@ -206,28 +205,25 @@ extension HomeView {
                     .cornerRadius(10)
                     .disabled(true)
                 
-                NavigationLink(destination: LocationsMap().environmentObject(locationService), label: {
+                Button {
+                    showMap.toggle()
+                } label: {
                     Text("Open map")
-                        .foregroundColor(Color.white)
-                        .padding([.top,.bottom], 15)
-                        .frame(maxWidth: .infinity)
-                        .background(RoundedRectangle(cornerRadius: 5).fill(Resources.Colors.primary))
-                        .cornerRadius(10)
-                })
+                }
+                .buttonStyle(NYCActionButtonStyle(showLoader: .constant(false)))
                 .padding([.leading,.trailing], 90)
+
             }
         }
-        .padding([.leading,.trailing], 20)
-        .padding(.top, 20)
+        .padding()
     }
     
     func addLocationTofavs(location: String) {
         Task {
-            do {
-                try await locationService.addFavoriteLocation(locationID: location, userID: userId) {
-                }
-            } catch {
-                print(error.localizedDescription)
+            await locationService.addFavoriteLocation(locationID: location, userID: userId, completion: {
+                addToFavs.toggle()
+            }) { err in
+                print(err.localizedDescription)
             }
         }
     }

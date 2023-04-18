@@ -47,12 +47,11 @@ struct LocationsMap: View {
                     .position(.top)
                     .animation(.spring(response: 0.4, blendDuration: 0.2))
             }
-            .toolbar(.hidden, for: .tabBar)
             .toolbarBackground(.clear, for: .navigationBar)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    NYCCircleImageButton(size: 24, image: Resources.Images.Navigation.arrowBack, color: .black) {
+                    NYCCircleImageButton(size: 24, image: Resources.Images.Navigation.close, color: .black) {
                         makeDismiss()
                     }
                 }

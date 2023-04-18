@@ -8,6 +8,7 @@
 import Foundation
 import FirebaseFirestoreSwift
 import FirebaseFirestore
+import Firebase
 
 class UserService: ObservableObject {
     private var db = Firestore.firestore()
@@ -26,6 +27,16 @@ class UserService: ObservableObject {
         }
         catch {
             print(error.localizedDescription)
+        }
+    }
+    
+    func logIn(withEmail email: String, withPass password: String, completion: @escaping () -> Void, completion2: @escaping (Error) -> Void) async {
+        do {
+            try await Auth.auth().signIn(withEmail: email, password: password)
+            completion()
+        }
+        catch {
+            completion2(error)
         }
     }
 }

@@ -34,7 +34,6 @@ struct ProfileView: View {
                 LogoutView()
                     .presentationDetents([.bottom])
             })
-            .hideTabbar(shouldHideTabbar: false)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     NYCHeader(title: "Profile")

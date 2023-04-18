@@ -56,7 +56,7 @@ struct LocationListView: View {
                         Resources.Images.Navigation.arrowBack
                             .foregroundColor(Resources.Colors.primary)
                     }
-
+                    
                 }
                 
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -66,7 +66,6 @@ struct LocationListView: View {
                 }
             }
             .navigationBarTitleDisplayMode(.inline)
-            .hideTabbar(shouldHideTabbar: true)
         }
         .navigationBarBackButtonHidden()
     }
@@ -79,11 +78,11 @@ struct LocationListView: View {
                     LocationListCell(type: .list, data: location) {
                         Task {
                             do {
-                                try await locationService.addFavoriteLocation(locationID: location.locationID, userID: userId) {
+                                await locationService.addFavoriteLocation(locationID: location.locationID, userID: userId, completion: {
                                     addToFavs.toggle()
+                                }) { err in
+                                    print(err.localizedDescription)
                                 }
-                            } catch {
-                                print(error.localizedDescription)
                             }
                         }
                     }
@@ -100,11 +99,11 @@ struct LocationListView: View {
                     LocationListCell(type: .list, data: location) {
                         Task {
                             do {
-                                try await locationService.addFavoriteLocation(locationID: location.locationID, userID: userId) {
+                                await locationService.addFavoriteLocation(locationID: location.locationID, userID: userId, completion: {
                                     addToFavs.toggle()
+                                }) { err in
+                                    print(err.localizedDescription)
                                 }
-                            } catch {
-                                print(error.localizedDescription)
                             }
                         }
                     }
@@ -121,11 +120,11 @@ struct LocationListView: View {
                     LocationListCell(type: .list, data: location) {
                         Task {
                             do {
-                                try await locationService.addFavoriteLocation(locationID: location.locationID, userID: userId) {
+                                await locationService.addFavoriteLocation(locationID: location.locationID, userID: userId, completion: {
                                     addToFavs.toggle()
+                                }) { err in
+                                    print(err.localizedDescription)
                                 }
-                            } catch {
-                                print(error.localizedDescription)
                             }
                         }
                     }

@@ -14,7 +14,6 @@ struct NotificationsView: View {
     @StateObject var notificationService = NotificationService()
     var body: some View {
         notificationsList()
-            .hideTabbar(shouldHideTabbar: true)
             .toolbar(content: {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button {

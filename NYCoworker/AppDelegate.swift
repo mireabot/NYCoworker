@@ -55,33 +55,40 @@ struct SplashScreenView: View {
     @AppStorage("UserID") var userId : String = ""
     @AppStorage("UserMail") var userMail : String = ""
     @AppStorage("UserPass") var userPass : String = ""
+    @StateObject var userService = UserService()
     var body: some View {
-        if isActive {
-            InitView()
-        } else {
-            VStack {
+        ZStack {
+            Color.clear.edgesIgnoringSafeArea(.all)
+            if isActive {
+                InitView()
+            } else {
                 VStack {
-                    Image("appLogo")
-                        .resizable()
-                        .frame(width: 70, height: 70)
+                    VStack {
+                        Image("appLogo")
+                            .resizable()
+                            .frame(width: 70, height: 70)
+                    }
                 }
             }
-            .onAppear {
-                logIn()
+        }
+        .overlay(content: {
+            NYCBottomErrorAlert(show: $showError, errorTitle: errorMessage) {
+                showError.toggle()
+                performLogIn()
             }
+        })
+        .onAppear {
+            performLogIn()
         }
     }
     
-    func logIn() {
+    func performLogIn() {
         if userLogged {
             Task {
-                do {
-                    try await Auth.auth().signIn(withEmail: userMail, password: userPass)
+                await userService.logIn(withEmail: userMail,withPass: userPass, completion: {
                     isActive = true
-                }
-                catch {
-                    await setError(error)
-                    print("Error happened")
+                }) { err in
+                    setError(err)
                 }
             }
         }
@@ -93,12 +100,12 @@ struct SplashScreenView: View {
         }
     }
     
-    func setError(_ error: Error) async {
-        await MainActor.run(body: {
-            isActive = false
-            errorMessage = error.localizedDescription
+    func setError(_ error: Error) {
+        isActive = false
+        errorMessage = parseAuthError(error)
+        withAnimation {
             showError.toggle()
-        })
+        }
     }
 }
 

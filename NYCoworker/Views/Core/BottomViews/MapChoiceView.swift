@@ -16,11 +16,11 @@ struct MapChoiceView: View {
                 NYCBottomSheetHeader(title: "Where you want to go?").padding(.top, 15)
                 VStack(alignment: .center, spacing: 10) {
                     NYCActionButton(action: {
-                        print(geoPoint)
+//                        openInAppleMapsTest(address: "350 W Broadway, New York, NY 10013")
                     }, text: "Apple Maps")
                     
                     NYCActionButton(action: {
-                        
+                        openInGoogleMaps(withLocation: geoPoint)
                     }, text: "Google Maps", buttonStyle: .secondary)
                 }
                 .frame(maxWidth: .infinity)

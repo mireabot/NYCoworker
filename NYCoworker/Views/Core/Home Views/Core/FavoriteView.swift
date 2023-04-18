@@ -22,7 +22,6 @@ struct FavoriteView: View {
                 .navigationDestination(for: Location.self, destination: { location in
                     LocationDetailView(locationData: location)
                 })
-                .toolbar(.hidden, for: .tabBar)
                 .toolbar(content: {
                     ToolbarItem(placement: .navigationBarLeading) {
                         Button {
