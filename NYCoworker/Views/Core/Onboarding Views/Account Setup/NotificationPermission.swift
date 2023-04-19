@@ -8,6 +8,7 @@
 import SwiftUI
 import UserNotifications
 import PopupView
+import FirebaseMessaging
 
 struct NotificationPermission: View {
     @State var showAlert: Bool = false
@@ -54,6 +55,10 @@ struct NotificationPermission: View {
         center.requestAuthorization(options: [.alert,.badge,.sound]) { granted, error in
             if granted {
                 print("Access granted")
+                DispatchQueue.main.async {
+                    UIApplication.shared.registerForRemoteNotifications()
+                    Messaging.messaging().delegate = UIApplication.shared.delegate as? MessagingDelegate
+                }
             }
             else {
                 print(error ?? "Unknown")
