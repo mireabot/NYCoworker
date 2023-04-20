@@ -10,6 +10,7 @@ import StoreKit
 
 struct SupportSettingsView: View {
     @Environment(\.requestReview) var requestReview
+    @State private var showFeedback = false
     var body: some View {
         VStack {
             VStack {
@@ -25,19 +26,24 @@ struct SupportSettingsView: View {
             .padding(.bottom, 20)
             
             VStack(spacing: 10) {
-                NYCSettingsCard(icon: Resources.Images.Settings.manageAccount, title: "Write feedback")
-                NYCSettingsCard(icon: Resources.Images.Settings.website, title: "Visit website")
-                NYCSettingsCard(icon: Resources.Images.Settings.rate, title: "Rate app").onTapGesture {
+                NYCSettingsCard(icon: Resources.Images.Settings.manageAccount, title: "Write feedback", action: {
+                    showFeedback.toggle()
+                })
+                NYCSettingsCard(icon: Resources.Images.Settings.website, title: "Visit website", action: {})
+                NYCSettingsCard(icon: Resources.Images.Settings.rate, title: "Rate app", action: {
                     requestReview()
-                }
+                })
             }
             .padding([.leading,.trailing], 16)
             
-            NYCSettingsCard(icon: Resources.Images.Settings.faq, title: "FAQ")
+            NYCSettingsCard(icon: Resources.Images.Settings.faq, title: "FAQ", action: {})
                 .padding(.top, 50)
                 .padding([.leading,.trailing], 16)
             
             Spacer()
+        }
+        .fullScreenCover(isPresented: $showFeedback) {
+            WriteFeedbackView()
         }
     }
 }

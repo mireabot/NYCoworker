@@ -17,7 +17,7 @@ enum Resources {
     
     static var userLocation : CLLocation = CLLocation(latitude: 0.0, longitude: 0.0)
     
-    static var adminMode = false
+    static var adminMode = true
     
     /// Colors resource pack
     enum Colors {
@@ -38,6 +38,7 @@ enum Resources {
             static let homeTab = UIImage(named: "home")
             static let socialTab = UIImage(named: "social")
             static let profileTab = UIImage(named: "profile")
+            static let admin = UIImage(named: "admin")
         }
         /// Images for navigation
         enum Navigation {

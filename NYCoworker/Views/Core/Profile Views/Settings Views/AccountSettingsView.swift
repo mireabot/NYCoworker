@@ -44,23 +44,6 @@ struct AccountSettingsView: View {
                     .focused($focusedField, equals: .occupationField)
             }.padding([.leading,.trailing], 16)
             
-            
-            Button {
-                self.isLoading = true
-                Task {
-                    await updateUserData(with: userId, name: nameText, occupation: occupationText) {
-                        isLoading = false
-                        showAlert.toggle()
-                    }
-                }
-            } label: {
-                Text("Save")
-            }
-            .disabled(nameText == userService.user.name || nameText.isEmpty)
-            .buttonStyle(NYCActionButtonStyle(showLoader: $isLoading))
-            .padding(.top, 20)
-            .padding([.leading,.trailing], 16)
-            
         }
         .popup(isPresented: $showAlert) {
             NYCAlertNotificationView(alertStyle: .dataUploaded)
@@ -76,6 +59,24 @@ struct AccountSettingsView: View {
         .onTapGesture {
             focusedField = nil
         }
+        .safeAreaInset(edge: .bottom, content: {
+            Button {
+                self.isLoading = true
+                Task {
+                    await updateUserData(with: userId, name: nameText, occupation: occupationText) {
+                        isLoading = false
+                        showAlert.toggle()
+                    }
+                }
+            } label: {
+                Text("Save")
+            }
+            .disabled(nameText == userService.user.name || nameText.isEmpty)
+            .buttonStyle(NYCActionButtonStyle(showLoader: $isLoading))
+            .padding(.bottom, 15)
+            .padding([.leading,.trailing], 16)
+            
+        })
         .onAppear {
             nameText = userService.user.name
             occupationText = userService.user.occupation

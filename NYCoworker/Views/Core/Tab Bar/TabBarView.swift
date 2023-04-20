@@ -34,7 +34,7 @@ struct TabBarView: View {
             if Resources.adminMode {
                 AdminHomeView()
                     .tabItem {
-                        Label("Admin", image: "profile")
+                        Label("Admin", image: "admin")
                     }
             }
         }
