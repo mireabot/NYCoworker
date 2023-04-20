@@ -10,12 +10,11 @@ import SwiftUI
 import Firebase
 import CoreLocation
 import FirebaseMessaging
+import UserNotifications
 
 @main
 struct NYCoworkerApp: App {
-    init() {
-        FirebaseApp.configure()
-    }
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     var body: some Scene {
         WindowGroup {
             SplashScreenView()
@@ -25,10 +24,14 @@ struct NYCoworkerApp: App {
 
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    let gcmMessageIDKey = "gcm.message_id"
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        FirebaseApp.configure()
+        UNUserNotificationCenter.current().delegate = self
         Messaging.messaging().delegate = self
+        application.registerForRemoteNotifications()
         return true
     }
     
@@ -46,14 +49,58 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
     
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) async -> UIBackgroundFetchResult {
+        if let aps = userInfo["aps"] as? [String: Any], let badgeCount = aps["badge"] as? Int {
+            // Set the badge count on the app icon
+            application.applicationIconBadgeNumber = badgeCount
+        }
+        
+        return UIBackgroundFetchResult.noData
+    }
+    
 }
 
-extension AppDelegate: MessagingDelegate {
+extension AppDelegate: MessagingDelegate{
+    
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
-        guard let token = fcmToken else {
-            print("No token")
-            return
+        print("FCM token: \(fcmToken ?? "")")
+    }
+    
+    func messaging(_ messaging: Messaging, didReceive remoteMessage: Any) {
+        print("Received remote message: \(remoteMessage)")
+    }
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        print("Device token: \(deviceToken.hexEncodedString())")
+        
+        // Set the APNS device token for Firebase Messaging
+        Messaging.messaging().apnsToken = deviceToken
+        
+        // Re-retrieve the FCM token
+        Messaging.messaging().token { token, error in
+            if let error = error {
+                print("Failed to retrieve FCM token: \(error.localizedDescription)")
+            } else if let token = token {
+                print("FCM token: \(token)")
+            }
         }
-        print("Firebase registration token: \(token)")
+    }
+    
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print("Failed to register for remote notifications: \(error.localizedDescription)")
+    }
+}
+
+// User Notifications...[AKA InApp Notifications...]
+extension AppDelegate : UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        print("User tapped notification")
+        completionHandler()
+    }
+}
+
+extension Data {
+    func hexEncodedString() -> String {
+        return map { String(format: "%02hhx", $0) }.joined()
     }
 }

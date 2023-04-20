@@ -39,5 +39,9 @@ class UserService: ObservableObject {
             completion2(error)
         }
     }
+    
+    func addToken(forUser user: String, token: String) {
+        db.collection("User").document(user).updateData(["token": token])
+    }
 }
 

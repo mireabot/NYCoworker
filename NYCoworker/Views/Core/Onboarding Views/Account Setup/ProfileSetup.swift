@@ -37,16 +37,26 @@ struct ProfileSetup: View {
                     Image(uiImage: image)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
+                        .clipShape(Circle())
+                        .contentShape(Circle())
                 }
                 else {
-                    Image("emptyImage")
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
+                    ZStack(alignment: .bottomTrailing) {
+                        Image("emptyImage")
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                        
+                        Image(systemName: "plus.circle.fill")
+                            .resizable()
+                            .frame(width: 20, height: 20)
+                            .foregroundColor(.white)
+                            .padding(4)
+                            .background(Resources.Colors.primary)
+                            .clipShape(Circle())
+                    }
                 }
             }
-            .frame(width: 90, height: 90)
-            .clipShape(Circle())
-            .contentShape(Circle())
+            .frame(width: 100, height: 100)
             .padding(.top, 10)
             .onTapGesture {
                 showImagePicker.toggle()

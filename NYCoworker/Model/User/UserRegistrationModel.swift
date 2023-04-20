@@ -21,6 +21,7 @@ class UserRegistrationModel: ObservableObject {
     @AppStorage("UserMail") var userMail : String = ""
     @AppStorage("UserPass") var userPass : String = ""
     @AppStorage("userSigned") var userLogged: Bool = false
+    @AppStorage("fcmToken") var firebaseToken: String = ""
     
     func createUser(mail: String, pass: String,completion: @escaping () -> Void) {
         Task {

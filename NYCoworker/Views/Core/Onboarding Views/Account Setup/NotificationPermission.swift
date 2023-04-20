@@ -12,6 +12,7 @@ import FirebaseMessaging
 
 struct NotificationPermission: View {
     @State var showAlert: Bool = false
+    @AppStorage("fcmToken") var firebaseToken: String = ""
     var body: some View {
         VStack {
             /// Content stack
@@ -35,7 +36,7 @@ struct NotificationPermission: View {
         }
         .addTransition()
         .onAppear {
-            requestNotification()
+            requestNotificationPermissions()
         }
         .popup(isPresented: $showAlert) {
             NYCAlertView(type: .notification) {
@@ -49,19 +50,34 @@ struct NotificationPermission: View {
         }
     }
     
-    func requestNotification() {
-        let center = UNUserNotificationCenter.current()
-        
-        center.requestAuthorization(options: [.alert,.badge,.sound]) { granted, error in
-            if granted {
-                print("Access granted")
-                DispatchQueue.main.async {
-                    UIApplication.shared.registerForRemoteNotifications()
-                    Messaging.messaging().delegate = UIApplication.shared.delegate as? MessagingDelegate
-                }
+    func requestNotificationPermissions() {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
+            if let error = error {
+                print("Error requesting notification permissions: \(error.localizedDescription)")
+                return
             }
-            else {
-                print(error ?? "Unknown")
+            
+            if granted {
+                print("Notifications granted!")
+                Messaging.messaging().token(completion: { token, error in
+                    if let error = error {
+                        print("Error getting FCM token: \(error.localizedDescription)")
+                        return
+                    }
+                    
+                    guard let token = token else {
+                        print("FCM token is nil")
+                        return
+                    }
+                    
+                    print("FCM token: \(token)")
+                    firebaseToken = token
+                    DispatchQueue.main.async {
+                        UIApplication.shared.registerForRemoteNotifications()
+                    }
+                })
+            } else {
+                print("Notifications not granted")
                 showAlert.toggle()
             }
         }
