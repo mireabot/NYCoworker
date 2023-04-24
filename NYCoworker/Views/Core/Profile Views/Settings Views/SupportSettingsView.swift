@@ -29,7 +29,9 @@ struct SupportSettingsView: View {
                 NYCSettingsCard(icon: Resources.Images.Settings.manageAccount, title: "Write feedback", action: {
                     showFeedback.toggle()
                 })
-                NYCSettingsCard(icon: Resources.Images.Settings.website, title: "Visit website", action: {})
+                NYCSettingsCard(icon: Resources.Images.Settings.website, title: "Visit website", action: {
+                    openWebsite()
+                })
                 NYCSettingsCard(icon: Resources.Images.Settings.rate, title: "Rate app", action: {
                     requestReview()
                 })
@@ -44,6 +46,12 @@ struct SupportSettingsView: View {
         }
         .fullScreenCover(isPresented: $showFeedback) {
             WriteFeedbackView()
+        }
+    }
+    
+    func openWebsite() {
+        if let url = URL(string: "https://www.nycoworker.com/") {
+            UIApplication.shared.open(url)
         }
     }
 }

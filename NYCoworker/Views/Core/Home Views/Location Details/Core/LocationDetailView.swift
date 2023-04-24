@@ -87,14 +87,6 @@ struct LocationDetailView: View {
                 }
                 
             }
-            ToolbarItem(placement: .primaryAction) {
-                Button {
-                    print("Share link")
-                } label: {
-                    Resources.Images.Navigation.share
-                        .foregroundColor(Resources.Colors.customBlack)
-                }
-            }
         }
         .toolbarBackground(.white, for: .navigationBar)
         .sheet(isPresented: $showReviewView, content: {

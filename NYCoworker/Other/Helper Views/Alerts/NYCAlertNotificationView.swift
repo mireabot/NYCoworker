@@ -12,6 +12,7 @@ struct NYCAlertNotificationView: View {
         case addedToFavorites
         case dataUploaded
         case reportSubmitted
+        case feedbackSent
         
         var title: String {
             switch self {
@@ -21,6 +22,8 @@ struct NYCAlertNotificationView: View {
                 return "Successfully updated"
             case .reportSubmitted:
                 return "Report submitted"
+            case .feedbackSent:
+                return "We received your feedback"
             }
         }
         
@@ -31,6 +34,8 @@ struct NYCAlertNotificationView: View {
             case .dataUploaded:
                 return Image("dataUploaded")
             case .reportSubmitted:
+                return Image("dataUploaded")
+            case .feedbackSent:
                 return Image("dataUploaded")
             }
         }

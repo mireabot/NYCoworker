@@ -13,4 +13,5 @@ enum Endpoints: String {
     case notifications = "Notifications"
     case reviews = "Reviews"
     case locations = "Locations"
+    case feedback = "Feedbacks"
 }

@@ -41,7 +41,27 @@ class UserService: ObservableObject {
     }
     
     func addToken(forUser user: String, token: String) {
-        db.collection("User").document(user).updateData(["token": token])
+        db.collection(Endpoints.users.rawValue).document(user).updateData(["token": token])
+    }
+    
+    func createFeedback(withID userID: String, withMessage message: String, completion: @escaping () -> Void, errorCompletion: @escaping (Error) -> Void) async {
+        do {
+            try await db.collection(Endpoints.feedback.rawValue).document().setData([
+                "feedbackID": randomString(length: 5),
+                "userID": userID,
+                "message": message,
+                "datePosted": Date()
+            ])
+            completion()
+        }
+        catch {
+            errorCompletion(error)
+        }
+    }
+    
+    func randomString(length: Int) -> String {
+        let letters = "0123456789QWERTYUIOPASDFGHJKLZXCVBNM"
+        return String((0..<length).map{ _ in letters.randomElement()! })
     }
 }
 

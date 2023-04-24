@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import PopupView
 
 struct WriteFeedbackView: View {
     @Environment(\.dismiss) var makeDismiss
@@ -13,6 +14,9 @@ struct WriteFeedbackView: View {
     let characterLimit = 300
     @State var showLoading = false
     @FocusState private var fieldIsFocused: Bool
+    @AppStorage("UserID") var userId : String = ""
+    @StateObject var userService = UserService()
+    @State private var showAlert = false
     var body: some View {
         NavigationView {
             ScrollView(.vertical, showsIndicators: false) {
@@ -35,6 +39,7 @@ struct WriteFeedbackView: View {
                     HStack(spacing: 8) {
                         withAnimation(.easeInOut) {
                             TextField("", text: $message, axis: .vertical)
+                                .tint(Resources.Colors.primary)
                                 .focused($fieldIsFocused)
                                 .onChange(of: message) { newValue in
                                     if newValue.count > characterLimit {
@@ -72,16 +77,39 @@ struct WriteFeedbackView: View {
                 .padding([.leading,.trailing], 16)
                 
             }
+            .popup(isPresented: $showAlert) {
+                NYCAlertNotificationView(alertStyle: .feedbackSent)
+            } customize: {
+                $0
+                    .isOpaque(true)
+                    .autohideIn(1.5)
+                    .type(.floater())
+                    .position(.top)
+                    .animation(.spring(response: 0.4, blendDuration: 0.2))
+            }
             .scrollDisabled(true)
             .onTapGesture {
                 fieldIsFocused = false
             }
             .safeAreaInset(edge: .bottom, content: {
                 Button {
-                    
+                    showLoading = true
+                    fieldIsFocused = false
+                    Task {
+                        await userService.createFeedback(withID: userId, withMessage: message, completion: {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                                self.showLoading = false
+                                self.message = ""
+                                self.showAlert.toggle()
+                            }
+                        }) { err in
+                            print(err.localizedDescription)
+                        }
+                    }
                 } label: {
                     Text("Submit")
                 }
+                .disabled(message.isEmpty)
                 .buttonStyle(NYCActionButtonStyle(showLoader: $showLoading))
                 .padding([.leading,.trailing], 16)
                 .padding(.bottom, 15)
@@ -102,16 +130,4 @@ struct WriteFeedbackView_Previews: PreviewProvider {
     static var previews: some View {
         WriteFeedbackView()
     }
-}
-
-extension View {
-    func placeholder<Content: View>(
-        when shouldShow: Bool,
-        alignment: Alignment = .leading,
-        @ViewBuilder placeholder: () -> Content) -> some View {
-            ZStack(alignment: alignment) {
-                placeholder().opacity(shouldShow ? 1 : 0)
-                self
-            }
-        }
 }

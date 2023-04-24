@@ -72,8 +72,8 @@ struct Onboarding_Previews: PreviewProvider {
 struct FirstView: View {
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
-            Rectangle()
-                .frame(width: UIScreen.main.bounds.width - 28, height: 160)
+            Image("onb2")
+                .frame(width: UIScreen.main.bounds.width - 28, height: 250)
                 .cornerRadius(10)
                 .padding(.bottom, 30)
             
@@ -93,8 +93,8 @@ struct FirstView: View {
 struct SecondView: View {
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
-            Rectangle()
-                .frame(width: UIScreen.main.bounds.width - 28, height: 160)
+            Image("onb1")
+                .frame(width: UIScreen.main.bounds.width - 28, height: 250)
                 .cornerRadius(10)
                 .padding(.bottom, 30)
             
@@ -115,7 +115,7 @@ struct ThirdView: View {
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
             Rectangle()
-                .frame(width: UIScreen.main.bounds.width - 28, height: 160)
+                .frame(width: UIScreen.main.bounds.width - 28, height: 250)
                 .cornerRadius(10)
                 .padding(.bottom, 30)
             
