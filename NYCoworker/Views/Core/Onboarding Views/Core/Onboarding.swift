@@ -30,7 +30,6 @@ struct Onboarding: View {
                 Spacer()
                 /// Page control with main content
                 iPages(selection: $currentPage) {
-                    FirstView()
                     SecondView()
                     ThirdView()
                 }
@@ -69,27 +68,6 @@ struct Onboarding_Previews: PreviewProvider {
     }
 }
 
-struct FirstView: View {
-    var body: some View {
-        VStack(alignment: .center, spacing: 0) {
-            Image("onb2")
-                .frame(width: UIScreen.main.bounds.width - 28, height: 250)
-                .cornerRadius(10)
-                .padding(.bottom, 30)
-            
-            VStack(spacing: 5) {
-                Text("Welcome to NYCoworker!")
-                    .foregroundColor(Resources.Colors.customBlack)
-                    .font(Resources.Fonts.bold(withSize: 22))
-                
-                Text("Extend your working space!")
-                    .foregroundColor(Resources.Colors.darkGrey)
-                    .font(Resources.Fonts.regular(withSize: 17))
-            }
-        }
-    }
-}
-
 struct SecondView: View {
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
@@ -99,14 +77,17 @@ struct SecondView: View {
                 .padding(.bottom, 30)
             
             VStack(spacing: 5) {
-                Text("Find new spots around NYC")
+                Text("Find the best free places to work")
                     .foregroundColor(Resources.Colors.customBlack)
                     .font(Resources.Fonts.bold(withSize: 22))
+                    .multilineTextAlignment(.center)
                 
-                Text("Choose any location from our hand picked list")
+                Text("Our app features a hand-picked selection of the coolest productive workspaces in NYC")
                     .foregroundColor(Resources.Colors.darkGrey)
                     .font(Resources.Fonts.regular(withSize: 17))
+                    .multilineTextAlignment(.center)
             }
+            .padding([.leading,.trailing], 16)
         }
     }
 }
@@ -114,20 +95,24 @@ struct SecondView: View {
 struct ThirdView: View {
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
-            Rectangle()
+            Image("onb2")
                 .frame(width: UIScreen.main.bounds.width - 28, height: 250)
                 .cornerRadius(10)
                 .padding(.bottom, 30)
             
             VStack(spacing: 5) {
-                Text("Connect with coworkers")
+                Text("Expand your professional network")
                     .foregroundColor(Resources.Colors.customBlack)
                     .font(Resources.Fonts.bold(withSize: 22))
+                    .multilineTextAlignment(.center)
                 
-                Text("Explore coworkers who work in the same space")
+                Text("Our app lets you easily explore and connect with coworkers who work in the same location")
                     .foregroundColor(Resources.Colors.darkGrey)
                     .font(Resources.Fonts.regular(withSize: 17))
+                    .multilineTextAlignment(.center)
             }
+            .padding([.leading,.trailing], 16)
         }
+        
     }
 }
