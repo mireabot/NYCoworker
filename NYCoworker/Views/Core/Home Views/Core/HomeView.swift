@@ -223,8 +223,12 @@ extension HomeView {
             await locationService.addFavoriteLocation(locationID: location, userID: userId, completion: {
                 addToFavs.toggle()
             }) { err in
-                print(err.localizedDescription)
+                setError(err)
             }
         }
+    }
+    
+    func setError(_ error: Error) {
+        print("DEBUG: \(firestoreError(forError: error))")
     }
 }

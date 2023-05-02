@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct ReviewCard: View {
     enum ReviewCardType {
@@ -18,9 +19,13 @@ struct ReviewCard: View {
         VStack(alignment: .leading, spacing: 10) {
             /// Header
             HStack(alignment: .center, spacing: 10) {
-                Image("p1")
-                    .resizable()
-                    .frame(width: 50, height: 50)
+                WebImage(url: URL(string: data.userImage)).placeholder {
+                    Image("emptyImage")
+                        .resizable()
+                }
+                .resizable()
+                .frame(width: 50, height: 50)
+                .clipShape(Circle())
                 Text(data.userName)
                     .foregroundColor(Resources.Colors.customBlack)
                     .font(Resources.Fonts.regular(withSize: 17))

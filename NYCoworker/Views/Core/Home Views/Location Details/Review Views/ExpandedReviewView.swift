@@ -9,15 +9,12 @@ import SwiftUI
 
 struct ExpandedReviewView: View {
     enum ExpandedReviewViewType {
-        case singleCard
         case fullList
     }
     var type: ExpandedReviewViewType?
     @EnvironmentObject private var model: ReviewService
     var body: some View {
         switch type {
-        case .singleCard:
-            fullListView()
         case .fullList:
             fullListView()
         case .none:

@@ -17,7 +17,7 @@ enum Resources {
     
     static var userLocation : CLLocation = CLLocation(latitude: 0.0, longitude: 0.0)
     
-    static var adminMode = false
+    static var adminMode = true
     
     /// Colors resource pack
     enum Colors {

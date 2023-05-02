@@ -46,37 +46,37 @@ class LocationService: ObservableObject {
             completion2(error)
         }
     }
-///Fetching favorite locations based on user's set of favorite locations
-///- parameter user: User model which will show array of favorite locations
-///- warning: Use completion for action after data loaded
-///- returns: favoriteLocations array in locationService class
-func fetchFavoriteLocations(for user: User, completion: @escaping () -> Void) async {
-    guard !user.favoriteLocations.isEmpty else {
-        completion()
-        return
-    }
-    do {
-        let locationsCollection = db.collection("Locations")
-        
-        let docs = try await locationsCollection.whereField("locationID", in: user.favoriteLocations).getDocuments()
-        
-        let fetchedFavs = docs.documents.compactMap { doc -> Location? in
-            try? doc.data(as: Location.self)
-        }
-        await MainActor.run(body: {
-            favoriteLocations = fetchedFavs
+    ///Fetching favorite locations based on user's set of favorite locations
+    ///- parameter user: User model which will show array of favorite locations
+    ///- warning: Use completion for action after data loaded
+    ///- returns: favoriteLocations array in locationService class
+    func fetchFavoriteLocations(for user: User, completion: @escaping () -> Void) async {
+        guard !user.favoriteLocations.isEmpty else {
             completion()
-        })
+            return
+        }
+        do {
+            let locationsCollection = db.collection("Locations")
+            
+            let docs = try await locationsCollection.whereField("locationID", in: user.favoriteLocations).getDocuments()
+            
+            let fetchedFavs = docs.documents.compactMap { doc -> Location? in
+                try? doc.data(as: Location.self)
+            }
+            await MainActor.run(body: {
+                favoriteLocations = fetchedFavs
+                completion()
+            })
+        }
+        catch {
+            print(error.localizedDescription)
+        }
     }
-    catch {
-        print(error.localizedDescription)
+    
+    func clearData() {
+        locations = []
+        favoriteLocations = []
+        print("Data cleared")
     }
-}
-
-func clearData() {
-    locations = []
-    favoriteLocations = []
-    print("Data cleared")
-}
 }
 

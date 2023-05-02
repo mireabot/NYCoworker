@@ -27,13 +27,9 @@ struct LogoutView: View {
                         }
                     }, text: "Delete", buttonStyle: .system)
                     
-                    Button {
+                    NYCActionButton(action: {
                         makeDismiss()
-                    } label: {
-                        Text("Never mind")
-                            .foregroundColor(Resources.Colors.darkGrey)
-                            .font(Resources.Fonts.bold(withSize: 17))
-                    }
+                    }, text: "Never mind", buttonStyle: .secondarySystem)
 
                 }
                 .frame(maxWidth: .infinity)

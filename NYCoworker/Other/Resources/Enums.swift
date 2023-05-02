@@ -9,6 +9,6 @@ import SwiftUI
 
 enum Locations: String {
     case libraries = "Silient libraries"
-    case lobbies = "Stunning lobbies"
+    case lobbies = "Busy lobbies"
     case publicSpaces = "Public Spaces"
 }

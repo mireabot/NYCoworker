@@ -23,7 +23,7 @@ func parseAuthError(_ error: Error) -> String {
     case .userDisabled:
         return "User account is disabled on the server"
     case .networkError:
-        return "Network error occured"
+        return "Looks like you're offline."
     default:
         return "Unknown error occurred"
     }

@@ -14,6 +14,7 @@ struct NYCActionButton: View {
         case primary
         case secondary
         case system
+        case secondarySystem
     }
     var buttonStyle: ButtonView?
     var body: some View {
@@ -25,6 +26,8 @@ struct NYCActionButton: View {
                 secondaryButton
             case .system:
                 systemButton
+            case .secondarySystem:
+                secondarySystemButton
             case .none:
                 primaryButton
             }
@@ -69,6 +72,20 @@ struct NYCActionButton: View {
         .background(Resources.Colors.customGrey)
         .cornerRadius(10)
     }
+    
+    var secondarySystemButton: some View {
+        Button {
+            action()
+        } label: {
+            Text(text)
+                .foregroundColor(Resources.Colors.darkGrey)
+                .padding([.top,.bottom], 13)
+                .font(Resources.Fonts.regular(withSize: 17))
+                .frame(maxWidth: .infinity)
+        }
+        .background(Resources.Colors.customGrey)
+        .cornerRadius(10)
+    }
 }
 
 struct NYCActionButtonStyle: ButtonStyle {
@@ -76,7 +93,7 @@ struct NYCActionButtonStyle: ButtonStyle {
     func makeBody(configuration: ButtonStyle.Configuration) -> some View {
         MyButton(configuration: configuration, showLoader: $showLoader)
     }
-
+    
     struct MyButton: View {
         let configuration: ButtonStyle.Configuration
         @Environment(\.isEnabled) private var isEnabled: Bool
@@ -88,15 +105,15 @@ struct NYCActionButtonStyle: ButtonStyle {
                 }
                 else {
                     configuration.label
-                        
+                    
                 }
             }
-                .foregroundColor(isEnabled ? Color.white : Resources.Colors.darkGrey)
-                .padding([.top,.bottom], 15)
-                .frame(maxWidth: .infinity)
-                .background(RoundedRectangle(cornerRadius: 5).fill(isEnabled ? Resources.Colors.primary : Resources.Colors.customGrey))
-                .cornerRadius(10)
-                .scaleEffect(configuration.isPressed ? 0.95 : 1)
+            .foregroundColor(isEnabled ? Color.white : Resources.Colors.darkGrey)
+            .padding([.top,.bottom], 15)
+            .frame(maxWidth: .infinity)
+            .background(RoundedRectangle(cornerRadius: 5).fill(isEnabled ? Resources.Colors.primary : Resources.Colors.customGrey))
+            .cornerRadius(10)
+            .scaleEffect(configuration.isPressed ? 0.95 : 1)
         }
     }
 }

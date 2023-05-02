@@ -843,7 +843,6 @@
 			packageReferences = (
 				3538C621298353210017800B /* XCRemoteSwiftPackageReference "iPages" */,
 				359A792E298ED141001B66CF /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */,
-				359213612995DC0C00B18A8D /* XCRemoteSwiftPackageReference "KeyboardAvoider" */,
 				3565689929A12C16007CAF80 /* XCRemoteSwiftPackageReference "PopupView" */,
 				35C1667A29D1307600963257 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				359B2FAE29DB45300097E1DC /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
@@ -1109,7 +1108,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = NYCoworker/NYCoworker.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 17;
+				CURRENT_PROJECT_VERSION = 18;
 				DEVELOPMENT_TEAM = 9S2MZXD36G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NYCoworker/Info.plist;
@@ -1147,7 +1146,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = NYCoworker/NYCoworker.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 17;
+				CURRENT_PROJECT_VERSION = 18;
 				DEVELOPMENT_TEAM = 9S2MZXD36G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NYCoworker/Info.plist;
@@ -1224,14 +1223,6 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 2.0.0;
-			};
-		};
-		359213612995DC0C00B18A8D /* XCRemoteSwiftPackageReference "KeyboardAvoider" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/michaelhenry/KeyboardAvoider.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
 			};
 		};
 		359A792E298ED141001B66CF /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */ = {

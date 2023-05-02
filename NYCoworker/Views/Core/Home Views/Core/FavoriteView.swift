@@ -68,11 +68,14 @@ struct FavoriteView: View {
         isLoading = true
         locationService.favoriteLocations = []
         await userService.fetchUser(documentId: userId, completion: {
-            print("User fetched again")
+            Task {
+                await locationService.fetchFavoriteLocations(for: userService.user) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                        isLoading = false
+                    }
+                }
+            }
         })
-        await locationService.fetchFavoriteLocations(for: userService.user) {
-            isLoading = false
-        }
     }
     
     @ViewBuilder

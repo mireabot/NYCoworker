@@ -10,6 +10,7 @@ import iPages
 import PopupView
 import CoreLocation
 import SDWebImageSwiftUI
+import Shimmer
 
 struct LocationDetailView: View {
     @Environment(\.dismiss) var makeDismiss
@@ -163,11 +164,13 @@ struct LocationDetailView: View {
                         .foregroundColor(Resources.Colors.primary)
                         .font(Resources.Fonts.bold(withSize: 13))
                 }
-                .opacity(reviewService.reviews.count <= 1 ? 0 : 1)
+                .opacity(reviewService.reviews.count == 0 ? 0 : 1)
                 
             }
             if isLoading {
                 ReviewEmptyView()
+                    .redacted(reason: .placeholder)
+                    .shimmering(active: true)
             }
             else {
                 if reviewService.reviews.isEmpty {

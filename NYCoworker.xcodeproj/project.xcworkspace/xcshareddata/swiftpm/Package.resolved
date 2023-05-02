@@ -82,15 +82,6 @@
       }
     },
     {
-      "identity" : "keyboardavoider",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/michaelhenry/KeyboardAvoider.git",
-      "state" : {
-        "revision" : "e1c3860e7b50bce567f3480ed443f1c6b3659725",
-        "version" : "1.0.3"
-      }
-    },
-    {
       "identity" : "leveldb",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/firebase/leveldb.git",
