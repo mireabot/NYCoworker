@@ -26,6 +26,7 @@
 		3524973829EB1C5E009E1002 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 3524973729EB1C5E009E1002 /* Lottie */; };
 		3524973A29EB1CE9009E1002 /* MaintenanceOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3524973929EB1CE9009E1002 /* MaintenanceOverlayView.swift */; };
 		3524974229EB2669009E1002 /* makeup.json in Resources */ = {isa = PBXBuildFile; fileRef = 3524974129EB2669009E1002 /* makeup.json */; };
+		3536C2D72A02A955007D3E1A /* AdminNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3536C2D62A02A955007D3E1A /* AdminNotificationView.swift */; };
 		3538C623298353210017800B /* iPages in Frameworks */ = {isa = PBXBuildFile; productRef = 3538C622298353210017800B /* iPages */; };
 		3538C626298356270017800B /* LanguageSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3538C625298356270017800B /* LanguageSetup.swift */; };
 		3538C6292983569D0017800B /* NYCBottomSheetHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3538C6282983569D0017800B /* NYCBottomSheetHeader.swift */; };
@@ -139,6 +140,7 @@
 		351B3A2829982ABC007E7D00 /* LocationDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailView.swift; sourceTree = "<group>"; };
 		3524973929EB1CE9009E1002 /* MaintenanceOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaintenanceOverlayView.swift; sourceTree = "<group>"; };
 		3524974129EB2669009E1002 /* makeup.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = makeup.json; sourceTree = "<group>"; };
+		3536C2D62A02A955007D3E1A /* AdminNotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminNotificationView.swift; sourceTree = "<group>"; };
 		3538C625298356270017800B /* LanguageSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSetup.swift; sourceTree = "<group>"; };
 		3538C6282983569D0017800B /* NYCBottomSheetHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCBottomSheetHeader.swift; sourceTree = "<group>"; };
 		3538C62B298357490017800B /* AppLanguageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLanguageModel.swift; sourceTree = "<group>"; };
@@ -695,6 +697,7 @@
 			children = (
 				35A7981529E463C600359400 /* AdminLocationView.swift */,
 				3563FB9D29F19A2C007E39C5 /* AdminHomeView.swift */,
+				3536C2D62A02A955007D3E1A /* AdminNotificationView.swift */,
 			);
 			path = Admin;
 			sourceTree = "<group>";
@@ -908,6 +911,7 @@
 				350DE2762991C5F200573163 /* LocationListView.swift in Sources */,
 				350DE27B2991CA7600573163 /* LocationsMapView.swift in Sources */,
 				351872CC29D3C510004B564A /* NotificationService.swift in Sources */,
+				3536C2D72A02A955007D3E1A /* AdminNotificationView.swift in Sources */,
 				355C11C029B7A44E001F092B /* ErrorEmptyView.swift in Sources */,
 				35E7FB9D2985B88700EFF282 /* GeoLocationModel.swift in Sources */,
 				35F2939B299F195400A85586 /* NotificationsView.swift in Sources */,

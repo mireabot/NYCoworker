@@ -31,7 +31,7 @@ struct Review: Codable {
     var text: String
     var type: ReviewType
     var userName: String
-    var userImage: String
+    var userImage: URL
     var datePostedString: String {
         let formatter = DateFormatter()
         formatter.dateFormat = "MM/dd/yyyy"

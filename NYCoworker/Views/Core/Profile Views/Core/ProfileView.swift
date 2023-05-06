@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import PopupView
 import Shimmer
 import SDWebImageSwiftUI
 

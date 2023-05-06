@@ -19,7 +19,7 @@ struct ReviewCard: View {
         VStack(alignment: .leading, spacing: 10) {
             /// Header
             HStack(alignment: .center, spacing: 10) {
-                WebImage(url: URL(string: data.userImage)).placeholder {
+                WebImage(url: data.userImage).placeholder {
                     Image("emptyImage")
                         .resizable()
                 }
