@@ -50,10 +50,12 @@ struct HomeView: View {
             }
             .task {
                 guard locationService.locations.isEmpty else { return }
-                await locationService.fetchLoactions {
+              await locationService.fetchLoactions(completion: {
                     Resources.userLocation = locationManager.userLocation ?? CLLocation(latitude: 0.0, longitude: 0.0)
                     isLoading = false
-                }
+              }) { err in
+                locationService.setError(err)
+              }
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -223,12 +225,8 @@ extension HomeView {
             await locationService.addFavoriteLocation(locationID: location, userID: userId, completion: {
                 addToFavs.toggle()
             }) { err in
-                setError(err)
+              locationService.setError(err)
             }
         }
-    }
-    
-    func setError(_ error: Error) {
-        print("DEBUG: \(firestoreError(forError: error))")
     }
 }
