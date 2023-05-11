@@ -13,7 +13,7 @@
 		3503BD8F297F50AC00C0E365 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3503BD8E297F50AC00C0E365 /* Assets.xcassets */; };
 		3503BD92297F50AC00C0E365 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3503BD90297F50AC00C0E365 /* LaunchScreen.storyboard */; };
 		3503BD9D297F5EE500C0E365 /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3503BD9C297F5EE500C0E365 /* Resources.swift */; };
-		350DE274299143B500573163 /* LogoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350DE273299143B500573163 /* LogoutView.swift */; };
+		350DE274299143B500573163 /* DeleteAccountBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350DE273299143B500573163 /* DeleteAccountBottomView.swift */; };
 		350DE2762991C5F200573163 /* LocationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350DE2752991C5F200573163 /* LocationListView.swift */; };
 		350DE2782991C66600573163 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350DE2772991C66600573163 /* Enums.swift */; };
 		350DE27B2991CA7600573163 /* LocationsMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350DE27A2991CA7600573163 /* LocationsMapView.swift */; };
@@ -128,7 +128,7 @@
 		3503BD91297F50AC00C0E365 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3503BD93297F50AC00C0E365 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3503BD9C297F5EE500C0E365 /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
-		350DE273299143B500573163 /* LogoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutView.swift; sourceTree = "<group>"; };
+		350DE273299143B500573163 /* DeleteAccountBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountBottomView.swift; sourceTree = "<group>"; };
 		350DE2752991C5F200573163 /* LocationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationListView.swift; sourceTree = "<group>"; };
 		350DE2772991C66600573163 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		350DE27A2991CA7600573163 /* LocationsMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsMapView.swift; sourceTree = "<group>"; };
@@ -308,12 +308,127 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		350DE2792991C9C400573163 /* MapViews */ = {
+		3504C8612A0D582900D61573 /* Locations Feed Module */ = {
 			isa = PBXGroup;
 			children = (
+				3504C8622A0D583900D61573 /* Views */,
+				3504C8642A0D58C000D61573 /* Cells */,
+				3504C8632A0D585D00D61573 /* Helper Views */,
+			);
+			path = "Locations Feed Module";
+			sourceTree = "<group>";
+		};
+		3504C8622A0D583900D61573 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				35737E6029888DF9003B68BE /* HomeView.swift */,
+				359F80FA298C330B000D792E /* FavoriteView.swift */,
+				350DE2752991C5F200573163 /* LocationListView.swift */,
+				35F2939A299F195400A85586 /* NotificationsView.swift */,
+				351B3A2829982ABC007E7D00 /* LocationDetailView.swift */,
 				350DE27A2991CA7600573163 /* LocationsMapView.swift */,
 			);
-			path = MapViews;
+			path = Views;
+			sourceTree = "<group>";
+		};
+		3504C8632A0D585D00D61573 /* Helper Views */ = {
+			isa = PBXGroup;
+			children = (
+				35DFA24029A518B700258BB7 /* AddReviewView.swift */,
+				3566264529B9445800EA11E0 /* ReportEditView.swift */,
+				35DFA23D29A3BFC800258BB7 /* ExpandedReviewView.swift */,
+			);
+			path = "Helper Views";
+			sourceTree = "<group>";
+		};
+		3504C8642A0D58C000D61573 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				359F80F6298C2508000D792E /* LocationCell.swift */,
+				356C52DB29A04BDB00080D4C /* LocationListCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		3504C8652A0D58F800D61573 /* Onboarding Module */ = {
+			isa = PBXGroup;
+			children = (
+				3504C8662A0D593D00D61573 /* Views */,
+			);
+			path = "Onboarding Module";
+			sourceTree = "<group>";
+		};
+		3504C8662A0D593D00D61573 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				359E6AA12981ED8B00333BD7 /* Onboarding.swift */,
+				35EF059D29B0F40A0098110B /* AccoutSetupView.swift */,
+				3538C625298356270017800B /* LanguageSetup.swift */,
+				35EF059C29B0F3F70098110B /* Account Setup */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		3504C8672A0D598400D61573 /* Profile Module */ = {
+			isa = PBXGroup;
+			children = (
+				3504C8682A0D599100D61573 /* Views */,
+			);
+			path = "Profile Module";
+			sourceTree = "<group>";
+		};
+		3504C8682A0D599100D61573 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				35737E5A29888866003B68BE /* ProfileView.swift */,
+				35C479A5298C89D50089F342 /* SettingsView.swift */,
+				351B3A21299814AA007E7D00 /* Settings Views */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		3504C8692A0D59BD00D61573 /* Social Module */ = {
+			isa = PBXGroup;
+			children = (
+				3504C86A2A0D59CA00D61573 /* Views */,
+			);
+			path = "Social Module";
+			sourceTree = "<group>";
+		};
+		3504C86A2A0D59CA00D61573 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				35737E5D29888DA5003B68BE /* Social View.swift */,
+				359A7931298EDCCB001B66CF /* ShareCardView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		3504C86B2A0D59F800D61573 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				35A7981529E463C600359400 /* AdminLocationView.swift */,
+				3563FB9D29F19A2C007E39C5 /* AdminHomeView.swift */,
+				3536C2D62A02A955007D3E1A /* AdminNotificationView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		3504C86C2A0D5A2100D61573 /* App Launch Module */ = {
+			isa = PBXGroup;
+			children = (
+				3504C86D2A0D5A3000D61573 /* Views */,
+			);
+			path = "App Launch Module";
+			sourceTree = "<group>";
+		};
+		3504C86D2A0D5A3000D61573 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				35D9448129EF725800B9B640 /* SplashScreenView.swift */,
+				35D9448329EF727E00B9B640 /* InitView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		351872C929D3C449004B564A /* Network */ = {
@@ -355,18 +470,11 @@
 			path = "Settings Views";
 			sourceTree = "<group>";
 		};
-		3538C624298356120017800B /* Onboarding Views */ = {
-			isa = PBXGroup;
-			children = (
-				359348E529BA44AB00B7739A /* Core */,
-				35EF059C29B0F3F70098110B /* Account Setup */,
-			);
-			path = "Onboarding Views";
-			sourceTree = "<group>";
-		};
 		3538C627298356840017800B /* Helper Views */ = {
 			isa = PBXGroup;
 			children = (
+				356C52DF29A052CD00080D4C /* BottomViews */,
+				35746CB129A29F2F007322AA /* Empty Views */,
 				35EF059929B0F2D90098110B /* Other */,
 				354651C129A839D7003F7AE8 /* Animation Views */,
 				35746CBB29A31D25007322AA /* Cards */,
@@ -433,50 +541,15 @@
 			path = Notifications;
 			sourceTree = "<group>";
 		};
-		3566264429B9444B00EA11E0 /* Help Views */ = {
-			isa = PBXGroup;
-			children = (
-				3566264529B9445800EA11E0 /* ReportEditView.swift */,
-			);
-			path = "Help Views";
-			sourceTree = "<group>";
-		};
 		356C52DF29A052CD00080D4C /* BottomViews */ = {
 			isa = PBXGroup;
 			children = (
-				350DE273299143B500573163 /* LogoutView.swift */,
+				350DE273299143B500573163 /* DeleteAccountBottomView.swift */,
 				356C52E029A052F900080D4C /* MapChoiceView.swift */,
 				35DFA24429A5822B00258BB7 /* VisitDatePickerView.swift */,
 				354651C429A83B1F003F7AE8 /* LoadingBottomView.swift */,
 			);
 			path = BottomViews;
-			sourceTree = "<group>";
-		};
-		35737E592988885B003B68BE /* Profile Views */ = {
-			isa = PBXGroup;
-			children = (
-				359348E429BA449D00B7739A /* Core */,
-				351B3A21299814AA007E7D00 /* Settings Views */,
-			);
-			path = "Profile Views";
-			sourceTree = "<group>";
-		};
-		35737E5C29888D98003B68BE /* Social Views */ = {
-			isa = PBXGroup;
-			children = (
-				35737E5D29888DA5003B68BE /* Social View.swift */,
-				359A7931298EDCCB001B66CF /* ShareCardView.swift */,
-			);
-			path = "Social Views";
-			sourceTree = "<group>";
-		};
-		35737E5F29888DF1003B68BE /* Home Views */ = {
-			isa = PBXGroup;
-			children = (
-				359348E329BA447F00B7739A /* Core */,
-				35DFA23C29A3BF8C00258BB7 /* Location Details */,
-			);
-			path = "Home Views";
 			sourceTree = "<group>";
 		};
 		35746CB129A29F2F007322AA /* Empty Views */ = {
@@ -549,12 +622,12 @@
 			path = Cards;
 			sourceTree = "<group>";
 		};
-		358703B129C4BB2600B6B383 /* Tab Bar */ = {
+		358703B129C4BB2600B6B383 /* TabBar Module */ = {
 			isa = PBXGroup;
 			children = (
 				359A7933298EF1C2001B66CF /* TabBarView.swift */,
 			);
-			path = "Tab Bar";
+			path = "TabBar Module";
 			sourceTree = "<group>";
 		};
 		358B93962980D35800160BFC /* Model */ = {
@@ -572,9 +645,13 @@
 		358B93992980D42700160BFC /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				35A7981429E4638800359400 /* Admin */,
-				359F80F5298C24FB000D792E /* Cells */,
-				359E6AA02981ECB200333BD7 /* Core */,
+				358703B129C4BB2600B6B383 /* TabBar Module */,
+				3504C86C2A0D5A2100D61573 /* App Launch Module */,
+				3504C8692A0D59BD00D61573 /* Social Module */,
+				3504C8672A0D598400D61573 /* Profile Module */,
+				3504C8652A0D58F800D61573 /* Onboarding Module */,
+				3504C8612A0D582900D61573 /* Locations Feed Module */,
+				35A7981429E4638800359400 /* Admin Module */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -604,44 +681,6 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
-		359348E229BA446700B7739A /* Core */ = {
-			isa = PBXGroup;
-			children = (
-				351B3A2829982ABC007E7D00 /* LocationDetailView.swift */,
-			);
-			path = Core;
-			sourceTree = "<group>";
-		};
-		359348E329BA447F00B7739A /* Core */ = {
-			isa = PBXGroup;
-			children = (
-				35737E6029888DF9003B68BE /* HomeView.swift */,
-				359F80FA298C330B000D792E /* FavoriteView.swift */,
-				350DE2752991C5F200573163 /* LocationListView.swift */,
-				35F2939A299F195400A85586 /* NotificationsView.swift */,
-			);
-			path = Core;
-			sourceTree = "<group>";
-		};
-		359348E429BA449D00B7739A /* Core */ = {
-			isa = PBXGroup;
-			children = (
-				35737E5A29888866003B68BE /* ProfileView.swift */,
-				35C479A5298C89D50089F342 /* SettingsView.swift */,
-			);
-			path = Core;
-			sourceTree = "<group>";
-		};
-		359348E529BA44AB00B7739A /* Core */ = {
-			isa = PBXGroup;
-			children = (
-				359E6AA12981ED8B00333BD7 /* Onboarding.swift */,
-				35EF059D29B0F40A0098110B /* AccoutSetupView.swift */,
-				3538C625298356270017800B /* LanguageSetup.swift */,
-			);
-			path = Core;
-			sourceTree = "<group>";
-		};
 		359B2FAB29DA53EB0097E1DC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -657,22 +696,6 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
-		359E6AA02981ECB200333BD7 /* Core */ = {
-			isa = PBXGroup;
-			children = (
-				35D9448029EF723F00B9B640 /* Starting Views */,
-				358703B129C4BB2600B6B383 /* Tab Bar */,
-				35746CB129A29F2F007322AA /* Empty Views */,
-				356C52DF29A052CD00080D4C /* BottomViews */,
-				35737E5F29888DF1003B68BE /* Home Views */,
-				350DE2792991C9C400573163 /* MapViews */,
-				35737E5C29888D98003B68BE /* Social Views */,
-				35737E592988885B003B68BE /* Profile Views */,
-				3538C624298356120017800B /* Onboarding Views */,
-			);
-			path = Core;
-			sourceTree = "<group>";
-		};
 		359E6AA32981FD8400333BD7 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -683,23 +706,12 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		359F80F5298C24FB000D792E /* Cells */ = {
+		35A7981429E4638800359400 /* Admin Module */ = {
 			isa = PBXGroup;
 			children = (
-				359F80F6298C2508000D792E /* LocationCell.swift */,
-				356C52DB29A04BDB00080D4C /* LocationListCell.swift */,
+				3504C86B2A0D59F800D61573 /* Views */,
 			);
-			path = Cells;
-			sourceTree = "<group>";
-		};
-		35A7981429E4638800359400 /* Admin */ = {
-			isa = PBXGroup;
-			children = (
-				35A7981529E463C600359400 /* AdminLocationView.swift */,
-				3563FB9D29F19A2C007E39C5 /* AdminHomeView.swift */,
-				3536C2D62A02A955007D3E1A /* AdminNotificationView.swift */,
-			);
-			path = Admin;
+			path = "Admin Module";
 			sourceTree = "<group>";
 		};
 		35D3821329B6A7B700B66EDA /* Location */ = {
@@ -725,34 +737,6 @@
 				35D9447829EEF80400B9B640 /* FirebaseErrors.swift */,
 			);
 			path = "Firebase Extensions";
-			sourceTree = "<group>";
-		};
-		35D9448029EF723F00B9B640 /* Starting Views */ = {
-			isa = PBXGroup;
-			children = (
-				35D9448129EF725800B9B640 /* SplashScreenView.swift */,
-				35D9448329EF727E00B9B640 /* InitView.swift */,
-			);
-			path = "Starting Views";
-			sourceTree = "<group>";
-		};
-		35DFA23C29A3BF8C00258BB7 /* Location Details */ = {
-			isa = PBXGroup;
-			children = (
-				359348E229BA446700B7739A /* Core */,
-				3566264429B9444B00EA11E0 /* Help Views */,
-				35DFA23F29A518AC00258BB7 /* Review Views */,
-			);
-			path = "Location Details";
-			sourceTree = "<group>";
-		};
-		35DFA23F29A518AC00258BB7 /* Review Views */ = {
-			isa = PBXGroup;
-			children = (
-				35DFA24029A518B700258BB7 /* AddReviewView.swift */,
-				35DFA23D29A3BFC800258BB7 /* ExpandedReviewView.swift */,
-			);
-			path = "Review Views";
 			sourceTree = "<group>";
 		};
 		35E7FB922985A9C200EFF282 /* User */ = {
@@ -900,7 +884,7 @@
 				359D87C629D76E9700E827F3 /* ReviewService.swift in Sources */,
 				3538C6292983569D0017800B /* NYCBottomSheetHeader.swift in Sources */,
 				351B3A2729981B22007E7D00 /* NYCSettingsCard.swift in Sources */,
-				350DE274299143B500573163 /* LogoutView.swift in Sources */,
+				350DE274299143B500573163 /* DeleteAccountBottomView.swift in Sources */,
 				35D9447D29EF035800B9B640 /* Helpers.swift in Sources */,
 				3538C626298356270017800B /* LanguageSetup.swift in Sources */,
 				35A7981629E463C600359400 /* AdminLocationView.swift in Sources */,

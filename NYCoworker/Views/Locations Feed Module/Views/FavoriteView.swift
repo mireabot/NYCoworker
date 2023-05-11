@@ -17,45 +17,39 @@ struct FavoriteView: View {
     @StateObject var locationService = LocationService()
     @AppStorage("UserID") var userId : String = ""
     var body: some View {
-        NavigationStack {
-            favoriteList()
-                .navigationDestination(for: Location.self, destination: { location in
-                    LocationDetailView(locationData: location)
-                })
-                .toolbar(content: {
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        Button {
-                            makeDismiss()
-                        } label: {
-                            Resources.Images.Navigation.arrowBack
-                                .foregroundColor(Resources.Colors.primary)
-                        }
-                        
-                    }
-                    
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        Text("Your favorites")
-                            .foregroundColor(Resources.Colors.customBlack)
-                            .font(Resources.Fonts.bold(withSize: 17))
-                    }
-                    
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Button {
-                            Task {
-                                await extractedFunc()
-                            }
-                        } label: {
-                            Resources.Images.Navigation.refresh
-                                .foregroundColor(Resources.Colors.primary)
-                        }
-                        
-                    }
-                })
-                .navigationBarTitleDisplayMode(.inline)
-            
-        }
-        .navigationBarBackButtonHidden()
-        .toolbarBackground(.white, for: .navigationBar)
+      favoriteList()
+          .toolbar(content: {
+              ToolbarItem(placement: .navigationBarLeading) {
+                  Button {
+                      makeDismiss()
+                  } label: {
+                      Resources.Images.Navigation.arrowBack
+                          .foregroundColor(Resources.Colors.primary)
+                  }
+                  
+              }
+              
+              ToolbarItem(placement: .navigationBarLeading) {
+                  Text("Your favorites")
+                      .foregroundColor(Resources.Colors.customBlack)
+                      .font(Resources.Fonts.bold(withSize: 17))
+              }
+              
+              ToolbarItem(placement: .navigationBarTrailing) {
+                  Button {
+                      Task {
+                          await extractedFunc()
+                      }
+                  } label: {
+                      Resources.Images.Navigation.refresh
+                          .foregroundColor(Resources.Colors.primary)
+                  }
+                  
+              }
+          })
+          .navigationBarTitleDisplayMode(.inline)
+          .navigationBarBackButtonHidden()
+          .toolbarBackground(.white, for: .navigationBar)
     }
     
     @ViewBuilder
@@ -92,14 +86,14 @@ struct FavoriteView: View {
                     ScrollView(.vertical, showsIndicators: true) {
                         LazyVStack {
                             ForEach(locationService.favoriteLocations, id: \.id) { data in
-                                NavigationLink(destination: LocationDetailView(locationData: data)) {
-                                    LocationListCell(type: .favorite, data: data, buttonAction: {
-                                        removeFromfavs(locationID: data.locationID)
-                                        Task {
-                                            await extractedFunc()
-                                        }
-                                    })
-                                }
+                              NavigationLink(destination: LocationDetailView(locationData: data)) {
+                                LocationListCell(type: .favorite, data: data, buttonAction: {
+                                    removeFromfavs(locationID: data.locationID)
+                                    Task {
+                                        await extractedFunc()
+                                    }
+                                })
+                              }
                             }
                         }
                     }

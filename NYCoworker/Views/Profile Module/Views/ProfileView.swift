@@ -8,6 +8,7 @@
 import SwiftUI
 import Shimmer
 import SDWebImageSwiftUI
+import PopupView
 
 struct ProfileView: View {
     @State var showPopup = false
@@ -16,22 +17,28 @@ struct ProfileView: View {
     @EnvironmentObject var userService : UserService
     var body: some View {
         NavigationStack {
-            VStack {
-                VStack {
-                    profileHeader()
-                    
-                    settingsView()
-                    
-                    profileFooter()
-                }
-                Spacer()
-            }
+          VStack {
+              VStack {
+                  profileHeader()
+                  
+                  settingsView()
+                  
+                  profileFooter()
+              }
+              Spacer()
+          }
             .navigationDestination(for: SettingsModel.self, destination: { settingsData in
                 SettingsView(title: settingsData.title).environmentObject(userService)
             })
-            .sheet(isPresented: $showPopup, content: {
-                LogoutView()
-                    .presentationDetents([.bottom])
+            .popup(isPresented: $showPopup, view: {
+              DeleteAccountBottomView(isVisible: $showPopup)
+            }, customize: {
+              $0
+                .type(.toast)
+                .backgroundColor(Color.black.opacity(0.3))
+                .position(.bottom)
+                .closeOnTap(false)
+                .closeOnTapOutside(false)
             })
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -105,3 +112,10 @@ extension ProfileView {
         .padding(.top, 10)
     }
 }
+
+struct ProfileView_Previews: PreviewProvider {
+    static var previews: some View {
+      ProfileView().environmentObject(UserService())
+    }
+}
+

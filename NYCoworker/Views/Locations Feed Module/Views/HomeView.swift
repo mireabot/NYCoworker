@@ -13,13 +13,15 @@ import PopupView
 struct HomeView: View {
     @State var isLoading = true
     @State var showMap = false
+  @State var showFavorites = false
+  @State var showNotifications = false
     @StateObject var locationManager = LocationManager()
     @StateObject private var locationService = LocationService()
     @EnvironmentObject var userService : UserService
     @AppStorage("UserID") var userId : String = ""
     @State var addToFavs = false
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ScrollView(.vertical, showsIndicators: false) {
                 VStack(spacing: 0) {
                     /// Map section
@@ -48,6 +50,15 @@ struct HomeView: View {
                     .position(.top)
                     .animation(.spring(response: 0.4, blendDuration: 0.2))
             }
+            .navigationDestination(for: Location.self, destination: { locationData in
+              LocationDetailView(locationData: locationData)
+            })
+            .navigationDestination(isPresented: $showFavorites, destination: {
+              FavoriteView().environmentObject(userService)
+            })
+            .navigationDestination(isPresented: $showNotifications, destination: {
+              NotificationsView()
+            })
             .task {
                 guard locationService.locations.isEmpty else { return }
               await locationService.fetchLoactions(completion: {
@@ -65,15 +76,11 @@ struct HomeView: View {
                 }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink(destination: FavoriteView().environmentObject(userService)) {
-                        NYCCircleImageButton(size: 20, image: Image("rate")) {}.disabled(true)
-                    }
+                  NYCCircleImageButton(size: 20, image: Image("rate")) {showFavorites.toggle()}
                 }
                 
                 ToolbarItem(placement: .primaryAction) {
-                    NavigationLink(destination: NotificationsView()) {
-                        NYCCircleImageButton(size: 20, image: Image("bell")) {}.disabled(true)
-                    }
+                  NYCCircleImageButton(size: 20, image: Image("bell")) {showNotifications.toggle()}
                 }
             }
             .fullScreenCover(isPresented: $showMap, content: {
@@ -114,11 +121,11 @@ extension HomeView {
                     else {
                         ForEach(locationService.locations,id: \.locationName) { data in
                             if data.locationType == .library {
-                                NavigationLink(destination: LocationDetailView(locationData: data)) {
-                                    LocationCell(data: data, type: .small, buttonAction: {
-                                        addLocationTofavs(location: data.locationID)
-                                    })
-                                }
+                              NavigationLink(value: data) {
+                                LocationCell(data: data, type: .small, buttonAction: {
+                                    addLocationTofavs(location: data.locationID)
+                                })
+                              }
                             }
                         }
                     }
@@ -149,11 +156,11 @@ extension HomeView {
                     else {
                         ForEach(locationService.locations,id: \.locationName) { data in
                             if data.locationType == .hotel {
-                                NavigationLink(destination: LocationDetailView(locationData: data)) {
-                                    LocationCell(data: data, type: .large, buttonAction: {
-                                        addLocationTofavs(location: data.locationID)
-                                    })
-                                }
+                              NavigationLink(value: data) {
+                                LocationCell(data: data, type: .large, buttonAction: {
+                                    addLocationTofavs(location: data.locationID)
+                                })
+                              }
                             }
                         }
                     }
@@ -183,11 +190,11 @@ extension HomeView {
                     else {
                         ForEach(locationService.locations,id: \.locationName) { data in
                             if data.locationType == .publicSpace {
-                                NavigationLink(destination: LocationDetailView(locationData: data)) {
-                                    LocationCell(data: data, type: .large, buttonAction: {
-                                        addLocationTofavs(location: data.locationID)
-                                    })
-                                }
+                              NavigationLink(value: data) {
+                                LocationCell(data: data, type: .large, buttonAction: {
+                                    addLocationTofavs(location: data.locationID)
+                                })
+                              }
                             }
                         }
                     }
