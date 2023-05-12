@@ -89,7 +89,7 @@ struct HomeView: View {
         LocationsMap().environmentObject(locationService)
       })
       .navigationBarTitleDisplayMode(.inline)
-      .toolbarBackground(.white, for: .navigationBar, .automatic)
+      .toolbarBackground(.white, for: .navigationBar)
     }
   }
 }
