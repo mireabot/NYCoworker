@@ -49,12 +49,6 @@ struct Location: Identifiable, Codable, Equatable, Hashable {
     }
 }
 
-enum LocationType: String, Codable {
-    case library = "Library"
-    case hotel = "Hotel"
-    case publicSpace = "Public space"
-}
-
 struct WorkingHours: Codable, Hashable {
     var hours: String
     var weekDay: String

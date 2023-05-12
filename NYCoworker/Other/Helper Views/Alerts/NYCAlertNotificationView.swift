@@ -8,39 +8,7 @@
 import SwiftUI
 
 struct NYCAlertNotificationView: View {
-    enum AlertStyle {
-        case addedToFavorites
-        case dataUploaded
-        case reportSubmitted
-        case feedbackSent
-        
-        var title: String {
-            switch self {
-            case .addedToFavorites:
-                return "Added to favorites"
-            case .dataUploaded:
-                return "Successfully updated"
-            case .reportSubmitted:
-                return "Report submitted"
-            case .feedbackSent:
-                return "We received your feedback"
-            }
-        }
-        
-        var icon: Image {
-            switch self {
-            case .addedToFavorites:
-                return Image("favs")
-            case .dataUploaded:
-                return Image("dataUploaded")
-            case .reportSubmitted:
-                return Image("dataUploaded")
-            case .feedbackSent:
-                return Image("dataUploaded")
-            }
-        }
-    }
-    var alertStyle: AlertStyle
+    var alertStyle: PopAlertType
     var title: String?
     var body: some View {
         if alertStyle == .reportSubmitted {
@@ -103,27 +71,6 @@ struct NYCAlertView_Previews: PreviewProvider {
 struct NYCAlertView: View {
     let type: AlertType
     var action: (()->Void)
-    enum AlertType {
-        case notification
-        case geoposition
-        
-        var title: String {
-            switch self {
-            case .notification:
-                return "Notifications are off"
-            case .geoposition:
-                return "Geoposition is off"
-            }
-        }
-        var subtitle: String {
-            switch self {
-            case .notification:
-                return "You can turn on notification later in settings"
-            case .geoposition:
-                return "You can turn on geoposition later in settings"
-            }
-        }
-    }
     var body: some View {
         VStack(alignment: .center, spacing: 10) {
             Text(type.title)

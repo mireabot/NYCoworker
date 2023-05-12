@@ -20,16 +20,7 @@ struct DeleteAccountBottomView: View {
     VStack {
       NYCBottomSheetHeader(title: "Delete account?").padding(.top, 15)
       VStack(alignment: .leading) {
-        VStack(alignment: .leading, spacing: 10) {
-          Text("Are you sure you want to delete account?")
-            .multilineTextAlignment(.leading)
-            .foregroundColor(Resources.Colors.customBlack)
-            .font(Resources.Fonts.bold(withSize: 18))
-          Text("We will delete your account and all related information from out cloud.")
-            .foregroundColor(Resources.Colors.customBlack)
-            .font(Resources.Fonts.regular(withSize: 15))
-            .multilineTextAlignment(.leading)
-        }
+        NYCBottomViewContent(content: .deleteAccount)
         .padding(.top, 5)
         
         VStack(alignment: .center, spacing: 10) {
@@ -46,7 +37,7 @@ struct DeleteAccountBottomView: View {
         .padding(.top, 10)
       }
       .padding([.leading,.trailing], 16)
-      .padding(.bottom, 40)
+      .padding(.bottom, UIScreen.main.bounds.size.height == 667 ? 10 : 50)
       .frame(maxWidth: .infinity)
     }
     .background(Color.white)
@@ -58,20 +49,20 @@ struct DeleteAccountBottomView: View {
   
   func deleteUser() {
     isLoading = true
-    //        Task {
-    //            do {
-    //                guard let userID = Auth.auth().currentUser?.uid else { return }
-    //                let ref = Storage.storage().reference().child("UserImages").child(userID)
-    //                try await ref.delete()
-    //
-    //                try await Firestore.firestore().collection("User").document(userID).delete()
-    //                try await Auth.auth().currentUser?.delete()
-    //                userLogged = false
-    //            }
-    //            catch {
-    //                await setError(error)
-    //            }
-    //        }
+    Task {
+      do {
+        guard let userID = Auth.auth().currentUser?.uid else { return }
+        let ref = Storage.storage().reference().child("UserImages").child(userID)
+        try await ref.delete()
+        
+        try await Firestore.firestore().collection("User").document(userID).delete()
+        try await Auth.auth().currentUser?.delete()
+        userLogged = false
+      }
+      catch {
+        await setError(error)
+      }
+    }
   }
   
   func setError(_ error: Error) async {
