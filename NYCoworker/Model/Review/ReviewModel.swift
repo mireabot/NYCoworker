@@ -47,4 +47,6 @@ struct Review: Codable {
         case pos = "positive"
         case neg = "negative"
     }
+  
+  static let mock = Review(id: "", datePosted: Timestamp(date: Date()), dateVisited: Timestamp(date: Date()), text: "Mock text", type: .pos, userName: "User name", userImage: URL(string: "")!)
 }

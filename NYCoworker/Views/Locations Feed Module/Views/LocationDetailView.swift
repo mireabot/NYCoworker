@@ -23,7 +23,7 @@ struct LocationDetailView: View {
   var locationData : Location
   var body: some View {
     ScrollView(.vertical, showsIndicators: true) {
-      LazyVStack {
+      LazyVStack(spacing: -4) {
         GeometryReader { proxy -> AnyView in
           let offset = proxy.frame(in: .global).minY
           
@@ -41,6 +41,7 @@ struct LocationDetailView: View {
           amenities
           workingHours
         }
+        .padding(.top, 15)
       }
     }
     .toolbarBackground(.hidden, for: .navigationBar)
@@ -119,15 +120,13 @@ struct LocationDetailView: View {
           openInAppleMaps(address: locationData.locationAddress, withName: locationData.locationName)
         }
         
-      }.padding(.top, 10)
+      }
       
       Rectangle()
         .foregroundColor(Resources.Colors.customGrey)
         .frame(height: 1)
     }
     .padding([.leading,.trailing], 16)
-    .background(Color.white)
-    .cornerRadius(16, corners: [.topLeft,. topRight])
   }
   
   var reviews: some View {
@@ -280,8 +279,8 @@ struct LocationDetailView: View {
   }
 }
 
-//struct LocationDetailView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        LocationDetailView()
-//    }
-//}
+struct LocationDetailView_Previews: PreviewProvider {
+    static var previews: some View {
+      LocationDetailView(locationData: Location.mock)
+    }
+}

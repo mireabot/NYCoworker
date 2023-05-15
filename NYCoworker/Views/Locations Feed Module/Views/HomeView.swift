@@ -78,11 +78,11 @@ struct HomeView: View {
         }
         
         ToolbarItem(placement: .navigationBarTrailing) {
-          NYCCircleImageButton(size: 20, image: Image("rate")) {showFavorites.toggle()}
+          NYCCircleImageButton(size: 20, image: Resources.Images.Settings.rate) {showFavorites.toggle()}
         }
         
         ToolbarItem(placement: .primaryAction) {
-          NYCCircleImageButton(size: 20, image: Image("bell")) {showNotifications.toggle()}
+          NYCCircleImageButton(size: 20, image: Resources.Images.Settings.notifications) {showNotifications.toggle()}
         }
       }
       .fullScreenCover(isPresented: $showMap, content: {
@@ -96,7 +96,7 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
   static var previews: some View {
-    HomeView()
+    HomeView().environmentObject(UserService())
   }
 }
 
@@ -215,18 +215,21 @@ extension HomeView {
     VStack(alignment: .leading, spacing: 15) {
       NYCSectionHeader(title: "Locations nearby", isExpandButton: false)
       ZStack {
-        Map(coordinateRegion: .constant(Resources.mapRegion))
+        LocationMapView(locations: locationService.locations, selectedLocation: .constant(Location.mock), region: Resources.mapRegion, type: .homePreview)
           .frame(width: UIScreen.main.bounds.width - 16, height: 100)
           .cornerRadius(10)
-          .disabled(true)
+//          .disabled(true)
         
-        Button {
-          showMap.toggle()
-        } label: {
-          Text("Open map")
-        }
-        .buttonStyle(NYCActionButtonStyle(showLoader: .constant(false)))
-        .padding([.leading,.trailing], 90)
+//        Button {
+//          showMap.toggle()
+//        } label: {
+//          Text("Open map")
+//        }
+//        .buttonStyle(NYCActionButtonStyle(showLoader: .constant(false)))
+//        .padding([.leading,.trailing], 90)
+      }
+      .onTapGesture {
+        showMap.toggle()
       }
     }
     .padding()
