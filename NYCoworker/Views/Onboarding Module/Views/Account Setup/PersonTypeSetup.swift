@@ -16,7 +16,7 @@ struct PersonTypeSetup: View {
                 VStack(alignment: .leading, spacing: 5) {
                     Text("Which of these describes you best?")
                         .foregroundColor(Resources.Colors.customBlack)
-                        .font(Resources.Fonts.bold(withSize: 22))
+                        .font(Resources.Fonts.medium(withSize: 22))
                     Text("You can edit later in profile settings")
                         .foregroundColor(Resources.Colors.darkGrey)
                         .font(Resources.Fonts.regular(withSize: 17))
@@ -79,7 +79,7 @@ struct GenderTypeSetup: View {
                 VStack(alignment: .leading, spacing: 5) {
                     Text("How can we refer to you?")
                         .foregroundColor(Resources.Colors.customBlack)
-                        .font(Resources.Fonts.bold(withSize: 22))
+                        .font(Resources.Fonts.medium(withSize: 22))
                     Text("We're committed to creating a welcoming vibe for members of all genders.")
                         .foregroundColor(Resources.Colors.darkGrey)
                         .font(Resources.Fonts.regular(withSize: 17))

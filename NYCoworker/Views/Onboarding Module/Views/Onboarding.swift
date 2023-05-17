@@ -79,7 +79,7 @@ struct SecondView: View {
             VStack(spacing: 5) {
                 Text("Find the best free places to work")
                     .foregroundColor(Resources.Colors.customBlack)
-                    .font(Resources.Fonts.bold(withSize: 22))
+                    .font(Resources.Fonts.medium(withSize: 22))
                     .multilineTextAlignment(.center)
                 
                 Text("Our app features a hand-picked selection of the coolest productive workspaces in NYC")
@@ -103,7 +103,7 @@ struct ThirdView: View {
             VStack(spacing: 5) {
                 Text("Expand your professional network")
                     .foregroundColor(Resources.Colors.customBlack)
-                    .font(Resources.Fonts.bold(withSize: 22))
+                    .font(Resources.Fonts.medium(withSize: 22))
                     .multilineTextAlignment(.center)
                 
                 Text("Our app lets you easily explore and connect with coworkers who work in the same location")

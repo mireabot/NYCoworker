@@ -77,6 +77,38 @@ struct LocationMapView: View {
   }
   var type: MapType
   var body: some View {
+    switch type {
+    case .homePreview:
+      homePreview()
+    case .mapModule:
+      mapModule()
+    }
+  }
+  
+  @ViewBuilder
+  func homePreview() -> some View {
+    Map(coordinateRegion: $region,
+        interactionModes: .zoom, showsUserLocation: true, annotationItems: locations) { location in
+      MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: location.locationCoordinates.latitude, longitude: location.locationCoordinates.longitude)) {
+        Button(action: {
+          DispatchQueue.main.async {
+            withAnimation(.easeOut) {
+              selectedLocation = location
+              updateRegion(location: location)
+            }
+          }
+        }, label: {
+          Image("mapPin")
+            .resizable()
+            .frame(width: 45, height: 45)
+            .scaleEffect(selectedLocation == location ? 1 : 0.7)
+        })
+      }
+    }
+  }
+  
+  @ViewBuilder
+  func mapModule() -> some View {
     Map(coordinateRegion: $region,
         showsUserLocation: true, annotationItems: locations) { location in
       MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: location.locationCoordinates.latitude, longitude: location.locationCoordinates.longitude)) {
@@ -96,7 +128,7 @@ struct LocationMapView: View {
       }
     }
         .onAppear {
-          if type == .mapModule { selectedLocation = locations.first! }
+          selectedLocation = locations.first!
         }
   }
   

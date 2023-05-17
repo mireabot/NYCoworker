@@ -16,7 +16,7 @@ struct NotificationCard: View {
                     HStack(alignment: .center) {
                         Text(data.title)
                             .foregroundColor(Resources.Colors.customBlack)
-                            .font(Resources.Fonts.bold(withSize: 17))
+                            .font(Resources.Fonts.medium(withSize: 17))
                         Circle()
                             .frame(width: 10, height: 10)
                             .foregroundColor(Resources.Colors.primary)

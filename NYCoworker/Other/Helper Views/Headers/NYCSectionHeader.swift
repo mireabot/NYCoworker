@@ -14,7 +14,7 @@ struct NYCSectionHeader: View {
         HStack(alignment: .center) {
             Text(title)
                 .foregroundColor(Resources.Colors.customBlack)
-                .font(Resources.Fonts.bold(withSize: 22))
+                .font(isExpandButton ? Resources.Fonts.medium(withSize: 22) : Resources.Fonts.medium(withSize: 26))
             Image("chevron-right")
                 .resizable()
                 .foregroundColor(Resources.Colors.customBlack)

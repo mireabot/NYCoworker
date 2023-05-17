@@ -38,7 +38,7 @@ struct AdminNotificationView: View {
       ToolbarItem(placement: .navigationBarLeading) {
         Text("Add review")
           .foregroundColor(Resources.Colors.customBlack)
-          .font(Resources.Fonts.bold(withSize: 17))
+          .font(Resources.Fonts.medium(withSize: 17))
       }
       
       ToolbarItem(placement: .navigationBarTrailing) {

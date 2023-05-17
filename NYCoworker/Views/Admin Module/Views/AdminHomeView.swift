@@ -20,7 +20,7 @@ struct AdminHomeView: View {
               VStack(alignment: .leading, spacing: 2) {
                 Text("Manage locations")
                   .foregroundColor(Resources.Colors.customBlack)
-                  .font(Resources.Fonts.bold(withSize: 15))
+                  .font(Resources.Fonts.medium(withSize: 15))
                 Text("Add new locations to database")
                   .foregroundColor(Resources.Colors.darkGrey)
                   .font(Resources.Fonts.regular(withSize: 13))
@@ -40,7 +40,7 @@ struct AdminHomeView: View {
             VStack(alignment: .leading, spacing: 2) {
               Text("Send remote notifications")
                 .foregroundColor(Resources.Colors.customBlack)
-                .font(Resources.Fonts.bold(withSize: 15))
+                .font(Resources.Fonts.medium(withSize: 15))
               Text("Create push notification for users")
                 .foregroundColor(Resources.Colors.darkGrey)
                 .font(Resources.Fonts.regular(withSize: 13))
@@ -60,7 +60,7 @@ struct AdminHomeView: View {
               VStack(alignment: .leading, spacing: 2) {
                 Text("Create review")
                   .foregroundColor(Resources.Colors.customBlack)
-                  .font(Resources.Fonts.bold(withSize: 15))
+                  .font(Resources.Fonts.medium(withSize: 15))
                 Text("Write a demo review for location")
                   .foregroundColor(Resources.Colors.darkGrey)
                   .font(Resources.Fonts.regular(withSize: 13))

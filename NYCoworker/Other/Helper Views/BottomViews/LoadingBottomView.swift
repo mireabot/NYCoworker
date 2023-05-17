@@ -21,7 +21,7 @@ struct LoadingBottomView: View {
                         
                         Text(title ?? "Hand tight")
                             .foregroundColor(Resources.Colors.customBlack)
-                            .font(Resources.Fonts.bold(withSize: 20))
+                            .font(Resources.Fonts.medium(withSize: 20))
                             .padding(.top, 20)
                     }
                     .padding(30)

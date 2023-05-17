@@ -12,7 +12,7 @@ struct NYCBottomSheetHeader: View {
     var body: some View {
         VStack(alignment: .center) {
             Text(title)
-                .font(Resources.Fonts.bold(withSize: 17))
+                .font(Resources.Fonts.medium(withSize: 17))
             Divider()
         }
     }
@@ -23,7 +23,7 @@ struct NYCHeader: View {
     var body: some View {
         HStack {
             Text(title)
-                .font(Resources.Fonts.bold(withSize: 22))
+                .font(Resources.Fonts.medium(withSize: 22))
 //                .padding(.leading, 16)
             Spacer()
         }

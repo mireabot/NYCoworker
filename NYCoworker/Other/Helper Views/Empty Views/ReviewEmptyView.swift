@@ -12,7 +12,7 @@ struct ReviewEmptyView: View {
         VStack {
             Text("No reviews so far")
                 .foregroundColor(Resources.Colors.customBlack)
-                .font(Resources.Fonts.bold(withSize: 17))
+                .font(Resources.Fonts.medium(withSize: 17))
         }
         .frame(maxWidth: .infinity)
         .padding(16)

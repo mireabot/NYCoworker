@@ -39,7 +39,7 @@ struct WorkingHoursCard: View {
                 .font(Resources.Fonts.regular(withSize: 15))
             Text(data.hours)
                 .foregroundColor(Resources.Colors.customBlack)
-                .font(Resources.Fonts.bold(withSize: 15))
+                .font(Resources.Fonts.medium(withSize: 15))
         }
         .padding(10)
         .background(Resources.Colors.customGrey)

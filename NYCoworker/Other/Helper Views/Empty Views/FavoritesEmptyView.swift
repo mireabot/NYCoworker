@@ -18,7 +18,7 @@ struct FavoritesEmptyView: View {
             VStack(alignment: .center, spacing: 10) {
                 Text("Add locations to favorites")
                     .foregroundColor(Resources.Colors.customBlack)
-                    .font(Resources.Fonts.bold(withSize: 20))
+                    .font(Resources.Fonts.medium(withSize: 20))
                 Text("Once you add any locations to favorites, you can see it here")
                     .foregroundColor(Resources.Colors.darkGrey)
                     .multilineTextAlignment(.center)

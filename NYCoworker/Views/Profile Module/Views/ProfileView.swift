@@ -64,7 +64,7 @@ extension ProfileView {
             
             Text(userService.user.name)
                 .foregroundColor(Resources.Colors.customBlack)
-                .font(Resources.Fonts.bold(withSize: 20))
+                .font(Resources.Fonts.medium(withSize: 20))
             Text("Coworker from 2023")
                 .foregroundColor(Resources.Colors.darkGrey)
                 .font(Resources.Fonts.regular(withSize: 13))
@@ -98,7 +98,7 @@ extension ProfileView {
                 } label: {
                     Text("Delete account")
                         .foregroundColor(Resources.Colors.actionRed)
-                        .font(Resources.Fonts.bold(withSize: 20))
+                        .font(Resources.Fonts.medium(withSize: 20))
                 }
 
                 Text("Version 1.0")

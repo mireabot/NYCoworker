@@ -18,7 +18,7 @@ struct MaintenanceOverlayView: View {
                 VStack(alignment: .center, spacing: 5) {
                     Text("NYCoworker is currently in maintenance stage")
                         .foregroundColor(Resources.Colors.customBlack)
-                        .font(Resources.Fonts.bold(withSize: 20))
+                        .font(Resources.Fonts.medium(withSize: 20))
                         .multilineTextAlignment(.center)
                     
                     Text("Check back later please")

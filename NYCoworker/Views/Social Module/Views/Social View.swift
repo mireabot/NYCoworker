@@ -19,7 +19,7 @@ struct SocialView: View {
             HStack {
                 Text("How it works?")
                     .foregroundColor(Resources.Colors.customBlack)
-                    .font(Resources.Fonts.bold(withSize: 17))
+                    .font(Resources.Fonts.medium(withSize: 17))
                 
                 Spacer()
             }

@@ -14,7 +14,7 @@ struct NYCBottomViewContent: View {
         Text(content.header)
           .multilineTextAlignment(.leading)
           .foregroundColor(Resources.Colors.customBlack)
-          .font(Resources.Fonts.bold(withSize: 18))
+          .font(Resources.Fonts.medium(withSize: 18))
         Text(content.text)
           .foregroundColor(Resources.Colors.customBlack)
           .font(Resources.Fonts.regular(withSize: 15))

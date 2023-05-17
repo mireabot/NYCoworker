@@ -56,7 +56,7 @@ struct LocationListView: View {
       ToolbarItem(placement: .navigationBarLeading) {
         Text(locationType.headerTitle)
           .foregroundColor(Resources.Colors.customBlack)
-          .font(Resources.Fonts.bold(withSize: 17))
+          .font(Resources.Fonts.medium(withSize: 17))
       }
     }
     .navigationBarTitleDisplayMode(.inline)

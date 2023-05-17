@@ -21,7 +21,7 @@ struct NYCBottomErrorAlert: View {
                         VStack(alignment: .leading, spacing: 5) {
                             Text(errorTitle)
                                 .foregroundColor(Resources.Colors.customBlack)
-                                .font(Resources.Fonts.bold(withSize: 24))
+                                .font(Resources.Fonts.medium(withSize: 24))
                             Text("Try again please")
                                 .foregroundColor(Resources.Colors.darkGrey)
                                 .font(Resources.Fonts.regular(withSize: 17))

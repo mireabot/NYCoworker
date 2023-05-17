@@ -20,7 +20,7 @@ struct SupportSettingsView: View {
                 
                 Text("NYCoworker")
                     .foregroundColor(Resources.Colors.customBlack)
-                    .font(Resources.Fonts.bold(withSize: 22))
+                    .font(Resources.Fonts.medium(withSize: 22))
             }
             .padding(.top, 20)
             .padding(.bottom, 20)

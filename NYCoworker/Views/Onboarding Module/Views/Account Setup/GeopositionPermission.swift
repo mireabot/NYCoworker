@@ -21,7 +21,7 @@ struct GeopositionPermission: View {
                     
                     Text("Discover local coworkers and spots near you, wherever you are")
                         .foregroundColor(Resources.Colors.customBlack)
-                        .font(Resources.Fonts.bold(withSize: 34))
+                        .font(Resources.Fonts.medium(withSize: 34))
                 }
                 
                 Spacer()

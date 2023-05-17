@@ -79,17 +79,22 @@ enum Resources {
   enum Fonts {
     /// Regular font
     static func regular(withSize size: CGFloat) -> Font {
-      return Font.custom("Nunito-Regular", size: size)
+      return Font.custom("Jost-Regular", size: size)
     }
     
     /// SemiBold font
     static func semiBold(withSize size: CGFloat) -> Font {
-      return Font.custom("Nunito-SemiBold", size: size)
+      return Font.custom("Jost-SemiBold", size: size)
+    }
+    
+    /// Medium font
+    static func medium(withSize size: CGFloat) -> Font {
+      return Font.custom("Jost-Medium", size: size)
     }
     
     /// Bold font
     static func bold(withSize size: CGFloat) -> Font {
-      return Font.custom("Nunito-Bold", size: size)
+      return Font.custom("Jost-Bold", size: size)
     }
   }
 }

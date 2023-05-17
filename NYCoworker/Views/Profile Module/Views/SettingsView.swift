@@ -39,7 +39,7 @@ struct SettingsView: View {
             ToolbarItem(placement: .navigationBarLeading) {
                 Text(title)
                     .foregroundColor(Resources.Colors.customBlack)
-                    .font(Resources.Fonts.bold(withSize: 17))
+                    .font(Resources.Fonts.medium(withSize: 17))
             }
         })
         .ignoresSafeArea(.keyboard)

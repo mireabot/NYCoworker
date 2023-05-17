@@ -80,7 +80,7 @@ struct AdminLocationView: View {
             ToolbarItem(placement: .navigationBarLeading) {
                 Text("Add location")
                     .foregroundColor(Resources.Colors.customBlack)
-                    .font(Resources.Fonts.bold(withSize: 17))
+                    .font(Resources.Fonts.medium(withSize: 17))
             }
         }
     }

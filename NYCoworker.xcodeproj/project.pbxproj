@@ -40,13 +40,16 @@
 		354651C529A83B1F003F7AE8 /* LoadingBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354651C429A83B1F003F7AE8 /* LoadingBottomView.swift */; };
 		354F6D3F29F182D500E45CFE /* WriteFeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354F6D3E29F182D500E45CFE /* WriteFeedbackView.swift */; };
 		3550FA2E29B3CA9F0091B558 /* OnboardingNavigationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3550FA2D29B3CA9F0091B558 /* OnboardingNavigationCoordinator.swift */; };
+		3554C5752A1463D3003080FD /* Jost-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3554C5722A1462ED003080FD /* Jost-Bold.ttf */; };
+		3554C5762A1463D3003080FD /* Jost-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3554C5742A146300003080FD /* Jost-SemiBold.ttf */; };
+		3554C5772A1463D3003080FD /* Jost-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3554C5732A1462F7003080FD /* Jost-Regular.ttf */; };
+		3554C5792A14660F003080FD /* Jost-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3554C5782A1465E4003080FD /* Jost-Medium.ttf */; };
 		355C11BE29B78EB7001F092B /* NotificationCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355C11BD29B78EB7001F092B /* NotificationCard.swift */; };
 		355C11C029B7A44E001F092B /* ErrorEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355C11BF29B7A44E001F092B /* ErrorEmptyView.swift */; };
 		355EA17929AD6FAF00D62B01 /* NYCLanguageCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355EA17829AD6FAF00D62B01 /* NYCLanguageCard.swift */; };
 		3563FB9E29F19A2C007E39C5 /* AdminHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3563FB9D29F19A2C007E39C5 /* AdminHomeView.swift */; };
 		3565689B29A12C16007CAF80 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = 3565689A29A12C16007CAF80 /* PopupView */; };
 		3565689D29A15673007CAF80 /* NYCAlertNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3565689C29A15673007CAF80 /* NYCAlertNotificationView.swift */; };
-		3566264629B9445800EA11E0 /* ReportEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3566264529B9445800EA11E0 /* ReportEditView.swift */; };
 		356C52DA29A0460C00080D4C /* LocationMapCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356C52D929A0460C00080D4C /* LocationMapCard.swift */; };
 		356C52DC29A04BDB00080D4C /* LocationListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356C52DB29A04BDB00080D4C /* LocationListCell.swift */; };
 		356C52DE29A04E0B00080D4C /* NYCRateBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356C52DD29A04E0B00080D4C /* NYCRateBadge.swift */; };
@@ -118,6 +121,7 @@
 		35F29397299E8ED500A85586 /* AmenityCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F29396299E8ED500A85586 /* AmenityCard.swift */; };
 		35F29399299E8F4A00A85586 /* AmenityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F29398299E8F4A00A85586 /* AmenityModel.swift */; };
 		35F2939B299F195400A85586 /* NotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F2939A299F195400A85586 /* NotificationsView.swift */; };
+		35F5630A2A13D181004FE102 /* NYCSegmentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F563092A13D181004FE102 /* NYCSegmentControl.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -154,12 +158,15 @@
 		354651C429A83B1F003F7AE8 /* LoadingBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingBottomView.swift; sourceTree = "<group>"; };
 		354F6D3E29F182D500E45CFE /* WriteFeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteFeedbackView.swift; sourceTree = "<group>"; };
 		3550FA2D29B3CA9F0091B558 /* OnboardingNavigationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingNavigationCoordinator.swift; sourceTree = "<group>"; };
+		3554C5722A1462ED003080FD /* Jost-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Jost-Bold.ttf"; path = "../../../../../Downloads/Jost/static/Jost-Bold.ttf"; sourceTree = "<group>"; };
+		3554C5732A1462F7003080FD /* Jost-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Jost-Regular.ttf"; path = "../../../../../Downloads/Jost/static/Jost-Regular.ttf"; sourceTree = "<group>"; };
+		3554C5742A146300003080FD /* Jost-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Jost-SemiBold.ttf"; path = "../../../../../Downloads/Jost/static/Jost-SemiBold.ttf"; sourceTree = "<group>"; };
+		3554C5782A1465E4003080FD /* Jost-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Jost-Medium.ttf"; path = "../../../../../Downloads/Jost/static/Jost-Medium.ttf"; sourceTree = "<group>"; };
 		355C11BD29B78EB7001F092B /* NotificationCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCard.swift; sourceTree = "<group>"; };
 		355C11BF29B7A44E001F092B /* ErrorEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorEmptyView.swift; sourceTree = "<group>"; };
 		355EA17829AD6FAF00D62B01 /* NYCLanguageCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCLanguageCard.swift; sourceTree = "<group>"; };
 		3563FB9D29F19A2C007E39C5 /* AdminHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminHomeView.swift; sourceTree = "<group>"; };
 		3565689C29A15673007CAF80 /* NYCAlertNotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCAlertNotificationView.swift; sourceTree = "<group>"; };
-		3566264529B9445800EA11E0 /* ReportEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportEditView.swift; sourceTree = "<group>"; };
 		356C52D929A0460C00080D4C /* LocationMapCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationMapCard.swift; sourceTree = "<group>"; };
 		356C52DB29A04BDB00080D4C /* LocationListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationListCell.swift; sourceTree = "<group>"; };
 		356C52DD29A04E0B00080D4C /* NYCRateBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCRateBadge.swift; sourceTree = "<group>"; };
@@ -224,6 +231,7 @@
 		35F29396299E8ED500A85586 /* AmenityCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmenityCard.swift; sourceTree = "<group>"; };
 		35F29398299E8F4A00A85586 /* AmenityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmenityModel.swift; sourceTree = "<group>"; };
 		35F2939A299F195400A85586 /* NotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsView.swift; sourceTree = "<group>"; };
+		35F563092A13D181004FE102 /* NYCSegmentControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCSegmentControl.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -329,6 +337,7 @@
 				35F2939A299F195400A85586 /* NotificationsView.swift */,
 				351B3A2829982ABC007E7D00 /* LocationDetailView.swift */,
 				350DE27A2991CA7600573163 /* LocationsMapView.swift */,
+				35F5630B2A13DB36004FE102 /* AddReview Module */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -336,8 +345,6 @@
 		3504C8632A0D585D00D61573 /* Helper Views */ = {
 			isa = PBXGroup;
 			children = (
-				35DFA24029A518B700258BB7 /* AddReviewView.swift */,
-				3566264529B9445800EA11E0 /* ReportEditView.swift */,
 				35DFA23D29A3BFC800258BB7 /* ExpandedReviewView.swift */,
 			);
 			path = "Helper Views";
@@ -693,6 +700,10 @@
 		359E6AA32981FD8400333BD7 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				3554C5782A1465E4003080FD /* Jost-Medium.ttf */,
+				3554C5742A146300003080FD /* Jost-SemiBold.ttf */,
+				3554C5732A1462F7003080FD /* Jost-Regular.ttf */,
+				3554C5722A1462ED003080FD /* Jost-Bold.ttf */,
 				359E6AA62981FDD300333BD7 /* Nunito-Bold.ttf */,
 				359E6AA52981FDC800333BD7 /* Nunito-SemiBold.ttf */,
 				359E6AA42981FDBA00333BD7 /* Nunito-Regular.ttf */,
@@ -750,6 +761,7 @@
 				3524973929EB1CE9009E1002 /* MaintenanceOverlayView.swift */,
 				3524974129EB2669009E1002 /* makeup.json */,
 				35402A2B2A0ED23400974CF7 /* NYCImageCarousel.swift */,
+				35F563092A13D181004FE102 /* NYCSegmentControl.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -763,6 +775,14 @@
 				35E7FB9A2985ADF800EFF282 /* GeopositionPermission.swift */,
 			);
 			path = "Account Setup";
+			sourceTree = "<group>";
+		};
+		35F5630B2A13DB36004FE102 /* AddReview Module */ = {
+			isa = PBXGroup;
+			children = (
+				35DFA24029A518B700258BB7 /* AddReviewView.swift */,
+			);
+			path = "AddReview Module";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -846,11 +866,15 @@
 			files = (
 				3524974229EB2669009E1002 /* makeup.json in Resources */,
 				359E6AA72981FEB800333BD7 /* Nunito-Bold.ttf in Resources */,
+				3554C5762A1463D3003080FD /* Jost-SemiBold.ttf in Resources */,
+				3554C5792A14660F003080FD /* Jost-Medium.ttf in Resources */,
 				359E6AA82981FEB800333BD7 /* Nunito-SemiBold.ttf in Resources */,
 				359E6AA92981FEB800333BD7 /* Nunito-Regular.ttf in Resources */,
 				3503BD92297F50AC00C0E365 /* LaunchScreen.storyboard in Resources */,
 				3503BD8F297F50AC00C0E365 /* Assets.xcassets in Resources */,
 				35C1667929D12FD500963257 /* GoogleService-Info.plist in Resources */,
+				3554C5752A1463D3003080FD /* Jost-Bold.ttf in Resources */,
+				3554C5772A1463D3003080FD /* Jost-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -895,9 +919,9 @@
 				355C11C029B7A44E001F092B /* ErrorEmptyView.swift in Sources */,
 				35E7FB9D2985B88700EFF282 /* GeoLocationModel.swift in Sources */,
 				35F2939B299F195400A85586 /* NotificationsView.swift in Sources */,
+				35F5630A2A13D181004FE102 /* NYCSegmentControl.swift in Sources */,
 				359F80F9298C30D2000D792E /* NYCBadgeView.swift in Sources */,
 				359D87CA29D8919C00E827F3 /* UserService.swift in Sources */,
-				3566264629B9445800EA11E0 /* ReportEditView.swift in Sources */,
 				3538C62F298358890017800B /* LanguageCard.swift in Sources */,
 				359A792D298ECC6B001B66CF /* NYCSocialCard.swift in Sources */,
 				356C52E129A052F900080D4C /* MapChoiceView.swift in Sources */,
@@ -1092,7 +1116,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = NYCoworker/NYCoworker.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 21;
 				DEVELOPMENT_TEAM = 9S2MZXD36G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NYCoworker/Info.plist;
@@ -1130,7 +1154,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = NYCoworker/NYCoworker.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 21;
 				DEVELOPMENT_TEAM = 9S2MZXD36G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NYCoworker/Info.plist;

@@ -16,7 +16,7 @@ struct NYCSocialCard: View {
             VStack(alignment: .leading, spacing: 1) {
                 Text(data.title)
                     .foregroundColor(Resources.Colors.customBlack)
-                    .font(Resources.Fonts.bold(withSize: 15))
+                    .font(Resources.Fonts.medium(withSize: 15))
                 Text(data.text)
                     .foregroundColor(Resources.Colors.darkGrey)
                     .font(Resources.Fonts.regular(withSize: 13))

@@ -14,7 +14,7 @@ struct NYCNotificationCard: View {
             VStack(alignment: .leading, spacing: 5) {
                 Text("General notifications")
                     .foregroundColor(Resources.Colors.customBlack)
-                    .font(Resources.Fonts.bold(withSize: 17))
+                    .font(Resources.Fonts.medium(withSize: 17))
                 Text("You will receive notifications about \nnew spaces, coworker updates and more")
                     .foregroundColor(Resources.Colors.darkGrey)
                     .font(Resources.Fonts.regular(withSize: 15))

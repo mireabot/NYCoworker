@@ -22,7 +22,7 @@ struct ShareCardView: View {
                 VStack(alignment: .leading, spacing: 0) {
                     Text("Meet new people anywhere you work")
                         .foregroundColor(.white)
-                        .font(Resources.Fonts.bold(withSize: 17))
+                        .font(Resources.Fonts.medium(withSize: 17))
                     Text("Coming soon")
                         .foregroundColor(.white)
                         .font(Resources.Fonts.regular(withSize: 15))
@@ -34,7 +34,7 @@ struct ShareCardView: View {
                     HStack(spacing: 3) {
                         Text("Share app")
                             .foregroundColor(Resources.Colors.primary)
-                            .font(Resources.Fonts.bold(withSize: 13))
+                            .font(Resources.Fonts.medium(withSize: 13))
                         Resources.Images.Navigation.share
                             .resizable().frame(width: 18, height: 18)
                             .foregroundColor(Resources.Colors.primary)

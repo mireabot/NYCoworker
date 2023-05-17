@@ -28,7 +28,7 @@ struct NotificationsView: View {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Text("Notifications")
                         .foregroundColor(Resources.Colors.customBlack)
-                        .font(Resources.Fonts.bold(withSize: 17))
+                        .font(Resources.Fonts.medium(withSize: 17))
                 }
             })
             .task {

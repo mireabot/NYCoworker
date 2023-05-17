@@ -11,7 +11,6 @@ import PopupView
 struct WriteFeedbackView: View {
     @Environment(\.dismiss) var makeDismiss
     @State var message: String = ""
-    let characterLimit = 300
     @State var showLoading = false
     @FocusState private var fieldIsFocused: Bool
     @AppStorage("UserID") var userId : String = ""
@@ -24,7 +23,7 @@ struct WriteFeedbackView: View {
                     VStack(alignment: .leading, spacing: 5) {
                         Text("Share feedback")
                             .foregroundColor(Resources.Colors.customBlack)
-                            .font(Resources.Fonts.bold(withSize: 24))
+                            .font(Resources.Fonts.medium(withSize: 24))
                         Text("Your opinion and ideas are very valuable for us")
                             .foregroundColor(Resources.Colors.darkGrey)
                             .font(Resources.Fonts.regular(withSize: 17))
@@ -35,45 +34,7 @@ struct WriteFeedbackView: View {
                 .padding(.top, 10)
                 .padding(.leading, 16)
                 
-                VStack() {
-                    HStack(spacing: 8) {
-                        withAnimation(.easeInOut) {
-                            TextField("", text: $message, axis: .vertical)
-                                .tint(Resources.Colors.primary)
-                                .focused($fieldIsFocused)
-                                .onChange(of: message) { newValue in
-                                    if newValue.count > characterLimit {
-                                        message = String(newValue.prefix(characterLimit))
-                                    }
-                                }
-                                .placeholder(when: message.isEmpty) {
-                                    Text("How we can improve NYCoworker for you?")
-                                        .foregroundColor(Resources.Colors.darkGrey)
-                                }
-                                .lineLimit(...7)
-                        }
-                    }
-                    .padding(.vertical, 15)
-                    .padding(.horizontal, 12)
-                    .background(Resources.Colors.customGrey)
-                    .cornerRadius(10)
-                    .padding(.top, 15)
-                    
-                    HStack {
-                        Text("\(characterLimit - message.count) characters left")
-                            .foregroundColor(message.count == characterLimit ? Resources.Colors.actionRed : Resources.Colors.darkGrey)
-                            .font(Resources.Fonts.regular(withSize: 14))
-                        Spacer()
-                        Button {
-                            message = ""
-                        } label: {
-                            Text("Clear")
-                                .foregroundColor(Resources.Colors.darkGrey)
-                                .font(Resources.Fonts.regular(withSize: 14))
-                        }
-
-                    }
-                }
+                NYCResizableTextField(message: $message, characterLimit: 300, placeHolder: "How we can improve NYCoworker for you?")
                 .padding([.leading,.trailing], 16)
                 
             }
@@ -117,7 +78,7 @@ struct WriteFeedbackView: View {
             .toolbarBackground(.white, for: .navigationBar)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    NYCCircleImageButton(size: 24, image: Resources.Images.Navigation.close) {
+                    NYCCircleImageButton(size: 18, image: Resources.Images.Navigation.close) {
                         makeDismiss()
                     }
                 }

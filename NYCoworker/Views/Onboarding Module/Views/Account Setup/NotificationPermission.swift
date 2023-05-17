@@ -24,7 +24,7 @@ struct NotificationPermission: View {
                     
                     Text("Get updates on the newest locations and updates")
                         .foregroundColor(Resources.Colors.customBlack)
-                        .font(Resources.Fonts.bold(withSize: 34))
+                        .font(Resources.Fonts.medium(withSize: 34))
                 }
                 
                 Spacer()

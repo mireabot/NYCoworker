@@ -21,7 +21,7 @@ struct ProfileSetup: View {
                 VStack(alignment: .leading, spacing: 5) {
                     Text("Complete your profile")
                         .foregroundColor(Resources.Colors.customBlack)
-                        .font(Resources.Fonts.bold(withSize: 22))
+                        .font(Resources.Fonts.medium(withSize: 22))
                     Text("This information will help us improve your app experience")
                         .foregroundColor(Resources.Colors.darkGrey)
                         .font(Resources.Fonts.regular(withSize: 17))

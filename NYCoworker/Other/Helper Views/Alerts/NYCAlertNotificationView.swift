@@ -75,7 +75,7 @@ struct NYCAlertView: View {
         VStack(alignment: .center, spacing: 10) {
             Text(type.title)
                 .foregroundColor(Resources.Colors.customBlack)
-                .font(Resources.Fonts.bold(withSize: 20))
+                .font(Resources.Fonts.medium(withSize: 20))
             Text(type.subtitle)
                 .foregroundColor(Resources.Colors.darkGrey)
                 .font(Resources.Fonts.regular(withSize: 17))

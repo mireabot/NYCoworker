@@ -19,6 +19,7 @@ struct LocationDetailView: View {
   @State var showReviewView = false
   @State var reportEdit = false
   @State var isLoading = true
+  @State var showAddReview = false
   @StateObject private var reviewService = ReviewService()
   var locationData : Location
   var body: some View {
@@ -44,6 +45,9 @@ struct LocationDetailView: View {
         .padding(.top, 15)
       }
     }
+    .fullScreenCover(isPresented: $showAddReview, content: {
+      AddReviewView(locationData: locationData)
+    })
     .toolbarBackground(.hidden, for: .navigationBar)
     .navigationBarBackButtonHidden()
     .navigationBarTitleDisplayMode(.inline)
@@ -95,7 +99,7 @@ struct LocationDetailView: View {
         VStack(alignment: .leading, spacing: 5) {
           Text(locationData.locationName)
             .foregroundColor(Resources.Colors.customBlack)
-            .font(Resources.Fonts.bold(withSize: 22))
+            .font(Resources.Fonts.medium(withSize: 22))
           HStack(spacing: 1) {
             LocationR.General.pin
               .resizable()
@@ -134,14 +138,14 @@ struct LocationDetailView: View {
       HStack {
         Text("What people say")
           .foregroundColor(Resources.Colors.customBlack)
-          .font(Resources.Fonts.bold(withSize: 15))
+          .font(Resources.Fonts.medium(withSize: 15))
         Spacer()
         Button {
           showReviewView.toggle()
         } label: {
           Text("See all")
             .foregroundColor(Resources.Colors.primary)
-            .font(Resources.Fonts.bold(withSize: 13))
+            .font(Resources.Fonts.medium(withSize: 13))
         }
         .opacity(reviewService.reviews.count == 0 ? 0 : 1)
         
@@ -160,6 +164,15 @@ struct LocationDetailView: View {
         }
       }
       
+      Button {
+        showAddReview.toggle()
+      } label: {
+        Text("Leave your review")
+      }
+      .buttonStyle(NYCActionButtonStyle(showLoader: .constant(false)))
+      .disabled(isLoading)
+
+      
       Rectangle()
         .foregroundColor(Resources.Colors.customGrey)
         .frame(height: 1)
@@ -172,7 +185,7 @@ struct LocationDetailView: View {
     VStack(alignment: .leading, spacing: 10) {
       Text("Amenities")
         .foregroundColor(Resources.Colors.customBlack)
-        .font(Resources.Fonts.bold(withSize: 15))
+        .font(Resources.Fonts.medium(withSize: 15))
       
       amenitiesGridView()
       
@@ -188,7 +201,7 @@ struct LocationDetailView: View {
     VStack(alignment: .leading, spacing: 10) {
       Text("Working hours")
         .foregroundColor(Resources.Colors.customBlack)
-        .font(Resources.Fonts.bold(withSize: 15))
+        .font(Resources.Fonts.medium(withSize: 15))
         .padding(.leading, 16)
       
       ScrollView(.horizontal, showsIndicators: false) {
@@ -200,7 +213,7 @@ struct LocationDetailView: View {
                 .font(Resources.Fonts.regular(withSize: 15))
               Text(item.hours)
                 .foregroundColor(Resources.Colors.customBlack)
-                .font(Resources.Fonts.bold(withSize: 15))
+                .font(Resources.Fonts.medium(withSize: 15))
             }
             .padding(10)
             .background(Resources.Colors.customGrey)
@@ -234,7 +247,7 @@ struct LocationDetailView: View {
             .foregroundColor(Resources.Colors.primary)
           Text("Make edit")
             .foregroundColor(Resources.Colors.primary)
-            .font(Resources.Fonts.bold(withSize: 15))
+            .font(Resources.Fonts.medium(withSize: 15))
         }
       }
       
