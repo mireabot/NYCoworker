@@ -25,7 +25,7 @@ struct HomeView: View {
       ScrollView(.vertical, showsIndicators: false) {
         VStack(spacing: 0) {
           /// Map section
-          mapView()
+          mapView().padding(.top, 5)
           /// Locations section
           VStack(alignment: .leading, spacing: 15) {
             /// Category scrollview
@@ -37,6 +37,7 @@ struct HomeView: View {
             /// Category scrollview
             locationPublicSpacesCollection()
           }
+          .padding(.top, 10)
         }
       }
       .popup(isPresented: $addToFavs) {
@@ -110,7 +111,7 @@ extension HomeView {
         label: {
           NYCSectionHeader(title: Locations.libraries.headerTitle, isExpandButton: true)
         })
-      .padding(.leading, 20)
+      .padding(.leading, 16)
       
       ScrollView(.horizontal, showsIndicators: false) {
         LazyHStack(spacing: 10) {
@@ -133,7 +134,7 @@ extension HomeView {
             }
           }
         }
-        .padding([.leading,.trailing], 20)
+        .padding([.leading,.trailing], 16)
       }
     }
   }
@@ -146,7 +147,7 @@ extension HomeView {
         label: {
           NYCSectionHeader(title: Locations.lobbies.headerTitle, isExpandButton: true)
         })
-      .padding(.leading, 20)
+      .padding(.leading, 16)
       
       ScrollView(.horizontal, showsIndicators: false) {
         LazyHStack(spacing: 10) {
@@ -169,7 +170,7 @@ extension HomeView {
             }
           }
         }
-        .padding([.leading,.trailing], 20)
+        .padding([.leading,.trailing], 16)
       }
     }
   }
@@ -182,7 +183,7 @@ extension HomeView {
         label: {
           NYCSectionHeader(title: Locations.publicSpaces.headerTitle, isExpandButton: true)
         })
-      .padding(.leading, 20)
+      .padding(.leading, 16)
       
       ScrollView(.horizontal, showsIndicators: false) {
         LazyHStack(spacing: 10) {
@@ -205,14 +206,14 @@ extension HomeView {
             }
           }
         }
-        .padding([.leading,.trailing], 20)
+        .padding([.leading,.trailing], 16)
       }
     }
   }
   
   @ViewBuilder
   func mapView() -> some View {
-    VStack(alignment: .leading, spacing: 15) {
+    VStack(alignment: .leading, spacing: 10) {
       NYCSectionHeader(title: "Locations nearby", isExpandButton: false)
       ZStack {
         LocationMapView(locations: locationService.locations, selectedLocation: .constant(Location.mock), region: Resources.mapRegion, type: .homePreview)
@@ -232,7 +233,7 @@ extension HomeView {
         showMap.toggle()
       }
     }
-    .padding()
+    .padding([.leading,.trailing], 16)
   }
   
   func addLocationTofavs(location: String) {

@@ -22,20 +22,20 @@ struct NYCAlertNotificationView: View {
     @ViewBuilder
     func createAlert() -> some View {
         HStack {
-            HStack(alignment: .center, spacing: 5) {
+            HStack(alignment: .center, spacing: 10) {
                 alertStyle.icon
                     .resizable()
                     .frame(width: 20, height: 20)
                     .foregroundColor(Color.white)
                 Text(alertStyle.title)
                     .foregroundColor(Color.white)
-                    .font(Resources.Fonts.regular(withSize: 17))
+                    .font(Resources.Fonts.medium(withSize: 17))
             }
             Spacer()
         }
-        .padding(10)
+        .padding(16)
         .background(Resources.Colors.customBlack)
-        .cornerRadius(5)
+        .cornerRadius(10)
         .padding([.leading,.trailing], 16)
     }
     
@@ -62,8 +62,8 @@ struct NYCAlertNotificationView: View {
 
 struct NYCAlertView_Previews: PreviewProvider {
     static var previews: some View {
-        //        NYCAlertNotificationView(title: "Added to favorites", alertStyle: .small)
-        NYCAlertView(type: .notification, action: {})
+      NYCAlertNotificationView(alertStyle: .addedToFavorites, title: "Added to favorites")
+//        NYCAlertView(type: .notification, action: {})
         //        NYCBottomErrorAlert(show: .constant(true))
     }
 }

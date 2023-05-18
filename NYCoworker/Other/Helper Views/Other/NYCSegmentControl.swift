@@ -9,13 +9,13 @@ import SwiftUI
 
 struct NYCSegmentControl: View {
   @State var selectedSegment = 1
-  @Binding var title: String
+  @Binding var title: Review.ReviewType
   var body: some View {
     HStack(spacing: 20) {
       Button {
         withAnimation(.spring()) {
           selectedSegment = 1
-          title = "Positive"
+          title = .pos
         }
       } label: {
         Text("Positive")
@@ -30,7 +30,7 @@ struct NYCSegmentControl: View {
       Button {
         withAnimation(.spring()) {
           selectedSegment = 2
-          title = "Negative"
+          title = .neg
         }
       } label: {
         Text("Negative")

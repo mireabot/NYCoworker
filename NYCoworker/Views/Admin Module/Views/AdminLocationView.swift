@@ -104,7 +104,7 @@ extension AdminLocationView {
         
         do {
             let locationData = try Firestore.Encoder().encode(location)
-            db.collection("Locations").document().setData(locationData)
+          db.collection(Endpoints.locations.rawValue).document(location.locationID).setData(locationData)
         } catch let error {
             print("Error encoding location: \(error.localizedDescription)")
         }

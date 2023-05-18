@@ -22,10 +22,13 @@ struct ReviewCard: View {
                 WebImage(url: data.userImage).placeholder {
                     Image("emptyImage")
                         .resizable()
+                        .aspectRatio(contentMode: .fill)
                 }
                 .resizable()
+                .aspectRatio(contentMode: .fill)
                 .frame(width: 50, height: 50)
                 .clipShape(Circle())
+              
                 Text(data.userName)
                     .foregroundColor(Resources.Colors.customBlack)
                     .font(Resources.Fonts.regular(withSize: 17))

@@ -8,24 +8,42 @@
 import SwiftUI
 
 struct NYCBottomSheetHeader: View {
-    var title: String
-    var body: some View {
-        VStack(alignment: .center) {
-            Text(title)
-                .font(Resources.Fonts.medium(withSize: 17))
-            Divider()
-        }
+  var title: String
+  var body: some View {
+    VStack(alignment: .center) {
+      Text(title)
+        .font(Resources.Fonts.medium(withSize: 17))
+      Divider()
     }
+  }
 }
 
 struct NYCHeader: View {
-    var title: String
-    var body: some View {
-        HStack {
-            Text(title)
-                .font(Resources.Fonts.medium(withSize: 22))
-//                .padding(.leading, 16)
-            Spacer()
-        }
+  enum HeaderStyle {
+    case center
+    case leading
+  }
+  var title: String
+  var headerType: HeaderStyle?
+  var body: some View {
+    switch headerType {
+    case .center:
+      VStack {
+        Text(title)
+          .font(Resources.Fonts.medium(withSize: 17))
+      }
+    case .leading:
+      HStack {
+        Text(title)
+          .font(Resources.Fonts.medium(withSize: 22))
+        Spacer()
+      }
+    case .none:
+      HStack {
+        Text(title)
+          .font(Resources.Fonts.medium(withSize: 22))
+        Spacer()
+      }
     }
+  }
 }

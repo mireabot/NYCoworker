@@ -51,6 +51,7 @@ enum PopAlertType {
     case dataUploaded
     case reportSubmitted
     case feedbackSent
+  case reviewUploaded
     
     var title: String {
         switch self {
@@ -62,6 +63,8 @@ enum PopAlertType {
             return "Report submitted"
         case .feedbackSent:
             return "We received your feedback"
+        case .reviewUploaded:
+          return "Your review is live!"
         }
     }
     
@@ -75,6 +78,8 @@ enum PopAlertType {
             return Image("dataUploaded")
         case .feedbackSent:
             return Image("dataUploaded")
+        case .reviewUploaded:
+          return Image("dataUploaded")
         }
     }
 }

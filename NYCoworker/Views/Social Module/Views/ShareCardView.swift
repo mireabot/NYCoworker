@@ -17,7 +17,6 @@ struct ShareCardView: View {
                         Image("p\(index)")
                     }
                 }
-                .padding(.leading, 12)
                 
                 VStack(alignment: .leading, spacing: 0) {
                     Text("Meet new people anywhere you work")
@@ -34,14 +33,14 @@ struct ShareCardView: View {
                     HStack(spacing: 3) {
                         Text("Share app")
                             .foregroundColor(Resources.Colors.primary)
-                            .font(Resources.Fonts.medium(withSize: 13))
+                            .font(Resources.Fonts.medium(withSize: 15))
                         Resources.Images.Navigation.share
                             .resizable().frame(width: 18, height: 18)
                             .foregroundColor(Resources.Colors.primary)
                     }
-                    .padding(5)
+                    .padding([.vertical,.horizontal], 10)
                     .background(.white)
-                    .cornerRadius(5)
+                    .cornerRadius(10)
                 }
 
             }
@@ -55,8 +54,8 @@ struct ShareCardView: View {
     }
 }
 
-//struct ShareCardView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ShareCardView()
-//    }
-//}
+struct ShareCardView_Previews: PreviewProvider {
+    static var previews: some View {
+      ShareCardView(buttonAction: {})
+    }
+}

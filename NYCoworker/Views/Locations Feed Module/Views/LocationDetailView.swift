@@ -21,6 +21,7 @@ struct LocationDetailView: View {
   @State var isLoading = true
   @State var showAddReview = false
   @StateObject private var reviewService = ReviewService()
+  @StateObject private var locationService = LocationService()
   var locationData : Location
   var body: some View {
     ScrollView(.vertical, showsIndicators: true) {
@@ -48,7 +49,7 @@ struct LocationDetailView: View {
     .fullScreenCover(isPresented: $showAddReview, content: {
       AddReviewView(locationData: locationData)
     })
-    .toolbarBackground(.hidden, for: .navigationBar)
+    .toolbarBackground(.white, for: .navigationBar)
     .navigationBarBackButtonHidden()
     .navigationBarTitleDisplayMode(.inline)
     .task {
@@ -72,7 +73,6 @@ struct LocationDetailView: View {
         }
       }
     }
-    .toolbarBackground(.white, for: .navigationBar)
     .sheet(isPresented: $showReviewView, content: {
       ExpandedReviewView(type: .fullList)
         .environmentObject(reviewService)

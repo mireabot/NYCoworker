@@ -105,11 +105,12 @@ struct NYCActionButtonStyle: ButtonStyle {
                 }
                 else {
                     configuration.label
+                    .font(Resources.Fonts.medium(withSize: 17))
                     
                 }
             }
             .foregroundColor(isEnabled ? Color.white : Resources.Colors.darkGrey)
-            .padding([.top,.bottom], 15)
+            .padding([.vertical,.horizontal], 10)
             .frame(maxWidth: .infinity)
             .background(RoundedRectangle(cornerRadius: 5).fill(isEnabled ? Resources.Colors.primary : Resources.Colors.customGrey))
             .cornerRadius(10)
