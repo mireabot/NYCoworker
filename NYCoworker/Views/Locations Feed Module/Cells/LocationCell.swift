@@ -82,7 +82,7 @@ extension LocationCell {
                     .font(Resources.Fonts.regular(withSize: 15))
                     .lineLimit(0)
                 HStack(spacing: 4) {
-                    Text(String(format: "%.1f", calculateDistance(from: Resources.userLocation, to: data.locationCoordinates)) + " mi")
+                    Text(String(format: "%.1f", calculateDistance(from: Resources.userLocation, to: data.locationCoordinates)) + " mi · ")
                         .foregroundColor(Resources.Colors.darkGrey)
                         .font(Resources.Fonts.regular(withSize: 12))
                     
@@ -134,7 +134,7 @@ extension LocationCell {
                 .lineLimit(0)
             
             HStack(spacing: 4) {
-                Text(String(format: "%.1f", calculateDistance(from: Resources.userLocation, to: data.locationCoordinates)) + " mi")
+                Text(String(format: "%.1f", calculateDistance(from: Resources.userLocation, to: data.locationCoordinates)) + " mi · ")
                     .foregroundColor(Resources.Colors.darkGrey)
                     .font(Resources.Fonts.regular(withSize: 12))
                 RatingDotsView(number: data.reviews)

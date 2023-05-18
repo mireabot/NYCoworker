@@ -13,7 +13,7 @@ import CoreLocation
 enum Resources {
   
   static let isLogged = false
-  static let mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 40.7171577, longitude: -73.9950039), span: MKCoordinateSpan(latitudeDelta: 0.025, longitudeDelta: 0.025))
+  static let mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 40.7171577, longitude: -73.9950039), span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02))
   
   static var userLocation : CLLocation = CLLocation(latitude: 0.0, longitude: 0.0)
   
@@ -62,6 +62,7 @@ enum Resources {
       static let website = Image("website")
       static let rate = Image("rate")
       static let faq = Image("faq")
+      static let like = Image("like")
       static let notifications = Image("bell")
     }
     

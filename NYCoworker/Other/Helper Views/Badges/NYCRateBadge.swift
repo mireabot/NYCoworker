@@ -30,7 +30,7 @@ struct NYCRateBadge: View {
     
     var cardRateBadge: some View {
         HStack(alignment: .center, spacing: 1) {
-            Image("rate")
+          Resources.Images.Settings.like
                 .resizable()
                 .frame(width: 14, height: 14)
                 .foregroundColor(Resources.Colors.actionGreen)

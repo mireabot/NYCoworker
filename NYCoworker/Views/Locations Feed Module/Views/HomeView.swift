@@ -217,17 +217,8 @@ extension HomeView {
       NYCSectionHeader(title: "Locations nearby", isExpandButton: false)
       ZStack {
         LocationMapView(locations: locationService.locations, selectedLocation: .constant(Location.mock), region: Resources.mapRegion, type: .homePreview)
-          .frame(width: UIScreen.main.bounds.width - 16, height: 100)
+          .frame(width: UIScreen.main.bounds.width - 16, height: 120)
           .cornerRadius(10)
-//          .disabled(true)
-        
-//        Button {
-//          showMap.toggle()
-//        } label: {
-//          Text("Open map")
-//        }
-//        .buttonStyle(NYCActionButtonStyle(showLoader: .constant(false)))
-//        .padding([.leading,.trailing], 90)
       }
       .onTapGesture {
         showMap.toggle()

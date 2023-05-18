@@ -32,10 +32,7 @@ struct ReviewCard: View {
                 Text(data.userName)
                     .foregroundColor(Resources.Colors.customBlack)
                     .font(Resources.Fonts.regular(withSize: 17))
-                Image(data.type == .pos ? "review-pos" : "review-neg")
-                    .resizable()
-                    .frame(width: 16, height: 16)
-                    .foregroundColor(data.type == .pos ? Resources.Colors.actionGreen : Resources.Colors.actionRed)
+              NYCReviewTypeBadge(type: data.type)
             }
             /// Review info
             HStack {
