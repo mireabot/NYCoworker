@@ -26,6 +26,8 @@ struct ExpandedReviewView: View {
     @ViewBuilder
     func fullListView() -> some View {
         VStack {
+          GrabberView()
+          VStack {
             NYCBottomSheetHeader(title: "All reviews").paddingForHeader()
             ScrollView(.vertical, showsIndicators: true) {
                 VStack {
@@ -36,6 +38,9 @@ struct ExpandedReviewView: View {
                 .padding([.leading,.trailing], 16)
                 .padding(.top, 10)
             }
+          }
+          .background(Color.white)
+          .cornerRadius(16, corners: [.topLeft,.topRight])
         }
     }
 }

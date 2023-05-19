@@ -39,6 +39,8 @@ struct ProfileView: View {
                 .position(.bottom)
                 .closeOnTap(false)
                 .closeOnTapOutside(false)
+                .dragToDismiss(false)
+                .animation(.spring(response: 0.4, blendDuration: 0.2))
             })
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {

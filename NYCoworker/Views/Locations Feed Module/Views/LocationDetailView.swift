@@ -73,14 +73,6 @@ struct LocationDetailView: View {
         }
       }
     }
-    .sheet(isPresented: $showReviewView, content: {
-      ExpandedReviewView(type: .fullList)
-        .environmentObject(reviewService)
-        .presentationDetents(
-          [.mediumBottomBar, .largeBottomBar],
-          selection: $selectDetent
-        )
-    })
     .popup(isPresented: $addToFavs) {
       NYCAlertNotificationView(alertStyle: .addedToFavorites)
     } customize: {
@@ -91,6 +83,21 @@ struct LocationDetailView: View {
         .position(.bottom)
         .animation(.spring(response: 0.4, blendDuration: 0.2))
     }
+    .popup(isPresented: $showReviewView, view: {
+      ExpandedReviewView(type: .fullList)
+        .environmentObject(reviewService)
+      
+    }, customize: {
+      $0
+        .type(.toast)
+        .isOpaque(true)
+        .backgroundColor(Color.black.opacity(0.3))
+        .position(.bottom)
+        .closeOnTap(false)
+        .closeOnTapOutside(false)
+        .dragToDismiss(true)
+        .animation(.spring(response: 0.4, blendDuration: 0.2))
+    })
   }
   
   var locationInfo: some View {
@@ -258,8 +265,8 @@ struct LocationDetailView: View {
   @ViewBuilder
   func amenitiesGridView() -> some View {
     let rows = [
-      GridItem(.flexible(),alignment: .leading),
-      GridItem(.flexible(),alignment: .leading)
+      GridItem(.fixed(30),alignment: .leading),
+      GridItem(.fixed(30),alignment: .leading)
     ]
     
     LazyHGrid(rows: rows, alignment: .center, spacing: 10) {
@@ -275,7 +282,6 @@ struct LocationDetailView: View {
         .padding(2)
       }
     }
-    .frame(height: 80)
   }
   
   func image(image: String) -> String {

@@ -124,6 +124,7 @@
 		35F29399299E8F4A00A85586 /* AmenityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F29398299E8F4A00A85586 /* AmenityModel.swift */; };
 		35F2939B299F195400A85586 /* NotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F2939A299F195400A85586 /* NotificationsView.swift */; };
 		35F5630A2A13D181004FE102 /* NYCSegmentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F563092A13D181004FE102 /* NYCSegmentControl.swift */; };
+		35F90D012A1808DC00AFF4FF /* GrabberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F90D002A1808DC00AFF4FF /* GrabberView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -236,6 +237,7 @@
 		35F29398299E8F4A00A85586 /* AmenityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmenityModel.swift; sourceTree = "<group>"; };
 		35F2939A299F195400A85586 /* NotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsView.swift; sourceTree = "<group>"; };
 		35F563092A13D181004FE102 /* NYCSegmentControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCSegmentControl.swift; sourceTree = "<group>"; };
+		35F90D002A1808DC00AFF4FF /* GrabberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrabberView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -768,6 +770,7 @@
 				3524974129EB2669009E1002 /* makeup.json */,
 				35402A2B2A0ED23400974CF7 /* NYCImageCarousel.swift */,
 				35F563092A13D181004FE102 /* NYCSegmentControl.swift */,
+				35F90D002A1808DC00AFF4FF /* GrabberView.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -919,6 +922,7 @@
 				35DFA24129A518B700258BB7 /* AddReviewView.swift in Sources */,
 				354F6D3F29F182D500E45CFE /* WriteFeedbackView.swift in Sources */,
 				350DE2762991C5F200573163 /* LocationListView.swift in Sources */,
+				35F90D012A1808DC00AFF4FF /* GrabberView.swift in Sources */,
 				350DE27B2991CA7600573163 /* LocationsMapView.swift in Sources */,
 				351872CC29D3C510004B564A /* NotificationService.swift in Sources */,
 				3536C2D72A02A955007D3E1A /* AdminNotificationView.swift in Sources */,
@@ -1124,7 +1128,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = NYCoworker/NYCoworker.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 23;
+				CURRENT_PROJECT_VERSION = 24;
 				DEVELOPMENT_TEAM = 9S2MZXD36G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NYCoworker/Info.plist;
@@ -1162,7 +1166,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = NYCoworker/NYCoworker.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 23;
+				CURRENT_PROJECT_VERSION = 24;
 				DEVELOPMENT_TEAM = 9S2MZXD36G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NYCoworker/Info.plist;

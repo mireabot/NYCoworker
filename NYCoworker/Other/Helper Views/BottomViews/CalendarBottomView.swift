@@ -40,59 +40,62 @@ struct CalendarBottomView: View {
   }
   
   var body: some View {
-    VStack(alignment: .leading) {
-      HStack {
-        Button {
-          showDate.toggle()
-        } label: {
-          Text("Cancel")
-            .foregroundColor(Resources.Colors.primary)
-            .font(Resources.Fonts.medium(withSize: 17))
-        }
+    VStack(alignment: .center) {
+      GrabberView()
+      VStack(alignment: .leading) {
+          HStack {
+            Button {
+              showDate.toggle()
+            } label: {
+              Text("Cancel")
+                .foregroundColor(Resources.Colors.primary)
+                .font(Resources.Fonts.medium(withSize: 17))
+            }
 
-        Spacer()
-        Button {
-          date = selectedDate
-          showDate.toggle()
-        } label: {
-          Text("Done")
-            .foregroundColor(Resources.Colors.primary)
-            .font(Resources.Fonts.medium(withSize: 17))
-        }
+            Spacer()
+            Button {
+              date = selectedDate
+              showDate.toggle()
+            } label: {
+              Text("Done")
+                .foregroundColor(Resources.Colors.primary)
+                .font(Resources.Fonts.medium(withSize: 17))
+            }
 
-      }
-      .padding([.leading,.trailing], 10)
-      .padding(.top, 15)
-      .padding(.bottom, 10)
-      
-      Text(currentMonthYear)
-        .foregroundColor(Resources.Colors.customBlack)
-        .font(Resources.Fonts.medium(withSize: 20))
-        .padding(.leading, 10)
-      VStack {
-        LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 5), count: 7), spacing: 5) {
-          ForEach(0..<generateDatesForCurrentMonth().count, id: \.self) { index in
-            Button(action: {
-              DispatchQueue.main.async {
-                withAnimation(.spring()) {
-                  selectDate(generateDatesForCurrentMonth()[index])
+          }
+          .padding([.leading,.trailing], 10)
+          .padding(.top, 15)
+          .padding(.bottom, 10)
+          
+          Text(currentMonthYear)
+            .foregroundColor(Resources.Colors.customBlack)
+            .font(Resources.Fonts.medium(withSize: 20))
+            .padding(.leading, 10)
+          VStack {
+            LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 5), count: 7), spacing: 5) {
+              ForEach(0..<generateDatesForCurrentMonth().count, id: \.self) { index in
+                Button(action: {
+                  DispatchQueue.main.async {
+                    withAnimation(.spring()) {
+                      selectDate(generateDatesForCurrentMonth()[index])
+                    }
+                  }
+                }) {
+                  Text(formatter.string(from: generateDatesForCurrentMonth()[index]))
+                    .font(isDateSelected(generateDatesForCurrentMonth()[index]) ? Resources.Fonts.medium(withSize: 15) : Resources.Fonts.regular(withSize: 15))
+                    .foregroundColor(isDateSelected(generateDatesForCurrentMonth()[index]) ? Color.white : Resources.Colors.customBlack)
+                    .padding(10)
+                    .background(isDateSelected(generateDatesForCurrentMonth()[index]) ? Resources.Colors.primary : Color.clear)
+                    .clipShape(Circle())
                 }
               }
-            }) {
-              Text(formatter.string(from: generateDatesForCurrentMonth()[index]))
-                .font(isDateSelected(generateDatesForCurrentMonth()[index]) ? Resources.Fonts.medium(withSize: 15) : Resources.Fonts.regular(withSize: 15))
-                .foregroundColor(isDateSelected(generateDatesForCurrentMonth()[index]) ? Color.white : Resources.Colors.customBlack)
-                .padding(10)
-                .background(isDateSelected(generateDatesForCurrentMonth()[index]) ? Resources.Colors.primary : Color.clear)
-                .clipShape(Circle())
             }
           }
         }
-      }
+        .padding(.bottom, 30)
+        .background(Color.white)
+        .cornerRadius(16, corners: [.topLeft,.topRight])
     }
-    .padding(.bottom, 30)
-    .background(Color.white)
-    .cornerRadius(16, corners: [.topLeft,.topRight])
   }
 }
 

@@ -64,6 +64,8 @@ struct AddReviewView: View {
           .position(.bottom)
           .closeOnTap(false)
           .closeOnTapOutside(false)
+          .dragToDismiss(true)
+          .animation(.spring(response: 0.4, blendDuration: 0.2))
       })
       .onTapGesture {
         fieldIsFocused = false
