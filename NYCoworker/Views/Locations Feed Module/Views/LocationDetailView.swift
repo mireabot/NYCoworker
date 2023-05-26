@@ -42,12 +42,16 @@ struct LocationDetailView: View {
           reviews
           amenities
           workingHours
+          suggestInfo
         }
         .padding(.top, 15)
       }
     }
     .fullScreenCover(isPresented: $showAddReview, content: {
       AddReviewView(locationData: locationData)
+    })
+    .fullScreenCover(isPresented: $reportEdit, content: {
+      SuggestInformationView()
     })
     .toolbarBackground(.white, for: .navigationBar)
     .navigationBarBackButtonHidden()
@@ -252,7 +256,7 @@ struct LocationDetailView: View {
             .resizable()
             .frame(width: 16, height: 16)
             .foregroundColor(Resources.Colors.primary)
-          Text("Make edit")
+          Text("Suggest an edit")
             .foregroundColor(Resources.Colors.primary)
             .font(Resources.Fonts.medium(withSize: 15))
         }

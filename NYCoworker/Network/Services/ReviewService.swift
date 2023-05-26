@@ -35,7 +35,9 @@ class ReviewService: ObservableObject {
   }
   
   ///Create review based on user input
-  ///- parameter review: Review model object
+  ///- Parameters:
+  ///   - review: Template of review object to send
+  ///   - location: Data about location which will be reviewed
   func createReview(from review: Review, location: Location, completion: @escaping () -> Void) async {
     do {
       let reviewData = try Firestore.Encoder().encode(review)

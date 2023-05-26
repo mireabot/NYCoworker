@@ -16,7 +16,7 @@ struct SplashScreenView: View {
     @AppStorage("UserID") var userId : String = ""
     @AppStorage("UserMail") var userMail : String = ""
     @AppStorage("UserPass") var userPass : String = ""
-    @AppStorage("fcmToken") var firebaseToken: String = ""
+    @State var token = UserDefaults.standard.string(forKey: "FCMToken")
     @StateObject var userService = UserService()
     var body: some View {
         ZStack {
@@ -48,7 +48,7 @@ struct SplashScreenView: View {
         if userLogged {
             Task {
                 await userService.logIn(withEmail: userMail,withPass: userPass, completion: {
-                    userService.addToken(forUser: userId, token: firebaseToken)
+                    userService.addToken(forUser: userId, token: token ?? "nil")
                     isActive = true
                 }) { err in
                     setError(err)

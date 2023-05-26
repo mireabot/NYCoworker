@@ -15,5 +15,5 @@ struct User: Codable {
     var name: String
     var occupation: String
     var favoriteLocations: [String]
-    
+  var token: String
 }

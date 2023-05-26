@@ -21,7 +21,6 @@ class UserRegistrationModel: ObservableObject {
     @AppStorage("UserMail") var userMail : String = ""
     @AppStorage("UserPass") var userPass : String = ""
     @AppStorage("userSigned") var userLogged: Bool = false
-    @AppStorage("fcmToken") var firebaseToken: String = ""
     
     func createUser(mail: String, pass: String,completion: @escaping () -> Void) {
         Task {
@@ -34,7 +33,7 @@ class UserRegistrationModel: ObservableObject {
                 
                 let downloadURL = try await storageRef.downloadURL()
                 
-                let user = User(userID: userID, avatarURL: downloadURL, name: name, occupation: occupation, favoriteLocations: [])
+              let user = User(userID: userID, avatarURL: downloadURL, name: name, occupation: occupation, favoriteLocations: [], token: UserDefaults.standard.string(forKey: "FCMToken") ?? "nil")
                 
                 let _ = try Firestore.firestore().collection(Endpoints.users.rawValue).document(userID).setData(from: user,completion: {
                     error in

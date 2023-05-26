@@ -75,11 +75,11 @@ struct WriteFeedbackView: View {
         .disabled(message.isEmpty)
         .buttonStyle(NYCActionButtonStyle(showLoader: $showLoading))
         .padding([.leading,.trailing], 16)
-        .padding(.bottom, 15)
+        .padding(.bottom, 10)
       })
       .toolbarBackground(.white, for: .navigationBar)
       .toolbar {
-        ToolbarItem(placement: .navigationBarTrailing) {
+        ToolbarItem(placement: .navigationBarLeading) {
           NYCCircleImageButton(size: 18, image: Resources.Images.Navigation.close) {
             makeDismiss()
           }

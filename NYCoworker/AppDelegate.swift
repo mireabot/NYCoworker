@@ -82,6 +82,8 @@ extension AppDelegate: MessagingDelegate{
                 print("Failed to retrieve FCM token: \(error.localizedDescription)")
             } else if let token = token {
                 print("FCM token: \(token)")
+              UserDefaults.standard.setValue(token, forKey: "FCMToken")
+              UserDefaults.standard.synchronize()
             }
         }
     }

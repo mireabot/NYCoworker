@@ -62,6 +62,8 @@
 		35746CB329A29F3E007322AA /* FavoritesEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35746CB229A29F3E007322AA /* FavoritesEmptyView.swift */; };
 		35746CB529A3183B007322AA /* NotificationsEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35746CB429A3183B007322AA /* NotificationsEmptyView.swift */; };
 		3583BD4529AA99E600B984EA /* NYCNotificationCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3583BD4429AA99E600B984EA /* NYCNotificationCard.swift */; };
+		35861C9D2A21493B00DC0AFB /* SuggestInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35861C9C2A21493B00DC0AFB /* SuggestInformationView.swift */; };
+		35861C9F2A2168F200DC0AFB /* NYCChipCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35861C9E2A2168F200DC0AFB /* NYCChipCollection.swift */; };
 		35915FEF29EB160700263946 /* AppConfigService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35915FEE29EB160700263946 /* AppConfigService.swift */; };
 		359348DA29BA378D00B7739A /* ReviewEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359348D929BA378D00B7739A /* ReviewEmptyView.swift */; };
 		359348DD29BA421900B7739A /* ReviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359348DC29BA421900B7739A /* ReviewModel.swift */; };
@@ -182,6 +184,8 @@
 		35746CB229A29F3E007322AA /* FavoritesEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesEmptyView.swift; sourceTree = "<group>"; };
 		35746CB429A3183B007322AA /* NotificationsEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsEmptyView.swift; sourceTree = "<group>"; };
 		3583BD4429AA99E600B984EA /* NYCNotificationCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCNotificationCard.swift; sourceTree = "<group>"; };
+		35861C9C2A21493B00DC0AFB /* SuggestInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestInformationView.swift; sourceTree = "<group>"; };
+		35861C9E2A2168F200DC0AFB /* NYCChipCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCChipCollection.swift; sourceTree = "<group>"; };
 		35915FEE29EB160700263946 /* AppConfigService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigService.swift; sourceTree = "<group>"; };
 		359348D929BA378D00B7739A /* ReviewEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewEmptyView.swift; sourceTree = "<group>"; };
 		359348DC29BA421900B7739A /* ReviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewModel.swift; sourceTree = "<group>"; };
@@ -771,6 +775,7 @@
 				35402A2B2A0ED23400974CF7 /* NYCImageCarousel.swift */,
 				35F563092A13D181004FE102 /* NYCSegmentControl.swift */,
 				35F90D002A1808DC00AFF4FF /* GrabberView.swift */,
+				35861C9E2A2168F200DC0AFB /* NYCChipCollection.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -790,6 +795,7 @@
 			isa = PBXGroup;
 			children = (
 				35DFA24029A518B700258BB7 /* AddReviewView.swift */,
+				35861C9C2A21493B00DC0AFB /* SuggestInformationView.swift */,
 			);
 			path = "AddReview Module";
 			sourceTree = "<group>";
@@ -970,7 +976,9 @@
 				355EA17929AD6FAF00D62B01 /* NYCLanguageCard.swift in Sources */,
 				356C52DA29A0460C00080D4C /* LocationMapCard.swift in Sources */,
 				351B3A2529981665007E7D00 /* SupportSettingsView.swift in Sources */,
+				35861C9F2A2168F200DC0AFB /* NYCChipCollection.swift in Sources */,
 				35E7FB8B298486F400EFF282 /* ProfileSetup.swift in Sources */,
+				35861C9D2A21493B00DC0AFB /* SuggestInformationView.swift in Sources */,
 				35F29397299E8ED500A85586 /* AmenityCard.swift in Sources */,
 				359F80F7298C2508000D792E /* LocationCell.swift in Sources */,
 				35D9448429EF727E00B9B640 /* InitView.swift in Sources */,
@@ -1128,7 +1136,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = NYCoworker/NYCoworker.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 24;
+				CURRENT_PROJECT_VERSION = 25;
 				DEVELOPMENT_TEAM = 9S2MZXD36G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NYCoworker/Info.plist;
@@ -1166,7 +1174,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = NYCoworker/NYCoworker.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 24;
+				CURRENT_PROJECT_VERSION = 25;
 				DEVELOPMENT_TEAM = 9S2MZXD36G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NYCoworker/Info.plist;
