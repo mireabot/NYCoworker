@@ -11,7 +11,6 @@ import SDWebImageSwiftUI
 import Firebase
 
 struct AddReviewView: View {
-  @Environment(\.dismiss) var makeDismiss
   @State var visitDate = Date()
   @State var reviewText = ""
   @State var reviewType : Review.ReviewType = .pos
@@ -20,6 +19,7 @@ struct AddReviewView: View {
   @State private var showAlert = false
   @FocusState private var fieldIsFocused: Bool
   @StateObject var reviewService = ReviewService()
+  @EnvironmentObject var navigationState: NavigationDestinations
   let locationData: Location
   var body: some View {
     NavigationView {
@@ -107,12 +107,21 @@ struct AddReviewView: View {
         }
         ToolbarItem(placement: .navigationBarTrailing) {
           NYCCircleImageButton(size: 18, image: Resources.Images.Navigation.close) {
-            makeDismiss()
+            dismiss()
           }
         }
       }
     }
   }
+}
+
+struct AddReviewView_Previews: PreviewProvider {
+  static var previews: some View {
+    AddReviewView(locationData: Location.mock)
+  }
+}
+
+extension AddReviewView { //MARK: - View components
   
   @ViewBuilder
   func reviewTypeControl() -> some View {
@@ -174,8 +183,8 @@ struct AddReviewView: View {
   }
 }
 
-struct AddReviewView_Previews: PreviewProvider {
-  static var previews: some View {
-    AddReviewView(locationData: Location.mock)
+extension AddReviewView { //MARK: - Functions
+  func dismiss() {
+    navigationState.isPresentingReviewSubmission = false
   }
 }

@@ -9,12 +9,13 @@ import SwiftUI
 import PopupView
 
 struct TabBarView: View {
-  @State var showBottomsheet = false
   @AppStorage("UserID") var userId : String = ""
   @StateObject private var userService = UserService()
+  @ObservedObject var navigationState = NavigationDestinations()
   var body: some View {
     TabView {
       HomeView()
+        .environmentObject(navigationState)
         .environmentObject(userService)
         .tabItem {
           Label("Explore", image: "home")

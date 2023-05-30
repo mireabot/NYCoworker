@@ -30,23 +30,24 @@ struct InitView: View {
             fetchAppConfig()
         }
     }
-    
-    func fetchAppConfig() {
-        let db = Firestore.firestore()
-        db.collection("AppConfig").document("iF6wRzrbgSP8YI9hbCLl").addSnapshotListener { snapshot, error in
-            if let error = error {
-                print("Error getting appConfig: \(error)")
-            } else if let data = snapshot?.data() {
-                // Decode AppConfig struct from database
-                do {
-                    let appConfig = try Firestore.Decoder().decode(AppConfig.self, from: data)
-                    self.appConfig = appConfig
-                    self.isMaintenanceMode = appConfig.maintainceMode
-                } catch {
-                    print("Error decoding appConfig: \(error)")
-                }
-            }
-        }
-    }
 }
 
+extension InitView { //MARK: - Functions
+  func fetchAppConfig() {
+      let db = Firestore.firestore()
+      db.collection("AppConfig").document("iF6wRzrbgSP8YI9hbCLl").addSnapshotListener { snapshot, error in
+          if let error = error {
+              print("Error getting appConfig: \(error)")
+          } else if let data = snapshot?.data() {
+              // Decode AppConfig struct from database
+              do {
+                  let appConfig = try Firestore.Decoder().decode(AppConfig.self, from: data)
+                  self.appConfig = appConfig
+                  self.isMaintenanceMode = appConfig.maintainceMode
+              } catch {
+                  print("Error decoding appConfig: \(error)")
+              }
+          }
+      }
+  }
+}

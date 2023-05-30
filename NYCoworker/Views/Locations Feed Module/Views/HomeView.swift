@@ -12,12 +12,10 @@ import PopupView
 
 struct HomeView: View {
   @State var isLoading = true
-  @State var showMap = false
-  @State var showFavorites = false
-  @State var showNotifications = false
   @StateObject var locationManager = LocationManager()
   @StateObject private var locationService = LocationService()
   @EnvironmentObject var userService : UserService
+  @EnvironmentObject var navigationState: NavigationDestinations
   @AppStorage("UserID") var userId : String = ""
   @State var addToFavs = false
   var body: some View {
@@ -56,11 +54,11 @@ struct HomeView: View {
       .navigationDestination(for: Location.self, destination: { locationData in
         LocationDetailView(locationData: locationData)
       })
-      .navigationDestination(isPresented: $showFavorites, destination: {
-        FavoriteView().environmentObject(userService)
+      .navigationDestination(isPresented: $navigationState.isPresentingFavourites, destination: {
+        FavoriteView().environmentObject(userService).environmentObject(navigationState)
       })
-      .navigationDestination(isPresented: $showNotifications, destination: {
-        NotificationsView()
+      .navigationDestination(isPresented: $navigationState.isPresentingNotifications, destination: {
+        NotificationsView().environmentObject(navigationState)
       })
       .task {
         guard locationService.locations.isEmpty else { return }
@@ -79,19 +77,20 @@ struct HomeView: View {
         }
         
         ToolbarItem(placement: .navigationBarTrailing) {
-          NYCCircleImageButton(size: 20, image: Resources.Images.Settings.rate) {showFavorites.toggle()}
+          NYCCircleImageButton(size: 20, image: Resources.Images.Settings.rate) { showFavourites() }
         }
         
         ToolbarItem(placement: .primaryAction) {
-          NYCCircleImageButton(size: 20, image: Resources.Images.Settings.notifications) {showNotifications.toggle()}
+          NYCCircleImageButton(size: 20, image: Resources.Images.Settings.notifications) { showNotifications() }
         }
       }
-      .fullScreenCover(isPresented: $showMap, content: {
-        LocationsMap().environmentObject(locationService)
+      .fullScreenCover(isPresented: $navigationState.isPresentingMap, content: {
+        LocationsMap().environmentObject(locationService).environmentObject(navigationState)
       })
       .navigationBarTitleDisplayMode(.inline)
       .toolbarBackground(.white, for: .navigationBar)
     }
+    .applyNavigationTransition()
   }
 }
 
@@ -102,7 +101,7 @@ struct HomeView_Previews: PreviewProvider {
 }
 
 
-extension HomeView {
+extension HomeView { //MARK: - Home components
   @ViewBuilder
   func locationLibrariesCollection() -> some View {
     VStack(alignment: .leading, spacing: 10) {
@@ -221,12 +220,14 @@ extension HomeView {
           .cornerRadius(10)
       }
       .onTapGesture {
-        showMap.toggle()
+        showMap()
       }
     }
     .padding([.leading,.trailing], 16)
   }
-  
+}
+
+extension HomeView { //MARK: - Functions
   func addLocationTofavs(location: String) {
     Task {
       await locationService.addFavoriteLocation(locationID: location, userID: userId, completion: {
@@ -235,5 +236,17 @@ extension HomeView {
         locationService.setError(err)
       }
     }
+  }
+  
+  func showFavourites() {
+    navigationState.isPresentingFavourites = true
+  }
+  
+  func showNotifications() {
+    navigationState.isPresentingNotifications = true
+  }
+  
+  func showMap() {
+    navigationState.isPresentingMap = true
   }
 }

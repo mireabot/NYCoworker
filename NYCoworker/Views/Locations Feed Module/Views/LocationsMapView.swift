@@ -12,8 +12,8 @@ import CoreLocation
 
 struct LocationsMap: View {
   @EnvironmentObject var locationsService: LocationService
+  @EnvironmentObject var navigationState: NavigationDestinations
   @State var selectedLocation: Location?
-  @Environment(\.dismiss) var makeDismiss
   @State var showAlert = false
   var body: some View {
     NavigationStack {
@@ -52,11 +52,12 @@ struct LocationsMap: View {
       .toolbar {
         ToolbarItem(placement: .navigationBarLeading) {
           NYCCircleImageButton(size: 24, image: Resources.Images.Navigation.close, color: .black) {
-            makeDismiss()
+            dismiss()
           }
         }
       }
     }
+    .applyNavigationTransition()
     .navigationBarBackButtonHidden()
   }
   
@@ -64,6 +65,10 @@ struct LocationsMap: View {
     let center = CLLocationCoordinate2D(latitude: locationsService.locations.first?.locationCoordinates.latitude ?? 0.0, longitude: locationsService.locations.first?.locationCoordinates.longitude ?? 0.0)
     let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
     return MKCoordinateRegion(center: center, span: span)
+  }
+  
+  func dismiss() {
+    navigationState.isPresentingMap = false
   }
 }
 
@@ -84,11 +89,13 @@ struct LocationMapView: View {
       mapModule()
     }
   }
-  
+}
+
+extension LocationMapView { //MARK: - View components
   @ViewBuilder
   func homePreview() -> some View {
     Map(coordinateRegion: $region,
-        interactionModes: .zoom, showsUserLocation: true, annotationItems: locations) { location in
+        interactionModes: .zoom, showsUserLocation: false, annotationItems: locations) { location in
       MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: location.locationCoordinates.latitude, longitude: location.locationCoordinates.longitude)) {
         Button(action: {
           DispatchQueue.main.async {
@@ -131,7 +138,9 @@ struct LocationMapView: View {
           selectedLocation = locations.first!
         }
   }
-  
+}
+
+extension LocationMapView { //MARK: - Functions
   func updateRegion(location: Location) {
     let center = CLLocationCoordinate2D(latitude: location.locationCoordinates.latitude, longitude: location.locationCoordinates.longitude)
     let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)

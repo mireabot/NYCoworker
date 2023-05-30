@@ -43,32 +43,33 @@ struct SplashScreenView: View {
             performLogIn()
         }
     }
-    
-    func performLogIn() {
-        if userLogged {
-            Task {
-                await userService.logIn(withEmail: userMail,withPass: userPass, completion: {
-                    userService.addToken(forUser: userId, token: token ?? "nil")
-                    isActive = true
-                }) { err in
-                    setError(err)
-                }
-            }
-        }
-        else {
-            print("Not logged")
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                isActive = true
-            }
-        }
-    }
-    
-    func setError(_ error: Error) {
-        isActive = false
-        errorMessage = parseAuthError(error)
-        withAnimation {
-            showError.toggle()
-        }
-    }
 }
 
+extension SplashScreenView { //MARK: - Functions
+  func performLogIn() {
+      if userLogged {
+          Task {
+              await userService.logIn(withEmail: userMail,withPass: userPass, completion: {
+                  userService.addToken(forUser: userId, token: token ?? "nil")
+                  isActive = true
+              }) { err in
+                  setError(err)
+              }
+          }
+      }
+      else {
+          print("Not logged")
+          DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+              isActive = true
+          }
+      }
+  }
+  
+  func setError(_ error: Error) {
+      isActive = false
+      errorMessage = parseAuthError(error)
+      withAnimation {
+          showError.toggle()
+      }
+  }
+}

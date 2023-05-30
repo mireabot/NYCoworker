@@ -62,7 +62,15 @@ struct LocationListView: View {
     .navigationBarTitleDisplayMode(.inline)
     .navigationBarBackButtonHidden()
   }
-  
+}
+
+//struct LocationListView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        LocationListView()
+//    }
+//}
+
+extension LocationListView { //MARK: - View components
   @ViewBuilder
   func hotelsLocations() -> some View {
     ForEach(locationService.locations){ location in
@@ -126,9 +134,3 @@ struct LocationListView: View {
     }
   }
 }
-
-//struct LocationListView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        LocationListView()
-//    }
-//}

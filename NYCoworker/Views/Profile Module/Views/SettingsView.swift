@@ -33,7 +33,6 @@ struct SettingsView: View {
                     Resources.Images.Navigation.arrowBack
                         .foregroundColor(Resources.Colors.primary)
                 }
-                
             }
             
             ToolbarItem(placement: .navigationBarLeading) {

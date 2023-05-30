@@ -13,15 +13,14 @@ import Shimmer
 
 struct LocationDetailView: View {
   @Environment(\.dismiss) var makeDismiss
-  @State var selectDetent : PresentationDetent = .bottom
   @State var currentImage: Int = 0
   @State var addToFavs = false
-  @State var showReviewView = false
+  @State var showReviewList = false
   @State var reportEdit = false
   @State var isLoading = true
-  @State var showAddReview = false
   @StateObject private var reviewService = ReviewService()
   @StateObject private var locationService = LocationService()
+  @EnvironmentObject var navigationState: NavigationDestinations
   var locationData : Location
   var body: some View {
     ScrollView(.vertical, showsIndicators: true) {
@@ -29,7 +28,7 @@ struct LocationDetailView: View {
         GeometryReader { proxy -> AnyView in
           let offset = proxy.frame(in: .global).minY
           
-          return AnyView(
+          AnyView(
             NYCImageCarousel(imageUrls: locationData.locationImages)
               .frame(width: UIScreen.main.bounds.width, height: 200 + (offset > 0 ? offset : 0))
               .offset(y: (offset > 0 ? -offset : 0))
@@ -38,20 +37,16 @@ struct LocationDetailView: View {
         .frame(height: 200)
         
         VStack {
-          locationInfo
-          reviews
-          amenities
-          workingHours
-          suggestInfo
+          locationInfo()
+          reviews()
+          amenities()
+          workingHours()
         }
         .padding(.top, 15)
       }
     }
-    .fullScreenCover(isPresented: $showAddReview, content: {
-      AddReviewView(locationData: locationData)
-    })
-    .fullScreenCover(isPresented: $reportEdit, content: {
-      SuggestInformationView()
+    .fullScreenCover(isPresented: $navigationState.isPresentingReviewSubmission, content: {
+      AddReviewView(locationData: locationData).environmentObject(navigationState)
     })
     .toolbarBackground(.white, for: .navigationBar)
     .navigationBarBackButtonHidden()
@@ -87,7 +82,7 @@ struct LocationDetailView: View {
         .position(.bottom)
         .animation(.spring(response: 0.4, blendDuration: 0.2))
     }
-    .popup(isPresented: $showReviewView, view: {
+    .popup(isPresented: $showReviewList, view: {
       ExpandedReviewView(type: .fullList)
         .environmentObject(reviewService)
       
@@ -103,8 +98,18 @@ struct LocationDetailView: View {
         .animation(.spring(response: 0.4, blendDuration: 0.2))
     })
   }
+}
+
+struct LocationDetailView_Previews: PreviewProvider {
+  static var previews: some View {
+    LocationDetailView(locationData: Location.mock)
+  }
+}
+
+extension LocationDetailView { //MARK: - View components
   
-  var locationInfo: some View {
+  @ViewBuilder
+  func locationInfo() -> some View {
     VStack {
       HStack {
         VStack(alignment: .leading, spacing: 5) {
@@ -144,7 +149,8 @@ struct LocationDetailView: View {
     .padding([.leading,.trailing], 16)
   }
   
-  var reviews: some View {
+  @ViewBuilder
+  func reviews() -> some View {
     VStack(alignment: .leading, spacing: 10) {
       HStack {
         Text("What people say")
@@ -152,7 +158,7 @@ struct LocationDetailView: View {
           .font(Resources.Fonts.medium(withSize: 15))
         Spacer()
         Button {
-          showReviewView.toggle()
+          showReviewList.toggle()
         } label: {
           Text("See all")
             .foregroundColor(Resources.Colors.primary)
@@ -176,13 +182,13 @@ struct LocationDetailView: View {
       }
       
       Button {
-        showAddReview.toggle()
+        showReviewSubmission()
       } label: {
         Text("Leave your review")
       }
       .buttonStyle(NYCActionButtonStyle(showLoader: .constant(false)))
       .disabled(isLoading)
-
+      
       
       Rectangle()
         .foregroundColor(Resources.Colors.customGrey)
@@ -192,7 +198,8 @@ struct LocationDetailView: View {
     .padding([.leading,.trailing], 16)
   }
   
-  var amenities: some View {
+  @ViewBuilder
+  func amenities() -> some View {
     VStack(alignment: .leading, spacing: 10) {
       Text("Amenities")
         .foregroundColor(Resources.Colors.customBlack)
@@ -208,7 +215,8 @@ struct LocationDetailView: View {
     .padding([.leading,.trailing], 16)
   }
   
-  var workingHours: some View {
+  @ViewBuilder
+  func workingHours() -> some View {
     VStack(alignment: .leading, spacing: 10) {
       Text("Working hours")
         .foregroundColor(Resources.Colors.customBlack)
@@ -242,7 +250,8 @@ struct LocationDetailView: View {
     }
   }
   
-  var suggestInfo: some View {
+  @ViewBuilder
+  func suggestInfo() -> some View {
     VStack(alignment: .center, spacing: 10) {
       Text("Found missing information?")
         .foregroundColor(Resources.Colors.darkGrey)
@@ -287,7 +296,9 @@ struct LocationDetailView: View {
       }
     }
   }
-  
+}
+
+extension LocationDetailView { //MARK: - Functions
   func image(image: String) -> String {
     switch image {
     case "W/C":
@@ -300,10 +311,8 @@ struct LocationDetailView: View {
       return image
     }
   }
-}
-
-struct LocationDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-      LocationDetailView(locationData: Location.mock)
-    }
+  
+  func showReviewSubmission() {
+    navigationState.isPresentingReviewSubmission = true
+  }
 }

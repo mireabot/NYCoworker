@@ -48,16 +48,18 @@ struct SupportSettingsView: View {
             WriteFeedbackView()
         }
     }
-    
-    func openWebsite() {
-        if let url = URL(string: "https://www.nycoworker.com/") {
-            UIApplication.shared.open(url)
-        }
-    }
 }
 
 struct HelpSupportView_Previews: PreviewProvider {
     static var previews: some View {
         SupportSettingsView()
     }
+}
+
+extension SupportSettingsView { //MARK: - Functions
+  func openWebsite() {
+      if let url = URL(string: "https://www.nycoworker.com/") {
+          UIApplication.shared.open(url)
+      }
+  }
 }

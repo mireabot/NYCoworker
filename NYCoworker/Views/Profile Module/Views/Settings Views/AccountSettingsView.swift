@@ -82,22 +82,6 @@ struct AccountSettingsView: View {
             occupationText = userService.user.occupation
         }
     }
-    
-    func updateUserData(with userID: String, name: String, occupation: String, completion: @escaping () -> Void) async {
-        do {
-            try await Firestore.firestore().collection(Endpoints.users.rawValue).document(userID).updateData([
-                "name": name,
-                "occupation": occupation
-            ])
-            
-            await MainActor.run(body: {
-                completion()
-            })
-        }
-        catch {
-            print(error.localizedDescription)
-        }
-    }
 }
 
 //struct ManageAccountView_Previews: PreviewProvider {
@@ -105,3 +89,21 @@ struct AccountSettingsView: View {
 //        ManageAccountView()
 //    }
 //}
+
+extension AccountSettingsView { //MARK: - Firebase functions
+  func updateUserData(with userID: String, name: String, occupation: String, completion: @escaping () -> Void) async {
+      do {
+          try await Firestore.firestore().collection(Endpoints.users.rawValue).document(userID).updateData([
+              "name": name,
+              "occupation": occupation
+          ])
+          
+          await MainActor.run(body: {
+              completion()
+          })
+      }
+      catch {
+          print(error.localizedDescription)
+      }
+  }
+}

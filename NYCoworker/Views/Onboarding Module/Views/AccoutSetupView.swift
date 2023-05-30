@@ -9,77 +9,77 @@ import SwiftUI
 import PopupView
 
 struct AccoutSetupView: View {
-    @State var currentStep = 0
-    @StateObject var model = UserRegistrationModel()
-    @State var showLoad = false
-    var body: some View {
-        VStack {
-            switch currentStep {
-            case 0:
-                ProfileSetup().environmentObject(model)
-            case 1:
-                PersonTypeSetup().environmentObject(model)
-            case 2:
-                GenderTypeSetup().environmentObject(model)
-            case 3:
-                NotificationPermission()
-            case 4:
-               GeopositionPermission()
-            default:
-                EmptyView()
-            }
-            
-            navBar
-        }
-        .navigationBarBackButtonHidden()
-        .overlay(content: {
-            LoadingBottomView(title: "Setting you up", show: $showLoad)
-        })
+  @State var currentStep = 0
+  @StateObject var model = UserRegistrationModel()
+  @State var showLoad = false
+  var body: some View {
+    VStack {
+      switch currentStep {
+      case 0:
+        ProfileSetup().environmentObject(model)
+      case 1:
+        PersonTypeSetup().environmentObject(model)
+      case 2:
+        GenderTypeSetup().environmentObject(model)
+      case 3:
+        NotificationPermission()
+      case 4:
+        GeopositionPermission()
+      default:
+        EmptyView()
+      }
+      
+      navBar
     }
-    
-    var navBar: some View {
-        HStack {
-            HStack {
-                ForEach(0..<5, id: \.self) { index in
-                    NavigationDotsView(index: index, page: self.$currentStep)
-                }
-            }
-            Spacer()
-            HStack {
-                NYCNavigationButton(type: .back) {
-                    self.currentStep -= 1
-                }
-                .opacity(self.currentStep > 0 ? 1 : 0)
-                
-                NYCNavigationButton(type: .next) {
-                    if self.currentStep == 4 {
-                        withAnimation(.spring()) {
-                            showLoad.toggle()
-                            let email = "\(model.randomString(length: 7))"
-                            let password = "\(model.randomString(length: 10))"
-                            model.createUser(mail: email, pass: password) {
-                                DispatchQueue.main.async {
-                                    showLoad.toggle()
-                                }
-                            }
-                        }
-                    }
-                    else {
-                        self.currentStep += 1
-                    }
-                }
-                .disabled(model.name.isEmpty || model.occupation.isEmpty || ((model.profileImage?.isEmpty) == nil) ? true : false)
-                .opacity(self.currentStep == 5 ? 0 : 1)
-            }
+    .navigationBarBackButtonHidden()
+    .overlay(content: {
+      LoadingBottomView(title: "Setting you up", show: $showLoad)
+    })
+  }
+  
+  var navBar: some View {
+    HStack {
+      HStack {
+        ForEach(0..<5, id: \.self) { index in
+          NavigationDotsView(index: index, page: self.$currentStep)
         }
-        .padding(16)
-        .background(Color.white)
+      }
+      Spacer()
+      HStack {
+        NYCNavigationButton(type: .back) {
+          self.currentStep -= 1
+        }
+        .opacity(self.currentStep > 0 ? 1 : 0)
+        
+        NYCNavigationButton(type: .next) {
+          if self.currentStep == 4 {
+            withAnimation(.spring()) {
+              showLoad.toggle()
+              let email = "\(model.randomString(length: 7))"
+              let password = "\(model.randomString(length: 10))"
+              model.createUser(mail: email, pass: password) {
+                DispatchQueue.main.async {
+                  showLoad.toggle()
+                }
+              }
+            }
+          }
+          else {
+            self.currentStep += 1
+          }
+        }
+        .disabled(model.name.isEmpty || model.occupation.isEmpty || ((model.profileImage?.isEmpty) == nil) ? true : false)
+        .opacity(self.currentStep == 5 ? 0 : 1)
+      }
     }
-    
+    .padding(16)
+    .background(Color.white)
+  }
+  
 }
 
 struct AccoutSetupView_Previews: PreviewProvider {
-    static var previews: some View {
-        AccoutSetupView()
-    }
+  static var previews: some View {
+    AccoutSetupView()
+  }
 }

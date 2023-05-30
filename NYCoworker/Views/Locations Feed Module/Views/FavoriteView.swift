@@ -10,123 +10,132 @@ import PopupView
 import Firebase
 
 struct FavoriteView: View {
-    @Environment(\.dismiss) var makeDismiss
-    @State var isLoading = true
-    @State var isUpdating = false
-    @EnvironmentObject var userService : UserService
-    @StateObject var locationService = LocationService()
-    @AppStorage("UserID") var userId : String = ""
-    var body: some View {
-      favoriteList()
-          .toolbar(content: {
-              ToolbarItem(placement: .navigationBarLeading) {
-                  Button {
-                      makeDismiss()
-                  } label: {
-                      Resources.Images.Navigation.arrowBack
-                          .foregroundColor(Resources.Colors.primary)
-                  }
-                  
-              }
-              
-              ToolbarItem(placement: .navigationBarLeading) {
-                  Text("Your favorites")
-                      .foregroundColor(Resources.Colors.customBlack)
-                      .font(Resources.Fonts.medium(withSize: 17))
-              }
-              
-              ToolbarItem(placement: .navigationBarTrailing) {
-                  Button {
-                      Task {
-                          await extractedFunc()
-                      }
-                  } label: {
-                      Resources.Images.Navigation.refresh
-                          .foregroundColor(Resources.Colors.primary)
-                  }
-                  
-              }
-          })
-          .navigationBarTitleDisplayMode(.inline)
-          .navigationBarBackButtonHidden()
-          .toolbarBackground(.white, for: .navigationBar)
-    }
-    
-    @ViewBuilder
-    func emptyState() -> some View {
-        VStack {
-            FavoritesEmptyView()
+  @State var isLoading = true
+  @State var isUpdating = false
+  @EnvironmentObject var userService : UserService
+  @EnvironmentObject var navigationState: NavigationDestinations
+  @StateObject var locationService = LocationService()
+  @AppStorage("UserID") var userId : String = ""
+  var body: some View {
+    favoriteList()
+      .toolbar(content: {
+        ToolbarItem(placement: .navigationBarLeading) {
+          Button {
+            dismiss()
+          } label: {
+            Resources.Images.Navigation.arrowBack
+              .foregroundColor(Resources.Colors.primary)
+          }
+          
         }
-    }
-    fileprivate func extractedFunc() async {
-        isLoading = true
-        locationService.favoriteLocations = []
-        await userService.fetchUser(documentId: userId, completion: {
+        
+        ToolbarItem(placement: .navigationBarLeading) {
+          Text("Your favorites")
+            .foregroundColor(Resources.Colors.customBlack)
+            .font(Resources.Fonts.medium(withSize: 17))
+        }
+        
+        ToolbarItem(placement: .navigationBarTrailing) {
+          Button {
             Task {
-                await locationService.fetchFavoriteLocations(for: userService.user) {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                        isLoading = false
-                    }
-                }
+              await extractedFunc()
             }
-        })
-    }
-    
-    @ViewBuilder
-    func favoriteList() -> some View {
-        VStack {
-            if isLoading {
-                ProgressView()
-            }
-            else {
-                if locationService.favoriteLocations.isEmpty {
-                    emptyState()
-                }
-                else {
-                    ScrollView(.vertical, showsIndicators: true) {
-                        LazyVStack {
-                            ForEach(locationService.favoriteLocations, id: \.id) { data in
-                              NavigationLink(destination: LocationDetailView(locationData: data)) {
-                                LocationListCell(type: .favorite, data: data, buttonAction: {
-                                    removeFromfavs(locationID: data.locationID)
-                                    Task {
-                                        await extractedFunc()
-                                    }
-                                })
-                              }
-                            }
-                        }
-                    }
-                    .padding([.leading,.trailing], 16)
-                }
-            }
+          } label: {
+            Resources.Images.Navigation.refresh
+              .foregroundColor(Resources.Colors.primary)
+          }
+          
         }
-        .overlay(content: {
-            LoadingBottomView(title: "Hold on a minute", show: $isUpdating)
-        })
-        .task {
-            await locationService.fetchFavoriteLocations(for: userService.user) {
-                isLoading = false
-            }
-        }
-    }
-    
-    func removeFromfavs(locationID: String) {
-        Task {
-            if userService.user.favoriteLocations.contains(locationID) {
-                Firestore.firestore().collection(Endpoints.users.rawValue).document(userId).updateData([
-                    "favoriteLocations": FieldValue.arrayRemove([locationID])
-                ])
-            }
-            else {
-                return
-            }
-        }
-    }
+      })
+      .navigationBarTitleDisplayMode(.inline)
+      .navigationBarBackButtonHidden()
+      .toolbarBackground(.white, for: .navigationBar)
+  }
 }
 
 struct FavoriteView_Previews: PreviewProvider {
-    static var previews: some View {
-        FavoriteView()
+  static var previews: some View {
+    FavoriteView()
+  }
+}
+
+extension FavoriteView { //MARK: - View components
+  @ViewBuilder
+  func emptyState() -> some View {
+    VStack {
+      FavoritesEmptyView()
     }
+  }
+  
+  @ViewBuilder
+  func favoriteList() -> some View {
+    VStack {
+      if isLoading {
+        ProgressView()
+      }
+      else {
+        if locationService.favoriteLocations.isEmpty {
+          emptyState()
+        }
+        else {
+          ScrollView(.vertical, showsIndicators: true) {
+            LazyVStack {
+              ForEach(locationService.favoriteLocations, id: \.id) { data in
+                NavigationLink(destination: LocationDetailView(locationData: data)) {
+                  LocationListCell(type: .favorite, data: data, buttonAction: {
+                    removeFromfavs(locationID: data.locationID)
+                    Task {
+                      await extractedFunc()
+                    }
+                  })
+                }
+              }
+            }
+          }
+          .padding([.leading,.trailing], 16)
+        }
+      }
+    }
+    .overlay(content: {
+      LoadingBottomView(title: "Hold on a minute", show: $isUpdating)
+    })
+    .task {
+      await locationService.fetchFavoriteLocations(for: userService.user) {
+        isLoading = false
+      }
+    }
+  }
+}
+
+extension FavoriteView { //MARK: - Functions
+  fileprivate func extractedFunc() async {
+    isLoading = true
+    locationService.favoriteLocations = []
+    await userService.fetchUser(documentId: userId, completion: {
+      Task {
+        await locationService.fetchFavoriteLocations(for: userService.user) {
+          DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            isLoading = false
+          }
+        }
+      }
+    })
+  }
+  
+  func removeFromfavs(locationID: String) {
+    Task {
+      if userService.user.favoriteLocations.contains(locationID) {
+        Firestore.firestore().collection(Endpoints.users.rawValue).document(userId).updateData([
+          "favoriteLocations": FieldValue.arrayRemove([locationID])
+        ])
+      }
+      else {
+        return
+      }
+    }
+  }
+  
+  func dismiss() {
+    navigationState.isPresentingFavourites = false
+  }
 }
