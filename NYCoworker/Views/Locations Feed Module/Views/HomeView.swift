@@ -96,7 +96,7 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
   static var previews: some View {
-    HomeView().environmentObject(UserService())
+    HomeView().environmentObject(UserService()).environmentObject(NavigationDestinations())
   }
 }
 
@@ -125,7 +125,7 @@ extension HomeView { //MARK: - Home components
             ForEach(locationService.locations,id: \.locationName) { data in
               if data.locationType == .library {
                 NavigationLink(value: data) {
-                  LocationCell(data: data, type: .small, buttonAction: {
+                  LocationCell(data: data, type: .large, buttonAction: {
                     addLocationTofavs(location: data.locationID)
                   })
                 }
@@ -217,7 +217,7 @@ extension HomeView { //MARK: - Home components
       ZStack {
         LocationMapView(locations: locationService.locations, selectedLocation: .constant(Location.mock), region: Resources.mapRegion, type: .homePreview)
           .frame(width: UIScreen.main.bounds.width - 16, height: 120)
-          .cornerRadius(10)
+          .cornerRadius(15)
       }
       .onTapGesture {
         showMap()

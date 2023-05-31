@@ -14,8 +14,8 @@ struct LoadingLocationCell: View {
                 Image("sample")
                     .resizable()
                     .scaledToFill()
-                    .frame(width: 120, height: 100)
-                    .cornerRadius(10)
+                    .frame(width: 180, height: 100)
+                    .cornerRadius(15)
                 Button {
                     print("Button tapped")
                 } label: {
@@ -49,6 +49,6 @@ struct LoadingLocationCell: View {
                 RatingDotsView(number: 1)
             }
         }
-        .frame(width: 120)
+        .frame(width: 180)
     }
 }

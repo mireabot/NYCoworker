@@ -13,11 +13,11 @@ struct RatingDotsView: View {
         HStack(spacing: 5) {
           Resources.Images.Settings.like
             .resizable()
-            .frame(width: 12, height: 12)
+            .frame(width: 13, height: 13)
             .foregroundColor(Resources.Colors.primary)
             Text("\(number)")
                 .foregroundColor(Resources.Colors.primary)
-                .font(Resources.Fonts.regular(withSize: 12))
+                .font(Resources.Fonts.regular(withSize: 13))
         }
     }
 }

@@ -53,8 +53,8 @@ extension LocationCell {
                     }
                     .resizable()
                     .scaledToFill()
-                    .frame(width: 180, height: 100)
-                    .cornerRadius(10)
+                    .frame(width: 180, height: 110)
+                    .cornerRadius(15)
                     
                     Button {
                         buttonAction()
@@ -79,17 +79,17 @@ extension LocationCell {
             VStack(alignment: .leading, spacing: 2) {
                 Text(data.locationName)
                     .foregroundColor(Resources.Colors.customBlack)
-                    .font(Resources.Fonts.regular(withSize: 15))
+                    .font(Resources.Fonts.regular(withSize: 16))
                     .lineLimit(0)
                 HStack(spacing: 4) {
                     Text(String(format: "%.1f", calculateDistance(from: Resources.userLocation, to: data.locationCoordinates)) + " mi · ")
                         .foregroundColor(Resources.Colors.darkGrey)
-                        .font(Resources.Fonts.regular(withSize: 12))
+                        .font(Resources.Fonts.regular(withSize: 13))
                     
                     RatingDotsView(number: data.reviews)
                 }
             }
-        }
+        }.frame(width: 180)
     }
     /// ViewBuilder for small location card cell
     ///  - Parameters:
@@ -145,11 +145,11 @@ extension LocationCell {
 }
 
 
-//struct LocationCell_Previews: PreviewProvider {
-//    static var previews: some View {
-//        LocationCellLarge()
-//    }
-//}
+struct LocationCell_Previews: PreviewProvider {
+    static var previews: some View {
+      LocationCell(data: Location.mock, type: .large, buttonAction: {})
+    }
+}
 
 extension LocationCell {
     func calculateDistance(from userLocation: CLLocation, to locationGeoPoint: GeoPoint) -> Double {
