@@ -65,6 +65,8 @@
 		35861C9D2A21493B00DC0AFB /* SuggestInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35861C9C2A21493B00DC0AFB /* SuggestInformationView.swift */; };
 		35861C9F2A2168F200DC0AFB /* NYCChipCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35861C9E2A2168F200DC0AFB /* NYCChipCollection.swift */; };
 		35915FEF29EB160700263946 /* AppConfigService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35915FEE29EB160700263946 /* AppConfigService.swift */; };
+		3591C97A2A2BE585002832C8 /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3591C9792A2BE585002832C8 /* SafariView.swift */; };
+		3591C97C2A2BE660002832C8 /* SafariBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3591C97B2A2BE660002832C8 /* SafariBottomView.swift */; };
 		359348DA29BA378D00B7739A /* ReviewEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359348D929BA378D00B7739A /* ReviewEmptyView.swift */; };
 		359348DD29BA421900B7739A /* ReviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359348DC29BA421900B7739A /* ReviewModel.swift */; };
 		359A792B298DFBB9001B66CF /* Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359A792A298DFBB9001B66CF /* Modifiers.swift */; };
@@ -189,6 +191,8 @@
 		35861C9C2A21493B00DC0AFB /* SuggestInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestInformationView.swift; sourceTree = "<group>"; };
 		35861C9E2A2168F200DC0AFB /* NYCChipCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCChipCollection.swift; sourceTree = "<group>"; };
 		35915FEE29EB160700263946 /* AppConfigService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigService.swift; sourceTree = "<group>"; };
+		3591C9792A2BE585002832C8 /* SafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
+		3591C97B2A2BE660002832C8 /* SafariBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariBottomView.swift; sourceTree = "<group>"; };
 		359348D929BA378D00B7739A /* ReviewEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewEmptyView.swift; sourceTree = "<group>"; };
 		359348DC29BA421900B7739A /* ReviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewModel.swift; sourceTree = "<group>"; };
 		359A792A298DFBB9001B66CF /* Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifiers.swift; sourceTree = "<group>"; };
@@ -572,6 +576,7 @@
 				35DFA24429A5822B00258BB7 /* VisitDatePickerView.swift */,
 				354651C429A83B1F003F7AE8 /* LoadingBottomView.swift */,
 				35725E5C2A159953002E22B9 /* CalendarBottomView.swift */,
+				3591C97B2A2BE660002832C8 /* SafariBottomView.swift */,
 			);
 			path = BottomViews;
 			sourceTree = "<group>";
@@ -781,6 +786,7 @@
 				35F563092A13D181004FE102 /* NYCSegmentControl.swift */,
 				35F90D002A1808DC00AFF4FF /* GrabberView.swift */,
 				35861C9E2A2168F200DC0AFB /* NYCChipCollection.swift */,
+				3591C9792A2BE585002832C8 /* SafariView.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -951,6 +957,7 @@
 				35D9447B29EF026D00B9B640 /* NYCErrorBottomAlert.swift in Sources */,
 				351B3A23299814B8007E7D00 /* AccountSettingsView.swift in Sources */,
 				35DFA24329A572BD00258BB7 /* NYCResizableTextField.swift in Sources */,
+				3591C97A2A2BE585002832C8 /* SafariView.swift in Sources */,
 				35D9A5D02989832200A2F8D6 /* SettingsCard.swift in Sources */,
 				35E7FB8D29848AE300EFF282 /* NYCFloatingTextField.swift in Sources */,
 				35737E5E29888DA5003B68BE /* Social View.swift in Sources */,
@@ -965,6 +972,7 @@
 				35A8AFE92A16B25D00E362D7 /* NYCReviewTypeBadge.swift in Sources */,
 				3542F59D29DA1A820086CB4F /* LoadingLocationCell.swift in Sources */,
 				35BC807A29970DC0001ACC35 /* ListModifier.swift in Sources */,
+				3591C97C2A2BE660002832C8 /* SafariBottomView.swift in Sources */,
 				35C479A6298C89D50089F342 /* SettingsView.swift in Sources */,
 				35746CB529A3183B007322AA /* NotificationsEmptyView.swift in Sources */,
 				351872CF29D3C547004B564A /* Notification.swift in Sources */,

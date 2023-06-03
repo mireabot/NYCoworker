@@ -20,6 +20,8 @@ enum Resources {
   static var userName : String = ""
   static var userImageUrl: URL = URL(string: "https://firebasestorage.googleapis.com/v0/b/nycoworker-10d04.appspot.com/o/UserImages%2FIMG_0812%202.jpeg?alt=media&token=9c09e090-b4f1-4b40-861b-11910d920632")!
   
+  static let websiteURL = URL(string: "https://www.nycoworker.com/")!
+  
   static var adminMode = false
   
   /// Colors resource pack
