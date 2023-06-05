@@ -16,6 +16,7 @@ struct LocationDetailView: View {
   @State var currentImage: Int = 0
   @State var addToFavs = false
   @State var showReviewList = false
+  @State var showUpdatesList = false
   @State var reportEdit = false
   @State var isLoading = true
   @StateObject private var reviewService = ReviewService()
@@ -82,6 +83,20 @@ struct LocationDetailView: View {
         .position(.bottom)
         .animation(.spring(response: 0.4, blendDuration: 0.2))
     }
+    .popup(isPresented: $showUpdatesList, view: {
+      InstructionsExpandedView(locationData: locationData)
+      
+    }, customize: {
+      $0
+        .type(.toast)
+        .isOpaque(true)
+        .backgroundColor(Color.black.opacity(0.3))
+        .position(.bottom)
+        .closeOnTap(false)
+        .closeOnTapOutside(false)
+        .dragToDismiss(true)
+        .animation(.spring(response: 0.4, blendDuration: 0.2))
+    })
     .popup(isPresented: $showReviewList, view: {
       ExpandedReviewView(type: .fullList)
         .environmentObject(reviewService)
@@ -102,7 +117,7 @@ struct LocationDetailView: View {
 
 struct LocationDetailView_Previews: PreviewProvider {
   static var previews: some View {
-    LocationDetailView(locationData: Location.mock)
+    LocationDetailView(locationData: Location.mock).environmentObject(NavigationDestinations())
   }
 }
 
@@ -124,9 +139,6 @@ extension LocationDetailView { //MARK: - View components
               .foregroundColor(Resources.Colors.darkGrey)
               .font(Resources.Fonts.regular(withSize: 13))
           }
-          //                    Text("Today 10:00am - 9:00pm")
-          //                        .foregroundColor(Resources.Colors.darkGrey)
-          //                        .font(Resources.Fonts.regular(withSize: 13))
           HStack(spacing: 3) {
             ForEach(locationData.locationTags,id: \.self) { title in
               NYCBadgeView(badgeType: .withWord, title: title)
@@ -139,8 +151,9 @@ extension LocationDetailView { //MARK: - View components
         NYCCircleImageButton(size: 24, image: Resources.Images.Navigation.openMap) {
           openInAppleMaps(address: locationData.locationAddress, withName: locationData.locationName)
         }
-        
       }
+      
+      InstructionsView(firstTabPressed: $showUpdatesList, secondTabPressed: $showReviewList, locationData: locationData)
       
       Rectangle()
         .foregroundColor(Resources.Colors.customGrey)
@@ -157,14 +170,14 @@ extension LocationDetailView { //MARK: - View components
           .foregroundColor(Resources.Colors.customBlack)
           .font(Resources.Fonts.medium(withSize: 15))
         Spacer()
-        Button {
-          showReviewList.toggle()
-        } label: {
-          Text("See all")
-            .foregroundColor(Resources.Colors.primary)
-            .font(Resources.Fonts.medium(withSize: 13))
-        }
-        .opacity(reviewService.reviews.count == 0 ? 0 : 1)
+//        Button {
+//          showReviewList.toggle()
+//        } label: {
+//          Text("See all")
+//            .foregroundColor(Resources.Colors.primary)
+//            .font(Resources.Fonts.medium(withSize: 13))
+//        }
+//        .opacity(reviewService.reviews.count == 0 ? 0 : 1)
         
       }
       if isLoading {

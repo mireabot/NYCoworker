@@ -35,7 +35,7 @@ extension View {
   }
   
   func applyNavigationTransition() -> some View {
-    self.navigationTransition(.slide.combined(with: .fade(.in).animation(.easeInOut.speed(0.45))), interactivity: .pan)
+    self.navigationTransition(.slide.combined(with: .fade(.in).animation(.easeInOut.speed(0.35))), interactivity: .edgePan)
   }
 }
 struct RoundedCorner: Shape {

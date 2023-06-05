@@ -121,6 +121,7 @@ extension AdminLocationView {
             locationImages: locationImages,
             locationTags: locationTags,
             reviews: reviews,
+            locationUpdates: [],
             locationAddress: locationAddress
         )
         addLocationToFirestore(location: location)

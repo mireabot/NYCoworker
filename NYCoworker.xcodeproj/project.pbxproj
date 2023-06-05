@@ -26,6 +26,8 @@
 		3524973829EB1C5E009E1002 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 3524973729EB1C5E009E1002 /* Lottie */; };
 		3524973A29EB1CE9009E1002 /* MaintenanceOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3524973929EB1CE9009E1002 /* MaintenanceOverlayView.swift */; };
 		3524974229EB2669009E1002 /* makeup.json in Resources */ = {isa = PBXBuildFile; fileRef = 3524974129EB2669009E1002 /* makeup.json */; };
+		3535AF562A2E8C3A00B55184 /* InstructionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3535AF552A2E8C3A00B55184 /* InstructionCell.swift */; };
+		3535AF582A2E8D4A00B55184 /* InstructionsExpandedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3535AF572A2E8D4A00B55184 /* InstructionsExpandedView.swift */; };
 		3536C2D72A02A955007D3E1A /* AdminNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3536C2D62A02A955007D3E1A /* AdminNotificationView.swift */; };
 		3538C623298353210017800B /* iPages in Frameworks */ = {isa = PBXBuildFile; productRef = 3538C622298353210017800B /* iPages */; };
 		3538C626298356270017800B /* LanguageSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3538C625298356270017800B /* LanguageSetup.swift */; };
@@ -67,6 +69,7 @@
 		35915FEF29EB160700263946 /* AppConfigService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35915FEE29EB160700263946 /* AppConfigService.swift */; };
 		3591C97A2A2BE585002832C8 /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3591C9792A2BE585002832C8 /* SafariView.swift */; };
 		3591C97C2A2BE660002832C8 /* SafariBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3591C97B2A2BE660002832C8 /* SafariBottomView.swift */; };
+		3591C97E2A2CF67D002832C8 /* InstructionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3591C97D2A2CF67D002832C8 /* InstructionsView.swift */; };
 		359348DA29BA378D00B7739A /* ReviewEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359348D929BA378D00B7739A /* ReviewEmptyView.swift */; };
 		359348DD29BA421900B7739A /* ReviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359348DC29BA421900B7739A /* ReviewModel.swift */; };
 		359A792B298DFBB9001B66CF /* Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359A792A298DFBB9001B66CF /* Modifiers.swift */; };
@@ -154,6 +157,8 @@
 		351B3A2829982ABC007E7D00 /* LocationDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailView.swift; sourceTree = "<group>"; };
 		3524973929EB1CE9009E1002 /* MaintenanceOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaintenanceOverlayView.swift; sourceTree = "<group>"; };
 		3524974129EB2669009E1002 /* makeup.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = makeup.json; sourceTree = "<group>"; };
+		3535AF552A2E8C3A00B55184 /* InstructionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionCell.swift; sourceTree = "<group>"; };
+		3535AF572A2E8D4A00B55184 /* InstructionsExpandedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionsExpandedView.swift; sourceTree = "<group>"; };
 		3536C2D62A02A955007D3E1A /* AdminNotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminNotificationView.swift; sourceTree = "<group>"; };
 		3538C625298356270017800B /* LanguageSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSetup.swift; sourceTree = "<group>"; };
 		3538C6282983569D0017800B /* NYCBottomSheetHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCBottomSheetHeader.swift; sourceTree = "<group>"; };
@@ -193,6 +198,7 @@
 		35915FEE29EB160700263946 /* AppConfigService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigService.swift; sourceTree = "<group>"; };
 		3591C9792A2BE585002832C8 /* SafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
 		3591C97B2A2BE660002832C8 /* SafariBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariBottomView.swift; sourceTree = "<group>"; };
+		3591C97D2A2CF67D002832C8 /* InstructionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionsView.swift; sourceTree = "<group>"; };
 		359348D929BA378D00B7739A /* ReviewEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewEmptyView.swift; sourceTree = "<group>"; };
 		359348DC29BA421900B7739A /* ReviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewModel.swift; sourceTree = "<group>"; };
 		359A792A298DFBB9001B66CF /* Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifiers.swift; sourceTree = "<group>"; };
@@ -364,6 +370,8 @@
 			isa = PBXGroup;
 			children = (
 				35DFA23D29A3BFC800258BB7 /* ExpandedReviewView.swift */,
+				3591C97D2A2CF67D002832C8 /* InstructionsView.swift */,
+				3535AF572A2E8D4A00B55184 /* InstructionsExpandedView.swift */,
 			);
 			path = "Helper Views";
 			sourceTree = "<group>";
@@ -373,6 +381,7 @@
 			children = (
 				359F80F6298C2508000D792E /* LocationCell.swift */,
 				356C52DB29A04BDB00080D4C /* LocationListCell.swift */,
+				3535AF552A2E8C3A00B55184 /* InstructionCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -939,8 +948,10 @@
 				35EF059E29B0F40A0098110B /* AccoutSetupView.swift in Sources */,
 				35E7FB942985A9D500EFF282 /* UserRegistrationModel.swift in Sources */,
 				35DFA24129A518B700258BB7 /* AddReviewView.swift in Sources */,
+				3535AF582A2E8D4A00B55184 /* InstructionsExpandedView.swift in Sources */,
 				354F6D3F29F182D500E45CFE /* WriteFeedbackView.swift in Sources */,
 				350DE2762991C5F200573163 /* LocationListView.swift in Sources */,
+				3535AF562A2E8C3A00B55184 /* InstructionCell.swift in Sources */,
 				35F90D012A1808DC00AFF4FF /* GrabberView.swift in Sources */,
 				350DE27B2991CA7600573163 /* LocationsMapView.swift in Sources */,
 				351872CC29D3C510004B564A /* NotificationService.swift in Sources */,
@@ -956,6 +967,7 @@
 				356C52E129A052F900080D4C /* MapChoiceView.swift in Sources */,
 				35D9447B29EF026D00B9B640 /* NYCErrorBottomAlert.swift in Sources */,
 				351B3A23299814B8007E7D00 /* AccountSettingsView.swift in Sources */,
+				3591C97E2A2CF67D002832C8 /* InstructionsView.swift in Sources */,
 				35DFA24329A572BD00258BB7 /* NYCResizableTextField.swift in Sources */,
 				3591C97A2A2BE585002832C8 /* SafariView.swift in Sources */,
 				35D9A5D02989832200A2F8D6 /* SettingsCard.swift in Sources */,
@@ -1152,7 +1164,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = NYCoworker/NYCoworker.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 27;
+				CURRENT_PROJECT_VERSION = 28;
 				DEVELOPMENT_TEAM = 9S2MZXD36G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NYCoworker/Info.plist;
@@ -1190,7 +1202,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = NYCoworker/NYCoworker.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 27;
+				CURRENT_PROJECT_VERSION = 28;
 				DEVELOPMENT_TEAM = 9S2MZXD36G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NYCoworker/Info.plist;

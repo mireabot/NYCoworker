@@ -40,10 +40,10 @@ enum Resources {
   enum Images {
     /// Images for tab bar
     enum Tabs {
-      static let homeTab = UIImage(named: "home")
-      static let socialTab = UIImage(named: "social")
-      static let profileTab = UIImage(named: "profile")
-      static let admin = UIImage(named: "admin")
+      static let homeTab = Image("home")
+      static let socialTab = Image("social")
+      static let profileTab = Image("profile")
+      static let admin = Image("admin")
     }
     /// Images for navigation
     enum Navigation {
@@ -54,6 +54,7 @@ enum Resources {
       static let location = Image("location")
       static let openMap = Image("open-map")
       static let refresh = Image("refresh")
+      static let alert = Image("alert")
     }
     /// Images for settings
     enum Settings {
