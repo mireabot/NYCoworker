@@ -23,7 +23,7 @@ struct InstructionsView: View {
               .frame(width: 20, height: 20)
               .foregroundColor(Resources.Colors.primary)
             
-            Text("New updates")
+            Text("Spot updates")
               .font(Resources.Fonts.regular(withSize: 15))
               .foregroundColor(Resources.Colors.darkGrey)
               .padding(.leading, -2)

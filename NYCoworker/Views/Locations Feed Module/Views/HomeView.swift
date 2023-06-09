@@ -29,6 +29,8 @@ struct HomeView: View {
             /// Category scrollview
             locationLibrariesCollection()
             
+            NYCPromoBanner(bannerType: .summerLocations)
+            
             /// Category scrollview
             locationLobbiesCollection()
             
@@ -239,14 +241,20 @@ extension HomeView { //MARK: - Functions
   }
   
   func showFavourites() {
-    navigationState.isPresentingFavourites = true
+    DispatchQueue.main.async {
+      navigationState.isPresentingFavourites = true
+    }
   }
   
   func showNotifications() {
-    navigationState.isPresentingNotifications = true
+    DispatchQueue.main.async {
+      navigationState.isPresentingNotifications = true
+    }
   }
   
   func showMap() {
-    navigationState.isPresentingMap = true
+    DispatchQueue.main.async {
+      navigationState.isPresentingMap = true
+    }
   }
 }

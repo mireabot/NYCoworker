@@ -13,6 +13,7 @@
 		3503BD8F297F50AC00C0E365 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3503BD8E297F50AC00C0E365 /* Assets.xcassets */; };
 		3503BD92297F50AC00C0E365 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3503BD90297F50AC00C0E365 /* LaunchScreen.storyboard */; };
 		3503BD9D297F5EE500C0E365 /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3503BD9C297F5EE500C0E365 /* Resources.swift */; };
+		350B52D22A2FCA0F00D61B6E /* NYCPromoBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350B52D12A2FCA0F00D61B6E /* NYCPromoBanner.swift */; };
 		350DE274299143B500573163 /* DeleteAccountBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350DE273299143B500573163 /* DeleteAccountBottomView.swift */; };
 		350DE2762991C5F200573163 /* LocationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350DE2752991C5F200573163 /* LocationListView.swift */; };
 		350DE2782991C66600573163 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350DE2772991C66600573163 /* Enums.swift */; };
@@ -145,6 +146,7 @@
 		3503BD91297F50AC00C0E365 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3503BD93297F50AC00C0E365 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3503BD9C297F5EE500C0E365 /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
+		350B52D12A2FCA0F00D61B6E /* NYCPromoBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCPromoBanner.swift; sourceTree = "<group>"; };
 		350DE273299143B500573163 /* DeleteAccountBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountBottomView.swift; sourceTree = "<group>"; };
 		350DE2752991C5F200573163 /* LocationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationListView.swift; sourceTree = "<group>"; };
 		350DE2772991C66600573163 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
@@ -658,6 +660,7 @@
 				3583BD4429AA99E600B984EA /* NYCNotificationCard.swift */,
 				355EA17829AD6FAF00D62B01 /* NYCLanguageCard.swift */,
 				35EF05A129B29BAD0098110B /* NYCSetupCard.swift */,
+				350B52D12A2FCA0F00D61B6E /* NYCPromoBanner.swift */,
 			);
 			path = Cards;
 			sourceTree = "<group>";
@@ -936,6 +939,7 @@
 				35D9447929EEF80400B9B640 /* FirebaseErrors.swift in Sources */,
 				35EF059B29B0F2EC0098110B /* NavigationDotsView.swift in Sources */,
 				356C52DC29A04BDB00080D4C /* LocationListCell.swift in Sources */,
+				350B52D22A2FCA0F00D61B6E /* NYCPromoBanner.swift in Sources */,
 				359F80F2298AA911000D792E /* NYCCircleImageButton.swift in Sources */,
 				359D87C629D76E9700E827F3 /* ReviewService.swift in Sources */,
 				3538C6292983569D0017800B /* NYCBottomSheetHeader.swift in Sources */,

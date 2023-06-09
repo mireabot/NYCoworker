@@ -34,7 +34,7 @@ struct Location: Identifiable, Codable, Equatable, Hashable {
   var locationImages: [URL]
   var locationTags: [String]
   var reviews: Int
-  var locationUpdates: [String]
+  var locationUpdates: [LocationUpdates]
   var locationAddress: String
   
   var id: String {
@@ -64,5 +64,14 @@ struct WorkingHours: Codable, Hashable {
     WorkingHours(hours: "8AM - 8PM", weekDay: "Friday"),
     WorkingHours(hours: "8AM - 8PM", weekDay: "Saturday"),
     WorkingHours(hours: "8AM - 8PM", weekDay: "Sunday")
+  ]
+}
+
+struct LocationUpdates: Codable, Hashable {
+  var text: String
+  var url: String
+  
+  static let mock : [LocationUpdates] = [
+    LocationUpdates(text: "Need to reserve a table", url: "")
   ]
 }
