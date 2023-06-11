@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Shimmer
 import MapKit
 import PopupView
 
@@ -29,7 +28,12 @@ struct HomeView: View {
             /// Category scrollview
             locationLibrariesCollection()
             
-            NYCPromoBanner(bannerType: .summerLocations)
+            if isLoading {
+              EmptyPromoBannerView()
+            }
+            else {
+              NYCPromoBanner(bannerType: .summerLocations)
+            }
             
             /// Category scrollview
             locationLobbiesCollection()
@@ -119,8 +123,6 @@ extension HomeView { //MARK: - Home components
           if isLoading {
             ForEach(0..<4) { _ in
               LoadingLocationCell()
-                .redacted(reason: .placeholder)
-                .shimmering(active: true, duration: 1.5, bounce: false)
             }
           }
           else {
@@ -155,8 +157,6 @@ extension HomeView { //MARK: - Home components
           if isLoading {
             ForEach(0..<4) { _ in
               LoadingLocationCell()
-                .redacted(reason: .placeholder)
-                .shimmering(active: true, duration: 1.5, bounce: false)
             }
           }
           else {
@@ -191,8 +191,6 @@ extension HomeView { //MARK: - Home components
           if isLoading {
             ForEach(0..<4) { _ in
               LoadingLocationCell()
-                .redacted(reason: .placeholder)
-                .shimmering(active: true, duration: 1.5, bounce: false)
             }
           }
           else {
@@ -221,6 +219,7 @@ extension HomeView { //MARK: - Home components
           .frame(width: UIScreen.main.bounds.width - 16, height: 120)
           .cornerRadius(15)
       }
+      .disabled(isLoading)
       .onTapGesture {
         showMap()
       }

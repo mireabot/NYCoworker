@@ -18,6 +18,16 @@ struct FavoriteView: View {
   @AppStorage("UserID") var userId : String = ""
   var body: some View {
     favoriteList()
+      .onAppear {
+        isLoading = true
+        Task(priority: .userInitiated) {
+          do {
+            await locationService.fetchFavoriteLocations(for: userService.user) {
+              isLoading = false
+            }
+          }
+        }
+      }
       .toolbar(content: {
         ToolbarItem(placement: .navigationBarLeading) {
           Button {
@@ -55,7 +65,7 @@ struct FavoriteView: View {
 
 struct FavoriteView_Previews: PreviewProvider {
   static var previews: some View {
-    FavoriteView()
+    FavoriteView().environmentObject(UserService()).environmentObject(NavigationDestinations())
   }
 }
 
@@ -71,7 +81,7 @@ extension FavoriteView { //MARK: - View components
   func favoriteList() -> some View {
     VStack {
       if isLoading {
-        ProgressView()
+        loadingView()
       }
       else {
         if locationService.favoriteLocations.isEmpty {
@@ -96,14 +106,17 @@ extension FavoriteView { //MARK: - View components
         }
       }
     }
-    .overlay(content: {
-      LoadingBottomView(title: "Hold on a minute", show: $isUpdating)
-    })
-    .task {
-      await locationService.fetchFavoriteLocations(for: userService.user) {
-        isLoading = false
-      }
-    }
+  }
+  
+  @ViewBuilder
+  func loadingView() -> some View {
+    ScrollView(.vertical, showsIndicators: false) {
+      LazyVStack {
+        ForEach(0..<3){ item in
+          LoadingLocationCell(type: .list)
+        }
+      }.padding([.leading,.trailing], 16)
+    }.scrollDisabled(true)
   }
 }
 
