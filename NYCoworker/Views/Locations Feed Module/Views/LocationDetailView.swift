@@ -298,9 +298,8 @@ extension LocationDetailView { //MARK: - View components
     LazyHGrid(rows: rows, alignment: .center, spacing: 10) {
       ForEach(locationData.locationAmenities,id: \.self) { item in
         HStack(alignment: .center, spacing: 5) {
-          Image(image(image: item))
-            .resizable()
-            .frame(width: 24, height: 24)
+          amenitiesImage(image: item)
+            .foregroundColor(Resources.Colors.customBlack)
           Text(item)
             .foregroundColor(Resources.Colors.customBlack)
             .font(Resources.Fonts.regular(withSize: 15))
@@ -312,16 +311,32 @@ extension LocationDetailView { //MARK: - View components
 }
 
 extension LocationDetailView { //MARK: - Functions
-  func image(image: String) -> String {
+  func amenitiesImage(image: String) -> Image {
     switch image {
     case "W/C":
-      return "WC"
+      return LocationR.Amenities.wc
     case "A/C":
-      return "AC"
-    case "Pets allowed":
-      return "Pets"
+      return LocationR.Amenities.ac
+    case "Pet friendly":
+      return LocationR.Amenities.pets
+    case "Rooftop":
+      return LocationR.Amenities.rooftop
+    case "Charging":
+      return LocationR.Amenities.charge
+    case "Wi-Fi":
+      return LocationR.Amenities.wifi
+    case "Quiet space":
+      return LocationR.Amenities.silient
+    case "Bar":
+      return LocationR.Amenities.bar
+    case "Work station":
+      return LocationR.Amenities.printer
+    case "Outdoor space":
+      return LocationR.Amenities.outdoor
+    case "Food store":
+      return LocationR.Amenities.store
     default:
-      return image
+      return LocationR.Amenities.wc
     }
   }
   

@@ -19,7 +19,7 @@ struct InstructionsExpandedView: View {
           NYCBottomSheetHeader(title: "Location Updates").paddingForHeader()
           ScrollView(.vertical, showsIndicators: false) {
             LazyVGrid(columns: [GridItem(.flexible(), spacing: 16), GridItem(.flexible(), spacing: 16)], spacing: 16) {
-              ForEach(locationData.locationUpdates, id: \.self) { item in
+              ForEach(locationData.locationUpdates ?? [], id: \.self) { item in
                 InstructionCell(updatesData: item) {
                   browserLink = URL(string: item.url)!
                   DispatchQueue.main.async {

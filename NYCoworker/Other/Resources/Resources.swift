@@ -122,9 +122,17 @@ enum LocationR {
   }
   
   enum Amenities {
-    static let wifi = Image("wi-fi")
-    static let ac = Image("ac")
-    static let charge = Image("charge")
-    static let meeting = Image("meeting")
+    static let wifi = Image(systemName: "wifi")
+    static let ac = Image(systemName: "snowflake")
+    static let charge = Image(systemName: "bolt.fill")
+    static let meeting = Image(systemName: "videoprojector.fill")
+    static let pets = Image(systemName: "pawprint.fill")
+    static let outdoor = Image(systemName: "sun.max.fill")
+    static let rooftop = Image(systemName: "beach.umbrella.fill")
+    static let silient = Image(systemName: "headphones")
+    static let bar = Image(systemName: "takeoutbag.and.cup.and.straw.fill")
+    static let wc = Image(systemName: "figure.dress.line.vertical.figure")
+    static let printer = Image(systemName: "printer.fill")
+    static let store = Image(systemName: "cart.fill")
   }
 }

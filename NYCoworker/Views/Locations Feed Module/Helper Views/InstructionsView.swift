@@ -35,7 +35,7 @@ struct InstructionsView: View {
           }
           .frame(maxWidth: .infinity)
         }
-        .disabled(locationData.locationUpdates.isEmpty)
+        .disabled(locationData.locationUpdates?.isEmpty ?? true)
         
         Button {
           secondTabPressed.toggle()
