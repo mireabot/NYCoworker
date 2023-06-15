@@ -24,7 +24,7 @@ struct HomeView: View {
           /// Map section
           mapView().padding(.top, 5)
           /// Locations section
-          VStack(alignment: .leading, spacing: 15) {
+          VStack(alignment: .leading, spacing: 20) {
             /// Category scrollview
             locationLibrariesCollection()
             
@@ -110,7 +110,7 @@ struct HomeView_Previews: PreviewProvider {
 extension HomeView { //MARK: - Home components
   @ViewBuilder
   func locationLibrariesCollection() -> some View {
-    VStack(alignment: .leading, spacing: 10) {
+    VStack(alignment: .leading, spacing: 12) {
       NavigationLink(
         value: Locations.libraries,
         label: {
@@ -144,7 +144,7 @@ extension HomeView { //MARK: - Home components
   
   @ViewBuilder
   func locationLobbiesCollection() -> some View {
-    VStack(alignment: .leading, spacing: 10) {
+    VStack(alignment: .leading, spacing: 12) {
       NavigationLink(
         value: Locations.lobbies,
         label: {
@@ -178,7 +178,7 @@ extension HomeView { //MARK: - Home components
   
   @ViewBuilder
   func locationPublicSpacesCollection() -> some View {
-    VStack(alignment: .leading, spacing: 10) {
+    VStack(alignment: .leading, spacing: 12) {
       NavigationLink(
         value: Locations.publicSpaces,
         label: {
@@ -212,7 +212,7 @@ extension HomeView { //MARK: - Home components
   
   @ViewBuilder
   func mapView() -> some View {
-    VStack(alignment: .leading, spacing: 10) {
+    VStack(alignment: .leading, spacing: 12) {
       NYCSectionHeader(title: "Locations nearby", isExpandButton: false)
       ZStack {
         LocationMapView(locations: locationService.locations, selectedLocation: .constant(Location.mock), region: Resources.mapRegion, type: .homePreview)

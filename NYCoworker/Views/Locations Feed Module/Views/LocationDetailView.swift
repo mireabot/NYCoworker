@@ -335,6 +335,8 @@ extension LocationDetailView { //MARK: - Functions
       return LocationR.Amenities.outdoor
     case "Food store":
       return LocationR.Amenities.store
+    case "Meeting room":
+      return LocationR.Amenities.meeting
     default:
       return LocationR.Amenities.wc
     }

@@ -89,7 +89,7 @@ extension FavoriteView { //MARK: - View components
         }
         else {
           ScrollView(.vertical, showsIndicators: true) {
-            LazyVStack {
+            LazyVStack(spacing: 16) {
               ForEach(locationService.favoriteLocations, id: \.id) { data in
                 NavigationLink(destination: LocationDetailView(locationData: data)) {
                   LocationListCell(type: .favorite, data: data, buttonAction: {

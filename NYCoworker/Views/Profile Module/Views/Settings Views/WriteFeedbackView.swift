@@ -35,8 +35,12 @@ struct WriteFeedbackView: View {
         .padding(.leading, 16)
         
         NYCResizableTextField(message: $message, characterLimit: 300, placeHolder: "How we can improve NYCoworker for you?")
+          .focused($fieldIsFocused)
           .padding([.leading,.trailing], 16)
         
+      }
+      .onTapGesture {
+        fieldIsFocused = false
       }
       .popup(isPresented: $showAlert) {
         NYCAlertNotificationView(alertStyle: .feedbackSent)
@@ -52,9 +56,6 @@ struct WriteFeedbackView: View {
           }
       }
       .scrollDisabled(true)
-      .onTapGesture {
-        fieldIsFocused = false
-      }
       .safeAreaInset(edge: .bottom, content: {
         Button {
           showLoading = true

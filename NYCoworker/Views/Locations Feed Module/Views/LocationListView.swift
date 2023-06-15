@@ -19,18 +19,16 @@ struct LocationListView: View {
   }
   var body: some View {
     ScrollView(.vertical, showsIndicators: true) {
-      LazyVStack(spacing: 10) {
-        switch locationType {
-        case .libraries:
-          libraryLocations()
-        case .lobbies:
-          hotelsLocations()
-        case .publicSpaces:
-          publicSpacesLocations()
-        }
+      switch locationType {
+      case .libraries:
+        libraryLocations()
+      case .lobbies:
+        hotelsLocations()
+      case .publicSpaces:
+        publicSpacesLocations()
       }
-      .padding([.leading,.trailing], 16)
     }
+    .padding([.leading,.trailing], 16)
     .popup(isPresented: $addToFavs) {
       NYCAlertNotificationView(alertStyle: .addedToFavorites)
     } customize: {
@@ -73,16 +71,18 @@ struct LocationListView: View {
 extension LocationListView { //MARK: - View components
   @ViewBuilder
   func hotelsLocations() -> some View {
-    ForEach(locationService.locations){ location in
-      if location.locationType == .hotel {
-        NavigationLink(value: location) {
-          LocationListCell(type: .list, data: location) {
-            Task {
-              do {
-                await locationService.addFavoriteLocation(locationID: location.locationID, userID: userId, completion: {
-                  addToFavs.toggle()
-                }) { err in
-                  print(err.localizedDescription)
+    LazyVStack(spacing: 12) {
+      ForEach(locationService.locations){ location in
+        if location.locationType == .hotel {
+          NavigationLink(value: location) {
+            LocationListCell(type: .list, data: location) {
+              Task {
+                do {
+                  await locationService.addFavoriteLocation(locationID: location.locationID, userID: userId, completion: {
+                    addToFavs.toggle()
+                  }) { err in
+                    print(err.localizedDescription)
+                  }
                 }
               }
             }
@@ -94,16 +94,18 @@ extension LocationListView { //MARK: - View components
   
   @ViewBuilder
   func libraryLocations() -> some View {
-    ForEach(locationService.locations){ location in
-      if location.locationType == .library {
-        NavigationLink(value: location) {
-          LocationListCell(type: .list, data: location) {
-            Task {
-              do {
-                await locationService.addFavoriteLocation(locationID: location.locationID, userID: userId, completion: {
-                  addToFavs.toggle()
-                }) { err in
-                  print(err.localizedDescription)
+    LazyVStack(spacing: 12) {
+      ForEach(locationService.locations){ location in
+        if location.locationType == .library {
+          NavigationLink(value: location) {
+            LocationListCell(type: .list, data: location) {
+              Task {
+                do {
+                  await locationService.addFavoriteLocation(locationID: location.locationID, userID: userId, completion: {
+                    addToFavs.toggle()
+                  }) { err in
+                    print(err.localizedDescription)
+                  }
                 }
               }
             }
@@ -115,16 +117,18 @@ extension LocationListView { //MARK: - View components
   
   @ViewBuilder
   func publicSpacesLocations() -> some View {
-    ForEach(locationService.locations){ location in
-      if location.locationType == .publicSpace {
-        NavigationLink(value: location) {
-          LocationListCell(type: .list, data: location) {
-            Task {
-              do {
-                await locationService.addFavoriteLocation(locationID: location.locationID, userID: userId, completion: {
-                  addToFavs.toggle()
-                }) { err in
-                  print(err.localizedDescription)
+    LazyVStack(spacing: 12) {
+      ForEach(locationService.locations){ location in
+        if location.locationType == .publicSpace {
+          NavigationLink(value: location) {
+            LocationListCell(type: .list, data: location) {
+              Task {
+                do {
+                  await locationService.addFavoriteLocation(locationID: location.locationID, userID: userId, completion: {
+                    addToFavs.toggle()
+                  }) { err in
+                    print(err.localizedDescription)
+                  }
                 }
               }
             }
