@@ -87,6 +87,7 @@ struct AddReviewView: View {
               DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                 showLoader = false
                 showAlert.toggle()
+                AnalyticsManager.shared.log(.reviewSubmitted(locationData.locationID))
               }
             })
           }

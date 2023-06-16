@@ -96,6 +96,7 @@ extension ProfileView { //MARK: - Profile components
     HStack {
       VStack(alignment: .leading, spacing: 5) {
         Button {
+          AnalyticsManager.shared.log(.deleteButtonPressed)
           showPopup.toggle()
         } label: {
           Text("Delete account")

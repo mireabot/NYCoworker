@@ -57,6 +57,7 @@ struct AccoutSetupView: View {
               showLoad.toggle()
               let email = "\(model.randomString(length: 7))"
               let password = "\(model.randomString(length: 10))"
+              AnalyticsManager.shared.log(.accountCreated)
               model.createUser(mail: email, pass: password) {
                 DispatchQueue.main.async {
                   showLoad.toggle()

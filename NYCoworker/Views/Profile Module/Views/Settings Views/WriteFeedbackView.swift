@@ -65,6 +65,7 @@ struct WriteFeedbackView: View {
               DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                 showLoading = false
                 showAlert.toggle()
+                AnalyticsManager.shared.log(.feedbackSubmitted)
               }
             }) { err in
               print(err.localizedDescription)

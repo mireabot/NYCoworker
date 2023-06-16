@@ -30,6 +30,7 @@ struct DeleteAccountBottomView: View {
           
           NYCActionButton(action: {
             withAnimation(.spring()) {
+              AnalyticsManager.shared.log(.deleteButtonSubmitted)
               deleteUser()
             }
           }, text: "Delete", buttonStyle: .system)

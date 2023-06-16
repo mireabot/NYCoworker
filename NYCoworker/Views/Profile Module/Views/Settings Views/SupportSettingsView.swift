@@ -29,9 +29,11 @@ struct SupportSettingsView: View {
       
       VStack(spacing: 10) {
         NYCSettingsCard(icon: Resources.Images.Settings.manageAccount, title: "Write feedback", action: {
+          AnalyticsManager.shared.log(.feedbackOpened)
           showFeedback.toggle()
         })
         NYCSettingsCard(icon: Resources.Images.Settings.website, title: "Visit website", action: {
+          AnalyticsManager.shared.log(.websiteOpened)
           showWebsite.toggle()
         })
         NYCSettingsCard(icon: Resources.Images.Settings.rate, title: "Rate app", action: {

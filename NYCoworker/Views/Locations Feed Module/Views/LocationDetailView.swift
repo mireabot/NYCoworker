@@ -53,6 +53,7 @@ struct LocationDetailView: View {
     .navigationBarBackButtonHidden()
     .navigationBarTitleDisplayMode(.inline)
     .task {
+      AnalyticsManager.shared.log(.locationSelected(locationData.locationID))
       guard reviewService.reviews.isEmpty else { return }
       await reviewService.fetchReviews(locationID: "\(locationData.locationID)", completion: {
         print("Reviews fetched")
@@ -149,6 +150,7 @@ extension LocationDetailView { //MARK: - View components
         Spacer()
         
         NYCCircleImageButton(size: 24, image: Resources.Images.Navigation.openMap) {
+          AnalyticsManager.shared.log(.routeButtonPressed(locationData.locationID))
           openInAppleMaps(address: locationData.locationAddress, withName: locationData.locationName)
         }
       }
@@ -343,6 +345,7 @@ extension LocationDetailView { //MARK: - Functions
   }
   
   func showReviewSubmission() {
+    AnalyticsManager.shared.log(.reviewOpened(locationData.locationID))
     navigationState.isPresentingReviewSubmission = true
   }
 }

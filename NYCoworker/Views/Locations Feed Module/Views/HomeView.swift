@@ -27,14 +27,14 @@ struct HomeView: View {
           VStack(alignment: .leading, spacing: 20) {
             /// Category scrollview
             locationLibrariesCollection()
-            
+            /*
             if isLoading {
               EmptyPromoBannerView()
             }
             else {
               NYCPromoBanner(bannerType: .summerLocations)
             }
-            
+            */
             /// Category scrollview
             locationLobbiesCollection()
             
@@ -232,6 +232,7 @@ extension HomeView { //MARK: - Functions
   func addLocationTofavs(location: String) {
     Task {
       await locationService.addFavoriteLocation(locationID: location, userID: userId, completion: {
+        AnalyticsManager.shared.log(.locationAddedToFavs(location))
         addToFavs.toggle()
       }) { err in
         locationService.setError(err)
@@ -241,6 +242,7 @@ extension HomeView { //MARK: - Functions
   
   func showFavourites() {
     DispatchQueue.main.async {
+      AnalyticsManager.shared.log(.openFavorites(userId))
       navigationState.isPresentingFavourites = true
     }
   }
@@ -253,6 +255,7 @@ extension HomeView { //MARK: - Functions
   
   func showMap() {
     DispatchQueue.main.async {
+      AnalyticsManager.shared.log(.openMap)
       navigationState.isPresentingMap = true
     }
   }
