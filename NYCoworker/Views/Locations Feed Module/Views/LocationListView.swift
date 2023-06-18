@@ -26,6 +26,8 @@ struct LocationListView: View {
         hotelsLocations()
       case .publicSpaces:
         publicSpacesLocations()
+      case .cafe:
+        cafesLocations()
       }
     }
     .padding([.leading,.trailing], 16)
@@ -120,6 +122,29 @@ extension LocationListView { //MARK: - View components
     LazyVStack(spacing: 12) {
       ForEach(locationService.locations){ location in
         if location.locationType == .publicSpace {
+          NavigationLink(value: location) {
+            LocationListCell(type: .list, data: location) {
+              Task {
+                do {
+                  await locationService.addFavoriteLocation(locationID: location.locationID, userID: userId, completion: {
+                    addToFavs.toggle()
+                  }) { err in
+                    print(err.localizedDescription)
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  @ViewBuilder
+  func cafesLocations() -> some View {
+    LazyVStack(spacing: 12) {
+      ForEach(locationService.locations){ location in
+        if location.locationType == .cafe {
           NavigationLink(value: location) {
             LocationListCell(type: .list, data: location) {
               Task {

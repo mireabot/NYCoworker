@@ -15,33 +15,38 @@ final class AnalyticsManager {
   
   
   public func log(_ event: AnalyticsEvents) {
-    switch event {
-    case .accountCreated:
-      Analytics.logEvent(event.eventName, parameters: [:])
-    case .openMap:
-      Analytics.logEvent(event.eventName, parameters: [:])
-    case .locationSelected(let locationID):
-      Analytics.logEvent(event.eventName, parameters: ["locationID":locationID])
-    case .openFavorites(let userID):
-      Analytics.logEvent(event.eventName, parameters: ["userID": userID])
-    case .locationAddedToFavs(let locationID):
-      Analytics.logEvent(event.eventName, parameters: ["locationID":locationID])
-    case .reviewOpened(let locationID):
-      Analytics.logEvent(event.eventName, parameters: ["locationID":locationID])
-    case .reviewSubmitted(let locationID):
-      Analytics.logEvent(event.eventName, parameters: ["locationID":locationID])
-    case .routeButtonPressed(let locationID):
-      Analytics.logEvent(event.eventName, parameters: ["locationID":locationID])
-    case .deleteButtonPressed:
-      Analytics.logEvent(event.eventName, parameters: [:])
-    case .deleteButtonSubmitted:
-      Analytics.logEvent(event.eventName, parameters: [:])
-    case .feedbackOpened:
-      Analytics.logEvent(event.eventName, parameters: [:])
-    case .feedbackSubmitted:
-      Analytics.logEvent(event.eventName, parameters: [:])
-    case .websiteOpened:
-      Analytics.logEvent(event.eventName, parameters: [:])
+    if Resources.adminMode {
+      print("Admin mode ON")
+    }
+    else {
+      switch event {
+      case .accountCreated:
+        Analytics.logEvent(event.eventName, parameters: [:])
+      case .openMap:
+        Analytics.logEvent(event.eventName, parameters: [:])
+      case .locationSelected(let locationID):
+        Analytics.logEvent(event.eventName, parameters: ["locationID":locationID])
+      case .openFavorites(let userID):
+        Analytics.logEvent(event.eventName, parameters: ["userID": userID])
+      case .locationAddedToFavs(let locationID):
+        Analytics.logEvent(event.eventName, parameters: ["locationID":locationID])
+      case .reviewOpened(let locationID):
+        Analytics.logEvent(event.eventName, parameters: ["locationID":locationID])
+      case .reviewSubmitted(let locationID):
+        Analytics.logEvent(event.eventName, parameters: ["locationID":locationID])
+      case .routeButtonPressed(let locationID):
+        Analytics.logEvent(event.eventName, parameters: ["locationID":locationID])
+      case .deleteButtonPressed:
+        Analytics.logEvent(event.eventName, parameters: [:])
+      case .deleteButtonSubmitted:
+        Analytics.logEvent(event.eventName, parameters: [:])
+      case .feedbackOpened:
+        Analytics.logEvent(event.eventName, parameters: [:])
+      case .feedbackSubmitted:
+        Analytics.logEvent(event.eventName, parameters: [:])
+      case .websiteOpened:
+        Analytics.logEvent(event.eventName, parameters: [:])
+      }
     }
   }
 }

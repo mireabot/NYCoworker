@@ -27,14 +27,14 @@ struct HomeView: View {
           VStack(alignment: .leading, spacing: 20) {
             /// Category scrollview
             locationLibrariesCollection()
-            /*
+            
             if isLoading {
               EmptyPromoBannerView()
             }
             else {
               NYCPromoBanner(bannerType: .summerLocations)
             }
-            */
+            
             /// Category scrollview
             locationLobbiesCollection()
             

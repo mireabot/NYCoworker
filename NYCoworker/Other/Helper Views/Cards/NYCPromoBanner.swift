@@ -29,8 +29,7 @@ struct NYCPromoBanner: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .font(Resources.Fonts.medium(withSize: 17))
             .foregroundColor(.white)
-          Button {
-          } label: {
+          NavigationLink(value: Locations.cafe) {
             HStack(spacing: 3) {
               Text("Explore")
                 .foregroundColor(Resources.Colors.customBlack)

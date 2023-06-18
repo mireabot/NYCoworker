@@ -22,7 +22,7 @@ enum Resources {
   
   static let websiteURL = URL(string: "https://www.nycoworker.com/")!
   
-  static var adminMode = false
+  static var adminMode = true
   
   /// Colors resource pack
   enum Colors {

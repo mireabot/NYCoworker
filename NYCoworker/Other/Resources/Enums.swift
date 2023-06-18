@@ -13,15 +13,14 @@ enum Locations {
   case libraries
   case lobbies
   case publicSpaces
+  case cafe
   
   var headerTitle: String {
     switch self {
-    case .libraries:
-      return "Silent Libraries"
-    case .lobbies:
-      return "Busy Lobbies"
-    case .publicSpaces:
-      return "Public Spaces"
+    case .libraries: return "Silent Libraries"
+    case .lobbies: return "Busy Lobbies"
+    case .publicSpaces: return "Public Spaces"
+    case .cafe: return "Cozy cafés"
     }
   }
 }
@@ -29,81 +28,82 @@ enum Locations {
 //MARK: - Locations types enum
 /// Used as part of Location model
 enum LocationType: String, Codable {
-    case library = "Library"
-    case hotel = "Hotel"
-    case publicSpace = "Public space"
+  case library = "Library"
+  case hotel = "Hotel"
+  case publicSpace = "Public space"
+  case cafe = "Café"
 }
 
 //MARK: - Endpoints enum
 /// Stores names of collection in Firestore
 enum Endpoints: String {
-    case users = "User"
-    case notifications = "Notifications"
-    case reviews = "Reviews"
-    case locations = "Locations"
-    case feedback = "Feedbacks"
+  case users = "User"
+  case notifications = "Notifications"
+  case reviews = "Reviews"
+  case locations = "Locations"
+  case feedback = "Feedbacks"
 }
 
 //MARK: - Pop alerts type enum
 /// Stores title and icon of top pop alerts
 enum PopAlertType {
-    case addedToFavorites
-    case dataUploaded
-    case reportSubmitted
-    case feedbackSent
+  case addedToFavorites
+  case dataUploaded
+  case reportSubmitted
+  case feedbackSent
   case reviewUploaded
-    
-    var title: String {
-        switch self {
-        case .addedToFavorites:
-            return "Added to favorites"
-        case .dataUploaded:
-            return "Successfully updated"
-        case .reportSubmitted:
-            return "Report submitted"
-        case .feedbackSent:
-            return "We received your feedback"
-        case .reviewUploaded:
-          return "Your review is live!"
-        }
+  
+  var title: String {
+    switch self {
+    case .addedToFavorites:
+      return "Added to favorites"
+    case .dataUploaded:
+      return "Successfully updated"
+    case .reportSubmitted:
+      return "Report submitted"
+    case .feedbackSent:
+      return "We received your feedback"
+    case .reviewUploaded:
+      return "Your review is live!"
     }
-    
-    var icon: Image {
-        switch self {
-        case .addedToFavorites:
-            return Image("favs")
-        case .dataUploaded:
-            return Image("dataUploaded")
-        case .reportSubmitted:
-            return Image("dataUploaded")
-        case .feedbackSent:
-            return Image("dataUploaded")
-        case .reviewUploaded:
-          return Image("dataUploaded")
-        }
+  }
+  
+  var icon: Image {
+    switch self {
+    case .addedToFavorites:
+      return Image("favs")
+    case .dataUploaded:
+      return Image("dataUploaded")
+    case .reportSubmitted:
+      return Image("dataUploaded")
+    case .feedbackSent:
+      return Image("dataUploaded")
+    case .reviewUploaded:
+      return Image("dataUploaded")
     }
+  }
 }
 
 enum AlertType {
-    case notification
-    case geoposition
-    
-    var title: String {
-        switch self {
-        case .notification:
-            return "Notifications are off"
-        case .geoposition:
-            return "Geoposition is off"
-        }
+  case notification
+  case geoposition
+  
+  var title: String {
+    switch self {
+    case .notification:
+      return "Notifications are off"
+    case .geoposition:
+      return "Geoposition is off"
     }
-    var subtitle: String {
-        switch self {
-        case .notification:
-            return "You can turn on notification later in settings"
-        case .geoposition:
-            return "You can turn on geoposition later in settings"
-        }
+  }
+  var subtitle: String {
+    switch self {
+    case .notification:
+      return "You can turn on notification later in settings"
+    case .geoposition:
+      return "You can turn on geoposition later in settings"
     }
+  }
 }
 
 //MARK: - Bottom view content enum
