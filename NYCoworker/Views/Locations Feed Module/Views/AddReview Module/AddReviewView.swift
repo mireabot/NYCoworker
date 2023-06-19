@@ -41,16 +41,20 @@ struct AddReviewView: View {
         .padding(.top, 10)
       }
       .popup(isPresented: $showAlert) {
-        NYCAlertNotificationView(alertStyle: .reviewUploaded)
+        NYCMiddleAlertView(alertType: .reviewUnderReview) {
+          withAnimation(.spring()) {
+            showAlert.toggle()
+          }
+        }
       } customize: {
         $0
           .isOpaque(true)
-          .autohideIn(1.5)
-          .type(.floater())
-          .position(.top)
+          .backgroundColor(Color.black.opacity(0.3))
+          .closeOnTap(false)
+          .closeOnTapOutside(false)
           .animation(.spring(response: 0.4, blendDuration: 0.2))
           .dismissCallback {
-            reviewText = ""
+            dismiss()
           }
       }
       .popup(isPresented: $showDate, view: {
@@ -72,25 +76,7 @@ struct AddReviewView: View {
       }
       .safeAreaInset(edge: .bottom, content: {
         Button {
-          showLoader = true
-          Task {
-            await reviewService.createReview(from:
-                                              Review(id: locationData.locationID,
-                                                     datePosted: Timestamp(date: Date()),
-                                                     dateVisited: Timestamp(date: visitDate),
-                                                     text: reviewText,
-                                                     type: reviewType,
-                                                     userName: Resources.userName,
-                                                     userImage: Resources.userImageUrl),
-                                             location: locationData,
-                                             completion: {
-              DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                showLoader = false
-                showAlert.toggle()
-                AnalyticsManager.shared.log(.reviewSubmitted(locationData.locationID))
-              }
-            })
-          }
+          submitReview()
         } label: {
           Text("Submit")
         }
@@ -186,6 +172,35 @@ extension AddReviewView { //MARK: - View components
 
 extension AddReviewView { //MARK: - Functions
   func dismiss() {
-    navigationState.isPresentingReviewSubmission = false
+    DispatchQueue.main.async {
+      reviewText = ""
+      navigationState.isPresentingReviewSubmission = false
+    }
+  }
+  
+  func submitReview() {
+    showLoader = true
+    Task {
+      await reviewService.createReview(from:
+                                        Review(locationID: locationData.locationID,
+                                               datePosted: Timestamp(date: Date()),
+                                               dateVisited: Timestamp(date: visitDate),
+                                               text: reviewText,
+                                               type: reviewType,
+                                               userName: Resources.userName,
+                                               userImage: Resources.userImageUrl,
+                                               isLive: false,
+                                               userToken: UserDefaults.standard.string(forKey: "FCMToken") ?? ""),
+                                       location: locationData,
+                                       completion: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+          withAnimation(.spring()) {
+            showLoader = false
+            showAlert.toggle()
+          }
+          AnalyticsManager.shared.log(.reviewSubmitted(locationData.locationID))
+        }
+      })
+    }
   }
 }

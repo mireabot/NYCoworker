@@ -13,6 +13,7 @@ import Shimmer
 
 struct LocationDetailView: View {
   @Environment(\.dismiss) var makeDismiss
+  @AppStorage("UserID") var userId : String = ""
   @State var currentImage: Int = 0
   @State var addToFavs = false
   @State var showReviewList = false
@@ -70,6 +71,14 @@ struct LocationDetailView: View {
       }
       ToolbarItem(placement: .navigationBarTrailing) {
         NYCCircleImageButton(size: 24, image: Resources.Images.Settings.rate) {
+          Task {
+            await locationService.addFavoriteLocation(locationID: locationData.locationID, userID: userId, completion: {
+              AnalyticsManager.shared.log(.locationAddedToFavs(locationData.locationID))
+              addToFavs.toggle()
+            }) { err in
+              locationService.setError(err)
+            }
+          }
           addToFavs.toggle()
         }
       }
@@ -86,7 +95,6 @@ struct LocationDetailView: View {
     }
     .popup(isPresented: $showUpdatesList, view: {
       InstructionsExpandedView(locationData: locationData)
-      
     }, customize: {
       $0
         .type(.toast)

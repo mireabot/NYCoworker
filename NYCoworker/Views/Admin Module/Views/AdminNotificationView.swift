@@ -73,13 +73,15 @@ extension AdminNotificationView {
   
   func saveReview() {
     let review = Review(
-      id: locationID,
+      locationID: locationID,
       datePosted: Timestamp(date: Date()),
       dateVisited: Timestamp(date: Date()),
       text: reviewText,
       type: .pos,
       userName: reviewerName,
-      userImage: reviewerImage
+      userImage: reviewerImage,
+      isLive: true,
+      userToken: Resources.demoToken
     )
     addReviewToFirestore(review: review)
     reviewText = ""

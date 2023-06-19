@@ -86,6 +86,10 @@
 		359D87C629D76E9700E827F3 /* ReviewService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359D87C529D76E9700E827F3 /* ReviewService.swift */; };
 		359D87C829D8912700E827F3 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359D87C729D8912700E827F3 /* User.swift */; };
 		359D87CA29D8919C00E827F3 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359D87C929D8919C00E827F3 /* UserService.swift */; };
+		359E36902A3F4D4C00BE937D /* NYCMiddleAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359E368F2A3F4D4C00BE937D /* NYCMiddleAlertView.swift */; };
+		359E36932A3F699F00BE937D /* AdminButtonCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359E36922A3F699F00BE937D /* AdminButtonCard.swift */; };
+		359E36952A3F6EFB00BE937D /* AdminModerationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359E36942A3F6EFB00BE937D /* AdminModerationView.swift */; };
+		359E36972A3F73D500BE937D /* AdminModerationSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359E36962A3F73D500BE937D /* AdminModerationSheetView.swift */; };
 		359E6AA22981ED8B00333BD7 /* Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359E6AA12981ED8B00333BD7 /* Onboarding.swift */; };
 		359E6AA72981FEB800333BD7 /* Nunito-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 359E6AA62981FDD300333BD7 /* Nunito-Bold.ttf */; };
 		359E6AA82981FEB800333BD7 /* Nunito-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 359E6AA52981FDC800333BD7 /* Nunito-SemiBold.ttf */; };
@@ -215,6 +219,10 @@
 		359D87C529D76E9700E827F3 /* ReviewService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewService.swift; sourceTree = "<group>"; };
 		359D87C729D8912700E827F3 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		359D87C929D8919C00E827F3 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		359E368F2A3F4D4C00BE937D /* NYCMiddleAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCMiddleAlertView.swift; sourceTree = "<group>"; };
+		359E36922A3F699F00BE937D /* AdminButtonCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminButtonCard.swift; sourceTree = "<group>"; };
+		359E36942A3F6EFB00BE937D /* AdminModerationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminModerationView.swift; sourceTree = "<group>"; };
+		359E36962A3F73D500BE937D /* AdminModerationSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminModerationSheetView.swift; sourceTree = "<group>"; };
 		359E6AA12981ED8B00333BD7 /* Onboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding.swift; sourceTree = "<group>"; };
 		359E6AA42981FDBA00333BD7 /* Nunito-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Regular.ttf"; sourceTree = "<group>"; };
 		359E6AA52981FDC800333BD7 /* Nunito-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-SemiBold.ttf"; sourceTree = "<group>"; };
@@ -451,9 +459,10 @@
 		3504C86B2A0D59F800D61573 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				35A7981529E463C600359400 /* AdminLocationView.swift */,
 				3563FB9D29F19A2C007E39C5 /* AdminHomeView.swift */,
+				35A7981529E463C600359400 /* AdminLocationView.swift */,
 				3536C2D62A02A955007D3E1A /* AdminNotificationView.swift */,
+				359E36942A3F6EFB00BE937D /* AdminModerationView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -664,6 +673,7 @@
 			children = (
 				3565689C29A15673007CAF80 /* NYCAlertNotificationView.swift */,
 				35D9447A29EF026D00B9B640 /* NYCErrorBottomAlert.swift */,
+				359E368F2A3F4D4C00BE937D /* NYCMiddleAlertView.swift */,
 			);
 			path = Alerts;
 			sourceTree = "<group>";
@@ -747,6 +757,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		359E36912A3F698B00BE937D /* Helper Views */ = {
+			isa = PBXGroup;
+			children = (
+				359E36922A3F699F00BE937D /* AdminButtonCard.swift */,
+				359E36962A3F73D500BE937D /* AdminModerationSheetView.swift */,
+			);
+			path = "Helper Views";
+			sourceTree = "<group>";
+		};
 		359E6AA32981FD8400333BD7 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -764,6 +783,7 @@
 		35A7981429E4638800359400 /* Admin Module */ = {
 			isa = PBXGroup;
 			children = (
+				359E36912A3F698B00BE937D /* Helper Views */,
 				3504C86B2A0D59F800D61573 /* Views */,
 			);
 			path = "Admin Module";
@@ -961,12 +981,14 @@
 				359D87C629D76E9700E827F3 /* ReviewService.swift in Sources */,
 				3538C6292983569D0017800B /* NYCBottomSheetHeader.swift in Sources */,
 				351B3A2729981B22007E7D00 /* NYCSettingsCard.swift in Sources */,
+				359E36932A3F699F00BE937D /* AdminButtonCard.swift in Sources */,
 				35402A2A2A0EB2A300974CF7 /* NYCBottomViewContent.swift in Sources */,
 				350DE274299143B500573163 /* DeleteAccountBottomView.swift in Sources */,
 				35D9447D29EF035800B9B640 /* Helpers.swift in Sources */,
 				3538C626298356270017800B /* LanguageSetup.swift in Sources */,
 				35A7981629E463C600359400 /* AdminLocationView.swift in Sources */,
 				35EF059E29B0F40A0098110B /* AccoutSetupView.swift in Sources */,
+				359E36952A3F6EFB00BE937D /* AdminModerationView.swift in Sources */,
 				35E7FB942985A9D500EFF282 /* UserRegistrationModel.swift in Sources */,
 				35DFA24129A518B700258BB7 /* AddReviewView.swift in Sources */,
 				3535AF582A2E8D4A00B55184 /* InstructionsExpandedView.swift in Sources */,
@@ -1006,9 +1028,11 @@
 				35A8AFE92A16B25D00E362D7 /* NYCReviewTypeBadge.swift in Sources */,
 				3542F59D29DA1A820086CB4F /* LoadingLocationCell.swift in Sources */,
 				35BC807A29970DC0001ACC35 /* ListModifier.swift in Sources */,
+				359E36972A3F73D500BE937D /* AdminModerationSheetView.swift in Sources */,
 				3591C97C2A2BE660002832C8 /* SafariBottomView.swift in Sources */,
 				3588F05E2A355EAD00E6FA72 /* EmptyPromoBannerView.swift in Sources */,
 				35C479A6298C89D50089F342 /* SettingsView.swift in Sources */,
+				359E36902A3F4D4C00BE937D /* NYCMiddleAlertView.swift in Sources */,
 				35746CB529A3183B007322AA /* NotificationsEmptyView.swift in Sources */,
 				351872CF29D3C547004B564A /* Notification.swift in Sources */,
 				35BA64B5299BF69D00E15206 /* ReviewCard.swift in Sources */,
@@ -1187,7 +1211,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = NYCoworker/NYCoworker.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 31;
+				CURRENT_PROJECT_VERSION = 32;
 				DEVELOPMENT_TEAM = 9S2MZXD36G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NYCoworker/Info.plist;
@@ -1225,7 +1249,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = NYCoworker/NYCoworker.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 31;
+				CURRENT_PROJECT_VERSION = 32;
 				DEVELOPMENT_TEAM = 9S2MZXD36G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NYCoworker/Info.plist;
