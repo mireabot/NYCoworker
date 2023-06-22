@@ -79,7 +79,6 @@ struct LocationDetailView: View {
               locationService.setError(err)
             }
           }
-          addToFavs.toggle()
         }
       }
     }
@@ -180,15 +179,6 @@ extension LocationDetailView { //MARK: - View components
           .foregroundColor(Resources.Colors.customBlack)
           .font(Resources.Fonts.medium(withSize: 15))
         Spacer()
-//        Button {
-//          showReviewList.toggle()
-//        } label: {
-//          Text("See all")
-//            .foregroundColor(Resources.Colors.primary)
-//            .font(Resources.Fonts.medium(withSize: 13))
-//        }
-//        .opacity(reviewService.reviews.count == 0 ? 0 : 1)
-        
       }
       if isLoading {
         ReviewEmptyView()

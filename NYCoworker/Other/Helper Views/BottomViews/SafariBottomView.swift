@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct SafariBottomView: View {
-  var url: URL
+  @Binding var url: URL
   var body: some View {
     VStack {
       GrabberView()
-      SafariView(url: url)
+      SafariView(url: $url)
         .cornerRadius(16)
     }
   }

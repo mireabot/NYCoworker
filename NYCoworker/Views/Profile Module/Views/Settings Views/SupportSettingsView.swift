@@ -49,7 +49,7 @@ struct SupportSettingsView: View {
       Spacer()
     }
     .popup(isPresented: $showWebsite, view: {
-      SafariBottomView(url: Resources.websiteURL)
+      SafariBottomView(url: .constant(Resources.websiteURL))
       
     }, customize: {
       $0

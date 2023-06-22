@@ -11,17 +11,27 @@ import FirebaseFirestoreSwift
 
 struct AdminLocationView: View {
   @Environment(\.dismiss) var makeDismiss
+  // Location information
   @State private var locationName: String = ""
   @State private var latitude: Double = 0.0
   @State private var longitude: Double = 0.0
   @State private var locationType: LocationType = .library
   @State private var locationID: String = ""
+  @State private var locationAmenitiesText: String = ""
   @State private var locationAmenities: [String] = []
-  @State private var locationHours: [WorkingHours] = Array(repeating: WorkingHours(hours: "", weekDay: ""), count: 7)
   @State private var locationImages: [URL] = [URL(string: "https://firebasestorage.googleapis.com/v0/b/nycoworker-10d04.appspot.com/o/LocationImages%2F1.png?alt=media&token=1d1fa8d4-367c-480e-b8bc-9fd5c6d72dc8")!]
   @State private var locationTags: [String] = []
   @State private var reviews: Int = 0
   @State private var locationAddress: String = ""
+  // Location updates
+  @State private var title: String = ""
+  @State private var text: String = ""
+  @State private var url: String = ""
+  @State private var locationUpdates: [LocationUpdates] = []
+  // Location working hours
+  @State private var weekday: String = ""
+  @State private var hours: String = ""
+  @State private var locationHours: [WorkingHours] = []
   var body: some View {
     ScrollView(.vertical, showsIndicators: true, content: {
       VStack(spacing: 10) {
@@ -41,28 +51,55 @@ struct AdminLocationView: View {
         .pickerStyle(SegmentedPickerStyle())
         NYCTextField(title: "Location ID", placeholder: "adamsLibrary", text: $locationID)
         NYCTextField(title: "Location Address", placeholder: "9 Adams St", text: $locationAddress)
+        NYCTextField(title: "Location Amenities", placeholder: "Wi-Fi", text: $locationAmenitiesText)
+        Button("Append") {
+          locationAmenities.append(locationAmenitiesText)
+          locationAmenitiesText = ""
+          print(locationAmenities)
+        }
+        .disabled(locationAmenitiesText.isEmpty)
+        .padding()
         
         VStack {
           Text("Working Hours")
             .font(.headline)
             .padding(.top)
-          ForEach(0..<7) { index in
-            HStack {
-              Text(weekday(for: index))
-              TextField("Hours", text: $locationHours[index].hours)
-            }
-            .padding(.bottom)
+          NYCTextField(title: "Week Day", placeholder: "Monday", text: $weekday)
+          NYCTextField(title: "Working Hours", placeholder: "5AM - 7PM", text: $hours)
+          Button("Append") {
+            let newData = WorkingHours(hours: hours, weekDay: weekday)
+            locationHours.append(newData)
+            clearHours()
+            print(locationHours)
           }
+          .disabled(weekday.isEmpty || hours.isEmpty)
+          .padding()
+        }
+        
+        VStack {
+          Text("Spot updates")
+            .font(.headline)
+            .padding(.top)
+          NYCTextField(title: "Card Title", placeholder: "Stay connected", text: $title)
+          NYCTextField(title: "Card Text", placeholder: "Start typing...", text: $text)
+          NYCTextField(title: "Card Url", placeholder: "Start typing...", text: $url)
+          Button("Append") {
+            let newData = LocationUpdates(title: title, text: text, url: url)
+            locationUpdates.append(newData)
+            clearUpdates()
+            print(locationUpdates)
+          }
+          .disabled(weekday.isEmpty || hours.isEmpty)
+          .padding()
         }
         Button {
           saveLocation()
         } label: {
           Text("Save Location")
         }
-        .disabled(locationName.isEmpty || locationID.isEmpty)
+        .disabled(title.isEmpty || text.isEmpty)
         .buttonStyle(NYCActionButtonStyle(showLoader: .constant(false)))
         
-        Spacer()
       }.padding([.leading,.trailing], 16)
     })
     .navigationBarBackButtonHidden()
@@ -84,12 +121,6 @@ struct AdminLocationView: View {
           .font(Resources.Fonts.medium(withSize: 17))
       }
     }
-  }
-  func weekday(for index: Int) -> String {
-    var calendar = Calendar(identifier: .gregorian)
-    calendar.firstWeekday = 2
-    let weekdaySymbols = calendar.shortWeekdaySymbols
-    return weekdaySymbols[index]
   }
 }
 
@@ -122,7 +153,7 @@ extension AdminLocationView {
       locationImages: locationImages,
       locationTags: locationTags,
       reviews: reviews,
-      locationUpdates: [],
+      locationUpdates: locationUpdates,
       locationAddress: locationAddress
     )
     addLocationToFirestore(location: location)
@@ -134,4 +165,15 @@ extension AdminLocationView {
     formatter.maximumFractionDigits = 20
     return formatter
   }
+  
+  func clearUpdates() {
+    title = ""
+    text = ""
+    url = ""
+  }
+  func clearHours() {
+    hours = ""
+    weekday = ""
+  }
 }
+

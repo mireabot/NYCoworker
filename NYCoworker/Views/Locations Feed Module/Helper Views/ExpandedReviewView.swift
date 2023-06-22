@@ -44,36 +44,3 @@ struct ExpandedReviewView: View {
         }
     }
 }
-
-
-//@ViewBuilder
-//func singleCardView(withData data: Review) -> some View {
-//    VStack(alignment: .leading, spacing: 10) {
-//        /// Header
-//        HStack(alignment: .center, spacing: 10) {
-//            Image("p1")
-//                .resizable()
-//                .frame(width: 50, height: 50)
-//            Text("Saleb")
-//                .foregroundColor(Resources.Colors.customBlack)
-//                .font(Resources.Fonts.regular(withSize: 17))
-//        }
-//        ///Review badge
-//        NYCRateBadge(badgeType: .expanded, reviewType: .postive)
-//
-//        /// Review info
-//        HStack {
-//            Text("Posted 30 Jan 2023 · Visited 10 Jan 2023")
-//                .foregroundColor(Resources.Colors.darkGrey)
-//                .font(Resources.Fonts.regular(withSize: 12))
-//        }
-//
-//        ///Review text
-//        HStack {
-//            Text("jjjj")
-//                .foregroundColor(Resources.Colors.customBlack)
-//                .font(Resources.Fonts.regular(withSize: 13))
-//        }
-//    }
-//    .padding([.leading,.trailing], 16)
-//}

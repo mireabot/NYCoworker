@@ -68,10 +68,11 @@ struct WorkingHours: Codable, Hashable {
 }
 
 struct LocationUpdates: Codable, Hashable {
+  var title: String
   var text: String
   var url: String
   
   static let mock : [LocationUpdates] = [
-    LocationUpdates(text: "Need to reserve a table", url: "")
+    LocationUpdates(title: "Sample title", text: "Need to reserve a table", url: "")
   ]
 }

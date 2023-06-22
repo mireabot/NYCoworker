@@ -10,7 +10,7 @@ import PopupView
 
 struct InstructionsExpandedView: View {
   @State private var showBrowser = false
-  @State private var browserLink : URL = URL(string: "https://www.nycoworker.com/")!
+  @State var browserLink : URL = URL(string: "https://www.nycoworker.com/")!
   var locationData: Location
     var body: some View {
       VStack {
@@ -18,7 +18,7 @@ struct InstructionsExpandedView: View {
         VStack {
           NYCBottomSheetHeader(title: "Location Updates").paddingForHeader()
           ScrollView(.vertical, showsIndicators: false) {
-            LazyVGrid(columns: [GridItem(.flexible(), spacing: 16), GridItem(.flexible(), spacing: 16)], spacing: 16) {
+            VStack(alignment: .center, spacing: 10) {
               ForEach(locationData.locationUpdates ?? [], id: \.self) { item in
                 InstructionCell(updatesData: item) {
                   browserLink = URL(string: item.url)!
@@ -35,7 +35,7 @@ struct InstructionsExpandedView: View {
         .cornerRadius(16, corners: [.topLeft,.topRight])
       }
       .popup(isPresented: $showBrowser, view: {
-        SafariBottomView(url: browserLink)
+        SafariBottomView(url: $browserLink)
         
       }, customize: {
         $0

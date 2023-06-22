@@ -125,7 +125,7 @@ extension FavoriteView { //MARK: - Functions
     isLoading = true
     locationService.favoriteLocations = []
     await userService.fetchUser(documentId: userId, completion: {
-      Task {
+      Task(priority: .userInitiated) {
         await locationService.fetchFavoriteLocations(for: userService.user) {
           DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
             isLoading = false

@@ -47,3 +47,11 @@ struct NYCHeader: View {
     }
   }
 }
+
+
+struct NYCBottomSheetHeader_Previews: PreviewProvider {
+  static var previews: some View {
+    NYCBottomSheetHeader(title: "Test title header").paddingForHeader()
+  }
+}
+

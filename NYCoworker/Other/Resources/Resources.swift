@@ -25,7 +25,7 @@ enum Resources {
   static let messagingKey = "AAAAwu3VOMc:APA91bHuGsKCHSzJ7Y8CDaeglaS9eKNI7y98fAIW2Fa9O7cd4Djt5mOLhaNDf9gRIm58Csv9vtFdXnVAsIfSo-d9zK20WpLwoF_V7ygA-fjqm4EYwRu4S5OOlk7sUacxFUrY0vbyOHU_"
   static let demoToken = "cIALBfZOckzepPkMS4ikdW:APA91bEwZVpI3OEw8MMZtjwxDdU6bnssiyaCuqt4JIRGwT5p9qtVseBk9yT3QvlywYNBCRiUX2phw4MeJJt2lC3c1_zNIOTQuovDUM8ffFxHXyc6OgU6uuPyBY3IKmH5Y4OR1-c10FT-"
   
-  static var adminMode = false
+  static var adminMode = true
   
   /// Colors resource pack
   enum Colors {
