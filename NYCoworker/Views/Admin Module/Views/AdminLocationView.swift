@@ -154,7 +154,8 @@ extension AdminLocationView {
       locationTags: locationTags,
       reviews: reviews,
       locationUpdates: locationUpdates,
-      locationAddress: locationAddress
+      locationAddress: locationAddress,
+      locationPriority: false
     )
     addLocationToFirestore(location: location)
   }

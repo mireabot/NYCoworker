@@ -36,6 +36,7 @@ struct Location: Identifiable, Codable, Equatable, Hashable {
   var reviews: Int
   var locationUpdates: [LocationUpdates]?
   var locationAddress: String
+  var locationPriority: Bool
   
   var id: String {
     locationID
@@ -49,7 +50,7 @@ struct Location: Identifiable, Codable, Equatable, Hashable {
     lhs.locationID == rhs.locationID
   }
   
-  static let mock = Location(locationName: "Adams Library", locationCoordinates: GeoPoint(latitude: 0.0, longitude: 0.0), locationType: .library, locationID: "id", locationAmenities: ["W/C","Bar","Charging"], locationHours: WorkingHours.mock, locationImages: [URL(string: "https://firebasestorage.googleapis.com/v0/b/nycoworker-10d04.appspot.com/o/LocationImages%2F1.png?alt=media&token=1d1fa8d4-367c-480e-b8bc-9fd5c6d72dc8")!], locationTags: [], reviews: 0, locationUpdates: [], locationAddress: "Address")
+  static let mock = Location(locationName: "Adams Library", locationCoordinates: GeoPoint(latitude: 0.0, longitude: 0.0), locationType: .library, locationID: "id", locationAmenities: ["W/C","Bar","Charging"], locationHours: WorkingHours.mock, locationImages: [URL(string: "https://firebasestorage.googleapis.com/v0/b/nycoworker-10d04.appspot.com/o/LocationImages%2F1.png?alt=media&token=1d1fa8d4-367c-480e-b8bc-9fd5c6d72dc8")!], locationTags: [], reviews: 0, locationUpdates: [], locationAddress: "Address", locationPriority: true)
 }
 
 struct WorkingHours: Codable, Hashable {

@@ -74,7 +74,8 @@ class ReviewService: ObservableObject {
   
   ///Create review based on user input
   ///- Parameters:
-  ///   - location: Data about location which will be fetched
+  ///   - locationID: ID of location for which review will be published
+  ///   - reviewID: ID of review which will be visible for public
   func publishReview(locationID: String, reviewID: String, completion: @escaping () -> Void) async {
     do {
       let locationDoc = try await db.collection(Endpoints.locations.rawValue).document(locationID).getDocument(as: Location.self)

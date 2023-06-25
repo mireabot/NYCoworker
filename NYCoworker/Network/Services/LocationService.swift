@@ -21,7 +21,7 @@ class LocationService: ObservableObject {
   func fetchLoactions(completion: @escaping () -> Void, errorCompletion: @escaping (Error) -> Void) async {
     do {
       var query: Query!
-      query = db.collection(Endpoints.locations.rawValue)
+      query = db.collection(Endpoints.locations.rawValue).order(by: "locationPriority", descending: true)
       let docs = try await query.getDocuments()
       let fetchedLocations = docs.documents.compactMap { doc -> Location? in
         try? doc.data(as: Location.self)
