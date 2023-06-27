@@ -27,7 +27,12 @@ struct InitView: View {
             }
         }
         .onAppear {
+          if Resources.adminMode {
+            print("Admin Mode")
+          }
+          else {
             fetchAppConfig()
+          }
         }
     }
 }

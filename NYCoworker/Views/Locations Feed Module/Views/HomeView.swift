@@ -41,7 +41,7 @@ struct HomeView: View {
             /// Category scrollview
             locationPublicSpacesCollection()
           }
-          .padding(.top, 10)
+          .padding([.top,.bottom], 10)
         }
       }
       .popup(isPresented: $addToFavs) {
@@ -186,26 +186,23 @@ extension HomeView { //MARK: - Home components
         })
       .padding(.leading, 16)
       
-      ScrollView(.horizontal, showsIndicators: false) {
-        LazyHStack(spacing: 10) {
-          if isLoading {
-            ForEach(0..<4) { _ in
-              LoadingLocationCell()
-            }
+      ZStack {
+        if isLoading {
+          ForEach(0..<4) { _ in
+            LoadingLocationCell(type: .map)
           }
-          else {
-            ForEach(locationService.locations,id: \.locationName) { data in
-              if data.locationType == .publicSpace {
-                NavigationLink(value: data) {
-                  LocationCell(data: data, type: .large, buttonAction: {
-                    addLocationTofavs(location: data.locationID)
-                  })
+        }
+        else {
+          ForEach(locationService.locations,id: \.locationName) { data in
+            if data.locationType == .publicSpace {
+              NavigationLink(value: data) {
+                LocationMapCard(location: data) {
+                  addLocationTofavs(location: data.locationID)
                 }
               }
             }
           }
         }
-        .padding([.leading,.trailing], 16)
       }
     }
   }
