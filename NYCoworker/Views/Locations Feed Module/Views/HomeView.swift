@@ -44,6 +44,17 @@ struct HomeView: View {
           .padding([.top,.bottom], 10)
         }
       }
+      .refreshable(action: {
+        DispatchQueue.main.async {
+          isLoading = true
+        }
+        await locationService.fetchLoactions(completion: {
+          Resources.userLocation = locationManager.userLocation ?? CLLocation(latitude: 0.0, longitude: 0.0)
+          isLoading = false
+        }) { err in
+          locationService.setError(err)
+        }
+      })
       .popup(isPresented: $addToFavs) {
         NYCAlertNotificationView(alertStyle: .addedToFavorites)
       } customize: {
