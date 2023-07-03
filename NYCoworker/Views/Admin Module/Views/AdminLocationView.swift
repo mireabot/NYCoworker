@@ -89,7 +89,7 @@ struct AdminLocationView: View {
             clearUpdates()
             print(locationUpdates)
           }
-          .disabled(weekday.isEmpty || hours.isEmpty)
+          .disabled(title.isEmpty || text.isEmpty)
           .padding()
         }
         Button {
@@ -97,7 +97,7 @@ struct AdminLocationView: View {
         } label: {
           Text("Save Location")
         }
-        .disabled(title.isEmpty || text.isEmpty)
+        .disabled(locationID.isEmpty || locationName.isEmpty)
         .buttonStyle(NYCActionButtonStyle(showLoader: .constant(false)))
         
       }.padding([.leading,.trailing], 16)
