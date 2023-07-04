@@ -21,6 +21,8 @@ enum Resources {
   static var userImageUrl: URL = URL(string: "https://firebasestorage.googleapis.com/v0/b/nycoworker-10d04.appspot.com/o/UserImages%2FIMG_0812%202.jpeg?alt=media&token=9c09e090-b4f1-4b40-861b-11910d920632")!
   
   static let websiteURL = URL(string: "https://www.nycoworker.com/")!
+  static let termsOfServiceLink = "https://www.nycoworker.com/legal/terms-of-service"
+  static let privacyLink = "https://www.nycoworker.com/legal/privacy-policy"
   
   static let messagingKey = "AAAAwu3VOMc:APA91bHuGsKCHSzJ7Y8CDaeglaS9eKNI7y98fAIW2Fa9O7cd4Djt5mOLhaNDf9gRIm58Csv9vtFdXnVAsIfSo-d9zK20WpLwoF_V7ygA-fjqm4EYwRu4S5OOlk7sUacxFUrY0vbyOHU_"
   static let demoToken = "cIALBfZOckzepPkMS4ikdW:APA91bEwZVpI3OEw8MMZtjwxDdU6bnssiyaCuqt4JIRGwT5p9qtVseBk9yT3QvlywYNBCRiUX2phw4MeJJt2lC3c1_zNIOTQuovDUM8ffFxHXyc6OgU6uuPyBY3IKmH5Y4OR1-c10FT-"

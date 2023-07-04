@@ -7,10 +7,10 @@
 
 import SwiftUI
 import iPages
+import UIKit
 
 struct Onboarding: View {
   @State var currentPage: Int = 0
-  let heights = stride(from: 0.4, through: 0.4, by: 0.1).map { PresentationDetent.fraction($0) }
   @State var prepareToNavigate: Bool = false
   let onboardingCoordinator = OnboardingCoordinator()
   var body: some View {
@@ -30,8 +30,9 @@ struct Onboarding: View {
         Spacer()
         /// Page control with main content
         iPages(selection: $currentPage) {
-          SecondView()
-          ThirdView()
+          firstView()
+          secondView()
+          thirdView()
         }
         .dotsTintColors(currentPage: Resources.Colors.primary, otherPages: Resources.Colors.customGrey)
         .hideDots(false)
@@ -47,7 +48,7 @@ struct Onboarding: View {
             prepareToNavigate.toggle()
           }, text: "Get Started")
           
-          Text("By pressing “Get started” button, you agree to our \(Text("Terms of service").foregroundColor(Resources.Colors.actionGreen)) and \(Text("Privacy Policy").foregroundColor(Resources.Colors.actionGreen))")
+          Text("By pressing “Get started” button, you agree to our \("Terms of service", link: Resources.termsOfServiceLink) and \("Privacy Policy", link: Resources.privacyLink)")
             .foregroundColor(Resources.Colors.customBlack)
             .font(Resources.Fonts.regular(withSize: 13))
         }
@@ -68,8 +69,9 @@ struct Onboarding_Previews: PreviewProvider {
   }
 }
 
-struct SecondView: View {
-  var body: some View {
+extension Onboarding { // MARK: - Views
+  @ViewBuilder
+  func firstView() -> some View {
     VStack(alignment: .center, spacing: 0) {
       Image("onb1")
         .frame(width: UIScreen.main.bounds.width - 28, height: 250)
@@ -90,10 +92,9 @@ struct SecondView: View {
       .padding([.leading,.trailing], 16)
     }
   }
-}
-
-struct ThirdView: View {
-  var body: some View {
+  
+  @ViewBuilder
+  func secondView() -> some View {
     VStack(alignment: .center, spacing: 0) {
       Image("onb2")
         .frame(width: UIScreen.main.bounds.width - 28, height: 250)
@@ -113,6 +114,28 @@ struct ThirdView: View {
       }
       .padding([.leading,.trailing], 16)
     }
-    
+  }
+  
+  @ViewBuilder
+  func thirdView() -> some View {
+    VStack(alignment: .center, spacing: 0) {
+      Image("onb3")
+        .frame(width: UIScreen.main.bounds.width - 28, height: 250)
+        .cornerRadius(10)
+        .padding(.bottom, 30)
+      
+      VStack(spacing: 5) {
+        Text("Stay Updated")
+          .foregroundColor(Resources.Colors.customBlack)
+          .font(Resources.Fonts.medium(withSize: 22))
+          .multilineTextAlignment(.center)
+        
+        Text("Our team consistently keep users informed about each location's information")
+          .foregroundColor(Resources.Colors.darkGrey)
+          .font(Resources.Fonts.regular(withSize: 17))
+          .multilineTextAlignment(.center)
+      }
+      .padding([.leading,.trailing], 16)
+    }
   }
 }

@@ -90,19 +90,27 @@ extension Date {
   }
 }
 
-//MARK: - Bottom sheet presentation
-extension PresentationDetent {
-  static let bottom = Self.custom(BottomBarDetent.self)
-  static let mediumBottomBar = Self.medium
-  static let largeBottomBar = Self.large
-}
+//MARK: - Hyperlinking in Text
+extension LocalizedStringKey.StringInterpolation {
+    /// String interpolation support for links in Text.
+    ///
+    /// Usage:
+    ///
+    ///     let url: URL = …
+    ///     Text("\("Link title", url: url)")
+    mutating func appendInterpolation(_ linkTitle: String, link url: URL) {
+      var linkString = AttributedString(linkTitle)
+        linkString.link = url
+      linkString.foregroundColor = .init(uiColor: UIColor(red: 0.11, green: 0.47, blue: 0.45, alpha: 1.00))
+        self.appendInterpolation(linkString)
+    }
 
-private struct BottomBarDetent: CustomPresentationDetent {
-  static func height(in context: Context) -> CGFloat? {
-    max(200, context.maxDetentValue * 0.1)
-  }
-  
-  static func height(in context: Context, withHeight height: CGFloat? = nil) -> CGFloat? {
-    max(height ?? 200, context.maxDetentValue * 0.1)
-  }
+    /// String interpolation support for links in Text.
+    ///
+    /// Usage:
+    ///
+    ///     Text("\("Link title", url: "https://example.com")")
+    mutating func appendInterpolation(_ linkTitle: String, link urlString: String) {
+        self.appendInterpolation(linkTitle, link: URL(string: urlString)!)
+    }
 }
