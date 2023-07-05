@@ -34,7 +34,7 @@ struct NYCPromoBanner: View {
               Text("Explore")
                 .foregroundColor(Resources.Colors.customBlack)
                 .font(Resources.Fonts.medium(withSize: 15))
-              Resources.Images.Navigation.chevron
+              Resources.Images.Navigation.chevronRight
                 .resizable().frame(width: 18, height: 18)
                 .foregroundColor(Resources.Colors.customBlack)
             }

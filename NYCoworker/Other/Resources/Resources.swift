@@ -54,7 +54,8 @@ enum Resources {
     enum Navigation {
       static let arrowBack = Image("arrow-back")
       static let close = Image("close")
-      static let chevron = Image("chevron-right")
+      static let chevronRight = Image("chevron-right")
+      static let chevronLeft = Image("chevron-left")
       static let share = Image("share")
       static let location = Image("location")
       static let openMap = Image("open-map")

@@ -7,7 +7,6 @@
 
 import SwiftUI
 import StoreKit
-import PopupView
 
 struct SupportSettingsView: View {
   @Environment(\.requestReview) var requestReview
@@ -48,19 +47,8 @@ struct SupportSettingsView: View {
       
       Spacer()
     }
-    .popup(isPresented: $showWebsite, view: {
-      SafariBottomView(url: .constant(Resources.websiteURL))
-      
-    }, customize: {
-      $0
-        .type(.toast)
-        .isOpaque(true)
-        .backgroundColor(Color.black.opacity(0.3))
-        .position(.bottom)
-        .closeOnTap(false)
-        .closeOnTapOutside(false)
-        .dragToDismiss(true)
-        .animation(.spring(response: 0.4, blendDuration: 0.2))
+    .sheet(isPresented: $showWebsite, content: {
+      SafariView(url: .constant(Resources.websiteURL))
     })
     .fullScreenCover(isPresented: $showFeedback) {
       WriteFeedbackView()
@@ -71,13 +59,5 @@ struct SupportSettingsView: View {
 struct HelpSupportView_Previews: PreviewProvider {
   static var previews: some View {
     SupportSettingsView()
-  }
-}
-
-extension SupportSettingsView { //MARK: - Functions
-  func openWebsite() {
-    if let url = URL(string: "https://www.nycoworker.com/") {
-      UIApplication.shared.open(url)
-    }
   }
 }

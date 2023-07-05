@@ -20,6 +20,7 @@ struct AddReviewView: View {
   @FocusState private var fieldIsFocused: Bool
   @StateObject var reviewService = ReviewService()
   @EnvironmentObject var navigationState: NavigationDestinations
+  @State private var sheetContentHeight = CGFloat(0)
   let locationData: Location
   var body: some View {
     NavigationView {
@@ -40,6 +41,19 @@ struct AddReviewView: View {
         .padding([.leading,.trailing], 16)
         .padding(.top, 10)
       }
+      .sheet(isPresented: $showDate, content: {
+        CalendarBottomView(showDate: $showDate, date: $visitDate)
+          .background {
+            GeometryReader { proxy in
+              Color.clear
+                .task {
+                  sheetContentHeight = proxy.size.height
+                }
+            }
+          }
+          .presentationDetents([.height(sheetContentHeight)])
+          .presentationDragIndicator(.visible)
+      })
       .popup(isPresented: $showAlert) {
         NYCMiddleAlertView(alertType: .reviewUnderReview) {
           withAnimation(.spring()) {
@@ -57,20 +71,6 @@ struct AddReviewView: View {
             dismiss()
           }
       }
-      .popup(isPresented: $showDate, view: {
-        CalendarBottomView(showDate: $showDate, date: $visitDate)
-        
-      }, customize: {
-        $0
-          .type(.toast)
-          .isOpaque(true)
-          .backgroundColor(Color.black.opacity(0.3))
-          .position(.bottom)
-          .closeOnTap(false)
-          .closeOnTapOutside(false)
-          .dragToDismiss(true)
-          .animation(.spring(response: 0.4, blendDuration: 0.2))
-      })
       .onTapGesture {
         fieldIsFocused = false
       }
@@ -153,7 +153,9 @@ extension AddReviewView { //MARK: - View components
         .foregroundColor(Resources.Colors.customBlack)
         .font(Resources.Fonts.medium(withSize: 20))
         .onTapGesture {
-          showDate.toggle()
+          DispatchQueue.main.async {
+            showDate.toggle()
+          }
         }
     }
   }

@@ -32,75 +32,108 @@ struct CalendarBottomView: View {
     selectedDate = date
   }
   
-  private func generateDatesForCurrentMonth() -> [Date] {
-    let currentDate = calendar.startOfDay(for: Date())
-    let startOfMonth = calendar.date(from: calendar.dateComponents([.year, .month], from: selectedDate))!
-    let range = calendar.range(of: .day, in: .month, for: selectedDate)!
-    let days = Range(uncheckedBounds: (lower: 1, upper: range.upperBound))
+  private func generateDatesForCurrentMonth(for month: Date) -> [Date] {
+    let monthRange = calendar.range(of: .day, in: .month, for: month)!
+    var dateComponents = calendar.dateComponents([.year, .month], from: month)
+    dateComponents.day = 1
+    guard let startDate = calendar.date(from: dateComponents) else {
+      return []
+    }
     
-    return days.compactMap { day in
-      let date = calendar.date(byAdding: .day, value: day - 1, to: startOfMonth)!
-      return calendar.isDate(date, inSameDayAs: currentDate) || date < currentDate ? date : nil
+    var dates: [Date] = []
+    var date = startDate
+    
+    for _ in monthRange {
+      dates.append(date)
+      date = calendar.date(byAdding: .day, value: 1, to: date)!
+    }
+    
+    return dates
+  }
+  
+  private func moveToPreviousMonth() {
+    guard let previousMonth = calendar.date(byAdding: .month, value: -1, to: Date()) else {
+      return
+    }
+    withAnimation(.easeOut(duration: 0.2)) {
+      DispatchQueue.main.async {
+        selectedDate = previousMonth
+      }
+    }
+  }
+  
+  private func moveToCurrentMonth() {
+    withAnimation(.easeOut(duration: 0.2)) {
+      DispatchQueue.main.async {
+        selectedDate = Date()
+      }
     }
   }
   
   var body: some View {
-    VStack(alignment: .center) {
-      GrabberView()
-      VStack(alignment: .leading) {
-        HStack {
-          Button {
-            showDate.toggle()
-          } label: {
-            Text("Cancel")
-              .foregroundColor(Resources.Colors.primary)
-              .font(Resources.Fonts.medium(withSize: 17))
-          }
-          
-          Spacer()
-          Button {
-            date = selectedDate
-            showDate.toggle()
-          } label: {
-            Text("Done")
-              .foregroundColor(Resources.Colors.primary)
-              .font(Resources.Fonts.medium(withSize: 17))
-          }
-          
-        }
-        .padding([.leading,.trailing], 10)
-        .padding(.top, 15)
-        .padding(.bottom, 10)
-        
+    VStack(alignment: .leading) {
+      HStack {
         Text(currentMonthYear)
           .foregroundColor(Resources.Colors.customBlack)
           .font(Resources.Fonts.medium(withSize: 20))
-          .padding(.leading, 10)
-        VStack {
-          LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 5), count: 7), spacing: 5) {
-            ForEach(0..<generateDatesForCurrentMonth().count, id: \.self) { index in
-              Button(action: {
-                DispatchQueue.main.async {
-                  withAnimation(.spring()) {
-                    selectDate(generateDatesForCurrentMonth()[index])
-                  }
+        
+        Spacer()
+        
+        HStack(alignment: .center, spacing: 10) {
+          Button(action: moveToPreviousMonth) {
+            Resources.Images.Navigation.chevronLeft
+              .resizable()
+              .frame(width: 30, height: 30)
+              .foregroundColor(Resources.Colors.customBlack)
+          }
+          
+          Button(action: moveToCurrentMonth) {
+            Resources.Images.Navigation.chevronRight
+              .resizable()
+              .frame(width: 30, height: 30)
+              .foregroundColor(Resources.Colors.customBlack)
+          }
+        }
+      }
+      .padding([.leading,.trailing], 15)
+      .padding(.top, 20)
+      
+      VStack {
+        LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 5), count: 7), spacing: 5) {
+          ForEach(generateDatesForCurrentMonth(for: selectedDate), id: \.self) { date in
+            let isDateEnabled = calendar.isDate(date, inSameDayAs: selectedDate) || date <= calendar.startOfDay(for: Date())
+            
+            
+            Button(action: {
+              withAnimation(.spring()) {
+                if isDateEnabled {
+                  selectDate(date)
                 }
-              }) {
-                Text(formatter.string(from: generateDatesForCurrentMonth()[index]))
-                  .font(isDateSelected(generateDatesForCurrentMonth()[index]) ? Resources.Fonts.medium(withSize: 15) : Resources.Fonts.regular(withSize: 15))
-                  .foregroundColor(isDateSelected(generateDatesForCurrentMonth()[index]) ? Color.white : Resources.Colors.customBlack)
-                  .padding(10)
-                  .background(isDateSelected(generateDatesForCurrentMonth()[index]) ? Resources.Colors.primary : Color.clear)
-                  .clipShape(Circle())
               }
+            }) {
+              Text(formatter.string(from: date))
+                .font(isDateSelected(date) ? Resources.Fonts.regular(withSize: 15) : Resources.Fonts.regular(withSize: 15))
+                .foregroundColor(isDateSelected(date) ? Color.white : isDateEnabled ? Resources.Colors.customBlack : Color.gray)
+                .padding(10)
+                .background(isDateSelected(date) ? Resources.Colors.primary : Color.clear)
+                .clipShape(Circle())
             }
           }
         }
       }
-      .padding(.bottom, 30)
-      .background(Color.white)
-      .cornerRadius(16, corners: [.topLeft,.topRight])
+      
+      Button {
+        date = selectedDate
+        showDate.toggle()
+      } label: {
+        Text("Apply")
+      }
+      .buttonStyle(NYCActionButtonStyle(showLoader: .constant(false)))
+      .padding([.leading,.trailing], 10)
+
     }
+    .padding(.bottom, 10)
+    .background(Color.white)
   }
 }
 

@@ -34,7 +34,6 @@ struct NotificationPermission: View {
       
       Spacer()
     }
-    .addTransition()
     .onAppear {
       requestNotificationPermissions()
     }

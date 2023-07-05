@@ -31,7 +31,6 @@ struct GeopositionPermission: View {
       
       Spacer()
     }
-    .addTransition()
     .onAppear {
       locationManager.locationManager.delegate = locationManager
     }

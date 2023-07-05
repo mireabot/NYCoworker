@@ -23,7 +23,7 @@ struct SettingsCard: View {
             
             Spacer()
             
-            Resources.Images.Navigation.chevron
+            Resources.Images.Navigation.chevronRight
                 .resizable()
                 .frame(width: 24, height: 24)
                 .foregroundColor(Resources.Colors.darkGrey)

@@ -18,7 +18,7 @@ struct DeleteAccountBottomView: View {
   @Binding var isVisible: Bool
   var body: some View {
     VStack {
-      NYCBottomSheetHeader(title: "Delete account?").padding(.top, 15)
+      NYCBottomSheetHeader(title: "Delete account?").paddingForHeader()
       VStack(alignment: .leading) {
         NYCBottomViewContent(content: .deleteAccount)
         .padding(.top, 5)
@@ -38,7 +38,6 @@ struct DeleteAccountBottomView: View {
         .padding(.top, 10)
       }
       .padding([.leading,.trailing], 16)
-      .padding(.bottom, UIScreen.main.bounds.size.height == 667 ? 10 : 50)
       .frame(maxWidth: .infinity)
     }
     .background(Color.white)

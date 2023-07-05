@@ -56,7 +56,6 @@ struct PersonTypeSetup: View {
       .padding([.leading,.trailing], 16)
       .padding(.top, 20)
     }
-    .addTransition()
     .scrollDisabled(true)
     .onAppear {
       model.accountType = "Prefer not to say"
@@ -115,7 +114,6 @@ struct GenderTypeSetup: View {
       .padding([.leading,.trailing], 16)
       .padding(.top, 20)
     }
-    .addTransition()
     .scrollDisabled(true)
     .onAppear {
       model.gender = "Prefer not to say"

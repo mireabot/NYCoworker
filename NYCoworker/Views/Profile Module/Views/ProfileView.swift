@@ -8,12 +8,12 @@
 import SwiftUI
 import Shimmer
 import SDWebImageSwiftUI
-import PopupView
 
 struct ProfileView: View {
   @State var showPopup = false
   @AppStorage("UserID") var userId : String = ""
   @EnvironmentObject var userService : UserService
+  @State private var sheetContentHeight = CGFloat(0)
   var body: some View {
     NavigationStack {
       VStack {
@@ -26,21 +26,22 @@ struct ProfileView: View {
         }
         Spacer()
       }
+      .sheet(isPresented: $showPopup) {
+        DeleteAccountBottomView(isVisible: $showPopup)
+          .background {
+            GeometryReader { proxy in
+              Color.clear
+                .task {
+                  sheetContentHeight = proxy.size.height
+                }
+            }
+          }
+          .presentationDetents([.height(sheetContentHeight)])
+          .presentationDragIndicator(.visible)
+      }
       .applyNavigationTransition()
       .navigationDestination(for: SettingsModel.self, destination: { settingsData in
         SettingsView(title: settingsData.title).environmentObject(userService)
-      })
-      .popup(isPresented: $showPopup, view: {
-        DeleteAccountBottomView(isVisible: $showPopup)
-      }, customize: {
-        $0
-          .type(.toast)
-          .backgroundColor(Color.black.opacity(0.3))
-          .position(.bottom)
-          .closeOnTap(false)
-          .closeOnTapOutside(false)
-          .dragToDismiss(false)
-          .animation(.spring(response: 0.4, blendDuration: 0.2))
       })
       .toolbar {
         ToolbarItem(placement: .navigationBarLeading) {

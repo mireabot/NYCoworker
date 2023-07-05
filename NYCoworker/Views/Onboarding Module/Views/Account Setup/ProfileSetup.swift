@@ -74,7 +74,6 @@ struct ProfileSetup: View {
     .onTapGesture {
       fieldIsFocused = false
     }
-    .addTransition()
     .scrollDisabled(true)
     .photosPicker(isPresented: $showImagePicker, selection: $photoItem)
     .onChange(of: photoItem) { newValue in

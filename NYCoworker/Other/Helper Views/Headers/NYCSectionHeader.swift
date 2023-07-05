@@ -15,7 +15,7 @@ struct NYCSectionHeader: View {
             Text(title)
                 .foregroundColor(Resources.Colors.customBlack)
                 .font(isExpandButton ? Resources.Fonts.medium(withSize: 22) : Resources.Fonts.medium(withSize: 26))
-            Image("chevron-right")
+          Resources.Images.Navigation.chevronRight
                 .resizable()
                 .foregroundColor(Resources.Colors.customBlack)
                 .frame(width: 15, height: 15)

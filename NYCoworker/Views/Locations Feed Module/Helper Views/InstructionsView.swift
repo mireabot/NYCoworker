@@ -28,7 +28,7 @@ struct InstructionsView: View {
               .foregroundColor(Resources.Colors.darkGrey)
               .padding(.leading, -2)
             
-            Resources.Images.Navigation.chevron
+            Resources.Images.Navigation.chevronRight
               .resizable()
               .frame(width: 20, height: 20)
               .foregroundColor(Resources.Colors.customBlack)
@@ -51,7 +51,7 @@ struct InstructionsView: View {
               .foregroundColor(Resources.Colors.darkGrey)
               .padding(.leading, -2)
             
-            Resources.Images.Navigation.chevron
+            Resources.Images.Navigation.chevronRight
               .resizable()
               .frame(width: 20, height: 20)
               .foregroundColor(Resources.Colors.customBlack)

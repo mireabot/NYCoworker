@@ -30,10 +30,6 @@ extension View {
     clipShape( RoundedCorner(radius: radius, corners: corners))
   }
   
-  func addTransition() -> some View {
-    self.transition(.move(edge: .trailing))
-  }
-  
   func applyNavigationTransition() -> some View {
     self.navigationTransition(.slide.combined(with: .fade(.in).animation(.easeInOut.speed(0.35))), interactivity: .edgePan)
   }

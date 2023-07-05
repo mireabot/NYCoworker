@@ -23,6 +23,7 @@ struct LocationDetailView: View {
   @StateObject private var reviewService = ReviewService()
   @StateObject private var locationService = LocationService()
   @EnvironmentObject var navigationState: NavigationDestinations
+  @State private var sheetContentHeight = CGFloat(0)
   var locationData : Location
   var body: some View {
     ScrollView(.vertical, showsIndicators: true) {
@@ -49,6 +50,17 @@ struct LocationDetailView: View {
     }
     .fullScreenCover(isPresented: $navigationState.isPresentingReviewSubmission, content: {
       AddReviewView(locationData: locationData).environmentObject(navigationState)
+    })
+    .sheet(isPresented: $showReviewList, content: {
+      ExpandedReviewView(type: .fullList)
+        .environmentObject(reviewService)
+        .presentationDetents([.large])
+        .presentationDragIndicator(.visible)
+    })
+    .sheet(isPresented: $showUpdatesList, content: {
+      InstructionsExpandedView(locationData: locationData)
+        .presentationDetents([.large])
+        .presentationDragIndicator(.visible)
     })
     .toolbarBackground(.white, for: .navigationBar)
     .navigationBarBackButtonHidden()
@@ -92,34 +104,6 @@ struct LocationDetailView: View {
         .position(.bottom)
         .animation(.spring(response: 0.4, blendDuration: 0.2))
     }
-    .popup(isPresented: $showUpdatesList, view: {
-      InstructionsExpandedView(locationData: locationData)
-    }, customize: {
-      $0
-        .type(.toast)
-        .isOpaque(true)
-        .backgroundColor(Color.black.opacity(0.3))
-        .position(.bottom)
-        .closeOnTap(false)
-        .closeOnTapOutside(false)
-        .dragToDismiss(true)
-        .animation(.spring(response: 0.4, blendDuration: 0.2))
-    })
-    .popup(isPresented: $showReviewList, view: {
-      ExpandedReviewView(type: .fullList)
-        .environmentObject(reviewService)
-      
-    }, customize: {
-      $0
-        .type(.toast)
-        .isOpaque(true)
-        .backgroundColor(Color.black.opacity(0.3))
-        .position(.bottom)
-        .closeOnTap(false)
-        .closeOnTapOutside(false)
-        .dragToDismiss(true)
-        .animation(.spring(response: 0.4, blendDuration: 0.2))
-    })
   }
 }
 

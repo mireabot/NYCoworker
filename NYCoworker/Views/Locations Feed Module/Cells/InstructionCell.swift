@@ -32,7 +32,7 @@ struct InstructionCell: View {
               HStack(spacing: 1) {
                 Text("Learn more")
                   .font(Resources.Fonts.medium(withSize: 17))
-                Resources.Images.Navigation.chevron
+                Resources.Images.Navigation.chevronRight
               }
               .foregroundColor(Resources.Colors.customBlack)
             }
