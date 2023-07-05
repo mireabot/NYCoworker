@@ -69,7 +69,6 @@ struct LocationDetailView: View {
       AnalyticsManager.shared.log(.locationSelected(locationData.locationID))
       guard reviewService.reviews.isEmpty else { return }
       await reviewService.fetchReviews(locationID: "\(locationData.locationID)", completion: {
-        print("Reviews fetched")
         DispatchQueue.main.async {
           isLoading = false
         }

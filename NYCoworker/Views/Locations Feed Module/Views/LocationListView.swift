@@ -13,6 +13,10 @@ struct LocationListView: View {
   @EnvironmentObject var locationService: LocationService
   @State var addToFavs = false
   var locationType: Locations
+  var publicSpacesLocation: [Location] { return locationService.locations.filter( {$0.locationType == .publicSpace}) }
+  var librariesLocations: [Location] { return locationService.locations.filter( { $0.locationType == .library }) }
+  var hotelLocations: [Location] { return locationService.locations.filter( { $0.locationType == .hotel }) }
+  var cafeLocations: [Location] { return locationService.locations.filter( { $0.locationType == .cafe }) }
   @AppStorage("UserID") var userId : String = ""
   init(type: Locations) {
     self.locationType = type
@@ -74,17 +78,15 @@ extension LocationListView { //MARK: - View components
   @ViewBuilder
   func hotelsLocations() -> some View {
     LazyVStack(spacing: 12) {
-      ForEach(locationService.locations){ location in
-        if location.locationType == .hotel {
-          NavigationLink(value: location) {
-            LocationListCell(type: .list, data: location) {
-              Task {
-                do {
-                  await locationService.addFavoriteLocation(locationID: location.locationID, userID: userId, completion: {
-                    addToFavs.toggle()
-                  }) { err in
-                    print(err.localizedDescription)
-                  }
+      ForEach(hotelLocations){ location in
+        NavigationLink(value: location) {
+          LocationListCell(type: .list, data: location) {
+            Task {
+              do {
+                await locationService.addFavoriteLocation(locationID: location.locationID, userID: userId, completion: {
+                  addToFavs.toggle()
+                }) { err in
+                  print(err.localizedDescription)
                 }
               }
             }
@@ -97,17 +99,15 @@ extension LocationListView { //MARK: - View components
   @ViewBuilder
   func libraryLocations() -> some View {
     LazyVStack(spacing: 12) {
-      ForEach(locationService.locations){ location in
-        if location.locationType == .library {
-          NavigationLink(value: location) {
-            LocationListCell(type: .list, data: location) {
-              Task {
-                do {
-                  await locationService.addFavoriteLocation(locationID: location.locationID, userID: userId, completion: {
-                    addToFavs.toggle()
-                  }) { err in
-                    print(err.localizedDescription)
-                  }
+      ForEach(librariesLocations){ location in
+        NavigationLink(value: location) {
+          LocationListCell(type: .list, data: location) {
+            Task {
+              do {
+                await locationService.addFavoriteLocation(locationID: location.locationID, userID: userId, completion: {
+                  addToFavs.toggle()
+                }) { err in
+                  print(err.localizedDescription)
                 }
               }
             }
@@ -120,17 +120,15 @@ extension LocationListView { //MARK: - View components
   @ViewBuilder
   func publicSpacesLocations() -> some View {
     LazyVStack(spacing: 12) {
-      ForEach(locationService.locations){ location in
-        if location.locationType == .publicSpace {
-          NavigationLink(value: location) {
-            LocationListCell(type: .list, data: location) {
-              Task {
-                do {
-                  await locationService.addFavoriteLocation(locationID: location.locationID, userID: userId, completion: {
-                    addToFavs.toggle()
-                  }) { err in
-                    print(err.localizedDescription)
-                  }
+      ForEach(publicSpacesLocation){ location in
+        NavigationLink(value: location) {
+          LocationListCell(type: .list, data: location) {
+            Task {
+              do {
+                await locationService.addFavoriteLocation(locationID: location.locationID, userID: userId, completion: {
+                  addToFavs.toggle()
+                }) { err in
+                  print(err.localizedDescription)
                 }
               }
             }
@@ -143,17 +141,15 @@ extension LocationListView { //MARK: - View components
   @ViewBuilder
   func cafesLocations() -> some View {
     LazyVStack(spacing: 12) {
-      ForEach(locationService.locations){ location in
-        if location.locationType == .cafe {
-          NavigationLink(value: location) {
-            LocationListCell(type: .list, data: location) {
-              Task {
-                do {
-                  await locationService.addFavoriteLocation(locationID: location.locationID, userID: userId, completion: {
-                    addToFavs.toggle()
-                  }) { err in
-                    print(err.localizedDescription)
-                  }
+      ForEach(cafeLocations){ location in
+        NavigationLink(value: location) {
+          LocationListCell(type: .list, data: location) {
+            Task {
+              do {
+                await locationService.addFavoriteLocation(locationID: location.locationID, userID: userId, completion: {
+                  addToFavs.toggle()
+                }) { err in
+                  print(err.localizedDescription)
                 }
               }
             }

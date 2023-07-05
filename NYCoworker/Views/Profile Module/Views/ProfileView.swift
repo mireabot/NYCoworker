@@ -98,7 +98,9 @@ extension ProfileView { //MARK: - Profile components
       VStack(alignment: .leading, spacing: 5) {
         Button {
           AnalyticsManager.shared.log(.deleteButtonPressed)
-          showPopup.toggle()
+          DispatchQueue.main.async {
+            showPopup.toggle()
+          }
         } label: {
           Text("Delete account")
             .foregroundColor(Resources.Colors.actionRed)

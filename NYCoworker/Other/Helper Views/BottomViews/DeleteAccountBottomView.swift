@@ -25,13 +25,17 @@ struct DeleteAccountBottomView: View {
         
         VStack(alignment: .center, spacing: 10) {
           NYCActionButton(action: {
-            isVisible = false
+            DispatchQueue.main.async {
+              isVisible = false
+            }
           }, text: "Never mind", buttonStyle: .secondarySystem)
           
           NYCActionButton(action: {
             withAnimation(.spring()) {
               AnalyticsManager.shared.log(.deleteButtonSubmitted)
-              deleteUser()
+              DispatchQueue.main.async {
+                deleteUser()
+              }
             }
           }, text: "Delete", buttonStyle: .system)
         }

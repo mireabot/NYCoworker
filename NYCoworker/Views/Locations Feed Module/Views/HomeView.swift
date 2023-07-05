@@ -17,6 +17,9 @@ struct HomeView: View {
   @EnvironmentObject var navigationState: NavigationDestinations
   @AppStorage("UserID") var userId : String = ""
   @State var addToFavs = false
+  var publicSpacesFirstLocation: Location? { return locationService.locations.first {$0.locationType == .publicSpace} }
+  var librariesLocations: [Location] { return locationService.locations.filter( { $0.locationType == .library }) }
+  var hotelsLocations: [Location] { return locationService.locations.filter( { $0.locationType == .hotel }) }
   var body: some View {
     NavigationStack {
       ScrollView(.vertical, showsIndicators: false) {
@@ -26,7 +29,7 @@ struct HomeView: View {
           /// Locations section
           VStack(alignment: .leading, spacing: 20) {
             /// Category scrollview
-            locationLibrariesCollection()
+            locationLobbiesCollection()
             
             if isLoading {
               EmptyPromoBannerView()
@@ -36,10 +39,10 @@ struct HomeView: View {
             }
             
             /// Category scrollview
-            locationLobbiesCollection()
+            locationPublicSpacesCollection()
             
             /// Category scrollview
-            locationPublicSpacesCollection()
+            locationLibrariesCollection()
           }
           .padding([.top,.bottom], 10)
         }
@@ -137,13 +140,11 @@ extension HomeView { //MARK: - Home components
             }
           }
           else {
-            ForEach(locationService.locations,id: \.locationName) { data in
-              if data.locationType == .library {
-                NavigationLink(value: data) {
-                  LocationCell(data: data, type: .large, buttonAction: {
-                    addLocationTofavs(location: data.locationID)
-                  })
-                }
+            ForEach(librariesLocations,id: \.locationName) { data in
+              NavigationLink(value: data) {
+                LocationCell(data: data, type: .large, buttonAction: {
+                  addLocationTofavs(location: data.locationID)
+                })
               }
             }
           }
@@ -171,13 +172,11 @@ extension HomeView { //MARK: - Home components
             }
           }
           else {
-            ForEach(locationService.locations,id: \.locationName) { data in
-              if data.locationType == .hotel {
-                NavigationLink(value: data) {
-                  LocationCell(data: data, type: .large, buttonAction: {
-                    addLocationTofavs(location: data.locationID)
-                  })
-                }
+            ForEach(hotelsLocations,id: \.locationName) { data in
+              NavigationLink(value: data) {
+                LocationCell(data: data, type: .large, buttonAction: {
+                  addLocationTofavs(location: data.locationID)
+                })
               }
             }
           }
@@ -189,27 +188,23 @@ extension HomeView { //MARK: - Home components
   
   @ViewBuilder
   func locationPublicSpacesCollection() -> some View {
-    VStack(alignment: .leading, spacing: 12) {
-      NavigationLink(
-        value: Locations.publicSpaces,
-        label: {
-          NYCSectionHeader(title: Locations.publicSpaces.headerTitle, isExpandButton: true)
-        })
-      .padding(.leading, 16)
-      
-      ZStack {
-        if isLoading {
-          ForEach(0..<4) { _ in
+    if let locationData = publicSpacesFirstLocation {
+      VStack(alignment: .leading, spacing: 12) {
+        NavigationLink(
+          value: Locations.publicSpaces,
+          label: {
+            NYCSectionHeader(title: Locations.publicSpaces.headerTitle, isExpandButton: true)
+          })
+        .padding(.leading, 16)
+        
+        ZStack {
+          if isLoading {
             LoadingLocationCell(type: .map)
           }
-        }
-        else {
-          ForEach(locationService.locations,id: \.locationName) { data in
-            if data.locationType == .publicSpace {
-              NavigationLink(value: data) {
-                LocationMapCard(location: data) {
-                  addLocationTofavs(location: data.locationID)
-                }
+          else {
+            NavigationLink(value: locationData) {
+              LocationMapCard(location: locationData) {
+                addLocationTofavs(location: locationData.locationID)
               }
             }
           }
