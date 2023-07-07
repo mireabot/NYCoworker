@@ -27,7 +27,7 @@ enum Resources {
   static let messagingKey = "AAAAwu3VOMc:APA91bHuGsKCHSzJ7Y8CDaeglaS9eKNI7y98fAIW2Fa9O7cd4Djt5mOLhaNDf9gRIm58Csv9vtFdXnVAsIfSo-d9zK20WpLwoF_V7ygA-fjqm4EYwRu4S5OOlk7sUacxFUrY0vbyOHU_"
   static let demoToken = "cIALBfZOckzepPkMS4ikdW:APA91bEwZVpI3OEw8MMZtjwxDdU6bnssiyaCuqt4JIRGwT5p9qtVseBk9yT3QvlywYNBCRiUX2phw4MeJJt2lC3c1_zNIOTQuovDUM8ffFxHXyc6OgU6uuPyBY3IKmH5Y4OR1-c10FT-"
   
-  static var adminMode = true
+  static var adminMode = false
   
   /// Colors resource pack
   enum Colors {
@@ -130,8 +130,9 @@ enum LocationR {
   enum Amenities {
     static let wifi = Image(systemName: "wifi")
     static let ac = Image(systemName: "snowflake")
+    static let accessible = Image(systemName: "figure.roll")
     static let charge = Image(systemName: "bolt.fill")
-    static let meeting = Image(systemName: "videoprojector.fill")
+    static let meeting = Image(systemName: "rectangle.inset.filled.and.person.filled")
     static let pets = Image(systemName: "pawprint.fill")
     static let outdoor = Image(systemName: "sun.max.fill")
     static let rooftop = Image(systemName: "beach.umbrella.fill")

@@ -23,7 +23,7 @@ struct InstructionsView: View {
               .frame(width: 20, height: 20)
               .foregroundColor(Resources.Colors.primary)
             
-            Text("Spot updates")
+            Text("Spot features")
               .font(Resources.Fonts.regular(withSize: 15))
               .foregroundColor(Resources.Colors.darkGrey)
               .padding(.leading, -2)
@@ -72,8 +72,8 @@ struct InstructionsView: View {
   }
 }
 
-//struct InstructionsView_Previews: PreviewProvider {
-//  static var previews: some View {
-//    InstructionsView()
-//  }
-//}
+struct InstructionsView_Previews: PreviewProvider {
+  static var previews: some View {
+    InstructionsView(firstTabPressed: .constant(false), secondTabPressed: .constant(false), locationData: .mock)
+  }
+}

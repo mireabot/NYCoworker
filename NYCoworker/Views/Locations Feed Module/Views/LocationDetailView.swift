@@ -54,12 +54,12 @@ struct LocationDetailView: View {
     .sheet(isPresented: $showReviewList, content: {
       ExpandedReviewView(type: .fullList)
         .environmentObject(reviewService)
-        .presentationDetents([.large])
+        .presentationDetents([.fraction(0.95)])
         .presentationDragIndicator(.visible)
     })
     .sheet(isPresented: $showUpdatesList, content: {
       InstructionsExpandedView(locationData: locationData)
-        .presentationDetents([.large])
+        .presentationDetents([.fraction(0.95)])
         .presentationDragIndicator(.visible)
     })
     .toolbarBackground(.white, for: .navigationBar)
@@ -200,15 +200,18 @@ extension LocationDetailView { //MARK: - View components
       Text("Amenities")
         .foregroundColor(Resources.Colors.customBlack)
         .font(Resources.Fonts.medium(withSize: 15))
+        .padding([.leading,.trailing], 16)
       
-      amenitiesGridView()
+      ScrollView(.horizontal, showsIndicators: false) {
+        amenitiesGridView()
+          .padding([.leading,.trailing], 16)
+      }.disabled(locationData.locationAmenities.count <= 6)
       
       Rectangle()
         .foregroundColor(Resources.Colors.customGrey)
         .frame(height: 1)
-      
+        .padding([.leading,.trailing], 16)
     }
-    .padding([.leading,.trailing], 16)
   }
   
   @ViewBuilder
@@ -320,6 +323,8 @@ extension LocationDetailView { //MARK: - Functions
       return LocationR.Amenities.store
     case "Meeting room":
       return LocationR.Amenities.meeting
+    case "Accessible":
+      return LocationR.Amenities.accessible
     default:
       return LocationR.Amenities.wc
     }
