@@ -35,10 +35,12 @@ struct NotificationPermission: View {
       Spacer()
     }
     .onAppear {
-      requestNotificationPermissions()
+      DispatchQueue.main.async {
+        requestNotificationPermissions()
+      }
     }
     .popup(isPresented: $showAlert) {
-      NYCAlertView(type: .notification) {
+      NYCMiddleAlertView(alertType: .notificationsRejected) {
         showAlert.toggle()
       }
     } customize: {

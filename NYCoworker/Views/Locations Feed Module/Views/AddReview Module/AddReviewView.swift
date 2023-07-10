@@ -167,7 +167,7 @@ extension AddReviewView { //MARK: - View components
         .foregroundColor(Resources.Colors.customBlack)
         .font(Resources.Fonts.regular(withSize: 15))
       
-      NYCResizableTextField(message: $reviewText, characterLimit: 300, placeHolder: "It was a good place...").focused($fieldIsFocused)
+      NYCResizableTextField(message: $reviewText, characterLimit: 1000, placeHolder: "It was a good place...").focused($fieldIsFocused)
     }
   }
 }

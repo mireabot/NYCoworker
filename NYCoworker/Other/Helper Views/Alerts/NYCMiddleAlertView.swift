@@ -41,7 +41,7 @@ struct NYCMiddleAlertView_Previews: PreviewProvider {
     static var previews: some View {
       ZStack {
         Color.black.edgesIgnoringSafeArea(.all)
-        NYCMiddleAlertView(alertType: .reviewUnderReview, action: {})
+        NYCMiddleAlertView(alertType: .geolocationRejected, action: {})
       }
     }
 }
@@ -49,16 +49,22 @@ struct NYCMiddleAlertView_Previews: PreviewProvider {
 extension NYCMiddleAlertView { // MARK: - Enums
   enum MiddleAlertType {
     case reviewUnderReview
+    case notificationsRejected
+    case geolocationRejected
     
     var title: String {
       switch self {
       case .reviewUnderReview: return "We're reviewing your submission"
+      case .notificationsRejected: return "You will not receive notifications"
+      case .geolocationRejected: return "Location Services Denied"
       }
     }
     
     var text: String {
       switch self {
       case .reviewUnderReview: return "Thanks for sharing your opinion! Our team'll review it in 1-2 days and send a push when it goes live."
+      case .notificationsRejected: return "No worries! Enable notifications in settings if you change your mind."
+      case .geolocationRejected: return "No worries! You won't see distance from locations unless you turn location services in settings."
       }
     }
   }

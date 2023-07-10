@@ -13,6 +13,7 @@ struct ProfileSetup: View {
   @FocusState private var fieldIsFocused: Bool
   @State var profileImage: Data?
   @State var showImagePicker: Bool = false
+  @State private var showTip = false
   @State var photoItem: PhotosPickerItem?
   var body: some View {
     ScrollView(.vertical, showsIndicators: false) {
@@ -42,18 +43,31 @@ struct ProfileSetup: View {
         }
         else {
           ZStack(alignment: .bottomTrailing) {
-            Image("emptyImage")
-              .resizable()
-              .aspectRatio(contentMode: .fill)
-            
-            Image(systemName: "plus.circle.fill")
-              .resizable()
-              .frame(width: 20, height: 20)
-              .foregroundColor(.white)
-              .padding(4)
-              .background(Resources.Colors.primary)
-              .clipShape(Circle())
-          }
+            ZStack(alignment: .bottomTrailing) {
+              Image("emptyImage")
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+              
+              Image(systemName: "plus.circle.fill")
+                .resizable()
+                .frame(width: 20, height: 20)
+                .foregroundColor(.white)
+                .padding(4)
+                .background(Resources.Colors.primary)
+                .clipShape(Circle())
+            }
+            if showTip {
+              Text("Don't forget about avatar")
+                .padding(.horizontal, 10)
+                .padding(.vertical, 5)
+                .foregroundColor(Resources.Colors.customBlack)
+                .font(Resources.Fonts.regular(withSize: 13))
+                .background(Resources.Colors.customGrey)
+                .cornerRadius(5)
+                .offset(x: 100)
+                .transition(.move(edge: .trailing))
+            }
+          }.animation(.interpolatingSpring(stiffness: 210, damping: 20), value: showTip)
         }
       }
       .frame(width: 100, height: 100)
@@ -70,6 +84,11 @@ struct ProfileSetup: View {
       .padding([.leading,.trailing], 16)
       .padding(.top, 30)
       
+    }
+    .onAppear {
+      DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
+        showTip = true
+      }
     }
     .onTapGesture {
       fieldIsFocused = false

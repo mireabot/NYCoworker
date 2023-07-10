@@ -35,9 +35,9 @@ struct GeopositionPermission: View {
       locationManager.locationManager.delegate = locationManager
     }
     .popup(isPresented: $locationManager.permissionDenied) {
-      NYCAlertView(type: .geoposition) {
+      NYCMiddleAlertView(alertType: .geolocationRejected, action: {
         locationManager.permissionDenied.toggle()
-      }
+      })
     } customize: {
       $0
         .closeOnTap(false)

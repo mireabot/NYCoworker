@@ -82,9 +82,11 @@ extension LocationCell {
                     .font(Resources.Fonts.regular(withSize: 16))
                     .lineLimit(0)
                 HStack(spacing: 4) {
+                  if Resources.userLocation == CLLocation(latitude: 0.0, longitude: 0.0) {
                     Text(String(format: "%.1f", calculateDistance(from: Resources.userLocation, to: data.locationCoordinates)) + " mi · ")
                         .foregroundColor(Resources.Colors.darkGrey)
                         .font(Resources.Fonts.regular(withSize: 13))
+                  }
                     
                     RatingDotsView(number: data.reviews)
                 }
