@@ -15,23 +15,26 @@ struct AdminModerationView: View {
   @StateObject var reviewService = ReviewService()
   @State private var showModerationSheet = false
   @State var passingReviewData : Review = Review.mock
+  @State private var sheetContentHeight = CGFloat(0)
     var body: some View {
       ScrollView(.vertical, showsIndicators: true) {
         reviewsList()
       }
-      .padding([.leading,.trailing], 16)
-      .popup(isPresented: $showModerationSheet, view: {
-        AdminModerationSheetView(reviewData: $passingReviewData).environmentObject(reviewService)
-      }, customize: {
-        $0
-          .type(.toast)
-          .backgroundColor(Color.black.opacity(0.3))
-          .position(.bottom)
-          .closeOnTap(false)
-          .closeOnTapOutside(false)
-          .dragToDismiss(true)
-          .animation(.spring(response: 0.4, blendDuration: 0.2))
+      .sheet(isPresented: $showModerationSheet, content: {
+        AdminModerationSheetView(reviewData: $passingReviewData, presented: $showModerationSheet)
+          .environmentObject(reviewService)
+          .background {
+            GeometryReader { proxy in
+              Color.clear
+                .task {
+                  sheetContentHeight = proxy.size.height
+                }
+            }
+          }
+          .presentationDetents([.height(sheetContentHeight)])
+          .presentationDragIndicator(.visible)
       })
+      .padding([.leading,.trailing], 16)
       .task {
         await reviewService.fetchReviewsForModeration(completion: {
           isLoading = false
@@ -73,20 +76,25 @@ extension AdminModerationView { // MARK: - View components
     if isLoading {
       LazyVStack(alignment: .center, spacing: 10) {
         ForEach(0..<4) { _ in
-          ReviewEmptyView()
+          NYCEmptyView(type: .noReviews)
             .redacted(reason: .placeholder)
             .shimmering(active: true)
         }
       }
     }
     else {
-      LazyVStack(alignment: .center, spacing: 10) {
-        ForEach(reviewService.reviews,id: \.datePosted){ reviewData in
-          ReviewCard(variation: .full, data: reviewData)
-            .onTapGesture {
-              self.passingReviewData = reviewData
-              showModerationSheet.toggle()
-            }
+      if reviewService.reviews.isEmpty {
+        NYCEmptyView(type: .moderationReviews)
+      }
+      else {
+        LazyVStack(alignment: .center, spacing: 10) {
+          ForEach(reviewService.reviews,id: \.datePosted){ reviewData in
+            ReviewCard(variation: .full, data: reviewData)
+              .onTapGesture {
+                self.passingReviewData = reviewData
+                showModerationSheet.toggle()
+              }
+          }
         }
       }
     }

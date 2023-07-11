@@ -46,6 +46,7 @@ struct ReviewCard: View {
                     .foregroundColor(Resources.Colors.customBlack)
                     .font(Resources.Fonts.regular(withSize: 13))
                     .lineLimit(variation == .full ? 20 : 3)
+                    .fixedSize(horizontal: false, vertical: true)
             }
             .frame(maxWidth: .infinity,alignment: .leading)
         }

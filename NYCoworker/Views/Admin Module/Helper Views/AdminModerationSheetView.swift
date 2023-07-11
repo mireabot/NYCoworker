@@ -10,73 +10,53 @@ import SwiftUI
 struct AdminModerationSheetView: View {
   @EnvironmentObject var reviewService: ReviewService
   @Binding var reviewData: Review
+  @Binding var presented: Bool
   var body: some View {
     VStack {
-      GrabberView()
-      VStack {
-        ReviewCard(variation: .full, data: reviewData).padding(.top, 15)
-        
-        HStack {
-          Button {
-            publishReview()
-          } label: {
-            Text("Publish")
-          }
-          .buttonStyle(NYCActionButtonStyle(showLoader: .constant(false)))
-          
-          NYCActionButton(action: {
-            
-          }, text: "Deny",buttonStyle: .system)
-          
+      ReviewCard(variation: .full, data: reviewData).padding(.top, 15)
+      
+      HStack {
+        Button {
+          publishReview(isPositive: true)
+          presented = false
+        } label: {
+          Text("Publish")
         }
+        .buttonStyle(NYCActionButtonStyle(showLoader: .constant(false)))
+        
+        NYCActionButton(action: {
+          publishReview(isPositive: false)
+          presented = false
+        }, text: "Deny",buttonStyle: .system)
+        
       }
-      .padding(.bottom, UIScreen.main.bounds.size.height == 667 ? 10 : 50)
-      .padding([.leading,.trailing], 16)
-      .background(.white)
-      .cornerRadius(16, corners: [.topLeft,.topRight])
     }
+    .padding(.bottom, 20)
+    .padding([.leading,.trailing], 16)
+    .background(.white)
   }
 }
 
 struct AdminModerationSheetView_Previews: PreviewProvider {
   static var previews: some View {
-    AdminModerationSheetView(reviewData: .constant(Review.mock))
+    AdminModerationSheetView(reviewData: .constant(Review.mock), presented: .constant(true))
   }
 }
 
 extension AdminModerationSheetView { // MARK: - Functions
-  func publishReview() {
+  func publishReview(isPositive: Bool) {
     Task {
-      await reviewService.publishReview(locationID: reviewData.locationID, reviewID: reviewData.id ?? "", completion: {
-        sendPushNotification(payloadDict: positiveNotification(userToken: reviewData.userToken))
-      })
-    }
-  }
-  
-  func sendPushNotification(payloadDict: [String: Any]) {
-    let url = URL(string: "https://fcm.googleapis.com/fcm/send")!
-    var request = URLRequest(url: url)
-    request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-    request.setValue("key=\(Resources.messagingKey)", forHTTPHeaderField: "Authorization")
-    request.httpMethod = "POST"
-    request.httpBody = try? JSONSerialization.data(withJSONObject: payloadDict, options: [])
-    let task = URLSession.shared.dataTask(with: request) { data, response, error in
-      guard let data = data, error == nil else {
-        print(error ?? "")
-        return
+      if isPositive {
+        await reviewService.publishReview(locationID: reviewData.locationID, reviewID: reviewData.id ?? "", completion: {
+          reviewService.sendPushNotification(payloadDict: reviewService.positiveNotification(userToken: reviewData.userToken))
+        })
       }
-      if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {
-        print("statusCode should be 200, but is \(httpStatus.statusCode)")
-        print(response ?? "")
+      
+      else {
+        await reviewService.deleteReview(reviewID: reviewData.id ?? "", completion: {
+          reviewService.sendPushNotification(payloadDict: reviewService.negativeNotification(userToken: reviewData.userToken))
+        })
       }
-      print("Notfication sent successfully.")
-      let responseString = String(data: data, encoding: .utf8)
-      print(responseString ?? "")
     }
-    task.resume()
-  }
-  
-  func positiveNotification(userToken: String?) -> [String: Any] {
-    return ["to": "\(userToken ?? Resources.demoToken)","notification": ["title":"Congrats! Your review is live🌐","body":"Thank you for improving our professional community!","sound":"default"] as [String : Any]]
   }
 }

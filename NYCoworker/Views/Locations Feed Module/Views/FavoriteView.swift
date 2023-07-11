@@ -71,13 +71,6 @@ struct FavoriteView_Previews: PreviewProvider {
 
 extension FavoriteView { //MARK: - View components
   @ViewBuilder
-  func emptyState() -> some View {
-    VStack {
-      FavoritesEmptyView()
-    }
-  }
-  
-  @ViewBuilder
   func favoriteList() -> some View {
     VStack {
       if isLoading {
@@ -85,7 +78,7 @@ extension FavoriteView { //MARK: - View components
       }
       else {
         if locationService.favoriteLocations.isEmpty {
-          emptyState()
+          NYCEmptyView(type: .favorites)
         }
         else {
           ScrollView(.vertical, showsIndicators: true) {

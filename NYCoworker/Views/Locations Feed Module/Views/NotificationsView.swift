@@ -58,7 +58,7 @@ extension NotificationsView { //MARK: - View components
     }
     else {
       if notificationService.notifications.isEmpty {
-        emptyView()
+        NYCEmptyView(type: .notifications)
       }
       else {
         ScrollView(.vertical, showsIndicators: true) {
@@ -70,13 +70,6 @@ extension NotificationsView { //MARK: - View components
           .padding(.top, 10)
         }
       }
-    }
-  }
-  
-  @ViewBuilder
-  func emptyView() -> some View {
-    VStack {
-      NotificationsEmptyView()
     }
   }
 }

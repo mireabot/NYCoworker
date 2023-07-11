@@ -32,7 +32,7 @@ struct HomeView: View {
             locationLobbiesCollection()
             
             if isLoading {
-              EmptyPromoBannerView()
+              PromoBannerLoadingView()
             }
             else {
               NYCPromoBanner(bannerType: .summerLocations)

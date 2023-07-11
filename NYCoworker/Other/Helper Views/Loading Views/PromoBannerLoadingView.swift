@@ -8,7 +8,7 @@
 import SwiftUI
 import Shimmer
 
-struct EmptyPromoBannerView: View {
+struct PromoBannerLoadingView: View {
     var body: some View {
       ZStack(alignment: .bottomTrailing) {
         HStack {
@@ -33,6 +33,6 @@ struct EmptyPromoBannerView: View {
 
 struct EmptyPromoBannerView_Previews: PreviewProvider {
     static var previews: some View {
-        EmptyPromoBannerView()
+        PromoBannerLoadingView()
     }
 }

@@ -164,13 +164,13 @@ extension LocationDetailView { //MARK: - View components
         Spacer()
       }
       if isLoading {
-        ReviewEmptyView()
+        NYCEmptyView(type: .noReviews)
           .redacted(reason: .placeholder)
           .shimmering(active: true)
       }
       else {
         if reviewService.reviews.isEmpty {
-          ReviewEmptyView()
+          NYCEmptyView(type: .noReviews)
         }
         else {
           ReviewCard(variation: .small, data: reviewService.reviews[0])
@@ -202,10 +202,16 @@ extension LocationDetailView { //MARK: - View components
         .font(Resources.Fonts.medium(withSize: 15))
         .padding([.leading,.trailing], 16)
       
-      ScrollView(.horizontal, showsIndicators: false) {
-        amenitiesGridView()
+      if locationData.locationAmenities.isEmpty {
+        NYCEmptyView(type: .noAmenities)
           .padding([.leading,.trailing], 16)
-      }.disabled(locationData.locationAmenities.count <= 6)
+      }
+      else {
+        ScrollView(.horizontal, showsIndicators: false) {
+          amenitiesGridView()
+            .padding([.leading,.trailing], 16)
+        }.disabled(locationData.locationAmenities.count <= 6)
+      }
       
       Rectangle()
         .foregroundColor(Resources.Colors.customGrey)
@@ -222,23 +228,29 @@ extension LocationDetailView { //MARK: - View components
         .font(Resources.Fonts.medium(withSize: 15))
         .padding(.leading, 16)
       
-      ScrollView(.horizontal, showsIndicators: false) {
-        HStack(spacing: 5) {
-          ForEach(locationData.locationHours,id: \.self){ item in
-            VStack(spacing: 5) {
-              Text(item.weekDay)
-                .foregroundColor(Resources.Colors.darkGrey)
-                .font(Resources.Fonts.regular(withSize: 15))
-              Text(item.hours)
-                .foregroundColor(Resources.Colors.customBlack)
-                .font(Resources.Fonts.medium(withSize: 15))
+      if locationData.locationHours.isEmpty {
+        NYCEmptyView(type: .noWorkingHours)
+          .padding([.leading,.trailing], 16)
+      }
+      else {
+        ScrollView(.horizontal, showsIndicators: false) {
+          HStack(spacing: 5) {
+            ForEach(locationData.locationHours,id: \.self){ item in
+              VStack(spacing: 5) {
+                Text(item.weekDay)
+                  .foregroundColor(Resources.Colors.darkGrey)
+                  .font(Resources.Fonts.regular(withSize: 15))
+                Text(item.hours)
+                  .foregroundColor(Resources.Colors.customBlack)
+                  .font(Resources.Fonts.medium(withSize: 15))
+              }
+              .padding(10)
+              .background(Resources.Colors.customGrey)
+              .cornerRadius(5)
             }
-            .padding(10)
-            .background(Resources.Colors.customGrey)
-            .cornerRadius(5)
           }
+          .padding([.leading,.trailing], 16)
         }
-        .padding([.leading,.trailing], 16)
       }
       
       Rectangle()
