@@ -34,7 +34,7 @@ struct WriteFeedbackView: View {
         .padding(.top, 10)
         .padding(.leading, 16)
         
-        NYCResizableTextField(message: $message, characterLimit: 300, placeHolder: "How we can improve NYCoworker for you?")
+        NYCResizableTextField(message: $message, characterLimit: 500, placeHolder: "How we can improve NYCoworker for you?")
           .focused($fieldIsFocused)
           .padding([.leading,.trailing], 16)
         

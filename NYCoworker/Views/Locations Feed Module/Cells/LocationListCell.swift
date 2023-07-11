@@ -43,7 +43,7 @@ struct LocationListCell: View {
         HStack(alignment: .center) {
           NYCRateBadge(rate: data.reviews, badgeType: .card)
             .offset(x: 6, y: 6)
-          Spacer()
+          Spacer()  
           Button {
             buttonAction()
           } label: {
@@ -74,8 +74,8 @@ struct LocationListCell: View {
             .font(Resources.Fonts.regular(withSize: 13))
         }
         Spacer()
-        if Resources.userLocation == CLLocation(latitude: 0.0, longitude: 0.0) {
-          Text(String(format: "%.1f", calculateDistance(from: Resources.userLocation, to: data.locationCoordinates)) + " mi · ")
+        if !Resources.locationLocked {
+          Text(String(format: "%.1f", calculateDistance(from: Resources.userLocation, to: data.locationCoordinates)) + " mi")
               .foregroundColor(Resources.Colors.darkGrey)
               .font(Resources.Fonts.regular(withSize: 15))
         }

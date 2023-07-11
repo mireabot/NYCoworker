@@ -17,6 +17,7 @@ import Firebase
 ///    - data: Data about location taken from LocationModel
 ///    - type: Type of cell taken from enum LocationCellType / small or large
 struct LocationCell: View {
+  @StateObject var locationManager = LocationManager()
     enum LocationCellType {
         case small
         case large
@@ -82,7 +83,7 @@ extension LocationCell {
                     .font(Resources.Fonts.regular(withSize: 16))
                     .lineLimit(0)
                 HStack(spacing: 4) {
-                  if Resources.userLocation == CLLocation(latitude: 0.0, longitude: 0.0) {
+                  if !Resources.locationLocked {
                     Text(String(format: "%.1f", calculateDistance(from: Resources.userLocation, to: data.locationCoordinates)) + " mi · ")
                         .foregroundColor(Resources.Colors.darkGrey)
                         .font(Resources.Fonts.regular(withSize: 13))

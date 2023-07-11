@@ -16,6 +16,7 @@ enum Resources {
   static let mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 40.7171577, longitude: -73.9950039), span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02))
   
   static var userLocation : CLLocation = CLLocation(latitude: 0.0, longitude: 0.0)
+  static var locationLocked = false
   
   static var userName : String = ""
   static var userImageUrl: URL = URL(string: "https://firebasestorage.googleapis.com/v0/b/nycoworker-10d04.appspot.com/o/UserImages%2FIMG_0812%202.jpeg?alt=media&token=9c09e090-b4f1-4b40-861b-11910d920632")!

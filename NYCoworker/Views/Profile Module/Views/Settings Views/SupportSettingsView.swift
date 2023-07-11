@@ -40,11 +40,6 @@ struct SupportSettingsView: View {
         })
       }
       .padding([.leading,.trailing], 16)
-      
-      NYCSettingsCard(icon: Resources.Images.Settings.faq, title: "FAQ", action: {})
-        .padding(.top, 50)
-        .padding([.leading,.trailing], 16)
-      
       Spacer()
     }
     .sheet(isPresented: $showWebsite, content: {
