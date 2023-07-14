@@ -64,7 +64,7 @@ extension NYCEmptyView { // MARK: - Views
         Text("Add locations to favorites")
           .foregroundColor(Resources.Colors.customBlack)
           .font(Resources.Fonts.medium(withSize: 20))
-        Text("Once you add any locations to favorites, you can see it here")
+        Text("Once you add any locations to favorites, you can see them here")
           .foregroundColor(Resources.Colors.darkGrey)
           .multilineTextAlignment(.center)
           .font(Resources.Fonts.regular(withSize: 17))

@@ -7,6 +7,7 @@
 
 import Foundation
 
+@MainActor
 final class NavigationDestinations : ObservableObject {
   @Published var isPresentingFavourites: Bool = false
   @Published var isPresentingNotifications: Bool = false

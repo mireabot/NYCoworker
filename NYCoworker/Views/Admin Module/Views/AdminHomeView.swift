@@ -16,9 +16,11 @@ struct AdminHomeView: View {
             AdminButtonCard(type: .manageLocations)
           }
           
-          AdminButtonCard(type: .sendNotifications)
-          
           NavigationLink(destination: AdminNotificationView()) {
+            AdminButtonCard(type: .sendNotifications)
+          }
+          
+          NavigationLink(destination: AdminReviewsView()) {
             AdminButtonCard(type: .createReview)
           }
           

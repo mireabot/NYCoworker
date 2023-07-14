@@ -86,5 +86,18 @@ class LocationService: ObservableObject {
     print("DEBUG: \(firestoreError(forError: error))")
     errorMessage = firestoreError(forError: error)
   }
+  
+  func fetchFavoritesLocationsNew(completion: @escaping () -> Void) {
+    db.collection("AppConfig").addSnapshotListener { (querySnapshot, error) in
+      guard let documents = querySnapshot?.documents else {
+        print("No documents")
+        return
+      }
+      
+      self.favoriteLocations = documents.compactMap { queryDocumentSnapshot -> Location? in
+        return try? queryDocumentSnapshot.data(as: Location.self)
+      }
+    }
+  }
 }
 

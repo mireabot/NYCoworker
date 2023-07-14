@@ -44,18 +44,6 @@ struct FavoriteView: View {
             .foregroundColor(Resources.Colors.customBlack)
             .font(Resources.Fonts.medium(withSize: 17))
         }
-        
-        ToolbarItem(placement: .navigationBarTrailing) {
-          Button {
-            Task {
-              await extractedFunc()
-            }
-          } label: {
-            Resources.Images.Navigation.refresh
-              .foregroundColor(Resources.Colors.primary)
-          }
-          
-        }
       })
       .navigationBarTitleDisplayMode(.inline)
       .navigationBarBackButtonHidden()
@@ -117,7 +105,7 @@ extension FavoriteView { //MARK: - Functions
   fileprivate func extractedFunc() async {
     isLoading = true
     locationService.favoriteLocations = []
-    await userService.fetchUser(documentId: userId, completion: {
+    userService.fetchUser(documentId: userId, completion: {
       Task(priority: .userInitiated) {
         await locationService.fetchFavoriteLocations(for: userService.user) {
           DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {

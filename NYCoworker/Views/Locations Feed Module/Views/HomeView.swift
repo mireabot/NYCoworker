@@ -13,6 +13,7 @@ struct HomeView: View {
   @State var isLoading = true
   @StateObject var locationManager = LocationManager()
   @StateObject private var locationService = LocationService()
+  @StateObject private var notificationService = NotificationService()
   @EnvironmentObject var userService : UserService
   @EnvironmentObject var navigationState: NavigationDestinations
   @AppStorage("UserID") var userId : String = ""
@@ -78,7 +79,7 @@ struct HomeView: View {
         FavoriteView().environmentObject(userService).environmentObject(navigationState)
       })
       .navigationDestination(isPresented: $navigationState.isPresentingNotifications, destination: {
-        NotificationsView().environmentObject(navigationState)
+        NotificationsView().environmentObject(navigationState).environmentObject(notificationService)
       })
       .task {
         guard locationService.locations.isEmpty else { return }
@@ -88,6 +89,10 @@ struct HomeView: View {
         }) { err in
           locationService.setError(err)
         }
+        guard notificationService.notifications.isEmpty else { return }
+        await notificationService.fetchNotifications(completion: {
+          print("Notifications fetched")
+        })
       }
       .toolbar {
         ToolbarItem(placement: .navigationBarLeading) {
@@ -101,7 +106,7 @@ struct HomeView: View {
         }
         
         ToolbarItem(placement: .primaryAction) {
-          NYCCircleImageButton(size: 20, image: Resources.Images.Settings.notifications) { showNotifications() }
+          NYCCircleImageButton(size: 20, image: Resources.Images.Settings.notifications, showBadge: !notificationService.notifications.isEmpty) { showNotifications() }
         }
       }
       .fullScreenCover(isPresented: $navigationState.isPresentingMap, content: {
@@ -110,6 +115,7 @@ struct HomeView: View {
       .navigationBarTitleDisplayMode(.inline)
       .toolbarBackground(.white, for: .navigationBar)
     }
+    .disabled(isLoading)
     .applyNavigationTransition()
   }
 }

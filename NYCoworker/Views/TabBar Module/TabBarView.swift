@@ -41,11 +41,11 @@ struct TabBarView: View {
     }
     .task {
       guard userService.user.userID.isEmpty else { return }
-      await userService.fetchUser(documentId: userId, completion: {
+      userService.fetchUser(documentId: userId) {
         print("User fetched")
         Resources.userName = userService.user.name
         Resources.userImageUrl = userService.user.avatarURL
-      })
+      }
     }
     .accentColor(Resources.Colors.primary)
     .onAppear() {

@@ -9,8 +9,8 @@ import SwiftUI
 import PopupView
 
 struct NotificationsView: View {
-  @State var isLoading = true
-  @StateObject var notificationService = NotificationService()
+  @State var isLoading = false
+  @EnvironmentObject var notificationService : NotificationService
   @EnvironmentObject var navigationState: NavigationDestinations
   var body: some View {
     notificationsList()
@@ -22,7 +22,6 @@ struct NotificationsView: View {
             Resources.Images.Navigation.arrowBack
               .foregroundColor(Resources.Colors.primary)
           }
-          
         }
         
         ToolbarItem(placement: .navigationBarLeading) {
@@ -31,14 +30,6 @@ struct NotificationsView: View {
             .font(Resources.Fonts.medium(withSize: 17))
         }
       })
-      .task {
-        guard notificationService.notifications.isEmpty else { return }
-        await notificationService.fetchNotifications(completion: {
-          DispatchQueue.main.async {
-            isLoading = false
-          }
-        })
-      }
       .navigationBarBackButtonHidden()
       .toolbarBackground(.white, for: .navigationBar)
   }
