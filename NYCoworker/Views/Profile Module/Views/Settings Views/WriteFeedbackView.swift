@@ -43,16 +43,23 @@ struct WriteFeedbackView: View {
         fieldIsFocused = false
       }
       .popup(isPresented: $showAlert) {
-        NYCAlertNotificationView(alertStyle: .feedbackSent)
+        NYCMiddleAlertView(alertType: .feedbackSubmitted) {
+          withAnimation(.spring()) {
+            showAlert.toggle()
+          }
+        }
       } customize: {
         $0
           .isOpaque(true)
-          .autohideIn(1.5)
-          .type(.floater())
-          .position(.top)
+          .backgroundColor(Color.black.opacity(0.3))
+          .closeOnTap(false)
+          .closeOnTapOutside(false)
           .animation(.spring(response: 0.4, blendDuration: 0.2))
           .dismissCallback {
-            message = ""
+            DispatchQueue.main.async {
+              message = ""
+              makeDismiss()
+            }
           }
       }
       .scrollDisabled(true)
@@ -61,7 +68,7 @@ struct WriteFeedbackView: View {
           showLoading = true
           fieldIsFocused = false
           Task {
-            await userService.createFeedback(withID: userId, withMessage: message, completion: {
+            await userService.createFeedback(withID: userId, withMessage: message, reportType: "", locationID: "", completion: {
               DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                 showLoading = false
                 showAlert.toggle()

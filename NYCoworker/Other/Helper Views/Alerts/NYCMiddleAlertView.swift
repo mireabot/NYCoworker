@@ -51,12 +51,16 @@ extension NYCMiddleAlertView { // MARK: - Enums
     case reviewUnderReview
     case notificationsRejected
     case geolocationRejected
+    case feedbackSubmitted
+    case suggestionSubmitted
     
     var title: String {
       switch self {
       case .reviewUnderReview: return "We're reviewing your submission"
       case .notificationsRejected: return "You will not receive notifications"
       case .geolocationRejected: return "Location Services Denied"
+      case .feedbackSubmitted: return "Thanks for sharing!"
+      case .suggestionSubmitted: return "Thanks for sharing!"
       }
     }
     
@@ -65,6 +69,8 @@ extension NYCMiddleAlertView { // MARK: - Enums
       case .reviewUnderReview: return "Thanks for sharing your opinion! Our team'll review it in 1-2 days and send a push when it goes live."
       case .notificationsRejected: return "No worries! Enable notifications in settings if you change your mind."
       case .geolocationRejected: return "No worries! You won't see distance from locations unless you turn location services in settings."
+      case .feedbackSubmitted: return "Hearing from you helps us to create the best NYCoworker experience."
+      case .suggestionSubmitted: return "Hearing from you helps us to create the best NYCoworker experience."
       }
     }
   }

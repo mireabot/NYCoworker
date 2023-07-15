@@ -44,10 +44,14 @@ struct LocationDetailView: View {
           reviews()
           amenities()
           workingHours()
+          suggestInfo().padding(.bottom, 15)
         }
         .padding(.top, 15)
       }
     }
+    .fullScreenCover(isPresented: $reportEdit, content: {
+      SuggestInformationView(locationID: locationData.locationID)
+    })
     .fullScreenCover(isPresented: $navigationState.isPresentingReviewSubmission, content: {
       AddReviewView(locationData: locationData).environmentObject(navigationState)
     })
@@ -280,6 +284,7 @@ extension LocationDetailView { //MARK: - View components
             .foregroundColor(Resources.Colors.primary)
             .font(Resources.Fonts.medium(withSize: 15))
         }
+        .underline(true, pattern: .solid)
       }
       
     }

@@ -57,15 +57,15 @@ class UserService: ObservableObject {
   ///- Parameters:
   ///   - userID: User's ID who sent feedback
   ///   - message: Text of feedback
-  func createFeedback(withID userID: String, withMessage message: String, completion: @escaping () -> Void, errorCompletion: @escaping (Error) -> Void) async {
+  func createFeedback(withID userID: String, withMessage message: String, reportType: String?, locationID: String?, completion: @escaping () -> Void, errorCompletion: @escaping (Error) -> Void) async {
     do {
       try await db.collection(Endpoints.feedback.rawValue).document().setData([
         "feedbackID": randomString(length: 5),
         "userID": userID,
         "message": message,
         "datePosted": Date(),
-        "reportType": "",
-        "locationID": ""
+        "reportType": reportType ?? "",
+        "locationID": locationID ?? ""
       ])
       completion()
     }
