@@ -10,10 +10,12 @@ import FirebaseFirestoreSwift
 import Firebase
 
 struct User: Codable {
-    var userID: String
-    var avatarURL: URL
-    var name: String
-    var occupation: String
-    var favoriteLocations: [String]
+  var userID: String
+  var avatarURL: URL
+  var name: String
+  var occupation: String
+  var favoriteLocations: [String]
   var token: String
+  
+  static let mock = User(userID: "", avatarURL: URL(string: "f")!, name: "", occupation: "", favoriteLocations: [], token: "")
 }

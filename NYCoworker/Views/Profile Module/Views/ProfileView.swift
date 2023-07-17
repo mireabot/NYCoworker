@@ -10,12 +10,13 @@ import Shimmer
 import SDWebImageSwiftUI
 
 struct ProfileView: View {
+  @EnvironmentObject var navigationFlow: ProfileModuleNavigationFlow
   @State var showPopup = false
   @AppStorage("UserID") var userId : String = ""
   @StateObject var userService = UserService()
   @State private var sheetContentHeight = CGFloat(0)
   var body: some View {
-    NavigationStack {
+    NavigationStack(path: $navigationFlow.path) {
       VStack {
         VStack {
           profileHeader()
@@ -30,8 +31,7 @@ struct ProfileView: View {
         guard userService.user.userID.isEmpty else { return }
         await userService.fetchUser(documentId: userId) {
           print("User fetched")
-          Resources.userName = userService.user.name
-          Resources.userImageUrl = userService.user.avatarURL
+          navigationFlow.currentUser = userService.user
         }
       }
       .sheet(isPresented: $showPopup) {
@@ -48,9 +48,9 @@ struct ProfileView: View {
           .presentationDragIndicator(.visible)
       }
       .applyNavigationTransition()
-      .navigationDestination(for: SettingsModel.self, destination: { settingsData in
-        SettingsView(title: settingsData.title).environmentObject(userService)
-      })
+      .navigationDestination(for: ProfileModuleNavigationDestinations.self) { destination in
+        ProfileModuleNavigationFactory.setViewForDestination(destination)
+      }
       .toolbar {
         ToolbarItem(placement: .navigationBarLeading) {
           NYCHeader(title: "Profile")
@@ -64,7 +64,7 @@ extension ProfileView { //MARK: - Profile components
   @ViewBuilder
   func profileHeader()-> some View {
     VStack(alignment: .center, spacing: 5) {
-      WebImage(url: userService.user.avatarURL).placeholder {
+      WebImage(url: navigationFlow.currentUser.avatarURL).placeholder {
         Image("emptyImage")
           .resizable()
       }
@@ -73,7 +73,7 @@ extension ProfileView { //MARK: - Profile components
       .frame(width: 100, height: 100)
       .clipShape(Circle())
       
-      Text(userService.user.name)
+      Text(navigationFlow.currentUser.name)
         .foregroundColor(Resources.Colors.customBlack)
         .font(Resources.Fonts.medium(withSize: 20))
       Text("Coworker from 2023")
@@ -89,12 +89,13 @@ extension ProfileView { //MARK: - Profile components
         .foregroundColor(Resources.Colors.customBlack)
         .font(Resources.Fonts.regular(withSize: 16))
       
-      ForEach(settigsData, id: \.title) { data in
-        VStack {
-          NavigationLink(value: data) {
-            SettingsCard(data: data)
-          }
-        }
+      VStack {
+        NYCSettingsCard(type: .manageAccount, action: {
+          navigationFlow.navigateToAccountEditView()
+        })
+        NYCSettingsCard(type: .help, action: {
+          navigationFlow.navigateToSupportView()
+        })
       }
     }
     .padding([.leading,.trailing], 16)

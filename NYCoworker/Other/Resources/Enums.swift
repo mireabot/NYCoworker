@@ -127,3 +127,42 @@ enum BottomViewContent {
     }
   }
 }
+
+//MARK: - Settings Card data enum
+enum SettingsData {
+  case manageAccount
+  case help
+  case visitWebsite
+  case rateApp
+  case writeFeedback
+  
+  var icon: Image {
+    switch self {
+    case .manageAccount:
+      return Resources.Images.Settings.manageAccount
+    case .help:
+      return Resources.Images.Settings.help
+    case .visitWebsite:
+      return Resources.Images.Settings.website
+    case .rateApp:
+      return Resources.Images.Settings.rate
+    case .writeFeedback:
+      return Resources.Images.Settings.manageAccount
+    }
+  }
+  
+  var title: String {
+    switch self {
+    case .manageAccount:
+      return Strings.Settings.manageAccount
+    case .help:
+      return Strings.Settings.helpSupport
+    case .visitWebsite:
+      return Strings.Settings.visitWebsite
+    case .rateApp:
+      return Strings.Settings.rateApp
+    case .writeFeedback:
+      return Strings.Settings.writeFeedback
+    }
+  }
+}

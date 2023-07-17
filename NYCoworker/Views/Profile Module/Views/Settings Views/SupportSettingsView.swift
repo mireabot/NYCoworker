@@ -9,8 +9,8 @@ import SwiftUI
 import StoreKit
 
 struct SupportSettingsView: View {
+  @EnvironmentObject var navigationFlow: ProfileModuleNavigationFlow
   @Environment(\.requestReview) var requestReview
-  @State private var showFeedback = false
   @State private var showWebsite = false
   var body: some View {
     VStack {
@@ -27,15 +27,15 @@ struct SupportSettingsView: View {
       .padding(.bottom, 20)
       
       VStack(spacing: 10) {
-        NYCSettingsCard(icon: Resources.Images.Settings.manageAccount, title: "Write feedback", action: {
+        NYCSettingsCard(type: .writeFeedback, action: {
           AnalyticsManager.shared.log(.feedbackOpened)
-          showFeedback.toggle()
+          navigationFlow.navigateToFeedbackView()
         })
-        NYCSettingsCard(icon: Resources.Images.Settings.website, title: "Visit website", action: {
+        NYCSettingsCard(type: .visitWebsite, action: {
           AnalyticsManager.shared.log(.websiteOpened)
           showWebsite.toggle()
         })
-        NYCSettingsCard(icon: Resources.Images.Settings.rate, title: "Rate app", action: {
+        NYCSettingsCard(type: .rateApp, action: {
           requestReview()
         })
       }
@@ -45,9 +45,24 @@ struct SupportSettingsView: View {
     .sheet(isPresented: $showWebsite, content: {
       SafariView(url: .constant(Resources.websiteURL))
     })
-    .fullScreenCover(isPresented: $showFeedback) {
-      WriteFeedbackView()
-    }
+    .toolbar(content: {
+        ToolbarItem(placement: .navigationBarLeading) {
+            Button {
+              navigationFlow.backToPrevious()
+            } label: {
+                Resources.Images.Navigation.arrowBack
+                    .foregroundColor(Resources.Colors.primary)
+            }
+        }
+        
+        ToolbarItem(placement: .navigationBarLeading) {
+          Text(Strings.Settings.helpSupport)
+                .foregroundColor(Resources.Colors.customBlack)
+                .font(Resources.Fonts.medium(withSize: 17))
+        }
+    })
+    .navigationBarBackButtonHidden()
+    .toolbarBackground(.white, for: .navigationBar)
   }
 }
 

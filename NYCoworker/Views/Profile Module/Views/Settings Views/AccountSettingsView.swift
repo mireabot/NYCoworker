@@ -11,6 +11,7 @@ import SDWebImageSwiftUI
 import PopupView
 
 struct AccountSettingsView: View {
+  @EnvironmentObject var navigationFlow: ProfileModuleNavigationFlow
     @State var nameText: String = ""
     @State var occupationText: String = ""
     enum Field: Hashable {
@@ -20,12 +21,11 @@ struct AccountSettingsView: View {
     @FocusState private var focusedField: Field?
     @State private var isLoading = false
     @State var showAlert = false
-    @EnvironmentObject var userService : UserService
     @AppStorage("UserID") var userId : String = ""
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack {
-                WebImage(url: userService.user.avatarURL).placeholder {
+              WebImage(url: navigationFlow.currentUser.avatarURL).placeholder {
                     Image("emptyImage")
                         .resizable()
                 }
@@ -45,6 +45,24 @@ struct AccountSettingsView: View {
             }.padding([.leading,.trailing], 16)
             
         }
+        .toolbar(content: {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button {
+                  navigationFlow.backToPrevious()
+                } label: {
+                    Resources.Images.Navigation.arrowBack
+                        .foregroundColor(Resources.Colors.primary)
+                }
+            }
+            
+            ToolbarItem(placement: .navigationBarLeading) {
+              Text(Strings.Settings.manageAccount)
+                    .foregroundColor(Resources.Colors.customBlack)
+                    .font(Resources.Fonts.medium(withSize: 17))
+            }
+        })
+        .navigationBarBackButtonHidden()
+        .toolbarBackground(.white, for: .navigationBar)
         .popup(isPresented: $showAlert) {
             NYCAlertNotificationView(alertStyle: .dataUploaded)
         } customize: {
@@ -71,15 +89,15 @@ struct AccountSettingsView: View {
             } label: {
                 Text("Save")
             }
-            .disabled(nameText == userService.user.name || nameText.isEmpty)
+            .disabled(nameText == navigationFlow.currentUser.name || nameText.isEmpty)
             .buttonStyle(NYCActionButtonStyle(showLoader: $isLoading))
             .padding(.bottom, 15)
             .padding([.leading,.trailing], 16)
             
         })
         .onAppear {
-            nameText = userService.user.name
-            occupationText = userService.user.occupation
+            nameText = navigationFlow.currentUser.name
+            occupationText = navigationFlow.currentUser.occupation
         }
     }
 }

@@ -24,6 +24,7 @@ struct TabBarView: View {
         Label("Coworkers", image: "social")
       }
       ProfileView()
+        .environmentObject(ProfileModuleNavigationFlow.shared)
         .tabItem {
           Label("Profile", image: "profile")
         }
