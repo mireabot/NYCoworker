@@ -9,15 +9,14 @@ import SwiftUI
 import PopupView
 
 struct NotificationsView: View {
+  @EnvironmentObject var navigationFlow: LocationModuleNavigationFlow
   @State var isLoading = false
-  @EnvironmentObject var notificationService : NotificationService
-  @EnvironmentObject var navigationState: NavigationDestinations
   var body: some View {
     notificationsList()
       .toolbar(content: {
         ToolbarItem(placement: .navigationBarLeading) {
           Button {
-            dismiss()
+            navigationFlow.backToPrevious()
           } label: {
             Resources.Images.Navigation.arrowBack
               .foregroundColor(Resources.Colors.primary)
@@ -48,13 +47,13 @@ extension NotificationsView { //MARK: - View components
       ProgressView()
     }
     else {
-      if notificationService.notifications.isEmpty {
+      if navigationFlow.setOfNotifications.isEmpty {
         NYCEmptyView(type: .notifications)
       }
       else {
         ScrollView(.vertical, showsIndicators: true) {
           LazyVStack(spacing: 10) {
-            ForEach(notificationService.notifications, id: \.datePosted) { item in
+            ForEach(navigationFlow.setOfNotifications, id: \.datePosted) { item in
               NotificationCard(data: item)
             }
           }
@@ -62,11 +61,5 @@ extension NotificationsView { //MARK: - View components
         }
       }
     }
-  }
-}
-
-extension NotificationsView { //MARK: - Functions
-  func dismiss() {
-    navigationState.isPresentingNotifications = false
   }
 }

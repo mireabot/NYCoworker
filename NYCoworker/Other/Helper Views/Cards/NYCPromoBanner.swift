@@ -13,6 +13,7 @@ enum BannerType {
 
 struct NYCPromoBanner: View {
   var bannerType: BannerType
+  var action: () -> Void
   var body: some View {
     switch bannerType {
     case .summerLocations:
@@ -29,7 +30,9 @@ struct NYCPromoBanner: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .font(Resources.Fonts.medium(withSize: 17))
             .foregroundColor(.white)
-          NavigationLink(value: Locations.cafe) {
+          Button {
+            action()
+          } label: {
             HStack(spacing: 3) {
               Text("Explore")
                 .foregroundColor(Resources.Colors.customBlack)
@@ -61,6 +64,6 @@ struct NYCPromoBanner: View {
 
 struct NYCPromoBanner_Previews: PreviewProvider {
   static var previews: some View {
-    NYCPromoBanner(bannerType: .summerLocations)
+    NYCPromoBanner(bannerType: .summerLocations, action: {})
   }
 }

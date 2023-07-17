@@ -12,19 +12,18 @@ import SDWebImageSwiftUI
 import Shimmer
 
 struct LocationDetailView: View {
-  @Environment(\.dismiss) var makeDismiss
+  @EnvironmentObject var navigationFlow: LocationModuleNavigationFlow
   @AppStorage("UserID") var userId : String = ""
   @State var currentImage: Int = 0
   @State var addToFavs = false
+  @State var addReviewView = false
   @State var showReviewList = false
   @State var showUpdatesList = false
   @State var reportEdit = false
   @State var isLoading = true
   @StateObject private var reviewService = ReviewService()
   @StateObject private var locationService = LocationService()
-  @EnvironmentObject var navigationState: NavigationDestinations
   @State private var sheetContentHeight = CGFloat(0)
-  var locationData : Location
   var body: some View {
     ScrollView(.vertical, showsIndicators: true) {
       LazyVStack(spacing: -4) {
@@ -32,7 +31,7 @@ struct LocationDetailView: View {
           let offset = proxy.frame(in: .global).minY
           
           AnyView(
-            NYCImageCarousel(imageUrls: locationData.locationImages)
+            NYCImageCarousel(imageUrls: navigationFlow.selectedLocation.locationImages)
               .frame(width: UIScreen.main.bounds.width, height: 200 + (offset > 0 ? offset : 0))
               .offset(y: (offset > 0 ? -offset : 0))
           )
@@ -50,10 +49,10 @@ struct LocationDetailView: View {
       }
     }
     .fullScreenCover(isPresented: $reportEdit, content: {
-      SuggestInformationView(locationID: locationData.locationID)
+      SuggestInformationView(locationID: navigationFlow.selectedLocation.locationID, isPresented: $reportEdit)
     })
-    .fullScreenCover(isPresented: $navigationState.isPresentingReviewSubmission, content: {
-      AddReviewView(locationData: locationData).environmentObject(navigationState)
+    .fullScreenCover(isPresented: $addReviewView, content: {
+      AddReviewView(isPresented: $addReviewView, locationData: navigationFlow.selectedLocation)
     })
     .sheet(isPresented: $showReviewList, content: {
       ExpandedReviewView(type: .fullList)
@@ -62,7 +61,7 @@ struct LocationDetailView: View {
         .presentationDragIndicator(.visible)
     })
     .sheet(isPresented: $showUpdatesList, content: {
-      InstructionsExpandedView(locationData: locationData)
+      InstructionsExpandedView(locationData: navigationFlow.selectedLocation)
         .presentationDetents([.fraction(0.95)])
         .presentationDragIndicator(.visible)
     })
@@ -70,9 +69,9 @@ struct LocationDetailView: View {
     .navigationBarBackButtonHidden()
     .navigationBarTitleDisplayMode(.inline)
     .task {
-      AnalyticsManager.shared.log(.locationSelected(locationData.locationID))
+      AnalyticsManager.shared.log(.locationSelected(navigationFlow.selectedLocation.locationID))
       guard reviewService.reviews.isEmpty else { return }
-      await reviewService.fetchReviews(locationID: "\(locationData.locationID)", completion: {
+      await reviewService.fetchReviews(locationID: "\(navigationFlow.selectedLocation.locationID)", completion: {
         DispatchQueue.main.async {
           isLoading = false
         }
@@ -81,14 +80,14 @@ struct LocationDetailView: View {
     .toolbar {
       ToolbarItem(placement: .navigationBarLeading) {
         NYCCircleImageButton(size: 24, image: Resources.Images.Navigation.arrowBack) {
-          makeDismiss()
+          navigationFlow.backToPrevious()
         }
       }
       ToolbarItem(placement: .navigationBarTrailing) {
         NYCCircleImageButton(size: 24, image: Resources.Images.Settings.rate) {
           Task {
-            await locationService.addFavoriteLocation(locationID: locationData.locationID, userID: userId, completion: {
-              AnalyticsManager.shared.log(.locationAddedToFavs(locationData.locationID))
+            await locationService.addFavoriteLocation(locationID: navigationFlow.selectedLocation.locationID, userID: userId, completion: {
+              AnalyticsManager.shared.log(.locationAddedToFavs(navigationFlow.selectedLocation.locationID))
               addToFavs.toggle()
             }) { err in
               locationService.setError(err)
@@ -112,7 +111,7 @@ struct LocationDetailView: View {
 
 struct LocationDetailView_Previews: PreviewProvider {
   static var previews: some View {
-    LocationDetailView(locationData: Location.mock).environmentObject(NavigationDestinations())
+    LocationDetailView().environmentObject(NavigationDestinations())
   }
 }
 
@@ -123,19 +122,19 @@ extension LocationDetailView { //MARK: - View components
     VStack {
       HStack {
         VStack(alignment: .leading, spacing: 5) {
-          Text(locationData.locationName)
+          Text(navigationFlow.selectedLocation.locationName)
             .foregroundColor(Resources.Colors.customBlack)
             .font(Resources.Fonts.medium(withSize: 22))
           HStack(spacing: 1) {
             LocationR.General.pin
               .resizable()
               .frame(width: 18,height: 18)
-            Text(locationData.locationAddress)
+            Text(navigationFlow.selectedLocation.locationAddress)
               .foregroundColor(Resources.Colors.darkGrey)
               .font(Resources.Fonts.regular(withSize: 13))
           }
           HStack(spacing: 3) {
-            ForEach(locationData.locationTags,id: \.self) { title in
+            ForEach(navigationFlow.selectedLocation.locationTags,id: \.self) { title in
               NYCBadgeView(badgeType: .withWord, title: title)
             }
           }
@@ -144,12 +143,12 @@ extension LocationDetailView { //MARK: - View components
         Spacer()
         
         NYCCircleImageButton(size: 24, image: Resources.Images.Navigation.openMap) {
-          AnalyticsManager.shared.log(.routeButtonPressed(locationData.locationID))
-          openInAppleMaps(address: locationData.locationAddress, withName: locationData.locationName)
+          AnalyticsManager.shared.log(.routeButtonPressed(navigationFlow.selectedLocation.locationID))
+          openInAppleMaps(address: navigationFlow.selectedLocation.locationAddress, withName: navigationFlow.selectedLocation.locationName)
         }
       }
       
-      InstructionsView(firstTabPressed: $showUpdatesList, secondTabPressed: $showReviewList, locationData: locationData)
+      InstructionsView(firstTabPressed: $showUpdatesList, secondTabPressed: $showReviewList, locationData: navigationFlow.selectedLocation)
       
       Rectangle()
         .foregroundColor(Resources.Colors.customGrey)
@@ -206,7 +205,7 @@ extension LocationDetailView { //MARK: - View components
         .font(Resources.Fonts.medium(withSize: 15))
         .padding([.leading,.trailing], 16)
       
-      if locationData.locationAmenities.isEmpty {
+      if navigationFlow.selectedLocation.locationAmenities.isEmpty {
         NYCEmptyView(type: .noAmenities)
           .padding([.leading,.trailing], 16)
       }
@@ -214,7 +213,7 @@ extension LocationDetailView { //MARK: - View components
         ScrollView(.horizontal, showsIndicators: false) {
           amenitiesGridView()
             .padding([.leading,.trailing], 16)
-        }.disabled(locationData.locationAmenities.count <= 6)
+        }.disabled(navigationFlow.selectedLocation.locationAmenities.count <= 6)
       }
       
       Rectangle()
@@ -232,14 +231,14 @@ extension LocationDetailView { //MARK: - View components
         .font(Resources.Fonts.medium(withSize: 15))
         .padding(.leading, 16)
       
-      if locationData.locationHours.isEmpty {
+      if navigationFlow.selectedLocation.locationHours.isEmpty {
         NYCEmptyView(type: .noWorkingHours)
           .padding([.leading,.trailing], 16)
       }
       else {
         ScrollView(.horizontal, showsIndicators: false) {
           HStack(spacing: 5) {
-            ForEach(locationData.locationHours,id: \.self){ item in
+            ForEach(navigationFlow.selectedLocation.locationHours,id: \.self){ item in
               VStack(spacing: 5) {
                 Text(item.weekDay)
                   .foregroundColor(Resources.Colors.darkGrey)
@@ -299,7 +298,7 @@ extension LocationDetailView { //MARK: - View components
     ]
     
     LazyHGrid(rows: rows, alignment: .center, spacing: 10) {
-      ForEach(locationData.locationAmenities,id: \.self) { item in
+      ForEach(navigationFlow.selectedLocation.locationAmenities,id: \.self) { item in
         HStack(alignment: .center, spacing: 5) {
           amenitiesImage(image: item)
             .foregroundColor(Resources.Colors.customBlack)
@@ -348,7 +347,7 @@ extension LocationDetailView { //MARK: - Functions
   }
   
   func showReviewSubmission() {
-    AnalyticsManager.shared.log(.reviewOpened(locationData.locationID))
-    navigationState.isPresentingReviewSubmission = true
+    AnalyticsManager.shared.log(.reviewOpened(navigationFlow.selectedLocation.locationID))
+    addReviewView.toggle()
   }
 }

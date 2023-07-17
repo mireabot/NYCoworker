@@ -9,8 +9,8 @@ import SwiftUI
 import PopupView
 
 struct SuggestInformationView: View {
-  @Environment(\.dismiss) var makeDismiss
   var locationID: String?
+  @Binding var isPresented: Bool
   @State var message = ""
   @State private var topic = ""
   @StateObject private var userService = UserService()
@@ -62,10 +62,10 @@ struct SuggestInformationView: View {
           .closeOnTapOutside(false)
           .animation(.spring(response: 0.4, blendDuration: 0.2))
           .dismissCallback {
-            DispatchQueue.main.async {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
               message = ""
               topic = ""
-              makeDismiss()
+              isPresented = false
             }
           }
       }
@@ -100,7 +100,7 @@ struct SuggestInformationView: View {
       .toolbar {
         ToolbarItem(placement: .navigationBarLeading) {
           NYCCircleImageButton(size: 18, image: Resources.Images.Navigation.close) {
-            makeDismiss()
+            isPresented = false
           }
         }
       }
@@ -110,6 +110,6 @@ struct SuggestInformationView: View {
 
 struct SuggestInformationView_Previews: PreviewProvider {
   static var previews: some View {
-    SuggestInformationView(locationID: "")
+    SuggestInformationView(locationID: "", isPresented: .constant(false))
   }
 }

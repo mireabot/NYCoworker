@@ -9,30 +9,13 @@ import SwiftUI
 import PopupView
 
 struct LocationListView: View {
-  @Environment(\.dismiss) var makeDismiss
-  @EnvironmentObject var locationService: LocationService
+  @EnvironmentObject var navigationFlow: LocationModuleNavigationFlow
+  @StateObject private var locationService = LocationService()
   @State var addToFavs = false
-  var locationType: Locations
-  var publicSpacesLocation: [Location] { return locationService.locations.filter( {$0.locationType == .publicSpace}) }
-  var librariesLocations: [Location] { return locationService.locations.filter( { $0.locationType == .library }) }
-  var hotelLocations: [Location] { return locationService.locations.filter( { $0.locationType == .hotel }) }
-  var cafeLocations: [Location] { return locationService.locations.filter( { $0.locationType == .cafe }) }
   @AppStorage("UserID") var userId : String = ""
-  init(type: Locations) {
-    self.locationType = type
-  }
   var body: some View {
     ScrollView(.vertical, showsIndicators: true) {
-      switch locationType {
-      case .libraries:
-        libraryLocations()
-      case .lobbies:
-        hotelsLocations()
-      case .publicSpaces:
-        publicSpacesLocations()
-      case .cafe:
-        cafesLocations()
-      }
+      locationsList()
     }
     .padding([.leading,.trailing], 16)
     .popup(isPresented: $addToFavs) {
@@ -49,7 +32,7 @@ struct LocationListView: View {
     .toolbar {
       ToolbarItem(placement: .navigationBarLeading) {
         Button {
-          makeDismiss()
+          navigationFlow.backToPrevious()
         } label: {
           Resources.Images.Navigation.arrowBack
             .foregroundColor(Resources.Colors.primary)
@@ -58,7 +41,7 @@ struct LocationListView: View {
       }
       
       ToolbarItem(placement: .navigationBarLeading) {
-        Text(locationType.headerTitle)
+        Text(navigationFlow.selectedListTitle)
           .foregroundColor(Resources.Colors.customBlack)
           .font(Resources.Fonts.medium(withSize: 17))
       }
@@ -76,84 +59,23 @@ struct LocationListView: View {
 
 extension LocationListView { //MARK: - View components
   @ViewBuilder
-  func hotelsLocations() -> some View {
+  func locationsList() -> some View {
     LazyVStack(spacing: 12) {
-      ForEach(hotelLocations){ location in
-        NavigationLink(value: location) {
-          LocationListCell(type: .list, data: location) {
-            Task {
-              do {
-                await locationService.addFavoriteLocation(locationID: location.locationID, userID: userId, completion: {
-                  addToFavs.toggle()
-                }) { err in
-                  print(err.localizedDescription)
-                }
+      ForEach(navigationFlow.selectedSetOfLocations){ location in
+        LocationListCell(type: .list, data: location) {
+          Task {
+            do {
+              await locationService.addFavoriteLocation(locationID: location.locationID, userID: userId, completion: {
+                addToFavs.toggle()
+              }) { err in
+                print(err.localizedDescription)
               }
             }
           }
         }
-      }
-    }
-  }
-  
-  @ViewBuilder
-  func libraryLocations() -> some View {
-    LazyVStack(spacing: 12) {
-      ForEach(librariesLocations){ location in
-        NavigationLink(value: location) {
-          LocationListCell(type: .list, data: location) {
-            Task {
-              do {
-                await locationService.addFavoriteLocation(locationID: location.locationID, userID: userId, completion: {
-                  addToFavs.toggle()
-                }) { err in
-                  print(err.localizedDescription)
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-  
-  @ViewBuilder
-  func publicSpacesLocations() -> some View {
-    LazyVStack(spacing: 12) {
-      ForEach(publicSpacesLocation){ location in
-        NavigationLink(value: location) {
-          LocationListCell(type: .list, data: location) {
-            Task {
-              do {
-                await locationService.addFavoriteLocation(locationID: location.locationID, userID: userId, completion: {
-                  addToFavs.toggle()
-                }) { err in
-                  print(err.localizedDescription)
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-  
-  @ViewBuilder
-  func cafesLocations() -> some View {
-    LazyVStack(spacing: 12) {
-      ForEach(cafeLocations){ location in
-        NavigationLink(value: location) {
-          LocationListCell(type: .list, data: location) {
-            Task {
-              do {
-                await locationService.addFavoriteLocation(locationID: location.locationID, userID: userId, completion: {
-                  addToFavs.toggle()
-                }) { err in
-                  print(err.localizedDescription)
-                }
-              }
-            }
-          }
+        .onTapGesture {
+          navigationFlow.selectedLocation = location
+          navigationFlow.navigateToDetailView()
         }
       }
     }

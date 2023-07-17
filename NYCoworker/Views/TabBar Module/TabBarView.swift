@@ -10,13 +10,10 @@ import PopupView
 
 struct TabBarView: View {
   @AppStorage("UserID") var userId : String = ""
-  @StateObject private var userService = UserService()
-  @ObservedObject var navigationState = NavigationDestinations()
   var body: some View {
     TabView {
       HomeView()
-        .environmentObject(navigationState)
-        .environmentObject(userService)
+        .environmentObject(LocationModuleNavigationFlow.shared)
         .tabItem {
           Label("Explore", image: "home")
         }
@@ -27,7 +24,6 @@ struct TabBarView: View {
         Label("Coworkers", image: "social")
       }
       ProfileView()
-        .environmentObject(userService)
         .tabItem {
           Label("Profile", image: "profile")
         }
@@ -37,14 +33,6 @@ struct TabBarView: View {
           .tabItem {
             Label("Admin", image: "admin")
           }
-      }
-    }
-    .task {
-      guard userService.user.userID.isEmpty else { return }
-      userService.fetchUser(documentId: userId) {
-        print("User fetched")
-        Resources.userName = userService.user.name
-        Resources.userImageUrl = userService.user.avatarURL
       }
     }
     .accentColor(Resources.Colors.primary)

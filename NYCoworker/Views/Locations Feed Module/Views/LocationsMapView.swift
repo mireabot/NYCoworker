@@ -11,64 +11,55 @@ import PopupView
 import CoreLocation
 
 struct LocationsMap: View {
-  @EnvironmentObject var locationsService: LocationService
-  @EnvironmentObject var navigationState: NavigationDestinations
+  @EnvironmentObject var navigationFlow: LocationModuleNavigationFlow
   @State var selectedLocation: Location?
   @State var showAlert = false
   var body: some View {
-    NavigationStack {
-      ZStack(alignment: .bottom) {
-        LocationMapView(locations: locationsService.locations, selectedLocation: $selectedLocation, region: getRegion(), type: .mapModule)
-          .ignoresSafeArea()
-        
-        ZStack {
-          ForEach(locationsService.locations){ location in
-            if selectedLocation == location {
-              NavigationLink(destination: LocationDetailView(locationData: location)) {
-                LocationMapCard(location: location) {
-                  showAlert.toggle()
-                }
-                .transition(.asymmetric(insertion: .move(edge: .trailing),removal: .move(edge: .leading)))
-              }
+    ZStack(alignment: .bottom) {
+      LocationMapView(locations: navigationFlow.arrayOfLocations, selectedLocation: $selectedLocation, region: getRegion(), type: .mapModule)
+        .ignoresSafeArea()
+      
+      ZStack {
+        ForEach(navigationFlow.arrayOfLocations, id: \.self) { location in
+          if selectedLocation == location {
+            LocationMapCard(location: location) {
+              showAlert.toggle()
             }
+            .onTapGesture {
+              navigationFlow.selectedLocation = location
+              navigationFlow.navigateToDetailView()
+            }
+            .transition(.asymmetric(insertion: .move(edge: .trailing),removal: .move(edge: .leading)))
           }
-        }.padding(.bottom, 30)
-      }
-      .navigationDestination(for: Location.self, destination: { locationData in
-        LocationDetailView(locationData: locationData)
-      })
-      .popup(isPresented: $showAlert) {
-        NYCAlertNotificationView(alertStyle: .addedToFavorites)
-      } customize: {
-        $0
-          .isOpaque(true)
-          .autohideIn(1.5)
-          .type(.floater())
-          .position(.top)
-          .animation(.spring(response: 0.4, blendDuration: 0.2))
-      }
-      .toolbarBackground(.clear, for: .navigationBar)
-      .navigationBarTitleDisplayMode(.inline)
-      .toolbar {
-        ToolbarItem(placement: .navigationBarLeading) {
-          NYCCircleImageButton(size: 24, image: Resources.Images.Navigation.close, color: .black) {
-            dismiss()
-          }
+        }
+      }.padding(.bottom, 30)
+    }
+    .popup(isPresented: $showAlert) {
+      NYCAlertNotificationView(alertStyle: .addedToFavorites)
+    } customize: {
+      $0
+        .isOpaque(true)
+        .autohideIn(1.5)
+        .type(.floater())
+        .position(.top)
+        .animation(.spring(response: 0.4, blendDuration: 0.2))
+    }
+    .navigationBarBackButtonHidden()
+    .toolbarBackground(.clear, for: .navigationBar)
+    .navigationBarTitleDisplayMode(.inline)
+    .toolbar {
+      ToolbarItem(placement: .navigationBarLeading) {
+        NYCCircleImageButton(size: 24, image: Resources.Images.Navigation.arrowBack, color: .black) {
+          navigationFlow.backToPrevious()
         }
       }
     }
-    .applyNavigationTransition()
-    .navigationBarBackButtonHidden()
   }
   
   private func getRegion() -> MKCoordinateRegion {
-    let center = CLLocationCoordinate2D(latitude: locationsService.locations.first?.locationCoordinates.latitude ?? 0.0, longitude: locationsService.locations.first?.locationCoordinates.longitude ?? 0.0)
+    let center = CLLocationCoordinate2D(latitude: navigationFlow.arrayOfLocations.first?.locationCoordinates.latitude ?? 0.0, longitude: navigationFlow.arrayOfLocations.first?.locationCoordinates.longitude ?? 0.0)
     let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
     return MKCoordinateRegion(center: center, span: span)
-  }
-  
-  func dismiss() {
-    navigationState.isPresentingMap = false
   }
 }
 
@@ -98,8 +89,8 @@ extension LocationMapView { //MARK: - View components
         interactionModes: .zoom, showsUserLocation: false, annotationItems: locations) { location in
       MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: location.locationCoordinates.latitude, longitude: location.locationCoordinates.longitude)) {
         Button(action: {
-          DispatchQueue.main.async {
-            withAnimation(.easeOut) {
+          withAnimation {
+            DispatchQueue.main.async {
               selectedLocation = location
               updateRegion(location: location)
             }

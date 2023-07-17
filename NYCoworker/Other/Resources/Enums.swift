@@ -14,6 +14,7 @@ enum Locations {
   case lobbies
   case publicSpaces
   case cafe
+  case empty
   
   var headerTitle: String {
     switch self {
@@ -21,6 +22,7 @@ enum Locations {
     case .lobbies: return "Busy Lobbies"
     case .publicSpaces: return "Public Spaces"
     case .cafe: return "Cozy cafés"
+    case .empty: return "Placeholder"
     }
   }
 }

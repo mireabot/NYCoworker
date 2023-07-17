@@ -12,7 +12,7 @@ import SDWebImageSwiftUI
 struct ProfileView: View {
   @State var showPopup = false
   @AppStorage("UserID") var userId : String = ""
-  @EnvironmentObject var userService : UserService
+  @StateObject var userService = UserService()
   @State private var sheetContentHeight = CGFloat(0)
   var body: some View {
     NavigationStack {
@@ -25,6 +25,14 @@ struct ProfileView: View {
           profileFooter()
         }
         Spacer()
+      }
+      .task {
+        guard userService.user.userID.isEmpty else { return }
+        await userService.fetchUser(documentId: userId) {
+          print("User fetched")
+          Resources.userName = userService.user.name
+          Resources.userImageUrl = userService.user.avatarURL
+        }
       }
       .sheet(isPresented: $showPopup) {
         DeleteAccountBottomView(isVisible: $showPopup)

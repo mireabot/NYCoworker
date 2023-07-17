@@ -18,7 +18,7 @@ class LocationService: ObservableObject {
   
   ///Fetching all locations from Firebase
   ///- returns: set of locations
-  func fetchLoactions(completion: @escaping () -> Void, errorCompletion: @escaping (Error) -> Void) async {
+  func fetchLocations(completion: @escaping () -> Void, errorCompletion: @escaping (Error) -> Void) async {
     do {
       var query: Query!
       query = db.collection(Endpoints.locations.rawValue).order(by: "locationPriority", descending: true)

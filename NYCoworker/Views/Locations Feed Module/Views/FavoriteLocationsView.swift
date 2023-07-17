@@ -9,12 +9,12 @@ import SwiftUI
 import PopupView
 import Firebase
 
-struct FavoriteView: View {
+struct FavoriteLocationsView: View {
+  @EnvironmentObject var navigationFlow: LocationModuleNavigationFlow
   @State var isLoading = true
   @State var isUpdating = false
-  @EnvironmentObject var userService : UserService
-  @EnvironmentObject var navigationState: NavigationDestinations
-  @StateObject var locationService = LocationService()
+  @StateObject private var userService = UserService()
+  @StateObject private var locationService = LocationService()
   @AppStorage("UserID") var userId : String = ""
   var body: some View {
     favoriteList()
@@ -22,16 +22,22 @@ struct FavoriteView: View {
         isLoading = true
         Task(priority: .userInitiated) {
           do {
-            await locationService.fetchFavoriteLocations(for: userService.user) {
-              isLoading = false
-            }
+            await userService.fetchUser(documentId: userId, completion: {
+              Task(priority: .userInitiated) {
+                await locationService.fetchFavoriteLocations(for: userService.user) {
+                  DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    isLoading = false
+                  }
+                }
+              }
+            })
           }
         }
       }
       .toolbar(content: {
         ToolbarItem(placement: .navigationBarLeading) {
           Button {
-            dismiss()
+            navigationFlow.backToPrevious()
           } label: {
             Resources.Images.Navigation.arrowBack
               .foregroundColor(Resources.Colors.primary)
@@ -53,11 +59,11 @@ struct FavoriteView: View {
 
 struct FavoriteView_Previews: PreviewProvider {
   static var previews: some View {
-    FavoriteView().environmentObject(UserService()).environmentObject(NavigationDestinations())
+    FavoriteLocationsView()
   }
 }
 
-extension FavoriteView { //MARK: - View components
+extension FavoriteLocationsView { //MARK: - View components
   @ViewBuilder
   func favoriteList() -> some View {
     VStack {
@@ -72,13 +78,15 @@ extension FavoriteView { //MARK: - View components
           ScrollView(.vertical, showsIndicators: true) {
             LazyVStack(spacing: 16) {
               ForEach(locationService.favoriteLocations, id: \.id) { data in
-                NavigationLink(destination: LocationDetailView(locationData: data)) {
-                  LocationListCell(type: .favorite, data: data, buttonAction: {
-                    removeFromfavs(locationID: data.locationID)
-                    Task {
-                      await extractedFunc()
-                    }
-                  })
+                LocationListCell(type: .favorite, data: data, buttonAction: {
+                  removeFromfavs(locationID: data.locationID)
+                  Task {
+                    await extractedFunc()
+                  }
+                })
+                .onTapGesture {
+                  navigationFlow.selectedLocation = data
+                  navigationFlow.navigateToDetailView()
                 }
               }
             }
@@ -101,11 +109,11 @@ extension FavoriteView { //MARK: - View components
   }
 }
 
-extension FavoriteView { //MARK: - Functions
+extension FavoriteLocationsView { //MARK: - Functions
   fileprivate func extractedFunc() async {
     isLoading = true
     locationService.favoriteLocations = []
-    userService.fetchUser(documentId: userId, completion: {
+    await userService.fetchUser(documentId: userId, completion: {
       Task(priority: .userInitiated) {
         await locationService.fetchFavoriteLocations(for: userService.user) {
           DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
@@ -127,9 +135,5 @@ extension FavoriteView { //MARK: - Functions
         return
       }
     }
-  }
-  
-  func dismiss() {
-    navigationState.isPresentingFavourites = false
   }
 }

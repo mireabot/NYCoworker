@@ -10,19 +10,19 @@ import MapKit
 import PopupView
 
 struct HomeView: View {
+  @EnvironmentObject var navigationFlow: LocationModuleNavigationFlow
   @State var isLoading = true
   @StateObject var locationManager = LocationManager()
   @StateObject private var locationService = LocationService()
   @StateObject private var notificationService = NotificationService()
-  @EnvironmentObject var userService : UserService
-  @EnvironmentObject var navigationState: NavigationDestinations
   @AppStorage("UserID") var userId : String = ""
   @State var addToFavs = false
-  var publicSpacesFirstLocation: Location? { return locationService.locations.first {$0.locationType == .publicSpace} }
-  var librariesLocations: [Location] { return locationService.locations.filter( { $0.locationType == .library }) }
-  var hotelsLocations: [Location] { return locationService.locations.filter( { $0.locationType == .hotel }) }
+  var publicSpacesLocations: [Location] { return navigationFlow.arrayOfLocations.filter( { $0.locationType == .publicSpace }) }
+  var librariesLocations: [Location] { return navigationFlow.arrayOfLocations.filter( { $0.locationType == .library }) }
+  var hotelsLocations: [Location] { return navigationFlow.arrayOfLocations.filter( { $0.locationType == .hotel }) }
+  var cafesLocations: [Location] { return navigationFlow.arrayOfLocations.filter( { $0.locationType == .cafe }) }
   var body: some View {
-    NavigationStack {
+    NavigationStack(path: $navigationFlow.path) {
       ScrollView(.vertical, showsIndicators: false) {
         VStack(spacing: 0) {
           /// Map section
@@ -36,7 +36,11 @@ struct HomeView: View {
               PromoBannerLoadingView()
             }
             else {
-              NYCPromoBanner(bannerType: .summerLocations)
+              NYCPromoBanner(bannerType: .summerLocations) {
+                navigationFlow.selectedListTitle = Locations.cafe.headerTitle
+                navigationFlow.selectedSetOfLocations = cafesLocations
+                navigationFlow.navigateToListView()
+              }
             }
             
             /// Category scrollview
@@ -52,8 +56,9 @@ struct HomeView: View {
         DispatchQueue.main.async {
           isLoading = true
         }
-        await locationService.fetchLoactions(completion: {
+        await locationService.fetchLocations(completion: {
           Resources.userLocation = locationManager.userLocation ?? CLLocation(latitude: 0.0, longitude: 0.0)
+          navigationFlow.arrayOfLocations = locationService.locations
           isLoading = false
         }) { err in
           locationService.setError(err)
@@ -69,29 +74,21 @@ struct HomeView: View {
           .position(.top)
           .animation(.spring(response: 0.4, blendDuration: 0.2))
       }
-      .navigationDestination(for: Locations.self, destination: { locationType in
-        LocationListView(type: locationType).environmentObject(locationService)
-      })
-      .navigationDestination(for: Location.self, destination: { locationData in
-        LocationDetailView(locationData: locationData)
-      })
-      .navigationDestination(isPresented: $navigationState.isPresentingFavourites, destination: {
-        FavoriteView().environmentObject(userService).environmentObject(navigationState)
-      })
-      .navigationDestination(isPresented: $navigationState.isPresentingNotifications, destination: {
-        NotificationsView().environmentObject(navigationState).environmentObject(notificationService)
-      })
+      .navigationDestination(for: LocationModuleNavigationDestinations.self) { destination in
+        LocationModuleNavigationFactory.setViewForDestination(destination)
+      }
       .task {
         guard locationService.locations.isEmpty else { return }
-        await locationService.fetchLoactions(completion: {
+        await locationService.fetchLocations(completion: {
           Resources.userLocation = locationManager.userLocation ?? CLLocation(latitude: 0.0, longitude: 0.0)
+          navigationFlow.arrayOfLocations = locationService.locations
           isLoading = false
         }) { err in
           locationService.setError(err)
         }
         guard notificationService.notifications.isEmpty else { return }
         await notificationService.fetchNotifications(completion: {
-          print("Notifications fetched")
+          navigationFlow.setOfNotifications = notificationService.notifications
         })
       }
       .toolbar {
@@ -109,9 +106,6 @@ struct HomeView: View {
           NYCCircleImageButton(size: 20, image: Resources.Images.Settings.notifications, showBadge: !notificationService.notifications.isEmpty) { showNotifications() }
         }
       }
-      .fullScreenCover(isPresented: $navigationState.isPresentingMap, content: {
-        LocationsMap().environmentObject(locationService).environmentObject(navigationState)
-      })
       .navigationBarTitleDisplayMode(.inline)
       .toolbarBackground(.white, for: .navigationBar)
     }
@@ -131,11 +125,13 @@ extension HomeView { //MARK: - Home components
   @ViewBuilder
   func locationLibrariesCollection() -> some View {
     VStack(alignment: .leading, spacing: 12) {
-      NavigationLink(
-        value: Locations.libraries,
-        label: {
-          NYCSectionHeader(title: Locations.libraries.headerTitle, isExpandButton: true)
-        })
+      Button(action: {
+        navigationFlow.selectedListTitle = Locations.libraries.headerTitle
+        navigationFlow.selectedSetOfLocations = librariesLocations
+        navigationFlow.navigateToListView()
+      }, label: {
+        NYCSectionHeader(title: Locations.libraries.headerTitle, isExpandButton: true)
+      })
       .padding(.leading, 16)
       
       ScrollView(.horizontal, showsIndicators: false) {
@@ -147,10 +143,12 @@ extension HomeView { //MARK: - Home components
           }
           else {
             ForEach(librariesLocations,id: \.locationName) { data in
-              NavigationLink(value: data) {
-                LocationCell(data: data, type: .large, buttonAction: {
-                  addLocationTofavs(location: data.locationID)
-                })
+              LocationCell(data: data, type: .large, buttonAction: {
+                addLocationTofavs(location: data.locationID)
+              })
+              .onTapGesture {
+                navigationFlow.selectedLocation = data
+                navigationFlow.navigateToDetailView()
               }
             }
           }
@@ -163,11 +161,13 @@ extension HomeView { //MARK: - Home components
   @ViewBuilder
   func locationLobbiesCollection() -> some View {
     VStack(alignment: .leading, spacing: 12) {
-      NavigationLink(
-        value: Locations.lobbies,
-        label: {
-          NYCSectionHeader(title: Locations.lobbies.headerTitle, isExpandButton: true)
-        })
+      Button(action: {
+        navigationFlow.selectedListTitle = Locations.lobbies.headerTitle
+        navigationFlow.selectedSetOfLocations = hotelsLocations
+        navigationFlow.navigateToListView()
+      }, label: {
+        NYCSectionHeader(title: Locations.lobbies.headerTitle, isExpandButton: true)
+      })
       .padding(.leading, 16)
       
       ScrollView(.horizontal, showsIndicators: false) {
@@ -179,10 +179,12 @@ extension HomeView { //MARK: - Home components
           }
           else {
             ForEach(hotelsLocations,id: \.locationName) { data in
-              NavigationLink(value: data) {
-                LocationCell(data: data, type: .large, buttonAction: {
-                  addLocationTofavs(location: data.locationID)
-                })
+              LocationCell(data: data, type: .large, buttonAction: {
+                addLocationTofavs(location: data.locationID)
+              })
+              .onTapGesture {
+                navigationFlow.selectedLocation = data
+                navigationFlow.navigateToDetailView()
               }
             }
           }
@@ -194,24 +196,27 @@ extension HomeView { //MARK: - Home components
   
   @ViewBuilder
   func locationPublicSpacesCollection() -> some View {
-    if let locationData = publicSpacesFirstLocation {
-      VStack(alignment: .leading, spacing: 12) {
-        NavigationLink(
-          value: Locations.publicSpaces,
-          label: {
-            NYCSectionHeader(title: Locations.publicSpaces.headerTitle, isExpandButton: true)
-          })
-        .padding(.leading, 16)
-        
-        ZStack {
-          if isLoading {
-            LoadingLocationCell(type: .map)
-          }
-          else {
-            NavigationLink(value: locationData) {
-              LocationMapCard(location: locationData) {
-                addLocationTofavs(location: locationData.locationID)
-              }
+    VStack(alignment: .leading, spacing: 12) {
+      Button(action: {
+        navigationFlow.selectedListTitle = Locations.publicSpaces.headerTitle
+        navigationFlow.selectedSetOfLocations = publicSpacesLocations
+        navigationFlow.navigateToListView()
+      }, label: {
+        NYCSectionHeader(title: Locations.publicSpaces.headerTitle, isExpandButton: true)
+      })
+      .padding(.leading, 16)
+      
+      ZStack {
+        if isLoading {
+          LoadingLocationCell(type: .map)
+        }
+        else {
+          Button {
+            navigationFlow.selectedLocation = publicSpacesLocations[0]
+            navigationFlow.navigateToDetailView()
+          } label: {
+            LocationMapCard(location: publicSpacesLocations[0]) {
+              addLocationTofavs(location: publicSpacesLocations[0].locationID)
             }
           }
         }
@@ -224,7 +229,7 @@ extension HomeView { //MARK: - Home components
     VStack(alignment: .leading, spacing: 12) {
       NYCSectionHeader(title: "Locations nearby", isExpandButton: false)
       ZStack {
-        LocationMapView(locations: locationService.locations, selectedLocation: .constant(Location.mock), region: Resources.mapRegion, type: .homePreview)
+        LocationMapView(locations: navigationFlow.arrayOfLocations, selectedLocation: .constant(Location.mock), region: Resources.mapRegion, type: .homePreview)
           .frame(width: UIScreen.main.bounds.width - 16, height: 120)
           .cornerRadius(15)
       }
@@ -252,20 +257,20 @@ extension HomeView { //MARK: - Functions
   func showFavourites() {
     DispatchQueue.main.async {
       AnalyticsManager.shared.log(.openFavorites(userId))
-      navigationState.isPresentingFavourites = true
+      navigationFlow.navigateToFavoriteView()
     }
   }
   
   func showNotifications() {
     DispatchQueue.main.async {
-      navigationState.isPresentingNotifications = true
+      navigationFlow.navigateToNotificationsView()
     }
   }
   
   func showMap() {
     DispatchQueue.main.async {
       AnalyticsManager.shared.log(.openMap)
-      navigationState.isPresentingMap = true
+      navigationFlow.navigateToMapView()
     }
   }
 }

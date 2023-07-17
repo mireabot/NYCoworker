@@ -17,25 +17,19 @@ class UserService: ObservableObject {
   /// Fetching user data based on save ID
   ///- parameter documentId: User's ID which stored localy in app defaults
   ///- returns: single User model with fetched data
-  func fetchUser(documentId: String, completion: @escaping () -> Void) {
+  func fetchUser(documentId: String, completion: @escaping () -> Void) async {
     let docRef = db.collection(Endpoints.users.rawValue).document(documentId)
-    docRef.addSnapshotListener { documentSnapshot, error in
-      guard let document = documentSnapshot else {
-        print("Document does not exist")
-        return
-      }
-      
-      if let error = error {
-        print("Error fetching document: \(error.localizedDescription)")
-        return
-      }
-      
-      if let data = document.data() {
-        self.user = try! Firestore.Decoder().decode(User.self, from: data)
+    do {
+      let docs = try await docRef.getDocument()
+      await MainActor.run(body: {
+        if let userData = docs.data() {
+          self.user = try! Firestore.Decoder().decode(User.self, from: userData)
+        }
         completion()
-      } else {
-        print("Document data is empty")
-      }
+      })
+    }
+    catch {
+      print(error.localizedDescription)
     }
   }
   

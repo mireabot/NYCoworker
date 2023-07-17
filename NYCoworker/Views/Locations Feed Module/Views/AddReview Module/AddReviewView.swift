@@ -11,6 +11,7 @@ import SDWebImageSwiftUI
 import Firebase
 
 struct AddReviewView: View {
+  @Binding var isPresented: Bool
   @State var visitDate = Date()
   @State var reviewText = ""
   @State var reviewType : Review.ReviewType = .pos
@@ -19,7 +20,6 @@ struct AddReviewView: View {
   @State private var showAlert = false
   @FocusState private var fieldIsFocused: Bool
   @StateObject var reviewService = ReviewService()
-  @EnvironmentObject var navigationState: NavigationDestinations
   @State private var sheetContentHeight = CGFloat(0)
   let locationData: Location
   var body: some View {
@@ -104,7 +104,7 @@ struct AddReviewView: View {
 
 struct AddReviewView_Previews: PreviewProvider {
   static var previews: some View {
-    AddReviewView(locationData: Location.mock)
+    AddReviewView(isPresented: .constant(false), locationData: Location.mock)
   }
 }
 
@@ -176,7 +176,7 @@ extension AddReviewView { //MARK: - Functions
   func dismiss() {
     DispatchQueue.main.async {
       reviewText = ""
-      navigationState.isPresentingReviewSubmission = false
+      isPresented = false
     }
   }
   
