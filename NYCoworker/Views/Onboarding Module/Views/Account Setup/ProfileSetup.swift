@@ -23,14 +23,14 @@ struct ProfileSetup: View {
           Text("Complete your profile")
             .foregroundColor(Resources.Colors.customBlack)
             .font(Resources.Fonts.medium(withSize: 22))
-          Text("This information will help us improve your app experience")
+          Text("This information will help you to leave reviews, find coworkers in social radar and many more.")
             .foregroundColor(Resources.Colors.darkGrey)
             .font(Resources.Fonts.regular(withSize: 17))
         }
         
         Spacer()
       }
-      .padding(.leading, 16)
+      .padding([.leading,.trailing], 16)
       .padding(.top, 10)
       
       ZStack {

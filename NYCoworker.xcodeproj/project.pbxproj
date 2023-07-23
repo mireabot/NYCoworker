@@ -34,10 +34,8 @@
 		3535AF582A2E8D4A00B55184 /* InstructionsExpandedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3535AF572A2E8D4A00B55184 /* InstructionsExpandedView.swift */; };
 		3536C2D72A02A955007D3E1A /* AdminReviewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3536C2D62A02A955007D3E1A /* AdminReviewsView.swift */; };
 		3538C623298353210017800B /* iPages in Frameworks */ = {isa = PBXBuildFile; productRef = 3538C622298353210017800B /* iPages */; };
-		3538C626298356270017800B /* LanguageSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3538C625298356270017800B /* LanguageSetup.swift */; };
 		3538C6292983569D0017800B /* NYCBottomSheetHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3538C6282983569D0017800B /* NYCBottomSheetHeader.swift */; };
 		3538C62C298357490017800B /* AppLanguageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3538C62B298357490017800B /* AppLanguageModel.swift */; };
-		3538C62F298358890017800B /* LanguageCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3538C62E298358890017800B /* LanguageCard.swift */; };
 		353EE7F02A64BB6E00B836CD /* LocationModuleNavigationFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353EE7EF2A64BB6E00B836CD /* LocationModuleNavigationFactory.swift */; };
 		353EE7F22A64BB7C00B836CD /* LocationModuleNavigationDestinations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353EE7F12A64BB7C00B836CD /* LocationModuleNavigationDestinations.swift */; };
 		353EE7F42A64BB8200B836CD /* LocationModuleNavigationFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353EE7F32A64BB8200B836CD /* LocationModuleNavigationFlow.swift */; };
@@ -54,7 +52,6 @@
 		3554C5772A1463D3003080FD /* Jost-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3554C5732A1462F7003080FD /* Jost-Regular.ttf */; };
 		3554C5792A14660F003080FD /* Jost-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3554C5782A1465E4003080FD /* Jost-Medium.ttf */; };
 		355C11BE29B78EB7001F092B /* NotificationCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355C11BD29B78EB7001F092B /* NotificationCard.swift */; };
-		355EA17929AD6FAF00D62B01 /* NYCLanguageCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355EA17829AD6FAF00D62B01 /* NYCLanguageCard.swift */; };
 		3563FB9E29F19A2C007E39C5 /* AdminHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3563FB9D29F19A2C007E39C5 /* AdminHomeView.swift */; };
 		3565689B29A12C16007CAF80 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = 3565689A29A12C16007CAF80 /* PopupView */; };
 		3565689D29A15673007CAF80 /* NYCAlertNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3565689C29A15673007CAF80 /* NYCAlertNotificationView.swift */; };
@@ -170,10 +167,8 @@
 		3535AF552A2E8C3A00B55184 /* InstructionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionCell.swift; sourceTree = "<group>"; };
 		3535AF572A2E8D4A00B55184 /* InstructionsExpandedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionsExpandedView.swift; sourceTree = "<group>"; };
 		3536C2D62A02A955007D3E1A /* AdminReviewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminReviewsView.swift; sourceTree = "<group>"; };
-		3538C625298356270017800B /* LanguageSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSetup.swift; sourceTree = "<group>"; };
 		3538C6282983569D0017800B /* NYCBottomSheetHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCBottomSheetHeader.swift; sourceTree = "<group>"; };
 		3538C62B298357490017800B /* AppLanguageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLanguageModel.swift; sourceTree = "<group>"; };
-		3538C62E298358890017800B /* LanguageCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageCard.swift; sourceTree = "<group>"; };
 		353EE7EF2A64BB6E00B836CD /* LocationModuleNavigationFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModuleNavigationFactory.swift; sourceTree = "<group>"; };
 		353EE7F12A64BB7C00B836CD /* LocationModuleNavigationDestinations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModuleNavigationDestinations.swift; sourceTree = "<group>"; };
 		353EE7F32A64BB8200B836CD /* LocationModuleNavigationFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModuleNavigationFlow.swift; sourceTree = "<group>"; };
@@ -190,7 +185,6 @@
 		3554C5742A146300003080FD /* Jost-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Jost-SemiBold.ttf"; path = "../../../../../Downloads/Jost/static/Jost-SemiBold.ttf"; sourceTree = "<group>"; };
 		3554C5782A1465E4003080FD /* Jost-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Jost-Medium.ttf"; path = "../../../../../Downloads/Jost/static/Jost-Medium.ttf"; sourceTree = "<group>"; };
 		355C11BD29B78EB7001F092B /* NotificationCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCard.swift; sourceTree = "<group>"; };
-		355EA17829AD6FAF00D62B01 /* NYCLanguageCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCLanguageCard.swift; sourceTree = "<group>"; };
 		3563FB9D29F19A2C007E39C5 /* AdminHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminHomeView.swift; sourceTree = "<group>"; };
 		3565689C29A15673007CAF80 /* NYCAlertNotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCAlertNotificationView.swift; sourceTree = "<group>"; };
 		356C52D929A0460C00080D4C /* LocationMapCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationMapCard.swift; sourceTree = "<group>"; };
@@ -413,7 +407,6 @@
 			children = (
 				359E6AA12981ED8B00333BD7 /* Onboarding.swift */,
 				35EF059D29B0F40A0098110B /* AccoutSetupView.swift */,
-				3538C625298356270017800B /* LanguageSetup.swift */,
 				35EF059C29B0F3F70098110B /* Account Setup */,
 			);
 			path = Views;
@@ -561,7 +554,6 @@
 		3538C62D298358560017800B /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				359348E129BA437800B7739A /* Settings */,
 				359348DE29BA432800B7739A /* Reviews */,
 				355C11BC29B78EAC001F092B /* Notifications */,
 				35D3821629B6AA8200B66EDA /* Location */,
@@ -687,7 +679,6 @@
 				359A792C298ECC6B001B66CF /* NYCSocialCard.swift */,
 				351B3A2629981B22007E7D00 /* NYCSettingsCard.swift */,
 				3583BD4429AA99E600B984EA /* NYCNotificationCard.swift */,
-				355EA17829AD6FAF00D62B01 /* NYCLanguageCard.swift */,
 				35EF05A129B29BAD0098110B /* NYCSetupCard.swift */,
 				350B52D12A2FCA0F00D61B6E /* NYCPromoBanner.swift */,
 			);
@@ -742,14 +733,6 @@
 				35BA64B4299BF69D00E15206 /* ReviewCard.swift */,
 			);
 			path = Reviews;
-			sourceTree = "<group>";
-		};
-		359348E129BA437800B7739A /* Settings */ = {
-			isa = PBXGroup;
-			children = (
-				3538C62E298358890017800B /* LanguageCard.swift */,
-			);
-			path = Settings;
 			sourceTree = "<group>";
 		};
 		359B2FAB29DA53EB0097E1DC /* Frameworks */ = {
@@ -1008,7 +991,6 @@
 				35402A2A2A0EB2A300974CF7 /* NYCBottomViewContent.swift in Sources */,
 				350DE274299143B500573163 /* DeleteAccountBottomView.swift in Sources */,
 				35D9447D29EF035800B9B640 /* Helpers.swift in Sources */,
-				3538C626298356270017800B /* LanguageSetup.swift in Sources */,
 				35F768122A65BB5F004E3305 /* ProfileModuleNavigationDestinations.swift in Sources */,
 				35A7981629E463C600359400 /* AdminLocationView.swift in Sources */,
 				35EF059E29B0F40A0098110B /* AccoutSetupView.swift in Sources */,
@@ -1031,7 +1013,6 @@
 				35F5630A2A13D181004FE102 /* NYCSegmentControl.swift in Sources */,
 				359F80F9298C30D2000D792E /* NYCBadgeView.swift in Sources */,
 				359D87CA29D8919C00E827F3 /* UserService.swift in Sources */,
-				3538C62F298358890017800B /* LanguageCard.swift in Sources */,
 				359A792D298ECC6B001B66CF /* NYCSocialCard.swift in Sources */,
 				35D9447B29EF026D00B9B640 /* NYCErrorBottomAlert.swift in Sources */,
 				351B3A23299814B8007E7D00 /* AccountSettingsView.swift in Sources */,
@@ -1067,7 +1048,6 @@
 				35E7FB9129848FEE00EFF282 /* NYCActionButton.swift in Sources */,
 				35F29399299E8F4A00A85586 /* AmenityModel.swift in Sources */,
 				35E7FB992985AB9300EFF282 /* NotificationPermission.swift in Sources */,
-				355EA17929AD6FAF00D62B01 /* NYCLanguageCard.swift in Sources */,
 				356C52DA29A0460C00080D4C /* LocationMapCard.swift in Sources */,
 				351B3A2529981665007E7D00 /* SupportSettingsView.swift in Sources */,
 				35861C9F2A2168F200DC0AFB /* NYCChipCollection.swift in Sources */,
@@ -1231,7 +1211,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = NYCoworker/NYCoworker.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 46;
+				CURRENT_PROJECT_VERSION = 47;
 				DEVELOPMENT_TEAM = 9S2MZXD36G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NYCoworker/Info.plist;
@@ -1269,7 +1249,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = NYCoworker/NYCoworker.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 46;
+				CURRENT_PROJECT_VERSION = 47;
 				DEVELOPMENT_TEAM = 9S2MZXD36G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NYCoworker/Info.plist;
