@@ -17,7 +17,7 @@ struct PersonTypeSetup: View {
           Text("Which of these describes you best?")
             .foregroundColor(Resources.Colors.customBlack)
             .font(Resources.Fonts.medium(withSize: 22))
-          Text("You can edit later in profile settings")
+          Text("We need this information to improve overall app experience")
             .foregroundColor(Resources.Colors.darkGrey)
             .font(Resources.Fonts.regular(withSize: 17))
         }
@@ -65,7 +65,7 @@ struct PersonTypeSetup: View {
 
 struct PersonTypeSetup_Previews: PreviewProvider {
   static var previews: some View {
-    GenderTypeSetup()
+    PersonTypeSetup().environmentObject(UserRegistrationModel())
   }
 }
 
