@@ -76,7 +76,7 @@ extension ProfileView { //MARK: - Profile components
       Text(navigationFlow.currentUser.name)
         .foregroundColor(Resources.Colors.customBlack)
         .font(Resources.Fonts.medium(withSize: 20))
-      Text("Coworker from 2023")
+      Text("Coworker since 2023")
         .foregroundColor(Resources.Colors.darkGrey)
         .font(Resources.Fonts.regular(withSize: 13))
     }
