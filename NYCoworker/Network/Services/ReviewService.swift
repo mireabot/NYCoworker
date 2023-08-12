@@ -12,6 +12,7 @@ import FirebaseFirestore
 class ReviewService: ObservableObject {
   private var db = Firestore.firestore()
   @Published var reviews: [Review] = []
+  @Published var suggestionModel = LocationSuggestionModel.empty
   
   ///Fetching all reviews which has ID matching with location's ID
   ///- parameter locationID: ID of location which searched in Reviews database
@@ -83,6 +84,19 @@ class ReviewService: ObservableObject {
       let reviewsCount = locationDoc.reviews
       try await db.collection(Endpoints.locations.rawValue).document(locationID).setData(["reviews": reviewsCount + 1], merge: true)
       try await db.collection(Endpoints.reviews.rawValue).document(reviewID).setData(["isLive": true], merge: true)
+      await MainActor.run(body: {
+        completion()
+      })
+    }
+    catch {
+      print(error.localizedDescription)
+    }
+  }
+  
+  func sendLocationSuggestion(with model: LocationSuggestionModel, completion: @escaping () -> Void) async {
+    do {
+      let data = try Firestore.Encoder().encode(model)
+      try await db.collection(Endpoints.suggestions.rawValue).document().setData(data)
       await MainActor.run(body: {
         completion()
       })

@@ -29,7 +29,9 @@ struct SupportSettingsView: View {
       VStack(spacing: 10) {
         NYCSettingsCard(type: .writeFeedback, action: {
           AnalyticsManager.shared.log(.feedbackOpened)
-          navigationFlow.navigateToFeedbackView()
+          DispatchQueue.main.async {
+            navigationFlow.navigateToFeedbackView()
+          }
         })
         NYCSettingsCard(type: .visitWebsite, action: {
           AnalyticsManager.shared.log(.websiteOpened)
@@ -46,20 +48,22 @@ struct SupportSettingsView: View {
       SafariView(url: .constant(Resources.websiteURL))
     })
     .toolbar(content: {
-        ToolbarItem(placement: .navigationBarLeading) {
-            Button {
-              navigationFlow.backToPrevious()
-            } label: {
-                Resources.Images.Navigation.arrowBack
-                    .foregroundColor(Resources.Colors.primary)
-            }
+      ToolbarItem(placement: .navigationBarLeading) {
+        Button {
+          DispatchQueue.main.async {
+            navigationFlow.backToPrevious()
+          }
+        } label: {
+          Resources.Images.Navigation.arrowBack
+            .foregroundColor(Resources.Colors.primary)
         }
-        
-        ToolbarItem(placement: .navigationBarLeading) {
-          Text(Strings.Settings.helpSupport)
-                .foregroundColor(Resources.Colors.customBlack)
-                .font(Resources.Fonts.medium(withSize: 17))
-        }
+      }
+      
+      ToolbarItem(placement: .navigationBarLeading) {
+        Text(Strings.Settings.helpSupport)
+          .foregroundColor(Resources.Colors.customBlack)
+          .font(Resources.Fonts.medium(withSize: 17))
+      }
     })
     .navigationBarBackButtonHidden()
     .toolbarBackground(.white, for: .navigationBar)

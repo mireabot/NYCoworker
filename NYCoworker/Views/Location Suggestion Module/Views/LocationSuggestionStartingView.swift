@@ -1,0 +1,175 @@
+//
+//  LocationSuggestionStartingView.swift
+//  NYCoworker
+//
+//  Created by Mikhail Kolkov on 8/9/23.
+//
+
+import SwiftUI
+import SwiftUIIntrospect
+import Lottie
+
+struct LocationSuggestionStartingView: View {
+  @Binding var showView: Bool
+  @StateObject var reviewService = ReviewService()
+  @State private var showLoader = false
+  @State var count = 1
+  @AppStorage("UserID") var userId : String = ""
+  var body: some View {
+    NavigationView(content: {
+      VStack {
+        TabView(selection: $count) {
+          AnyView(startView)
+            .tag(1)
+          
+          LocationSuggestionBasicInfo()
+            .environmentObject(reviewService)
+            .tag(2)
+          
+          LocationSuggestionExtraInfo()
+            .environmentObject(reviewService)
+            .tag(3)
+          
+          AnyView(successView)
+            .environmentObject(reviewService)
+            .tag(4)
+        }
+        .safeAreaInset(edge: .bottom) {
+          VStack(spacing: 15) {
+            NYCSegmentProgressBar(value: count, maximum: 4)
+            Button(action: {
+              if count == 4 {
+                showView = false
+              }
+              else if count == 3 {
+                showLoader = true
+                Task {
+                  do {
+                    await reviewService.sendLocationSuggestion(with:
+                                                                LocationSuggestionModel(locationName: reviewService.suggestionModel.locationName,
+                                                                                        locationAddress: reviewService.suggestionModel.locationAddress,
+                                                                                        locationAmenities: reviewService.suggestionModel.locationAmenities,
+                                                                                        userID: userId,
+                                                                                        userComment: reviewService.suggestionModel.userComment,
+                                                                                        userToken: UserDefaults.standard.string(forKey: "FCMToken") ?? "nil")) {
+                      DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                        showLoader = false
+                        count += 1
+                      }
+                    }
+                  }
+                }
+              }
+              else {
+                count += 1
+              }
+            }, label: {
+              if count == 1 {
+                Text("Get started")
+              }
+              else if count == 4 {
+                Text("Done")
+              }
+              else {
+                Text("Next")
+              }
+            })
+            .buttonStyle(NYCActionButtonStyle(showLoader: $showLoader))
+            .disabled(checkButton())
+            .padding(.bottom, 15)
+          }
+          .padding([.leading,.trailing], 16)
+        }
+      }
+      .animation(.linear, value: count)
+      .toolbar {
+        ToolbarItem(placement: .navigationBarTrailing) {
+          NYCCircleImageButton(size: 20, image: Resources.Images.Navigation.close, action: {
+            showView = false
+          })
+        }
+        ToolbarItem(placement: .navigationBarLeading) {
+          NYCCircleImageButton(size: 20, image: Resources.Images.Navigation.arrowBack, action: {
+            count -= 1
+          })
+          .opacity(count == 1 || count == 4 ? 0 : 1)
+        }
+        
+        ToolbarItem(placement: .principal) {
+          Text(count == 2 ? "Let’s start from basic information" : "Now share any special details")
+            .font(Resources.Fonts.regular(withSize: 18))
+            .foregroundColor(Resources.Colors.customBlack)
+            .opacity(count == 1 || count == 4 ? 0 : 1)
+        }
+      }
+      .navigationBarTitleDisplayMode(.inline)
+    })
+  }
+}
+
+struct LocationSuggestionStartingView_Previews: PreviewProvider {
+  static var previews: some View {
+    LocationSuggestionStartingView(showView: .constant(false))
+  }
+}
+
+extension LocationSuggestionStartingView {
+  var startView: any View {
+    ScrollView(.vertical, showsIndicators: false) {
+      HStack {
+        VStack(alignment: .leading, spacing: 5) {
+          Text("Ready to share your work hub? We're All Ears!")
+            .font(Resources.Fonts.medium(withSize: 28))
+            .foregroundColor(Resources.Colors.customBlack)
+          Text("Virtual High-Five! We want to share some good stuff")
+            .font(Resources.Fonts.regular(withSize: 17))
+            .foregroundColor(Resources.Colors.darkGrey)
+        }
+        Spacer()
+      }
+      
+      VStack(alignment: .center, spacing: 20) {
+        NYCIntroCard(type: .business)
+        NYCIntroCard(type: .coworker)
+      }
+      .padding(.top, 60)
+    }
+    .scrollDisabled(true)
+    .padding([.leading,.trailing], 16)
+  }
+  
+  var successView: any View {
+    ScrollView(.vertical, showsIndicators: false) {
+      Text("You are all set!")
+        .font(Resources.Fonts.regular(withSize: 20))
+        .foregroundColor(Resources.Colors.customBlack)
+        .padding(.top, 30)
+      
+      VStack(spacing: -40) {
+        LottieAnimationViewWrapper(animationName: .constant("success.json"))
+          .frame(width: 250, height: 250)
+        VStack(alignment: .center, spacing: 5) {
+          Text("Our team is reviewing submission now!")
+            .foregroundColor(Resources.Colors.customBlack)
+            .font(Resources.Fonts.medium(withSize: 20))
+            .multilineTextAlignment(.center)
+          
+          Text("We will send you notification once submission is approved")
+            .foregroundColor(Resources.Colors.darkGrey)
+            .font(Resources.Fonts.regular(withSize: 15))
+            .multilineTextAlignment(.center)
+        }
+      }
+      .padding(.top, 60)
+    }
+    .scrollDisabled(true)
+    .padding([.leading,.trailing], 16)
+  }
+  
+  func checkButton() -> Bool {
+    if count == 2 && (reviewService.suggestionModel.locationName.isEmpty || reviewService.suggestionModel.locationAddress.isEmpty || reviewService.suggestionModel.locationAmenities.isEmpty) {
+      return true
+    }
+    return false
+  }
+}

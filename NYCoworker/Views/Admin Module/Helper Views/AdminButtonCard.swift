@@ -62,7 +62,7 @@ extension AdminButtonCard { // MARK: - Enums
     
     var image: Image {
       switch self {
-      case .manageLocations: return Resources.Images.Social.mark
+      case .manageLocations: return Resources.Images.Onboarding.mark
       case .createReview: return Resources.Images.Settings.rate
       case .reviewModeration: return Resources.Images.Navigation.share
       case .sendNotifications: return Resources.Images.Settings.manageNotifications

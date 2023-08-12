@@ -33,7 +33,7 @@ struct WriteFeedbackView: View {
       .padding(.top, 10)
       .padding(.leading, 16)
       
-      NYCResizableTextField(message: $message, characterLimit: 500, placeHolder: "How we can improve NYCoworker for you?")
+      NYCResizableTextField(message: $message, characterLimit: 1000, placeHolder: "How we can improve NYCoworker for you?")
         .focused($fieldIsFocused)
         .padding([.leading,.trailing], 16)
       
@@ -89,7 +89,9 @@ struct WriteFeedbackView: View {
     .toolbar {
       ToolbarItem(placement: .navigationBarLeading) {
         NYCCircleImageButton(size: 18, image: Resources.Images.Navigation.arrowBack) {
-          navigationFlow.backToPrevious()
+          DispatchQueue.main.async {
+            navigationFlow.backToPrevious()
+          }
         }
       }
     }

@@ -44,6 +44,7 @@ enum Endpoints: String {
   case reviews = "Reviews"
   case locations = "Locations"
   case feedback = "Feedbacks"
+  case suggestions = "Suggestions"
 }
 
 //MARK: - Pop alerts type enum

@@ -83,10 +83,12 @@ enum Resources {
     }
     
     /// Images for social screen
-    enum Social {
+    enum Onboarding {
       static let search = Image("search")
       static let go = Image("go")
       static let mark = Image("mark")
+      static let business = Image("business")
+      static let coworker = Image("coworker")
     }
   }
   /// Fonts resource pack

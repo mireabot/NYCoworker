@@ -37,9 +37,11 @@ struct HomeView: View {
             }
             else {
               NYCPromoBanner(bannerType: .summerLocations) {
-                navigationFlow.selectedListTitle = Locations.cafe.headerTitle
-                navigationFlow.selectedSetOfLocations = cafesLocations
-                navigationFlow.navigateToListView()
+                DispatchQueue.main.async {
+                  navigationFlow.selectedListTitle = Locations.cafe.headerTitle
+                  navigationFlow.selectedSetOfLocations = cafesLocations
+                  navigationFlow.navigateToListView()
+                }
               }
             }
             
@@ -126,9 +128,11 @@ extension HomeView { //MARK: - Home components
   func locationLibrariesCollection() -> some View {
     VStack(alignment: .leading, spacing: 12) {
       Button(action: {
-        navigationFlow.selectedListTitle = Locations.libraries.headerTitle
-        navigationFlow.selectedSetOfLocations = librariesLocations
-        navigationFlow.navigateToListView()
+        DispatchQueue.main.async {
+          navigationFlow.selectedListTitle = Locations.libraries.headerTitle
+          navigationFlow.selectedSetOfLocations = librariesLocations
+          navigationFlow.navigateToListView()
+        }
       }, label: {
         NYCSectionHeader(title: Locations.libraries.headerTitle, isExpandButton: true)
       })
@@ -147,8 +151,10 @@ extension HomeView { //MARK: - Home components
                 addLocationTofavs(location: data.locationID)
               })
               .onTapGesture {
-                navigationFlow.selectedLocation = data
-                navigationFlow.navigateToDetailView()
+                DispatchQueue.main.async {
+                  navigationFlow.selectedLocation = data
+                  navigationFlow.navigateToDetailView()
+                }
               }
             }
           }
@@ -162,9 +168,11 @@ extension HomeView { //MARK: - Home components
   func locationLobbiesCollection() -> some View {
     VStack(alignment: .leading, spacing: 12) {
       Button(action: {
-        navigationFlow.selectedListTitle = Locations.lobbies.headerTitle
-        navigationFlow.selectedSetOfLocations = hotelsLocations
-        navigationFlow.navigateToListView()
+        DispatchQueue.main.async {
+          navigationFlow.selectedListTitle = Locations.lobbies.headerTitle
+          navigationFlow.selectedSetOfLocations = hotelsLocations
+          navigationFlow.navigateToListView()
+        }
       }, label: {
         NYCSectionHeader(title: Locations.lobbies.headerTitle, isExpandButton: true)
       })
@@ -183,8 +191,10 @@ extension HomeView { //MARK: - Home components
                 addLocationTofavs(location: data.locationID)
               })
               .onTapGesture {
-                navigationFlow.selectedLocation = data
-                navigationFlow.navigateToDetailView()
+                DispatchQueue.main.async {
+                  navigationFlow.selectedLocation = data
+                  navigationFlow.navigateToDetailView()
+                }
               }
             }
           }
@@ -198,9 +208,11 @@ extension HomeView { //MARK: - Home components
   func locationPublicSpacesCollection() -> some View {
     VStack(alignment: .leading, spacing: 12) {
       Button(action: {
-        navigationFlow.selectedListTitle = Locations.publicSpaces.headerTitle
-        navigationFlow.selectedSetOfLocations = publicSpacesLocations
-        navigationFlow.navigateToListView()
+        DispatchQueue.main.async {
+          navigationFlow.selectedListTitle = Locations.publicSpaces.headerTitle
+          navigationFlow.selectedSetOfLocations = publicSpacesLocations
+          navigationFlow.navigateToListView()
+        }
       }, label: {
         NYCSectionHeader(title: Locations.publicSpaces.headerTitle, isExpandButton: true)
       })
@@ -212,8 +224,10 @@ extension HomeView { //MARK: - Home components
         }
         else {
           Button {
-            navigationFlow.selectedLocation = publicSpacesLocations[0]
-            navigationFlow.navigateToDetailView()
+            DispatchQueue.main.async {
+              navigationFlow.selectedLocation = publicSpacesLocations[0]
+              navigationFlow.navigateToDetailView()
+            }
           } label: {
             LocationMapCard(location: publicSpacesLocations[0]) {
               addLocationTofavs(location: publicSpacesLocations[0].locationID)

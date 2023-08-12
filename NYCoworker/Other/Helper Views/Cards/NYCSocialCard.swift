@@ -37,7 +37,7 @@ struct NYCSocialCardModel : Identifiable {
 }
 
 let socialData = [
-    NYCSocialCardModel(id: 0, image: Resources.Images.Social.search, title: "Pick a spot", text: "Find a place where you want to work today from our hand-picked list"),
-    NYCSocialCardModel(id: 1, image: Resources.Images.Social.go, title: "Head to location", text: "You can plan a route from spot details page using Apple or Google Maps - your choice first"),
-    NYCSocialCardModel(id: 2, image: Resources.Images.Social.mark, title: "Mark yourself", text: "You can make yourself visible to other coworkers that you are in current location - or stay private"),
+    NYCSocialCardModel(id: 0, image: Resources.Images.Onboarding.search, title: "Pick a spot", text: "Find a place where you want to work today from our hand-picked list"),
+    NYCSocialCardModel(id: 1, image: Resources.Images.Onboarding.go, title: "Head to location", text: "You can plan a route from spot details page using Apple or Google Maps - your choice first"),
+    NYCSocialCardModel(id: 2, image: Resources.Images.Onboarding.mark, title: "Mark yourself", text: "You can make yourself visible to other coworkers that you are in current location - or stay private"),
 ]

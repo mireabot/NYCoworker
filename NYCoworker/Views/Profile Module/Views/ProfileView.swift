@@ -12,6 +12,7 @@ import SDWebImageSwiftUI
 struct ProfileView: View {
   @EnvironmentObject var navigationFlow: ProfileModuleNavigationFlow
   @State var showPopup = false
+  @State var showSuggestionSheet = false
   @AppStorage("UserID") var userId : String = ""
   @StateObject var userService = UserService()
   @State private var sheetContentHeight = CGFloat(0)
@@ -22,6 +23,13 @@ struct ProfileView: View {
           profileHeader()
           
           settingsView()
+          
+          NYCPromoBanner(bannerType: .suggestLocation, action: {
+            DispatchQueue.main.async {
+              showSuggestionSheet.toggle()
+            }
+          })
+            .padding(.top, 15)
           
           profileFooter()
         }
@@ -34,6 +42,9 @@ struct ProfileView: View {
           navigationFlow.currentUser = userService.user
         }
       }
+      .fullScreenCover(isPresented: $showSuggestionSheet, content: {
+        LocationSuggestionStartingView(showView: $showSuggestionSheet)
+      })
       .sheet(isPresented: $showPopup) {
         DeleteAccountBottomView(isVisible: $showPopup)
           .background {
@@ -45,7 +56,6 @@ struct ProfileView: View {
             }
           }
           .presentationDetents([.height(sheetContentHeight)])
-          .presentationDragIndicator(.visible)
       }
       .applyNavigationTransition()
       .navigationDestination(for: ProfileModuleNavigationDestinations.self) { destination in
@@ -91,10 +101,14 @@ extension ProfileView { //MARK: - Profile components
       
       VStack {
         NYCSettingsCard(type: .manageAccount, action: {
-          navigationFlow.navigateToAccountEditView()
+          DispatchQueue.main.async {
+            navigationFlow.navigateToAccountEditView()
+          }
         })
         NYCSettingsCard(type: .help, action: {
-          navigationFlow.navigateToSupportView()
+          DispatchQueue.main.async {
+            navigationFlow.navigateToSupportView()
+          }
         })
       }
     }
@@ -130,7 +144,7 @@ extension ProfileView { //MARK: - Profile components
 
 struct ProfileView_Previews: PreviewProvider {
   static var previews: some View {
-    ProfileView().environmentObject(UserService())
+    ProfileView().environmentObject(ProfileModuleNavigationFlow())
   }
 }
 
