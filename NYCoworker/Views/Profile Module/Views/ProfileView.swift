@@ -10,14 +10,14 @@ import Shimmer
 import SDWebImageSwiftUI
 
 struct ProfileView: View {
-  @EnvironmentObject var navigationFlow: ProfileModuleNavigationFlow
+  @EnvironmentObject var router: NYCNavigationViewsRouter
   @State var showPopup = false
   @State var showSuggestionSheet = false
   @AppStorage("UserID") var userId : String = ""
   @StateObject var userService = UserService()
   @State private var sheetContentHeight = CGFloat(0)
   var body: some View {
-    NavigationStack(path: $navigationFlow.path) {
+    NavigationView(content: {
       VStack {
         VStack {
           profileHeader()
@@ -36,10 +36,8 @@ struct ProfileView: View {
         Spacer()
       }
       .task {
-        guard userService.user.userID.isEmpty else { return }
         await userService.fetchUser(documentId: userId) {
-          print("User fetched")
-          navigationFlow.currentUser = userService.user
+          print("User fetched with id \(userService.user.userID)")
         }
       }
       .toolbar {
@@ -47,11 +45,7 @@ struct ProfileView: View {
           NYCHeader(title: "Profile")
         }
       }
-      .navigationDestination(for: ProfileModuleNavigationDestinations.self) { destination in
-        ProfileModuleNavigationFactory.setViewForDestination(destination)
-      }
-    }
-    .applyNavigationTransition()
+    })
     .fullScreenCover(isPresented: $showSuggestionSheet, content: {
       LocationSuggestionStartingView(showView: $showSuggestionSheet)
     })
@@ -74,7 +68,7 @@ extension ProfileView { //MARK: - Profile components
   @ViewBuilder
   func profileHeader()-> some View {
     VStack(alignment: .center, spacing: 5) {
-      WebImage(url: navigationFlow.currentUser.avatarURL).placeholder {
+      WebImage(url: userService.user.avatarURL).placeholder {
         Image("emptyImage")
           .resizable()
       }
@@ -83,7 +77,7 @@ extension ProfileView { //MARK: - Profile components
       .frame(width: 100, height: 100)
       .clipShape(Circle())
       
-      Text(navigationFlow.currentUser.name)
+      Text(userService.user.name)
         .foregroundColor(Resources.Colors.customBlack)
         .font(Resources.Fonts.medium(withSize: 20))
       Text("Coworker since 2023")
@@ -102,12 +96,12 @@ extension ProfileView { //MARK: - Profile components
       VStack {
         NYCSettingsCard(type: .manageAccount, action: {
           DispatchQueue.main.async {
-            navigationFlow.navigateToAccountEditView()
+            router.pushTo(view: NYCNavigationViewBuilder.builder.makeView(AccountSettingsView(currentUser: userService.user)))
           }
         })
         NYCSettingsCard(type: .help, action: {
           DispatchQueue.main.async {
-            navigationFlow.navigateToSupportView()
+            router.pushTo(view: NYCNavigationViewBuilder.builder.makeView(SupportSettingsView()))
           }
         })
       }
@@ -144,7 +138,7 @@ extension ProfileView { //MARK: - Profile components
 
 struct ProfileView_Previews: PreviewProvider {
   static var previews: some View {
-    ProfileView().environmentObject(ProfileModuleNavigationFlow())
+    ProfileView()
   }
 }
 

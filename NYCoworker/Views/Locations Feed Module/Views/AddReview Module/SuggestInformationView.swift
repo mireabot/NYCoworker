@@ -98,7 +98,7 @@ struct SuggestInformationView: View {
         
       })
       .toolbar {
-        ToolbarItem(placement: .navigationBarLeading) {
+        ToolbarItem(placement: .navigationBarTrailing) {
           NYCCircleImageButton(size: 18, image: Resources.Images.Navigation.close) {
             isPresented = false
           }

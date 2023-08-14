@@ -38,13 +38,13 @@ struct LocationsMap: View {
       .navigationBarTitleDisplayMode(.inline)
       .toolbar {
         ToolbarItem(placement: .navigationBarLeading) {
-          NYCCircleImageButton(size: 24, image: Resources.Images.Navigation.arrowBack) {
+          NYCCircleImageButton(size: 20, image: Resources.Images.Navigation.arrowBack) {
             router.nav?.popViewController(animated: true)
           }
         }
         ToolbarItem(placement: .principal) {
-          Text("Locations Nearby")
-            .font(Resources.Fonts.medium(withSize: 20))
+          Text("Locations nearby")
+            .font(Resources.Fonts.medium(withSize: 17))
             .foregroundColor(Resources.Colors.customBlack)
         }
       }

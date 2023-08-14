@@ -12,7 +12,7 @@ struct InstructionsView: View {
   @Binding var secondTabPressed: Bool
   var locationData: Location
   var body: some View {
-    ZStack {
+    ZStack(alignment: .center) {
       HStack(alignment: .center, spacing: 0) {
         Button {
           firstTabPressed.toggle()
@@ -28,11 +28,9 @@ struct InstructionsView: View {
               .foregroundColor(Resources.Colors.darkGrey)
               .padding(.leading, -2)
             
-            Resources.Images.Navigation.chevronRight
-              .resizable()
-              .frame(width: 20, height: 20)
-              .foregroundColor(Resources.Colors.customBlack)
+            
           }
+          .underline()
           .frame(maxWidth: .infinity)
         }
         .disabled(locationData.locationUpdates?.isEmpty ?? true)
@@ -51,11 +49,9 @@ struct InstructionsView: View {
               .foregroundColor(Resources.Colors.darkGrey)
               .padding(.leading, -2)
             
-            Resources.Images.Navigation.chevronRight
-              .resizable()
-              .frame(width: 20, height: 20)
-              .foregroundColor(Resources.Colors.customBlack)
+            
           }
+          .underline()
           .frame(maxWidth: .infinity)
         }
         .disabled(locationData.reviews == 0)
@@ -75,5 +71,6 @@ struct InstructionsView: View {
 struct InstructionsView_Previews: PreviewProvider {
   static var previews: some View {
     InstructionsView(firstTabPressed: .constant(false), secondTabPressed: .constant(false), locationData: .mock)
+      .padding([.leading,.trailing],16)
   }
 }

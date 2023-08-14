@@ -28,10 +28,13 @@ struct TabBarView: View {
       .tabItem {
         Label("Coworkers", image: "social")
       }
-      ProfileView()
-        .environmentObject(ProfileModuleNavigationFlow.shared)
+      RootNavigationController(nav: nav.profileNavigationController, rootView: ProfileView())
         .tabItem {
           Label("Profile", image: "profile")
+        }
+        .environmentObject(router)
+        .onAppear {
+          router.nav = nav.profileNavigationController
         }
       
       if Resources.adminMode {

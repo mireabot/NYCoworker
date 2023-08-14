@@ -29,22 +29,14 @@ struct LocationDetailView: View {
   var body: some View {
     NavigationView {
       ScrollView(.vertical, showsIndicators: true) {
-        LazyVStack(spacing: -4) {
-          GeometryReader { proxy -> AnyView in
-            let offset = proxy.frame(in: .global).minY
-            
-            AnyView(
-              NYCImageCarousel(imageUrls: selectedLocation?.locationImages ?? Location.mock.locationImages)
-                .frame(width: UIScreen.main.bounds.width, height: 200 + (offset > 0 ? offset : 0))
-                .offset(y: (offset > 0 ? -offset : 0))
-            )
-          }
-          .frame(height: 200)
+        LazyVStack(spacing: -5) {
+          NYCImageCarousel(imageUrls: selectedLocation?.locationImages ?? Location.mock.locationImages)
+            .frame(width: UIScreen.main.bounds.width, height: 200)
           
           VStack {
             locationInfo()
-            reviews()
-            amenities()
+            reviews().id(2)
+            amenities().id(3)
             workingHours()
             suggestInfo().padding(.bottom, 15)
           }
@@ -64,7 +56,6 @@ struct LocationDetailView: View {
           .presentationDragIndicator(.visible)
       })
       .toolbarBackground(.white, for: .navigationBar)
-      .navigationBarBackButtonHidden()
       .navigationBarTitleDisplayMode(.inline)
       .task {
         AnalyticsManager.shared.log(.locationSelected(selectedLocation?.locationID ?? Location.mock.locationID))
@@ -77,12 +68,12 @@ struct LocationDetailView: View {
       }
       .toolbar {
         ToolbarItem(placement: .navigationBarLeading) {
-          NYCCircleImageButton(size: 24, image: Resources.Images.Navigation.arrowBack) {
+          NYCCircleImageButton(size: 20, image: Resources.Images.Navigation.arrowBack) {
             router.nav?.popViewController(animated: true)
           }
         }
         ToolbarItem(placement: .navigationBarTrailing) {
-          NYCCircleImageButton(size: 24, image: Resources.Images.Settings.rate) {
+          NYCCircleImageButton(size: 20, image: Resources.Images.Settings.rate) {
             Task {
               await locationService.addFavoriteLocation(locationID: selectedLocation?.locationID ?? Location.mock.locationID, userID: userId, completion: {
                 AnalyticsManager.shared.log(.locationAddedToFavs(selectedLocation?.locationID ?? Location.mock.locationID))
@@ -124,19 +115,9 @@ extension LocationDetailView { //MARK: - View components
           Text(selectedLocation?.locationName ?? Location.mock.locationName)
             .foregroundColor(Resources.Colors.customBlack)
             .font(Resources.Fonts.medium(withSize: 22))
-          HStack(spacing: 1) {
-            LocationR.General.pin
-              .resizable()
-              .frame(width: 18,height: 18)
-            Text(selectedLocation?.locationAddress ?? Location.mock.locationAddress)
-              .foregroundColor(Resources.Colors.darkGrey)
-              .font(Resources.Fonts.regular(withSize: 13))
-          }
-          HStack(spacing: 3) {
-            ForEach(selectedLocation?.locationTags ?? Location.mock.locationTags,id: \.self) { title in
-              NYCBadgeView(badgeType: .withWord, title: title)
-            }
-          }
+          Text(selectedLocation?.locationAddress ?? Location.mock.locationAddress)
+            .foregroundColor(Resources.Colors.darkGrey)
+            .font(Resources.Fonts.regular(withSize: 13))
         }
         
         Spacer()
@@ -148,7 +129,15 @@ extension LocationDetailView { //MARK: - View components
         }
       }
       
+      HStack(spacing: 3) {
+        ForEach(selectedLocation?.locationTags ?? Location.mock.locationTags,id: \.self) { title in
+          NYCBadgeView(badgeType: .withWord, title: title)
+        }
+        Spacer()
+      }
+      
       InstructionsView(firstTabPressed: $showUpdatesList, secondTabPressed: $showReviewList, locationData: selectedLocation ?? Location.mock)
+        .padding(.top, 5)
         .sheet(isPresented: $showUpdatesList, content: {
           InstructionsExpandedView(locationData: selectedLocation ?? Location.mock)
             .presentationDetents([.fraction(0.95)])

@@ -134,9 +134,6 @@
 		35F29399299E8F4A00A85586 /* AmenityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F29398299E8F4A00A85586 /* AmenityModel.swift */; };
 		35F2939B299F195400A85586 /* NotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F2939A299F195400A85586 /* NotificationsView.swift */; };
 		35F5630A2A13D181004FE102 /* NYCSegmentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F563092A13D181004FE102 /* NYCSegmentControl.swift */; };
-		35F768102A65BB52004E3305 /* ProfileModuleNavigationFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F7680F2A65BB52004E3305 /* ProfileModuleNavigationFactory.swift */; };
-		35F768122A65BB5F004E3305 /* ProfileModuleNavigationDestinations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F768112A65BB5F004E3305 /* ProfileModuleNavigationDestinations.swift */; };
-		35F768142A65BB71004E3305 /* ProfileModuleNavigationFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F768132A65BB71004E3305 /* ProfileModuleNavigationFlow.swift */; };
 		35F7A2FB2A243FB20021BB5D /* NavigationTransitions in Frameworks */ = {isa = PBXBuildFile; productRef = 35F7A2FA2A243FB20021BB5D /* NavigationTransitions */; };
 		35F7A2FD2A2444DF0021BB5D /* NavigationDestinations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F7A2FC2A2444DF0021BB5D /* NavigationDestinations.swift */; };
 		35F90D012A1808DC00AFF4FF /* GrabberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F90D002A1808DC00AFF4FF /* GrabberView.swift */; };
@@ -265,9 +262,6 @@
 		35F29398299E8F4A00A85586 /* AmenityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmenityModel.swift; sourceTree = "<group>"; };
 		35F2939A299F195400A85586 /* NotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsView.swift; sourceTree = "<group>"; };
 		35F563092A13D181004FE102 /* NYCSegmentControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCSegmentControl.swift; sourceTree = "<group>"; };
-		35F7680F2A65BB52004E3305 /* ProfileModuleNavigationFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModuleNavigationFactory.swift; sourceTree = "<group>"; };
-		35F768112A65BB5F004E3305 /* ProfileModuleNavigationDestinations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModuleNavigationDestinations.swift; sourceTree = "<group>"; };
-		35F768132A65BB71004E3305 /* ProfileModuleNavigationFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModuleNavigationFlow.swift; sourceTree = "<group>"; };
 		35F7A2FC2A2444DF0021BB5D /* NavigationDestinations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationDestinations.swift; sourceTree = "<group>"; };
 		35F90D002A1808DC00AFF4FF /* GrabberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrabberView.swift; sourceTree = "<group>"; };
 		35FAF10A2A844CA100E67769 /* LocationSuggestionStartingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSuggestionStartingView.swift; sourceTree = "<group>"; };
@@ -581,7 +575,6 @@
 			isa = PBXGroup;
 			children = (
 				35A34BF52A89701C0072E6A4 /* NYCAppNavigation */,
-				35F7680E2A65BB37004E3305 /* ProfileModuleNavigation */,
 				3550FA2C29B3CA8A0091B558 /* Coordinators */,
 			);
 			path = Navigation;
@@ -875,16 +868,6 @@
 			path = "AddReview Module";
 			sourceTree = "<group>";
 		};
-		35F7680E2A65BB37004E3305 /* ProfileModuleNavigation */ = {
-			isa = PBXGroup;
-			children = (
-				35F7680F2A65BB52004E3305 /* ProfileModuleNavigationFactory.swift */,
-				35F768112A65BB5F004E3305 /* ProfileModuleNavigationDestinations.swift */,
-				35F768132A65BB71004E3305 /* ProfileModuleNavigationFlow.swift */,
-			);
-			path = ProfileModuleNavigation;
-			sourceTree = "<group>";
-		};
 		35FAF1002A844AFB00E67769 /* Location Suggestion Module */ = {
 			isa = PBXGroup;
 			children = (
@@ -1026,7 +1009,6 @@
 				3503BD9D297F5EE500C0E365 /* Resources.swift in Sources */,
 				359E6AA22981ED8B00333BD7 /* Onboarding.swift in Sources */,
 				35A34BE12A856DD80072E6A4 /* LocationSuggestionModel.swift in Sources */,
-				35F768102A65BB52004E3305 /* ProfileModuleNavigationFactory.swift in Sources */,
 				355C11BE29B78EB7001F092B /* NotificationCard.swift in Sources */,
 				359A792B298DFBB9001B66CF /* Modifiers.swift in Sources */,
 				35D9447929EEF80400B9B640 /* FirebaseErrors.swift in Sources */,
@@ -1042,7 +1024,6 @@
 				35402A2A2A0EB2A300974CF7 /* NYCBottomViewContent.swift in Sources */,
 				350DE274299143B500573163 /* DeleteAccountBottomView.swift in Sources */,
 				35D9447D29EF035800B9B640 /* Helpers.swift in Sources */,
-				35F768122A65BB5F004E3305 /* ProfileModuleNavigationDestinations.swift in Sources */,
 				35A7981629E463C600359400 /* AdminLocationView.swift in Sources */,
 				35EF059E29B0F40A0098110B /* AccoutSetupView.swift in Sources */,
 				359E36952A3F6EFB00BE937D /* AdminModerationView.swift in Sources */,
@@ -1080,7 +1061,6 @@
 				35737E5B29888866003B68BE /* ProfileView.swift in Sources */,
 				359F80FB298C330B000D792E /* FavoriteLocationsView.swift in Sources */,
 				35D9A5CE298981EE00A2F8D6 /* SettingsModel.swift in Sources */,
-				35F768142A65BB71004E3305 /* ProfileModuleNavigationFlow.swift in Sources */,
 				359348DD29BA421900B7739A /* ReviewModel.swift in Sources */,
 				35A8AFE92A16B25D00E362D7 /* NYCReviewTypeBadge.swift in Sources */,
 				3542F59D29DA1A820086CB4F /* LoadingLocationCell.swift in Sources */,
@@ -1267,7 +1247,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = NYCoworker/NYCoworker.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 49;
+				CURRENT_PROJECT_VERSION = 50;
 				DEVELOPMENT_TEAM = 9S2MZXD36G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NYCoworker/Info.plist;
@@ -1305,7 +1285,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = NYCoworker/NYCoworker.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 49;
+				CURRENT_PROJECT_VERSION = 50;
 				DEVELOPMENT_TEAM = 9S2MZXD36G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NYCoworker/Info.plist;

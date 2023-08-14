@@ -96,10 +96,9 @@ struct LocationSuggestionStartingView: View {
         }
         
         ToolbarItem(placement: .principal) {
-          Text(count == 2 ? "Let’s start from basic information" : "Now share any special details")
+          Text(setToolBarTitle())
             .font(Resources.Fonts.regular(withSize: 18))
             .foregroundColor(Resources.Colors.customBlack)
-            .opacity(count == 1 || count == 4 ? 0 : 1)
         }
       }
       .navigationBarTitleDisplayMode(.inline)
@@ -140,11 +139,6 @@ extension LocationSuggestionStartingView {
   
   var successView: any View {
     ScrollView(.vertical, showsIndicators: false) {
-      Text("You are all set!")
-        .font(Resources.Fonts.regular(withSize: 20))
-        .foregroundColor(Resources.Colors.customBlack)
-        .padding(.top, 30)
-      
       VStack(spacing: -40) {
         LottieAnimationViewWrapper(animationName: .constant("success.json"))
           .frame(width: 250, height: 250)
@@ -171,5 +165,15 @@ extension LocationSuggestionStartingView {
       return true
     }
     return false
+  }
+  
+  func setToolBarTitle() -> String {
+    switch count {
+    case 1: return ""
+    case 2: return "Let’s start from basic information"
+    case 3: return "Now share any special details"
+    case 4: return "You are all set!"
+    default: return ""
+    }
   }
 }

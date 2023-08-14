@@ -41,7 +41,7 @@ struct NYCMiddleAlertView_Previews: PreviewProvider {
     static var previews: some View {
       ZStack {
         Color.black.edgesIgnoringSafeArea(.all)
-        NYCMiddleAlertView(alertType: .geolocationRejected, action: {})
+        NYCMiddleAlertView(alertType: .accountUpdated, action: {})
       }
     }
 }
@@ -53,6 +53,7 @@ extension NYCMiddleAlertView { // MARK: - Enums
     case geolocationRejected
     case feedbackSubmitted
     case suggestionSubmitted
+    case accountUpdated
     
     var title: String {
       switch self {
@@ -61,6 +62,7 @@ extension NYCMiddleAlertView { // MARK: - Enums
       case .geolocationRejected: return "Location Services Denied"
       case .feedbackSubmitted: return "Thanks for sharing!"
       case .suggestionSubmitted: return "Thanks for sharing!"
+      case .accountUpdated: return "Your profile was updated!"
       }
     }
     
@@ -71,6 +73,7 @@ extension NYCMiddleAlertView { // MARK: - Enums
       case .geolocationRejected: return "No worries! You won't see distance from locations unless you turn location services in settings."
       case .feedbackSubmitted: return "Hearing from you helps us to create the best NYCoworker experience."
       case .suggestionSubmitted: return "Hearing from you helps us to create the best NYCoworker experience."
+      case .accountUpdated: return "New data successfully saved and will be updated shortly."
       }
     }
   }
