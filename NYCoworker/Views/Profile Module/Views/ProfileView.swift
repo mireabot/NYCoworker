@@ -29,7 +29,7 @@ struct ProfileView: View {
               showSuggestionSheet.toggle()
             }
           })
-            .padding(.top, 15)
+          .padding(.top, 15)
           
           profileFooter()
         }
@@ -42,30 +42,30 @@ struct ProfileView: View {
           navigationFlow.currentUser = userService.user
         }
       }
-      .fullScreenCover(isPresented: $showSuggestionSheet, content: {
-        LocationSuggestionStartingView(showView: $showSuggestionSheet)
-      })
-      .sheet(isPresented: $showPopup) {
-        DeleteAccountBottomView(isVisible: $showPopup)
-          .background {
-            GeometryReader { proxy in
-              Color.clear
-                .task {
-                  sheetContentHeight = proxy.size.height
-                }
-            }
-          }
-          .presentationDetents([.height(sheetContentHeight)])
-      }
-      .applyNavigationTransition()
-      .navigationDestination(for: ProfileModuleNavigationDestinations.self) { destination in
-        ProfileModuleNavigationFactory.setViewForDestination(destination)
-      }
       .toolbar {
         ToolbarItem(placement: .navigationBarLeading) {
           NYCHeader(title: "Profile")
         }
       }
+      .navigationDestination(for: ProfileModuleNavigationDestinations.self) { destination in
+        ProfileModuleNavigationFactory.setViewForDestination(destination)
+      }
+    }
+    .applyNavigationTransition()
+    .fullScreenCover(isPresented: $showSuggestionSheet, content: {
+      LocationSuggestionStartingView(showView: $showSuggestionSheet)
+    })
+    .sheet(isPresented: $showPopup) {
+      DeleteAccountBottomView(isVisible: $showPopup)
+        .background {
+          GeometryReader { proxy in
+            Color.clear
+              .task {
+                sheetContentHeight = proxy.size.height
+              }
+          }
+        }
+        .presentationDetents([.height(sheetContentHeight)])
     }
   }
 }

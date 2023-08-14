@@ -9,45 +9,47 @@ import SwiftUI
 import PopupView
 
 struct LocationListView: View {
-  @EnvironmentObject var navigationFlow: LocationModuleNavigationFlow
+  @EnvironmentObject var router: NYCNavigationViewsRouter
   @StateObject private var locationService = LocationService()
   @State var addToFavs = false
   @AppStorage("UserID") var userId : String = ""
+  var selectedTitle: String
+  var selectedLocations: [Location]
   var body: some View {
-    ScrollView(.vertical, showsIndicators: true) {
-      locationsList()
-    }
-    .padding([.leading,.trailing], 16)
-    .popup(isPresented: $addToFavs) {
-      NYCAlertNotificationView(alertStyle: .addedToFavorites)
-    } customize: {
-      $0
-        .isOpaque(true)
-        .autohideIn(1.5)
-        .type(.floater())
-        .position(.top)
-        .animation(.spring(response: 0.4, blendDuration: 0.2))
-    }
-    .toolbarBackground(.white, for: .navigationBar)
-    .toolbar {
-      ToolbarItem(placement: .navigationBarLeading) {
-        Button {
-          navigationFlow.backToPrevious()
-        } label: {
-          Resources.Images.Navigation.arrowBack
-            .foregroundColor(Resources.Colors.primary)
+    NavigationView {
+      ScrollView(.vertical, showsIndicators: true) {
+        locationsList()
+      }
+      .padding([.leading,.trailing], 16)
+      .popup(isPresented: $addToFavs) {
+        NYCAlertNotificationView(alertStyle: .addedToFavorites)
+      } customize: {
+        $0
+          .isOpaque(true)
+          .autohideIn(1.5)
+          .type(.floater())
+          .position(.top)
+          .animation(.spring(response: 0.4, blendDuration: 0.2))
+      }
+      .toolbarBackground(.white, for: .navigationBar)
+      .toolbar {
+        ToolbarItem(placement: .navigationBarLeading) {
+          Button {
+            router.nav?.popViewController(animated: true)
+          } label: {
+            Resources.Images.Navigation.arrowBack
+              .foregroundColor(Resources.Colors.primary)
+          }
+          
         }
         
-      }
-      
-      ToolbarItem(placement: .navigationBarLeading) {
-        Text(navigationFlow.selectedListTitle)
-          .foregroundColor(Resources.Colors.customBlack)
-          .font(Resources.Fonts.medium(withSize: 17))
+        ToolbarItem(placement: .navigationBarLeading) {
+          Text(selectedTitle)
+            .foregroundColor(Resources.Colors.customBlack)
+            .font(Resources.Fonts.medium(withSize: 17))
+        }
       }
     }
-    .navigationBarTitleDisplayMode(.inline)
-    .navigationBarBackButtonHidden()
   }
 }
 
@@ -61,7 +63,7 @@ extension LocationListView { //MARK: - View components
   @ViewBuilder
   func locationsList() -> some View {
     LazyVStack(spacing: 12) {
-      ForEach(navigationFlow.selectedSetOfLocations){ location in
+      ForEach(selectedLocations){ location in
         LocationListCell(type: .list, data: location) {
           Task {
             do {
@@ -74,8 +76,7 @@ extension LocationListView { //MARK: - View components
           }
         }
         .onTapGesture {
-          navigationFlow.selectedLocation = location
-          navigationFlow.navigateToDetailView()
+          router.pushTo(view: NYCNavigationViewBuilder.builder.makeView(LocationDetailView(selectedLocation: location)))
         }
       }
     }

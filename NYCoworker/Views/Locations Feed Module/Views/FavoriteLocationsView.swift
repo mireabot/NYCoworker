@@ -10,50 +10,49 @@ import PopupView
 import Firebase
 
 struct FavoriteLocationsView: View {
-  @EnvironmentObject var navigationFlow: LocationModuleNavigationFlow
+  @EnvironmentObject var router: NYCNavigationViewsRouter
   @State var isLoading = true
   @State var isUpdating = false
   @StateObject private var userService = UserService()
   @StateObject private var locationService = LocationService()
   @AppStorage("UserID") var userId : String = ""
   var body: some View {
-    favoriteList()
-      .onAppear {
-        isLoading = true
-        Task(priority: .userInitiated) {
-          do {
-            await userService.fetchUser(documentId: userId, completion: {
-              Task(priority: .userInitiated) {
-                await locationService.fetchFavoriteLocations(for: userService.user) {
-                  DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                    isLoading = false
+    NavigationView {
+      favoriteList()
+        .onAppear {
+          isLoading = true
+          Task(priority: .userInitiated) {
+            do {
+              await userService.fetchUser(documentId: userId, completion: {
+                Task(priority: .userInitiated) {
+                  await locationService.fetchFavoriteLocations(for: userService.user) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                      print("Favorites locations for userID \(userService.user.userID) fetched with count \(locationService.favoriteLocations.count)")
+                      isLoading = false
+                    }
                   }
                 }
-              }
-            })
+              })
+            }
           }
         }
-      }
-      .toolbar(content: {
-        ToolbarItem(placement: .navigationBarLeading) {
-          Button {
-            navigationFlow.backToPrevious()
-          } label: {
-            Resources.Images.Navigation.arrowBack
-              .foregroundColor(Resources.Colors.primary)
+        .toolbar(content: {
+          ToolbarItem(placement: .navigationBarLeading) {
+            Button {
+              router.nav?.popViewController(animated: true)
+            } label: {
+              Resources.Images.Navigation.arrowBack
+                .foregroundColor(Resources.Colors.primary)
+            }
           }
           
-        }
-        
-        ToolbarItem(placement: .navigationBarLeading) {
-          Text("Your favorites")
-            .foregroundColor(Resources.Colors.customBlack)
-            .font(Resources.Fonts.medium(withSize: 17))
-        }
-      })
-      .navigationBarTitleDisplayMode(.inline)
-      .navigationBarBackButtonHidden()
-      .toolbarBackground(.white, for: .navigationBar)
+          ToolbarItem(placement: .navigationBarLeading) {
+            Text("Your favorites")
+              .foregroundColor(Resources.Colors.customBlack)
+              .font(Resources.Fonts.medium(withSize: 17))
+          }
+        })
+    }
   }
 }
 
@@ -85,8 +84,7 @@ extension FavoriteLocationsView { //MARK: - View components
                   }
                 })
                 .onTapGesture {
-                  navigationFlow.selectedLocation = data
-                  navigationFlow.navigateToDetailView()
+                  router.pushTo(view: NYCNavigationViewBuilder.builder.makeView(LocationDetailView(selectedLocation: data)))
                 }
               }
             }
@@ -117,6 +115,7 @@ extension FavoriteLocationsView { //MARK: - Functions
       Task(priority: .userInitiated) {
         await locationService.fetchFavoriteLocations(for: userService.user) {
           DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            print("Favorites locations for userID \(userId) fetched with count \(locationService.favoriteLocations)")
             isLoading = false
           }
         }

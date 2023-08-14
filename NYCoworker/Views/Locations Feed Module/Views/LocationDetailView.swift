@@ -10,9 +10,11 @@ import PopupView
 import CoreLocation
 import SDWebImageSwiftUI
 import Shimmer
+import UIKit
 
 struct LocationDetailView: View {
-  @EnvironmentObject var navigationFlow: LocationModuleNavigationFlow
+  @EnvironmentObject var router: NYCNavigationViewsRouter
+  var selectedLocation: Location?
   @AppStorage("UserID") var userId : String = ""
   @State var currentImage: Int = 0
   @State var addToFavs = false
@@ -25,86 +27,83 @@ struct LocationDetailView: View {
   @StateObject private var locationService = LocationService()
   @State private var sheetContentHeight = CGFloat(0)
   var body: some View {
-    ScrollView(.vertical, showsIndicators: true) {
-      LazyVStack(spacing: -4) {
-        GeometryReader { proxy -> AnyView in
-          let offset = proxy.frame(in: .global).minY
+    NavigationView {
+      ScrollView(.vertical, showsIndicators: true) {
+        LazyVStack(spacing: -4) {
+          GeometryReader { proxy -> AnyView in
+            let offset = proxy.frame(in: .global).minY
+            
+            AnyView(
+              NYCImageCarousel(imageUrls: selectedLocation?.locationImages ?? Location.mock.locationImages)
+                .frame(width: UIScreen.main.bounds.width, height: 200 + (offset > 0 ? offset : 0))
+                .offset(y: (offset > 0 ? -offset : 0))
+            )
+          }
+          .frame(height: 200)
           
-          AnyView(
-            NYCImageCarousel(imageUrls: navigationFlow.selectedLocation.locationImages)
-              .frame(width: UIScreen.main.bounds.width, height: 200 + (offset > 0 ? offset : 0))
-              .offset(y: (offset > 0 ? -offset : 0))
-          )
+          VStack {
+            locationInfo()
+            reviews()
+            amenities()
+            workingHours()
+            suggestInfo().padding(.bottom, 15)
+          }
+          .padding(.top, 15)
         }
-        .frame(height: 200)
-        
-        VStack {
-          locationInfo()
-          reviews()
-          amenities()
-          workingHours()
-          suggestInfo().padding(.bottom, 15)
-        }
-        .padding(.top, 15)
       }
-    }
-    .fullScreenCover(isPresented: $reportEdit, content: {
-      SuggestInformationView(locationID: navigationFlow.selectedLocation.locationID, isPresented: $reportEdit)
-    })
-    .fullScreenCover(isPresented: $addReviewView, content: {
-      AddReviewView(isPresented: $addReviewView, locationData: navigationFlow.selectedLocation)
-    })
-    .sheet(isPresented: $showReviewList, content: {
-      ExpandedReviewView(type: .fullList)
-        .environmentObject(reviewService)
-        .presentationDetents([.fraction(0.95)])
-        .presentationDragIndicator(.visible)
-    })
-    .sheet(isPresented: $showUpdatesList, content: {
-      InstructionsExpandedView(locationData: navigationFlow.selectedLocation)
-        .presentationDetents([.fraction(0.95)])
-        .presentationDragIndicator(.visible)
-    })
-    .toolbarBackground(.white, for: .navigationBar)
-    .navigationBarBackButtonHidden()
-    .navigationBarTitleDisplayMode(.inline)
-    .task {
-      AnalyticsManager.shared.log(.locationSelected(navigationFlow.selectedLocation.locationID))
-      guard reviewService.reviews.isEmpty else { return }
-      await reviewService.fetchReviews(locationID: "\(navigationFlow.selectedLocation.locationID)", completion: {
-        DispatchQueue.main.async {
-          isLoading = false
-        }
+      .fullScreenCover(isPresented: $reportEdit, content: {
+        SuggestInformationView(locationID: selectedLocation?.locationID ?? Location.mock.locationID, isPresented: $reportEdit)
       })
-    }
-    .toolbar {
-      ToolbarItem(placement: .navigationBarLeading) {
-        NYCCircleImageButton(size: 24, image: Resources.Images.Navigation.arrowBack) {
-          navigationFlow.backToPrevious()
-        }
+      .fullScreenCover(isPresented: $addReviewView, content: {
+        AddReviewView(isPresented: $addReviewView, locationData: selectedLocation ?? Location.mock)
+      })
+      .sheet(isPresented: $showReviewList, content: {
+        ExpandedReviewView(type: .fullList)
+          .environmentObject(reviewService)
+          .presentationDetents([.fraction(0.95)])
+          .presentationDragIndicator(.visible)
+      })
+      .toolbarBackground(.white, for: .navigationBar)
+      .navigationBarBackButtonHidden()
+      .navigationBarTitleDisplayMode(.inline)
+      .task {
+        AnalyticsManager.shared.log(.locationSelected(selectedLocation?.locationID ?? Location.mock.locationID))
+        guard reviewService.reviews.isEmpty else { return }
+        await reviewService.fetchReviews(locationID: "\(selectedLocation?.locationID ?? Location.mock.locationID)", completion: {
+          DispatchQueue.main.async {
+            isLoading = false
+          }
+        })
       }
-      ToolbarItem(placement: .navigationBarTrailing) {
-        NYCCircleImageButton(size: 24, image: Resources.Images.Settings.rate) {
-          Task {
-            await locationService.addFavoriteLocation(locationID: navigationFlow.selectedLocation.locationID, userID: userId, completion: {
-              AnalyticsManager.shared.log(.locationAddedToFavs(navigationFlow.selectedLocation.locationID))
-              addToFavs.toggle()
-            }) { err in
-              locationService.setError(err)
+      .toolbar {
+        ToolbarItem(placement: .navigationBarLeading) {
+          NYCCircleImageButton(size: 24, image: Resources.Images.Navigation.arrowBack) {
+            router.nav?.popViewController(animated: true)
+          }
+        }
+        ToolbarItem(placement: .navigationBarTrailing) {
+          NYCCircleImageButton(size: 24, image: Resources.Images.Settings.rate) {
+            Task {
+              await locationService.addFavoriteLocation(locationID: selectedLocation?.locationID ?? Location.mock.locationID, userID: userId, completion: {
+                AnalyticsManager.shared.log(.locationAddedToFavs(selectedLocation?.locationID ?? Location.mock.locationID))
+                addToFavs.toggle()
+              }) { err in
+                locationService.setError(err)
+              }
             }
           }
         }
       }
-    }
-    .popup(isPresented: $addToFavs) {
-      NYCAlertNotificationView(alertStyle: .addedToFavorites)
-    } customize: {
-      $0
-        .isOpaque(true)
-        .autohideIn(1.5)
-        .type(.floater())
-        .position(.bottom)
-        .animation(.spring(response: 0.4, blendDuration: 0.2))
+      .popup(isPresented: $addToFavs) {
+        NYCAlertNotificationView(alertStyle: .addedToFavorites)
+      } customize: {
+        $0
+          .isOpaque(true)
+          .autohideIn(1.5)
+          .type(.floater())
+          .position(.bottom)
+          .animation(.spring(response: 0.4, blendDuration: 0.2))
+      }
     }
   }
 }
@@ -122,19 +121,19 @@ extension LocationDetailView { //MARK: - View components
     VStack {
       HStack {
         VStack(alignment: .leading, spacing: 5) {
-          Text(navigationFlow.selectedLocation.locationName)
+          Text(selectedLocation?.locationName ?? Location.mock.locationName)
             .foregroundColor(Resources.Colors.customBlack)
             .font(Resources.Fonts.medium(withSize: 22))
           HStack(spacing: 1) {
             LocationR.General.pin
               .resizable()
               .frame(width: 18,height: 18)
-            Text(navigationFlow.selectedLocation.locationAddress)
+            Text(selectedLocation?.locationAddress ?? Location.mock.locationAddress)
               .foregroundColor(Resources.Colors.darkGrey)
               .font(Resources.Fonts.regular(withSize: 13))
           }
           HStack(spacing: 3) {
-            ForEach(navigationFlow.selectedLocation.locationTags,id: \.self) { title in
+            ForEach(selectedLocation?.locationTags ?? Location.mock.locationTags,id: \.self) { title in
               NYCBadgeView(badgeType: .withWord, title: title)
             }
           }
@@ -143,12 +142,18 @@ extension LocationDetailView { //MARK: - View components
         Spacer()
         
         NYCCircleImageButton(size: 24, image: Resources.Images.Navigation.openMap) {
-          AnalyticsManager.shared.log(.routeButtonPressed(navigationFlow.selectedLocation.locationID))
-          openInAppleMaps(address: navigationFlow.selectedLocation.locationAddress, withName: navigationFlow.selectedLocation.locationName)
+          AnalyticsManager.shared.log(.routeButtonPressed(selectedLocation?.locationID ?? Location.mock.locationID))
+          guard let selectedLocation = selectedLocation else { return }
+          openInAppleMaps(address: selectedLocation.locationAddress, withName: selectedLocation.locationName)
         }
       }
       
-      InstructionsView(firstTabPressed: $showUpdatesList, secondTabPressed: $showReviewList, locationData: navigationFlow.selectedLocation)
+      InstructionsView(firstTabPressed: $showUpdatesList, secondTabPressed: $showReviewList, locationData: selectedLocation ?? Location.mock)
+        .sheet(isPresented: $showUpdatesList, content: {
+          InstructionsExpandedView(locationData: selectedLocation ?? Location.mock)
+            .presentationDetents([.fraction(0.95)])
+            .presentationDragIndicator(.visible)
+        })
       
       Rectangle()
         .foregroundColor(Resources.Colors.customGrey)
@@ -205,15 +210,16 @@ extension LocationDetailView { //MARK: - View components
         .font(Resources.Fonts.medium(withSize: 15))
         .padding([.leading,.trailing], 16)
       
-      if navigationFlow.selectedLocation.locationAmenities.isEmpty {
-        NYCEmptyView(type: .noAmenities)
-          .padding([.leading,.trailing], 16)
-      }
-      else {
+      if let amenitiesData = selectedLocation?.locationAmenities, !amenitiesData.isEmpty {
         ScrollView(.horizontal, showsIndicators: false) {
           amenitiesGridView()
             .padding([.leading,.trailing], 16)
-        }.disabled(navigationFlow.selectedLocation.locationAmenities.count <= 6)
+        }
+        .disabled(amenitiesData.count <= 6)
+      }
+      else {
+        NYCEmptyView(type: .noAmenities)
+          .padding([.leading,.trailing], 16)
       }
       
       Rectangle()
@@ -231,14 +237,10 @@ extension LocationDetailView { //MARK: - View components
         .font(Resources.Fonts.medium(withSize: 15))
         .padding(.leading, 16)
       
-      if navigationFlow.selectedLocation.locationHours.isEmpty {
-        NYCEmptyView(type: .noWorkingHours)
-          .padding([.leading,.trailing], 16)
-      }
-      else {
+      if let hoursData = selectedLocation?.locationHours, !hoursData.isEmpty {
         ScrollView(.horizontal, showsIndicators: false) {
           HStack(spacing: 5) {
-            ForEach(navigationFlow.selectedLocation.locationHours,id: \.self){ item in
+            ForEach(selectedLocation?.locationHours ?? Location.mock.locationHours,id: \.self){ item in
               VStack(spacing: 5) {
                 Text(item.weekDay)
                   .foregroundColor(Resources.Colors.darkGrey)
@@ -254,6 +256,10 @@ extension LocationDetailView { //MARK: - View components
           }
           .padding([.leading,.trailing], 16)
         }
+      }
+      else {
+        NYCEmptyView(type: .noWorkingHours)
+          .padding([.leading,.trailing], 16)
       }
       
       Rectangle()
@@ -298,7 +304,7 @@ extension LocationDetailView { //MARK: - View components
     ]
     
     LazyHGrid(rows: rows, alignment: .center, spacing: 10) {
-      ForEach(navigationFlow.selectedLocation.locationAmenities,id: \.self) { item in
+      ForEach(selectedLocation?.locationAmenities ?? Location.mock.locationAmenities,id: \.self) { item in
         HStack(alignment: .center, spacing: 5) {
           amenitiesImage(image: item)
             .foregroundColor(Resources.Colors.customBlack)
@@ -347,7 +353,7 @@ extension LocationDetailView { //MARK: - Functions
   }
   
   func showReviewSubmission() {
-    AnalyticsManager.shared.log(.reviewOpened(navigationFlow.selectedLocation.locationID))
+    AnalyticsManager.shared.log(.reviewOpened(selectedLocation?.locationID ?? Location.mock.locationID))
     addReviewView.toggle()
   }
 }

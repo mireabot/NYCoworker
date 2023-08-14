@@ -9,28 +9,29 @@ import SwiftUI
 import PopupView
 
 struct NotificationsView: View {
-  @EnvironmentObject var navigationFlow: LocationModuleNavigationFlow
+  @EnvironmentObject var router: NYCNavigationViewsRouter
+  @EnvironmentObject var notificationService: NotificationService
   @State var isLoading = false
   var body: some View {
-    notificationsList()
-      .toolbar(content: {
-        ToolbarItem(placement: .navigationBarLeading) {
-          Button {
-            navigationFlow.backToPrevious()
-          } label: {
-            Resources.Images.Navigation.arrowBack
-              .foregroundColor(Resources.Colors.primary)
+    NavigationView {
+      notificationsList()
+        .toolbar(content: {
+          ToolbarItem(placement: .navigationBarLeading) {
+            Button {
+              router.nav?.popViewController(animated: true)
+            } label: {
+              Resources.Images.Navigation.arrowBack
+                .foregroundColor(Resources.Colors.primary)
+            }
           }
-        }
-        
-        ToolbarItem(placement: .navigationBarLeading) {
-          Text("Notifications")
-            .foregroundColor(Resources.Colors.customBlack)
-            .font(Resources.Fonts.medium(withSize: 17))
-        }
-      })
-      .navigationBarBackButtonHidden()
-      .toolbarBackground(.white, for: .navigationBar)
+          
+          ToolbarItem(placement: .navigationBarLeading) {
+            Text("Notifications")
+              .foregroundColor(Resources.Colors.customBlack)
+              .font(Resources.Fonts.medium(withSize: 17))
+          }
+        })
+    }
   }
 }
 
@@ -47,13 +48,13 @@ extension NotificationsView { //MARK: - View components
       ProgressView()
     }
     else {
-      if navigationFlow.setOfNotifications.isEmpty {
+      if notificationService.notifications.isEmpty {
         NYCEmptyView(type: .notifications)
       }
       else {
         ScrollView(.vertical, showsIndicators: true) {
           LazyVStack(spacing: 10) {
-            ForEach(navigationFlow.setOfNotifications, id: \.datePosted) { item in
+            ForEach(notificationService.notifications, id: \.datePosted) { item in
               NotificationCard(data: item)
             }
           }

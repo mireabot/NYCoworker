@@ -11,53 +11,58 @@ import PopupView
 import CoreLocation
 
 struct LocationsMap: View {
-  @EnvironmentObject var navigationFlow: LocationModuleNavigationFlow
+  @EnvironmentObject var router: NYCNavigationViewsRouter
   @State var selectedLocation: Location?
   @State var showAlert = false
+  var locations: [Location]
   var body: some View {
-    ZStack(alignment: .bottom) {
-      LocationMapView(locations: navigationFlow.arrayOfLocations, selectedLocation: $selectedLocation, region: getRegion(), type: .mapModule)
-        .ignoresSafeArea()
-      
-      ZStack {
-        ForEach(navigationFlow.arrayOfLocations, id: \.self) { location in
-          if selectedLocation == location {
-            LocationMapCard(location: location) {
-              showAlert.toggle()
+    NavigationView {
+      ZStack(alignment: .bottom) {
+        LocationMapView(locations: locations, selectedLocation: $selectedLocation, region: getRegion(), type: .mapModule)
+          .ignoresSafeArea()
+        
+        ZStack {
+          ForEach(locations, id: \.self) { location in
+            if selectedLocation == location {
+              LocationMapCard(location: location) {
+                showAlert.toggle()
+              }
+              .onTapGesture {
+                router.pushTo(view: NYCNavigationViewBuilder.builder.makeView(LocationDetailView(selectedLocation: location)))
+              }
+              .transition(.asymmetric(insertion: .move(edge: .trailing),removal: .move(edge: .leading)))
             }
-            .onTapGesture {
-              navigationFlow.selectedLocation = location
-              navigationFlow.navigateToDetailView()
-            }
-            .transition(.asymmetric(insertion: .move(edge: .trailing),removal: .move(edge: .leading)))
+          }
+        }.padding(.bottom, 30)
+      }
+      .navigationBarTitleDisplayMode(.inline)
+      .toolbar {
+        ToolbarItem(placement: .navigationBarLeading) {
+          NYCCircleImageButton(size: 24, image: Resources.Images.Navigation.arrowBack) {
+            router.nav?.popViewController(animated: true)
           }
         }
-      }.padding(.bottom, 30)
-    }
-    .popup(isPresented: $showAlert) {
-      NYCAlertNotificationView(alertStyle: .addedToFavorites)
-    } customize: {
-      $0
-        .isOpaque(true)
-        .autohideIn(1.5)
-        .type(.floater())
-        .position(.top)
-        .animation(.spring(response: 0.4, blendDuration: 0.2))
-    }
-    .navigationBarBackButtonHidden()
-    .toolbarBackground(.clear, for: .navigationBar)
-    .navigationBarTitleDisplayMode(.inline)
-    .toolbar {
-      ToolbarItem(placement: .navigationBarLeading) {
-        NYCCircleImageButton(size: 24, image: Resources.Images.Navigation.arrowBack, color: .black) {
-          navigationFlow.backToPrevious()
+        ToolbarItem(placement: .principal) {
+          Text("Locations Nearby")
+            .font(Resources.Fonts.medium(withSize: 20))
+            .foregroundColor(Resources.Colors.customBlack)
         }
+      }
+      .popup(isPresented: $showAlert) {
+        NYCAlertNotificationView(alertStyle: .addedToFavorites)
+      } customize: {
+        $0
+          .isOpaque(true)
+          .autohideIn(1.5)
+          .type(.floater())
+          .position(.top)
+          .animation(.spring(response: 0.4, blendDuration: 0.2))
       }
     }
   }
   
   private func getRegion() -> MKCoordinateRegion {
-    let center = CLLocationCoordinate2D(latitude: navigationFlow.arrayOfLocations.first?.locationCoordinates.latitude ?? 0.0, longitude: navigationFlow.arrayOfLocations.first?.locationCoordinates.longitude ?? 0.0)
+    let center = CLLocationCoordinate2D(latitude: locations.first?.locationCoordinates.latitude ?? 0.0, longitude: locations.first?.locationCoordinates.longitude ?? 0.0)
     let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
     return MKCoordinateRegion(center: center, span: span)
   }

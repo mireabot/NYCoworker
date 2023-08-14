@@ -72,7 +72,7 @@ struct SuggestInformationView: View {
       .onTapGesture {
         fieldIsFocused = false
       }
-      .scrollDisabled(true)
+      .scrollDisabled(false)
       .safeAreaInset(edge: .bottom, content: {
         Button {
           isLoading = true

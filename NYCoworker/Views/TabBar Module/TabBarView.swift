@@ -10,12 +10,17 @@ import PopupView
 
 struct TabBarView: View {
   @AppStorage("UserID") var userId : String = ""
+  let nav = NavigationControllers()
+  let router = NYCNavigationViewsRouter()
   var body: some View {
     TabView {
-      HomeView()
-        .environmentObject(LocationModuleNavigationFlow.shared)
+      RootNavigationController(nav: nav.locationFeedNavigationController, rootView: HomeView())
         .tabItem {
           Label("Explore", image: "home")
+        }
+        .environmentObject(router)
+        .onAppear {
+          router.nav = nav.locationFeedNavigationController
         }
       NavigationStack {
         SocialView()
@@ -45,6 +50,12 @@ struct TabBarView: View {
         UITabBar.appearance().standardAppearance = tabBarAppearance
         
         if #available(iOS 15.0, *) {
+          let navigationBarAppearance = UINavigationBarAppearance()
+          navigationBarAppearance.backgroundColor = .white
+          navigationBarAppearance.shadowColor = .clear
+          UINavigationBar.appearance().standardAppearance = navigationBarAppearance
+          UINavigationBar.appearance().compactAppearance = navigationBarAppearance
+          UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
           UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
         }
       }
