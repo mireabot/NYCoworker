@@ -16,6 +16,8 @@ class UserRegistrationModel: ObservableObject {
   @Published var gender = ""
   @Published var accountType = ""
   @Published var profileImage: Data?
+  @Published var notificationsPermissionGranted: Bool = false
+  @Published var geolocationPermissionGranted: Bool = false
   
   @AppStorage("UserID") var userId : String = ""
   @AppStorage("UserMail") var userMail : String = ""

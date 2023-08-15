@@ -23,6 +23,8 @@ struct NYCTextField: View {
         .padding(.horizontal, 16)
         .textFieldStyle(PlainTextFieldStyle())
         .tint(Resources.Colors.primary)
+        .keyboardType(.alphabet)
+        .autocorrectionDisabled(true)
         .background(
           RoundedRectangle(cornerRadius: 16)
             .strokeBorder(Resources.Colors.lightGrey, lineWidth: 1)

@@ -9,6 +9,7 @@ import SwiftUI
 import PopupView
 
 struct GeopositionPermission: View {
+  @EnvironmentObject var model: UserRegistrationModel
   @StateObject var locationManager = LocationManager()
   var body: some View {
     VStack {
@@ -33,9 +34,13 @@ struct GeopositionPermission: View {
     }
     .onAppear {
       locationManager.locationManager.delegate = locationManager
+      DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        model.geolocationPermissionGranted = true
+      }
     }
     .popup(isPresented: $locationManager.permissionDenied) {
       NYCMiddleAlertView(alertType: .geolocationRejected, action: {
+        model.geolocationPermissionGranted = true
         locationManager.permissionDenied.toggle()
       })
     } customize: {

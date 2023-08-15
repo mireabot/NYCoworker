@@ -8,10 +8,10 @@
 import SwiftUI
 
 class OnboardingCoordinator: ObservableObject {
-    var onboardingView: AccoutSetupView?
+    var onboardingView: AccountSetupView?
     
-    func start() -> AccoutSetupView {
-        let onboardingView = AccoutSetupView()
+    func start() -> AccountSetupView {
+        let onboardingView = AccountSetupView()
         self.onboardingView = onboardingView
         return onboardingView
     }

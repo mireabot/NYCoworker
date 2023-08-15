@@ -11,6 +11,7 @@ import PopupView
 import FirebaseMessaging
 
 struct NotificationPermission: View {
+  @EnvironmentObject var model: UserRegistrationModel
   @State var showAlert: Bool = false
   @AppStorage("fcmToken") var firebaseToken: String = ""
   var body: some View {
@@ -83,10 +84,12 @@ extension NotificationPermission { //MARK: - Functions
           firebaseToken = token
           DispatchQueue.main.async {
             UIApplication.shared.registerForRemoteNotifications()
+            model.notificationsPermissionGranted = true
           }
         })
       } else {
         print("Notifications not granted")
+        model.notificationsPermissionGranted = true
         showAlert.toggle()
       }
     }

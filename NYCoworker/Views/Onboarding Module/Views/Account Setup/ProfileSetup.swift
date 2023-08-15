@@ -5,8 +5,10 @@
 //  Created by Mikhail Kolkov on 1/27/23.
 //
 
+import Foundation
 import SwiftUI
 import PhotosUI
+import SwiftUIIntrospect
 
 struct ProfileSetup: View {
   @EnvironmentObject var model: UserRegistrationModel
@@ -16,7 +18,7 @@ struct ProfileSetup: View {
   @State private var showTip = false
   @State var photoItem: PhotosPickerItem?
   var body: some View {
-    ScrollView(.vertical, showsIndicators: false) {
+    ScrollView {
       /// Header
       HStack {
         VStack(alignment: .leading, spacing: 5) {
@@ -40,60 +42,41 @@ struct ProfileSetup: View {
             .aspectRatio(contentMode: .fill)
             .clipShape(Circle())
             .contentShape(Circle())
+            .frame(width: 80, height: 80)
         }
         else {
           ZStack(alignment: .bottomTrailing) {
-            ZStack(alignment: .bottomTrailing) {
-              Image("emptyImage")
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-              
-              Image(systemName: "plus.circle.fill")
-                .resizable()
-                .frame(width: 20, height: 20)
-                .foregroundColor(.white)
-                .padding(4)
-                .background(Resources.Colors.primary)
-                .clipShape(Circle())
-            }
-            if showTip {
-              Text("Don't forget about avatar")
-                .padding(.horizontal, 10)
-                .padding(.vertical, 5)
-                .foregroundColor(Resources.Colors.customBlack)
-                .font(Resources.Fonts.regular(withSize: 13))
-                .background(Resources.Colors.customGrey)
-                .cornerRadius(5)
-                .offset(x: 100)
-                .transition(.move(edge: .trailing))
-            }
-          }.animation(.interpolatingSpring(stiffness: 210, damping: 20), value: showTip)
+            Image("emptyImage")
+              .resizable()
+              .aspectRatio(contentMode: .fill)
+              .frame(width: 80, height: 80)
+            
+            Image(systemName: "plus.circle.fill")
+              .resizable()
+              .frame(width: 20, height: 20)
+              .foregroundColor(.white)
+              .padding(4)
+              .background(Resources.Colors.primary)
+              .clipShape(Circle())
+          }
         }
       }
-      .frame(width: 100, height: 100)
-      .padding(.top, 10)
+      .padding(.top, 5)
       .onTapGesture {
         showImagePicker.toggle()
       }
-      
       /// Main section - Name, Occupation, Personality
       VStack(alignment: .leading) {
         NYCTextField(title: "Your name", placeholder: "Ex. Michael", text: $model.name).focused($fieldIsFocused)
         NYCTextField(title: "Describe occupation", placeholder: "Ex. Freelancer", text: $model.occupation).focused($fieldIsFocused)
       }
       .padding([.leading,.trailing], 16)
-      .padding(.top, 30)
+      .padding(.top, 10)
       
-    }
-    .onAppear {
-      DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
-        showTip = true
-      }
     }
     .onTapGesture {
       fieldIsFocused = false
     }
-    .scrollDisabled(true)
     .photosPicker(isPresented: $showImagePicker, selection: $photoItem)
     .onChange(of: photoItem) { newValue in
       if let newValue {

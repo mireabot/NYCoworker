@@ -127,7 +127,7 @@
 		35E7FB9D2985B88700EFF282 /* GeoLocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E7FB9C2985B88700EFF282 /* GeoLocationModel.swift */; };
 		35EF059829B0F0310098110B /* NYCNavigationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EF059729B0F0310098110B /* NYCNavigationButton.swift */; };
 		35EF059B29B0F2EC0098110B /* NavigationDotsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EF059A29B0F2EC0098110B /* NavigationDotsView.swift */; };
-		35EF059E29B0F40A0098110B /* AccoutSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EF059D29B0F40A0098110B /* AccoutSetupView.swift */; };
+		35EF059E29B0F40A0098110B /* AccountSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EF059D29B0F40A0098110B /* AccountSetupView.swift */; };
 		35EF05A029B0FB780098110B /* PersonTypeSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EF059F29B0FB780098110B /* PersonTypeSetup.swift */; };
 		35EF05A229B29BAD0098110B /* NYCSetupCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EF05A129B29BAD0098110B /* NYCSetupCard.swift */; };
 		35F29397299E8ED500A85586 /* AmenityCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F29396299E8ED500A85586 /* AmenityCard.swift */; };
@@ -255,7 +255,7 @@
 		35E7FB9C2985B88700EFF282 /* GeoLocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoLocationModel.swift; sourceTree = "<group>"; };
 		35EF059729B0F0310098110B /* NYCNavigationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCNavigationButton.swift; sourceTree = "<group>"; };
 		35EF059A29B0F2EC0098110B /* NavigationDotsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationDotsView.swift; sourceTree = "<group>"; };
-		35EF059D29B0F40A0098110B /* AccoutSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccoutSetupView.swift; sourceTree = "<group>"; };
+		35EF059D29B0F40A0098110B /* AccountSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSetupView.swift; sourceTree = "<group>"; };
 		35EF059F29B0FB780098110B /* PersonTypeSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonTypeSetup.swift; sourceTree = "<group>"; };
 		35EF05A129B29BAD0098110B /* NYCSetupCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCSetupCard.swift; sourceTree = "<group>"; };
 		35F29396299E8ED500A85586 /* AmenityCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmenityCard.swift; sourceTree = "<group>"; };
@@ -408,7 +408,7 @@
 			isa = PBXGroup;
 			children = (
 				359E6AA12981ED8B00333BD7 /* Onboarding.swift */,
-				35EF059D29B0F40A0098110B /* AccoutSetupView.swift */,
+				35EF059D29B0F40A0098110B /* AccountSetupView.swift */,
 				35EF059C29B0F3F70098110B /* Account Setup */,
 			);
 			path = Views;
@@ -1025,7 +1025,7 @@
 				350DE274299143B500573163 /* DeleteAccountBottomView.swift in Sources */,
 				35D9447D29EF035800B9B640 /* Helpers.swift in Sources */,
 				35A7981629E463C600359400 /* AdminLocationView.swift in Sources */,
-				35EF059E29B0F40A0098110B /* AccoutSetupView.swift in Sources */,
+				35EF059E29B0F40A0098110B /* AccountSetupView.swift in Sources */,
 				359E36952A3F6EFB00BE937D /* AdminModerationView.swift in Sources */,
 				35E7FB942985A9D500EFF282 /* UserRegistrationModel.swift in Sources */,
 				35DFA24129A518B700258BB7 /* AddReviewView.swift in Sources */,
