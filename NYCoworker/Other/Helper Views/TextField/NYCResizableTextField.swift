@@ -18,6 +18,8 @@ struct NYCResizableTextField: View {
           TextField("", text: $message, axis: .vertical)
             .font(Resources.Fonts.regular(withSize: 17))
             .tint(Resources.Colors.primary)
+            .keyboardType(.alphabet)
+            .autocorrectionDisabled(true)
             .onChange(of: message) { newValue in
               if newValue.count > characterLimit {
                 message = String(newValue.prefix(characterLimit))

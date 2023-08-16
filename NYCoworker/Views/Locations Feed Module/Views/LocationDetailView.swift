@@ -31,7 +31,7 @@ struct LocationDetailView: View {
       ScrollView(.vertical, showsIndicators: true) {
         LazyVStack(spacing: -5) {
           NYCImageCarousel(imageUrls: selectedLocation?.locationImages ?? Location.mock.locationImages)
-            .frame(width: UIScreen.main.bounds.width, height: 200)
+            .frame(width: UIScreen.main.bounds.width, height: 230)
           
           VStack {
             locationInfo()

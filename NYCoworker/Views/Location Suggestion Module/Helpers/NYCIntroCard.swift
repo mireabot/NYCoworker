@@ -23,7 +23,7 @@ struct NYCIntroCard: View {
             .font(Resources.Fonts.regular(withSize: 15))
             .foregroundColor(Resources.Colors.darkGrey)
         }
-        .frame(maxWidth: .infinity)
+        .frame(maxWidth: .infinity, alignment: .leading)
       }
       .padding([.vertical,.horizontal], 15)
       .background(Resources.Colors.customGrey)
@@ -45,7 +45,7 @@ extension NYCIntroCard {
     var title: String {
       switch self {
       case .business: return "If you’re business owner"
-      case .coworker: return "If you’re Coworker"
+      case .coworker: return "If you’re coworker"
       }
     }
     
