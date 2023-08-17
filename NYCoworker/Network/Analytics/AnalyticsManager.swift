@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import FirebaseAnalytics
+import PostHog
 
 final class AnalyticsManager {
   private init() {}
@@ -21,31 +21,36 @@ final class AnalyticsManager {
     else {
       switch event {
       case .accountCreated:
-        Analytics.logEvent(event.eventName, parameters: [:])
+        PHGPostHog.shared()?.capture(event.eventName)
       case .openMap:
-        Analytics.logEvent(event.eventName, parameters: [:])
+        PHGPostHog.shared()?.capture(event.eventName)
       case .locationSelected(let locationID):
-        Analytics.logEvent(event.eventName, parameters: ["locationID":locationID])
-      case .openFavorites(let userID):
-        Analytics.logEvent(event.eventName, parameters: ["userID": userID])
+        PHGPostHog.shared()?.capture(event.eventName, properties: ["location" : locationID])
+      case .openFavorites:
+        PHGPostHog.shared()?.capture(event.eventName)
       case .locationAddedToFavs(let locationID):
-        Analytics.logEvent(event.eventName, parameters: ["locationID":locationID])
+        PHGPostHog.shared()?.capture(event.eventName, properties: ["location" : locationID])
       case .reviewOpened(let locationID):
-        Analytics.logEvent(event.eventName, parameters: ["locationID":locationID])
+        PHGPostHog.shared()?.capture(event.eventName, properties: ["location" : locationID])
       case .reviewSubmitted(let locationID):
-        Analytics.logEvent(event.eventName, parameters: ["locationID":locationID])
+        PHGPostHog.shared()?.capture(event.eventName, properties: ["location" : locationID])
       case .routeButtonPressed(let locationID):
-        Analytics.logEvent(event.eventName, parameters: ["locationID":locationID])
+        PHGPostHog.shared()?.capture(event.eventName, properties: ["location" : locationID])
       case .deleteButtonPressed:
-        Analytics.logEvent(event.eventName, parameters: [:])
+        PHGPostHog.shared()?.capture(event.eventName)
       case .deleteButtonSubmitted:
-        Analytics.logEvent(event.eventName, parameters: [:])
-      case .feedbackOpened:
-        Analytics.logEvent(event.eventName, parameters: [:])
+        PHGPostHog.shared()?.capture(event.eventName)
+        PHGPostHog.shared()?.reset()
       case .feedbackSubmitted:
-        Analytics.logEvent(event.eventName, parameters: [:])
+        PHGPostHog.shared()?.capture(event.eventName)
       case .websiteOpened:
-        Analytics.logEvent(event.eventName, parameters: [:])
+        PHGPostHog.shared()?.capture(event.eventName)
+      case .notificationWasOpened:
+        PHGPostHog.shared()?.capture(event.eventName)
+      case .locationSuggestionWasOpened:
+        PHGPostHog.shared()?.capture(event.eventName)
+      case .locationSuggestionWasSubmitted:
+        PHGPostHog.shared()?.capture(event.eventName)
       }
     }
   }
@@ -55,32 +60,36 @@ enum AnalyticsEvents {
   case accountCreated
   case openMap
   case locationSelected(String)
-  case openFavorites(String)
+  case openFavorites
   case locationAddedToFavs(String)
   case reviewOpened(String)
   case reviewSubmitted(String)
   case routeButtonPressed(String)
   case deleteButtonPressed
   case deleteButtonSubmitted
-  case feedbackOpened
   case feedbackSubmitted
   case websiteOpened
+  case notificationWasOpened
+  case locationSuggestionWasOpened
+  case locationSuggestionWasSubmitted
   
   var eventName: String {
     switch self {
-    case .accountCreated: return "accountCreatedEvent"
+    case .accountCreated: return "accountWasCreated"
     case .openMap: return "mapOpened"
-    case .locationSelected: return "locationSelected"
+    case .locationSelected: return "userSelectedLocation"
     case .openFavorites: return "favoritesOpened"
     case .locationAddedToFavs: return "locationAddedToFavs"
     case .reviewOpened: return "reviewScreenOpened"
     case .reviewSubmitted: return "reviewWasSubmitted"
     case .routeButtonPressed: return "routeButtonPressed"
     case .deleteButtonPressed: return "deleteAccountButtonPressed"
-    case .deleteButtonSubmitted: return "deleteAcccountAction"
-    case .feedbackOpened: return "feedbackScreenOpened"
+    case .deleteButtonSubmitted: return "accountWasDeleted"
     case .feedbackSubmitted: return "feedbackSubmitted"
     case .websiteOpened: return "websiteOpened"
+    case .notificationWasOpened: return "notificationsOpened"
+    case .locationSuggestionWasOpened: return "Location suggestion was opened"
+    case .locationSuggestionWasSubmitted: return "Location was suggested to app"
     }
   }
 }

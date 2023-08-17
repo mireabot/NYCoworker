@@ -14,6 +14,7 @@ struct SocialView: View {
       /// Social card
       ShareCardView {
         showWebsite.toggle()
+        AnalyticsManager.shared.log(.websiteOpened)
       }
       
       /// Title label

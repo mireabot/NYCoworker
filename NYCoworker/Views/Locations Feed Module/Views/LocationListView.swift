@@ -77,6 +77,7 @@ extension LocationListView { //MARK: - View components
         }
         .onTapGesture {
           router.pushTo(view: NYCNavigationViewBuilder.builder.makeView(LocationDetailView(selectedLocation: location)))
+          AnalyticsManager.shared.log(.locationSelected(location.locationID))
         }
       }
     }

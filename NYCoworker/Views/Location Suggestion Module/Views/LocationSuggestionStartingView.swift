@@ -40,6 +40,7 @@ struct LocationSuggestionStartingView: View {
             Button(action: {
               if count == 4 {
                 showView = false
+                AnalyticsManager.shared.log(.locationSuggestionWasSubmitted)
               }
               else if count == 3 {
                 showLoader = true

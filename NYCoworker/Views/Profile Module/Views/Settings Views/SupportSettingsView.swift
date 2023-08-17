@@ -29,7 +29,6 @@ struct SupportSettingsView: View {
         
         VStack(spacing: 10) {
           NYCSettingsCard(type: .writeFeedback, action: {
-            AnalyticsManager.shared.log(.feedbackOpened)
             DispatchQueue.main.async {
               router.pushTo(view: NYCNavigationViewBuilder.builder.makeView(WriteFeedbackView()))
             }

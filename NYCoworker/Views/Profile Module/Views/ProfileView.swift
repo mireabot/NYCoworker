@@ -27,6 +27,7 @@ struct ProfileView: View {
           NYCPromoBanner(bannerType: .suggestLocation, action: {
             DispatchQueue.main.async {
               showSuggestionSheet.toggle()
+              AnalyticsManager.shared.log(.locationSuggestionWasOpened)
             }
           })
           .padding(.top, 15)

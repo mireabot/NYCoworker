@@ -77,6 +77,7 @@ struct AddReviewView: View {
       .safeAreaInset(edge: .bottom, content: {
         Button {
           submitReview()
+          AnalyticsManager.shared.log(.reviewSubmitted(locationData.locationID))
         } label: {
           Text("Submit")
         }

@@ -126,6 +126,7 @@ extension LocationDetailView { //MARK: - View components
           AnalyticsManager.shared.log(.routeButtonPressed(selectedLocation?.locationID ?? Location.mock.locationID))
           guard let selectedLocation = selectedLocation else { return }
           openInAppleMaps(address: selectedLocation.locationAddress, withName: selectedLocation.locationName)
+          AnalyticsManager.shared.log(.routeButtonPressed(selectedLocation.locationName))
         }
       }
       
@@ -176,6 +177,7 @@ extension LocationDetailView { //MARK: - View components
       
       Button {
         showReviewSubmission()
+        AnalyticsManager.shared.log(.reviewOpened(selectedLocation?.locationID ?? Location.mock.locationID))
       } label: {
         Text("Leave your review")
       }

@@ -8,6 +8,7 @@
 import SwiftUI
 import MapKit
 import PopupView
+import PostHog
 
 struct HomeView: View {
   @EnvironmentObject var router: NYCNavigationViewsRouter
@@ -145,6 +146,7 @@ extension HomeView { //MARK: - Home components
               .onTapGesture {
                 DispatchQueue.main.async {
                   router.pushTo(view: NYCNavigationViewBuilder.builder.makeView(LocationDetailView(selectedLocation: data)))
+                  AnalyticsManager.shared.log(.locationSelected(data.locationID))
                 }
               }
             }
@@ -182,6 +184,7 @@ extension HomeView { //MARK: - Home components
               .onTapGesture {
                 DispatchQueue.main.async {
                   router.pushTo(view: NYCNavigationViewBuilder.builder.makeView(LocationDetailView(selectedLocation: data)))
+                  AnalyticsManager.shared.log(.locationSelected(data.locationID))
                 }
               }
             }
@@ -209,13 +212,13 @@ extension HomeView { //MARK: - Home components
           LoadingLocationCell(type: .map)
         }
         else {
-          Button {
+          LocationMapCard(location: publicSpacesLocations[0]) {
+            addLocationTofavs(location: publicSpacesLocations[0].locationID)
+          }
+          .onTapGesture {
             DispatchQueue.main.async {
               router.pushTo(view: NYCNavigationViewBuilder.builder.makeView(LocationDetailView(selectedLocation: publicSpacesLocations[0])))
-            }
-          } label: {
-            LocationMapCard(location: publicSpacesLocations[0]) {
-              addLocationTofavs(location: publicSpacesLocations[0].locationID)
+              AnalyticsManager.shared.log(.locationSelected(publicSpacesLocations[0].locationID))
             }
           }
         }
@@ -255,13 +258,14 @@ extension HomeView { //MARK: - Functions
   
   func showFavourites() {
     DispatchQueue.main.async {
-      AnalyticsManager.shared.log(.openFavorites(userId))
+      AnalyticsManager.shared.log(.openFavorites)
       router.pushTo(view: NYCNavigationViewBuilder.builder.makeView(FavoriteLocationsView()))
     }
   }
   
   func showNotifications() {
     DispatchQueue.main.async {
+      AnalyticsManager.shared.log(.notificationWasOpened)
       router.pushTo(view: NYCNavigationViewBuilder.builder.makeView(NotificationsView().environmentObject(notificationService)))
     }
   }
