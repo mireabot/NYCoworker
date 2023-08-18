@@ -14,7 +14,7 @@ struct FavoriteLocationsView: View {
   @State var isLoading = true
   @State var isUpdating = false
   @StateObject private var userService = UserService()
-  @StateObject private var locationService = LocationService()
+  @StateObject var userFavoritesVM = UserFavoritesViewModel()
   @AppStorage("UserID") var userId : String = ""
   var body: some View {
     NavigationView {
@@ -25,12 +25,18 @@ struct FavoriteLocationsView: View {
             do {
               await userService.fetchUser(documentId: userId, completion: {
                 Task(priority: .userInitiated) {
-                  await locationService.fetchFavoriteLocations(for: userService.user) {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                      print("Favorites locations for userID \(userService.user.userID) fetched with count \(locationService.favoriteLocations.count)")
-                      isLoading = false
+                  await LocationService.shared.fetchFavoriteLocations(for: userService.user, completion: { result in
+                    switch result {
+                    case .success(let data):
+                      userFavoritesVM.userFavoritesLocations = data
+                      DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                        print("Favorites locations for userID \(userService.user.userID) fetched with count \(userFavoritesVM.userFavoritesLocations.count)")
+                        isLoading = false
+                      }
+                    case .failure(let error):
+                      print(firestoreError(forError: error))
                     }
-                  }
+                  })
                 }
               })
             }
@@ -70,13 +76,13 @@ extension FavoriteLocationsView { //MARK: - View components
         loadingView()
       }
       else {
-        if locationService.favoriteLocations.isEmpty {
+        if userFavoritesVM.userFavoritesLocations.isEmpty {
           NYCEmptyView(type: .favorites)
         }
         else {
           ScrollView(.vertical, showsIndicators: true) {
             LazyVStack(spacing: 16) {
-              ForEach(locationService.favoriteLocations, id: \.id) { data in
+              ForEach(userFavoritesVM.userFavoritesLocations, id: \.id) { data in
                 LocationListCell(type: .favorite, data: data, buttonAction: {
                   removeFromfavs(locationID: data.locationID)
                   Task {
@@ -110,15 +116,21 @@ extension FavoriteLocationsView { //MARK: - View components
 extension FavoriteLocationsView { //MARK: - Functions
   fileprivate func extractedFunc() async {
     isLoading = true
-    locationService.favoriteLocations = []
+    userFavoritesVM.userFavoritesLocations = []
     await userService.fetchUser(documentId: userId, completion: {
       Task(priority: .userInitiated) {
-        await locationService.fetchFavoriteLocations(for: userService.user) {
-          DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-            print("Favorites locations for userID \(userId) fetched with count \(locationService.favoriteLocations)")
-            isLoading = false
+        await LocationService.shared.fetchFavoriteLocations(for: userService.user, completion: { result in
+          switch result {
+          case .success(let data):
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+              userFavoritesVM.userFavoritesLocations = data
+              print("Favorites locations for userID \(userId) fetched with count \(userFavoritesVM.userFavoritesLocations.count)")
+              isLoading = false
+            }
+          case .failure(let error):
+            print(firestoreError(forError: error))
           }
-        }
+        })
       }
     })
   }

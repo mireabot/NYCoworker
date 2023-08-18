@@ -24,7 +24,6 @@ struct LocationDetailView: View {
   @State var reportEdit = false
   @State var isLoading = true
   @StateObject private var reviewService = ReviewService()
-  @StateObject private var locationService = LocationService()
   @State private var sheetContentHeight = CGFloat(0)
   var body: some View {
     NavigationView {
@@ -75,12 +74,15 @@ struct LocationDetailView: View {
         ToolbarItem(placement: .navigationBarTrailing) {
           NYCCircleImageButton(size: 20, image: Resources.Images.Settings.rate) {
             Task {
-              await locationService.addFavoriteLocation(locationID: selectedLocation?.locationID ?? Location.mock.locationID, userID: userId, completion: {
-                AnalyticsManager.shared.log(.locationAddedToFavs(selectedLocation?.locationID ?? Location.mock.locationID))
-                addToFavs.toggle()
-              }) { err in
-                locationService.setError(err)
-              }
+              await LocationService.shared.addFavoriteLocation(locationID: selectedLocation?.locationID ?? Location.mock.locationID, userID: userId, completion: { result in
+                switch result {
+                case .success:
+                  AnalyticsManager.shared.log(.locationAddedToFavs(selectedLocation?.locationID ?? Location.mock.locationID))
+                  addToFavs.toggle()
+                case .failure(let error):
+                  print(firestoreError(forError: error))
+                }
+              })
             }
           }
         }

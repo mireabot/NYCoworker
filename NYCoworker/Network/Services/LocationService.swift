@@ -10,15 +10,15 @@ import FirebaseFirestoreSwift
 import FirebaseFirestore
 import MapKit
 
-class LocationService: ObservableObject {
+@MainActor
+class LocationService {
   private var db = Firestore.firestore()
-  @Published var locations: [Location] = []
-  @Published var favoriteLocations : [Location] = []
-  @Published var errorMessage: String = ""
+  
+  static let shared = LocationService()
   
   ///Fetching all locations from Firebase
   ///- returns: set of locations
-  func fetchLocations(completion: @escaping () -> Void, errorCompletion: @escaping (Error) -> Void) async {
+  func fetchLocations(completion: @escaping (Result<[Location], Error>) -> Void) async {
     do {
       var query: Query!
       query = db.collection(Endpoints.locations.rawValue).order(by: "locationPriority", descending: true)
@@ -26,13 +26,10 @@ class LocationService: ObservableObject {
       let fetchedLocations = docs.documents.compactMap { doc -> Location? in
         try? doc.data(as: Location.self)
       }
-      await MainActor.run(body: {
-        locations = fetchedLocations
-        completion()
-      })
+      completion(.success(fetchedLocations))
     }
     catch {
-      errorCompletion(error)
+      completion(.failure(error))
     }
   }
   
@@ -40,12 +37,13 @@ class LocationService: ObservableObject {
   ///- parameter locationID: ID of location which will be added
   ///- parameter userID: ID of User which added location to favorites
   ///- warning: Use completion for action after data loaded
-  func addFavoriteLocation(locationID: String, userID: String, completion: @escaping () -> Void, completion2: @escaping (Error) -> Void) async {
+  func addFavoriteLocation(locationID: String, userID: String, completion: @escaping (Result<Void, Error>) -> Void) async {
     do {
       try await db.collection("User").document(userID).setData(["favoriteLocations": FieldValue.arrayUnion([locationID])], merge: true)
-      completion()
+      completion(.success(()))
     } catch {
-      completion2(error)
+      completion(.failure(error))
+      return
     }
   }
   
@@ -53,9 +51,9 @@ class LocationService: ObservableObject {
   ///- parameter user: User model which will show array of favorite locations
   ///- warning: Use completion for action after data loaded
   ///- returns: favoriteLocations array in locationService class
-  func fetchFavoriteLocations(for user: User, completion: @escaping () -> Void) async {
+  func fetchFavoriteLocations(for user: User, completion: @escaping (Result<[Location], Error>) -> Void) async {
     guard !user.favoriteLocations.isEmpty else {
-      completion()
+      completion(.success([]))
       return
     }
     do {
@@ -66,38 +64,17 @@ class LocationService: ObservableObject {
       let fetchedFavs = docs.documents.compactMap { doc -> Location? in
         try? doc.data(as: Location.self)
       }
-      await MainActor.run(body: {
-        favoriteLocations = fetchedFavs
-        completion()
-      })
+      completion(.success(fetchedFavs))
     }
     catch {
-      print(error.localizedDescription)
+      completion(.failure(error))
+      return
     }
-  }
-  
-  func clearData() {
-    locations = []
-    favoriteLocations = []
-    print("Data cleared")
   }
   
   func setError(_ error: Error) {
     print("DEBUG: \(firestoreError(forError: error))")
-    errorMessage = firestoreError(forError: error)
-  }
-  
-  func fetchFavoritesLocationsNew(completion: @escaping () -> Void) {
-    db.collection("AppConfig").addSnapshotListener { (querySnapshot, error) in
-      guard let documents = querySnapshot?.documents else {
-        print("No documents")
-        return
-      }
-      
-      self.favoriteLocations = documents.compactMap { queryDocumentSnapshot -> Location? in
-        return try? queryDocumentSnapshot.data(as: Location.self)
-      }
-    }
+    //errorMessage = firestoreError(forError: error)
   }
 }
 

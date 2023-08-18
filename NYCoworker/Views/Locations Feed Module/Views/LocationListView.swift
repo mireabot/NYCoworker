@@ -10,7 +10,6 @@ import PopupView
 
 struct LocationListView: View {
   @EnvironmentObject var router: NYCNavigationViewsRouter
-  @StateObject private var locationService = LocationService()
   @State var addToFavs = false
   @AppStorage("UserID") var userId : String = ""
   var selectedTitle: String
@@ -67,11 +66,14 @@ extension LocationListView { //MARK: - View components
         LocationListCell(type: .list, data: location) {
           Task {
             do {
-              await locationService.addFavoriteLocation(locationID: location.locationID, userID: userId, completion: {
-                addToFavs.toggle()
-              }) { err in
-                print(err.localizedDescription)
-              }
+              await LocationService.shared.addFavoriteLocation(locationID: location.locationID, userID: userId, completion: { result in
+                switch result {
+                case .success:
+                  addToFavs.toggle()
+                case .failure(let error):
+                  print(firestoreError(forError: error))
+                }
+              })
             }
           }
         }

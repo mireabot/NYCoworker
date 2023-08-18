@@ -44,6 +44,8 @@
 		354F6D3F29F182D500E45CFE /* WriteFeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354F6D3E29F182D500E45CFE /* WriteFeedbackView.swift */; };
 		3550FA2E29B3CA9F0091B558 /* OnboardingNavigationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3550FA2D29B3CA9F0091B558 /* OnboardingNavigationCoordinator.swift */; };
 		355C11BE29B78EB7001F092B /* NotificationCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355C11BD29B78EB7001F092B /* NotificationCard.swift */; };
+		3562A3CD2A8F9E97005632CF /* LocationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3562A3CC2A8F9E97005632CF /* LocationsViewModel.swift */; };
+		3562A3D02A8FA202005632CF /* UserFavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3562A3CF2A8FA202005632CF /* UserFavoritesViewModel.swift */; };
 		3563FB9E29F19A2C007E39C5 /* AdminHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3563FB9D29F19A2C007E39C5 /* AdminHomeView.swift */; };
 		3565689B29A12C16007CAF80 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = 3565689A29A12C16007CAF80 /* PopupView */; };
 		3565689D29A15673007CAF80 /* NYCAlertNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3565689C29A15673007CAF80 /* NYCAlertNotificationView.swift */; };
@@ -180,6 +182,8 @@
 		354F6D3E29F182D500E45CFE /* WriteFeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteFeedbackView.swift; sourceTree = "<group>"; };
 		3550FA2D29B3CA9F0091B558 /* OnboardingNavigationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingNavigationCoordinator.swift; sourceTree = "<group>"; };
 		355C11BD29B78EB7001F092B /* NotificationCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCard.swift; sourceTree = "<group>"; };
+		3562A3CC2A8F9E97005632CF /* LocationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsViewModel.swift; sourceTree = "<group>"; };
+		3562A3CF2A8FA202005632CF /* UserFavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFavoritesViewModel.swift; sourceTree = "<group>"; };
 		3563FB9D29F19A2C007E39C5 /* AdminHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminHomeView.swift; sourceTree = "<group>"; };
 		3565689C29A15673007CAF80 /* NYCAlertNotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCAlertNotificationView.swift; sourceTree = "<group>"; };
 		356C52D929A0460C00080D4C /* LocationMapCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationMapCard.swift; sourceTree = "<group>"; };
@@ -554,6 +558,7 @@
 		3538C62D298358560017800B /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				3562A3CE2A8FA1F3005632CF /* User */,
 				359348DE29BA432800B7739A /* Reviews */,
 				355C11BC29B78EAC001F092B /* Notifications */,
 				35D3821629B6AA8200B66EDA /* Location */,
@@ -593,6 +598,14 @@
 				355C11BD29B78EB7001F092B /* NotificationCard.swift */,
 			);
 			path = Notifications;
+			sourceTree = "<group>";
+		};
+		3562A3CE2A8FA1F3005632CF /* User */ = {
+			isa = PBXGroup;
+			children = (
+				3562A3CF2A8FA202005632CF /* UserFavoritesViewModel.swift */,
+			);
+			path = User;
 			sourceTree = "<group>";
 		};
 		356C52DF29A052CD00080D4C /* Bottom Views */ = {
@@ -807,6 +820,7 @@
 			children = (
 				35F29396299E8ED500A85586 /* AmenityCard.swift */,
 				356C52D929A0460C00080D4C /* LocationMapCard.swift */,
+				3562A3CC2A8F9E97005632CF /* LocationsViewModel.swift */,
 			);
 			path = Location;
 			sourceTree = "<group>";
@@ -1055,6 +1069,7 @@
 				35915FEF29EB160700263946 /* AppConfigService.swift in Sources */,
 				35E7FB8F29848B1C00EFF282 /* Extensions.swift in Sources */,
 				35D9448229EF725800B9B640 /* SplashScreenView.swift in Sources */,
+				3562A3CD2A8F9E97005632CF /* LocationsViewModel.swift in Sources */,
 				35A34BDF2A855DC10072E6A4 /* LocationSuggestionExtraInfo.swift in Sources */,
 				35737E5B29888866003B68BE /* ProfileView.swift in Sources */,
 				359F80FB298C330B000D792E /* FavoriteLocationsView.swift in Sources */,
@@ -1081,6 +1096,7 @@
 				35E7FB992985AB9300EFF282 /* NotificationPermission.swift in Sources */,
 				356C52DA29A0460C00080D4C /* LocationMapCard.swift in Sources */,
 				351B3A2529981665007E7D00 /* SupportSettingsView.swift in Sources */,
+				3562A3D02A8FA202005632CF /* UserFavoritesViewModel.swift in Sources */,
 				35A34BE32A8572300072E6A4 /* NYCSegmentProgressBar.swift in Sources */,
 				35861C9F2A2168F200DC0AFB /* NYCChipCollection.swift in Sources */,
 				35E7FB8B298486F400EFF282 /* ProfileSetup.swift in Sources */,
@@ -1245,7 +1261,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = NYCoworker/NYCoworker.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 51;
+				CURRENT_PROJECT_VERSION = 53;
 				DEVELOPMENT_TEAM = 9S2MZXD36G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NYCoworker/Info.plist;
@@ -1283,7 +1299,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = NYCoworker/NYCoworker.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 51;
+				CURRENT_PROJECT_VERSION = 53;
 				DEVELOPMENT_TEAM = 9S2MZXD36G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NYCoworker/Info.plist;
