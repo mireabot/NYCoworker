@@ -11,7 +11,7 @@ import Lottie
 
 struct LocationSuggestionStartingView: View {
   @Binding var showView: Bool
-  @StateObject var reviewService = ReviewService()
+  @StateObject var reviewStore = ReviewStore()
   @State private var showLoader = false
   @State var count = 1
   @AppStorage("UserID") var userId : String = ""
@@ -23,15 +23,14 @@ struct LocationSuggestionStartingView: View {
             .tag(1)
           
           LocationSuggestionBasicInfo()
-            .environmentObject(reviewService)
+            .environmentObject(reviewStore)
             .tag(2)
           
           LocationSuggestionExtraInfo()
-            .environmentObject(reviewService)
+            .environmentObject(reviewStore)
             .tag(3)
           
           AnyView(successView)
-            .environmentObject(reviewService)
             .tag(4)
         }
         .safeAreaInset(edge: .bottom) {
@@ -46,18 +45,26 @@ struct LocationSuggestionStartingView: View {
                 showLoader = true
                 Task {
                   do {
-                    await reviewService.sendLocationSuggestion(with:
-                                                                LocationSuggestionModel(locationName: reviewService.suggestionModel.locationName,
-                                                                                        locationAddress: reviewService.suggestionModel.locationAddress,
-                                                                                        locationAmenities: reviewService.suggestionModel.locationAmenities,
-                                                                                        userID: userId,
-                                                                                        userComment: reviewService.suggestionModel.userComment,
-                                                                                        userToken: UserDefaults.standard.string(forKey: "FCMToken") ?? "nil")) {
-                      DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                        showLoader = false
-                        count += 1
+                    await ReviewService.shared.sendLocationSuggestion(with:
+                                                                        LocationSuggestionModel(
+                                                                          locationName: reviewStore.suggestionModel.locationName,
+                                                                          locationAddress: reviewStore.suggestionModel.locationAddress,
+                                                                          locationAmenities: reviewStore.suggestionModel.locationAmenities,
+                                                                          userID: userId,
+                                                                          userComment: reviewStore.suggestionModel.userComment,
+                                                                          userToken: UserDefaults.standard.string(forKey: "FCMToken") ?? "nil",
+                                                                          createdAt: Date()),
+                                                                      completion: { result in
+                      switch result {
+                      case .success:
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                          showLoader = false
+                          count += 1
+                        }
+                      case .failure(let error):
+                        print(error.localizedDescription)
                       }
-                    }
+                    })
                   }
                 }
               }
@@ -162,7 +169,7 @@ extension LocationSuggestionStartingView {
   }
   
   func checkButton() -> Bool {
-    if count == 2 && (reviewService.suggestionModel.locationName.isEmpty || reviewService.suggestionModel.locationAddress.isEmpty || reviewService.suggestionModel.locationAmenities.isEmpty) {
+    if count == 2 && (reviewStore.suggestionModel.locationName.isEmpty || reviewStore.suggestionModel.locationAddress.isEmpty || reviewStore.suggestionModel.locationAmenities.isEmpty) {
       return true
     }
     return false

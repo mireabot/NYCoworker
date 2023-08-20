@@ -54,7 +54,7 @@ extension NotificationsView { //MARK: - View components
         ScrollView(.vertical, showsIndicators: true) {
           LazyVStack(spacing: 10) {
             ForEach(notificationStore.notifications, id: \.datePosted) { item in
-              NotificationCard(data: item)
+              NYCNotificationCard(data: item)
             }
           }
           .padding(.top, 10)

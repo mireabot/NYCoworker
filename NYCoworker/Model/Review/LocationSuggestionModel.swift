@@ -14,6 +14,7 @@ struct LocationSuggestionModel: Codable {
   var userID: String
   var userComment: String
   var userToken: String
+  var createdAt: Date
   
-  static let empty = LocationSuggestionModel(locationName: "", locationAddress: "", locationAmenities: "", userID: "", userComment: "", userToken: "")
+  static let empty = LocationSuggestionModel(locationName: "", locationAddress: "", locationAmenities: "", userID: "", userComment: "", userToken: "", createdAt: Date())
 }

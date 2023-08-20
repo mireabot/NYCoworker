@@ -12,7 +12,7 @@ import PopupView
 struct AdminModerationView: View {
   @Environment(\.dismiss) var makeDismiss
   @State private var isLoading = true
-  @StateObject var reviewService = ReviewService()
+  @StateObject private var reviewStore = ReviewStore()
   @State private var showModerationSheet = false
   @State var passingReviewData : Review = Review.mock
   @State private var sheetContentHeight = CGFloat(0)
@@ -21,8 +21,7 @@ struct AdminModerationView: View {
         reviewsList()
       }
       .sheet(isPresented: $showModerationSheet, content: {
-        AdminModerationSheetView(reviewData: $passingReviewData, presented: $showModerationSheet)
-          .environmentObject(reviewService)
+        AdminModerationSheetView(reviewData: passingReviewData, presented: $showModerationSheet)
           .background {
             GeometryReader { proxy in
               Color.clear
@@ -36,9 +35,7 @@ struct AdminModerationView: View {
       })
       .padding([.leading,.trailing], 16)
       .task {
-        await reviewService.fetchReviewsForModeration(completion: {
-          isLoading = false
-        })
+        await fetchAllReviews()
       }
       .navigationBarBackButtonHidden()
       .toolbarBackground(.white, for: .navigationBar)
@@ -83,13 +80,13 @@ extension AdminModerationView { // MARK: - View components
       }
     }
     else {
-      if reviewService.reviews.isEmpty {
+      if reviewStore.reviews.isEmpty {
         NYCEmptyView(type: .moderationReviews)
       }
       else {
         LazyVStack(alignment: .center, spacing: 10) {
-          ForEach(reviewService.reviews,id: \.datePosted){ reviewData in
-            ReviewCard(variation: .full, data: reviewData)
+          ForEach(reviewStore.reviews,id: \.datePosted){ reviewData in
+            NYCReviewCard(variation: .full, data: reviewData)
               .onTapGesture {
                 self.passingReviewData = reviewData
                 showModerationSheet.toggle()
@@ -98,5 +95,18 @@ extension AdminModerationView { // MARK: - View components
         }
       }
     }
+  }
+}
+
+extension AdminModerationView { // MARK: - Functions
+  func fetchAllReviews() async {
+    await reviewStore.fetchReviews(completion: { result in
+      switch result {
+      case .success:
+        print("Reviews are fetched \(reviewStore.reviews.count)")
+      case .failure(let error):
+        print(error.localizedDescription)
+      }
+    })
   }
 }

@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import NavigationTransitions
 
 //MARK: - String
 extension String {
@@ -28,10 +27,6 @@ extension View {
   
   func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
     clipShape( RoundedCorner(radius: radius, corners: corners))
-  }
-  
-  func applyNavigationTransition() -> some View {
-    self.navigationTransition(.slide.combined(with: .fade(.in).animation(.easeInOut.speed(0.35))), interactivity: .edgePan)
   }
 }
 struct RoundedCorner: Shape {

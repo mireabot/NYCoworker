@@ -168,7 +168,7 @@ extension LocationDetailView { //MARK: - View components
           NYCEmptyView(type: .noReviews)
         }
         else {
-          ReviewCard(variation: .small, data: locationStore.reviews[0])
+          NYCReviewCard(variation: .small, data: locationStore.reviews[0])
         }
       }
       
@@ -229,17 +229,7 @@ extension LocationDetailView { //MARK: - View components
         ScrollView(.horizontal, showsIndicators: false) {
           HStack(spacing: 5) {
             ForEach(selectedLocation?.locationHours ?? Location.mock.locationHours,id: \.self){ item in
-              VStack(spacing: 5) {
-                Text(item.weekDay)
-                  .foregroundColor(Resources.Colors.darkGrey)
-                  .font(Resources.Fonts.regular(withSize: 15))
-                Text(item.hours)
-                  .foregroundColor(Resources.Colors.customBlack)
-                  .font(Resources.Fonts.medium(withSize: 15))
-              }
-              .padding(10)
-              .background(Resources.Colors.customGrey)
-              .cornerRadius(5)
+              NYCWorkingHoursCard(data: item)
             }
           }
           .padding([.leading,.trailing], 16)
@@ -293,14 +283,7 @@ extension LocationDetailView { //MARK: - View components
     
     LazyHGrid(rows: rows, alignment: .center, spacing: 10) {
       ForEach(selectedLocation?.locationAmenities ?? Location.mock.locationAmenities,id: \.self) { item in
-        HStack(alignment: .center, spacing: 5) {
-          amenitiesImage(image: item)
-            .foregroundColor(Resources.Colors.customBlack)
-          Text(item)
-            .foregroundColor(Resources.Colors.customBlack)
-            .font(Resources.Fonts.regular(withSize: 15))
-        }
-        .padding(2)
+        NYCAmenityCard(data: item)
       }
     }
   }

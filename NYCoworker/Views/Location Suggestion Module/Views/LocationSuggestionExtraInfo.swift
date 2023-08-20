@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct LocationSuggestionExtraInfo: View {
-  @EnvironmentObject var reviewService: ReviewService
+  @EnvironmentObject var reviewStore: ReviewStore
   @FocusState private var fieldIsFocused: Bool
   var body: some View {
     ScrollView(.vertical, showsIndicators: false) {
       VStack(alignment: .center, spacing: 25) {
-        NYCResizableTextField(message: $reviewService.suggestionModel.userComment, characterLimit: 1000, placeHolder: "Any comments from your side...").focused($fieldIsFocused)
+        NYCResizableTextField(message: $reviewStore.suggestionModel.userComment, characterLimit: 1000, placeHolder: "Any comments from your side...").focused($fieldIsFocused)
       }
       .padding(.top, 30)
     }
@@ -27,6 +27,6 @@ struct LocationSuggestionExtraInfo: View {
 
 struct LocationSuggestionExtraInfo_Previews: PreviewProvider {
   static var previews: some View {
-    LocationSuggestionExtraInfo().environmentObject(ReviewService())
+    LocationSuggestionExtraInfo().environmentObject(ReviewStore())
   }
 }

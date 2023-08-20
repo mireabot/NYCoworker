@@ -34,7 +34,6 @@
 		3536C2D72A02A955007D3E1A /* AdminReviewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3536C2D62A02A955007D3E1A /* AdminReviewsView.swift */; };
 		3538C623298353210017800B /* iPages in Frameworks */ = {isa = PBXBuildFile; productRef = 3538C622298353210017800B /* iPages */; };
 		3538C6292983569D0017800B /* NYCBottomSheetHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3538C6282983569D0017800B /* NYCBottomSheetHeader.swift */; };
-		3538C62C298357490017800B /* AppLanguageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3538C62B298357490017800B /* AppLanguageModel.swift */; };
 		35402A2A2A0EB2A300974CF7 /* NYCBottomViewContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35402A292A0EB2A300974CF7 /* NYCBottomViewContent.swift */; };
 		35402A2C2A0ED23400974CF7 /* NYCImageCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35402A2B2A0ED23400974CF7 /* NYCImageCarousel.swift */; };
 		3542F59B29D9DF410086CB4F /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3542F59A29D9DF410086CB4F /* LocationService.swift */; };
@@ -43,8 +42,8 @@
 		354651C529A83B1F003F7AE8 /* LoadingBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354651C429A83B1F003F7AE8 /* LoadingBottomView.swift */; };
 		354F6D3F29F182D500E45CFE /* WriteFeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354F6D3E29F182D500E45CFE /* WriteFeedbackView.swift */; };
 		3550FA2E29B3CA9F0091B558 /* OnboardingNavigationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3550FA2D29B3CA9F0091B558 /* OnboardingNavigationCoordinator.swift */; };
-		355C11BE29B78EB7001F092B /* NotificationCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355C11BD29B78EB7001F092B /* NotificationCard.swift */; };
 		3563FB9E29F19A2C007E39C5 /* AdminHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3563FB9D29F19A2C007E39C5 /* AdminHomeView.swift */; };
+		3564A3482A92546500C960F6 /* ReviewStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3564A3472A92546500C960F6 /* ReviewStore.swift */; };
 		3565689B29A12C16007CAF80 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = 3565689A29A12C16007CAF80 /* PopupView */; };
 		3565689D29A15673007CAF80 /* NYCAlertNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3565689C29A15673007CAF80 /* NYCAlertNotificationView.swift */; };
 		356569BC2A8EB75B009EB975 /* PostHog in Frameworks */ = {isa = PBXBuildFile; productRef = 356569BB2A8EB75B009EB975 /* PostHog */; };
@@ -97,7 +96,7 @@
 		35AD1AEE29CBB4780076AE54 /* RatingDotsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AD1AED29CBB4780076AE54 /* RatingDotsView.swift */; };
 		35B77FAC2A919C7E00A5DB53 /* LocationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B77FAB2A919C7E00A5DB53 /* LocationStore.swift */; };
 		35B77FAE2A91B38400A5DB53 /* NotificationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B77FAD2A91B38400A5DB53 /* NotificationStore.swift */; };
-		35BA64B5299BF69D00E15206 /* ReviewCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BA64B4299BF69D00E15206 /* ReviewCard.swift */; };
+		35BA64B5299BF69D00E15206 /* NYCReviewCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BA64B4299BF69D00E15206 /* NYCReviewCard.swift */; };
 		35C1667929D12FD500963257 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 35C1667829D12FD500963257 /* GoogleService-Info.plist */; };
 		35C1667C29D1307600963257 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 35C1667B29D1307600963257 /* FirebaseAuth */; };
 		35C1667E29D1307600963257 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 35C1667D29D1307600963257 /* FirebaseFirestore */; };
@@ -114,7 +113,6 @@
 		35D9447F29EF6B2700B9B640 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 35D9447E29EF6B2700B9B640 /* FirebaseMessaging */; };
 		35D9448229EF725800B9B640 /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D9448129EF725800B9B640 /* SplashScreenView.swift */; };
 		35D9448429EF727E00B9B640 /* InitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D9448329EF727E00B9B640 /* InitView.swift */; };
-		35D9A5CE298981EE00A2F8D6 /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D9A5CD298981EE00A2F8D6 /* SettingsModel.swift */; };
 		35DFA23E29A3BFC900258BB7 /* ReviewListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35DFA23D29A3BFC800258BB7 /* ReviewListView.swift */; };
 		35DFA24129A518B700258BB7 /* AddReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35DFA24029A518B700258BB7 /* AddReviewView.swift */; };
 		35DFA24329A572BD00258BB7 /* NYCResizableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35DFA24229A572BD00258BB7 /* NYCResizableTextField.swift */; };
@@ -125,17 +123,15 @@
 		35E7FB942985A9D500EFF282 /* UserRegistrationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E7FB932985A9D500EFF282 /* UserRegistrationModel.swift */; };
 		35E7FB992985AB9300EFF282 /* NotificationPermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E7FB982985AB9300EFF282 /* NotificationPermission.swift */; };
 		35E7FB9B2985ADF800EFF282 /* GeopositionPermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E7FB9A2985ADF800EFF282 /* GeopositionPermission.swift */; };
-		35E7FB9D2985B88700EFF282 /* GeoLocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E7FB9C2985B88700EFF282 /* GeoLocationModel.swift */; };
+		35E7FB9D2985B88700EFF282 /* LocationManagerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E7FB9C2985B88700EFF282 /* LocationManagerService.swift */; };
 		35EF059829B0F0310098110B /* NYCNavigationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EF059729B0F0310098110B /* NYCNavigationButton.swift */; };
 		35EF059B29B0F2EC0098110B /* NavigationDotsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EF059A29B0F2EC0098110B /* NavigationDotsView.swift */; };
 		35EF059E29B0F40A0098110B /* AccountSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EF059D29B0F40A0098110B /* AccountSetupView.swift */; };
 		35EF05A029B0FB780098110B /* PersonTypeSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EF059F29B0FB780098110B /* PersonTypeSetup.swift */; };
 		35EF05A229B29BAD0098110B /* NYCSetupCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EF05A129B29BAD0098110B /* NYCSetupCard.swift */; };
-		35F29397299E8ED500A85586 /* AmenityCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F29396299E8ED500A85586 /* AmenityCard.swift */; };
-		35F29399299E8F4A00A85586 /* AmenityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F29398299E8F4A00A85586 /* AmenityModel.swift */; };
+		35F29397299E8ED500A85586 /* NYCAmenityCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F29396299E8ED500A85586 /* NYCAmenityCard.swift */; };
 		35F2939B299F195400A85586 /* NotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F2939A299F195400A85586 /* NotificationsView.swift */; };
 		35F5630A2A13D181004FE102 /* NYCSegmentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F563092A13D181004FE102 /* NYCSegmentControl.swift */; };
-		35F7A2FB2A243FB20021BB5D /* NavigationTransitions in Frameworks */ = {isa = PBXBuildFile; productRef = 35F7A2FA2A243FB20021BB5D /* NavigationTransitions */; };
 		35F7A2FD2A2444DF0021BB5D /* NavigationDestinations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F7A2FC2A2444DF0021BB5D /* NavigationDestinations.swift */; };
 		35F90D012A1808DC00AFF4FF /* GrabberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F90D002A1808DC00AFF4FF /* GrabberView.swift */; };
 		35FAF10B2A844CA100E67769 /* LocationSuggestionStartingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35FAF10A2A844CA100E67769 /* LocationSuggestionStartingView.swift */; };
@@ -172,7 +168,6 @@
 		3535AF572A2E8D4A00B55184 /* InstructionsExpandedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionsExpandedView.swift; sourceTree = "<group>"; };
 		3536C2D62A02A955007D3E1A /* AdminReviewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminReviewsView.swift; sourceTree = "<group>"; };
 		3538C6282983569D0017800B /* NYCBottomSheetHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCBottomSheetHeader.swift; sourceTree = "<group>"; };
-		3538C62B298357490017800B /* AppLanguageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLanguageModel.swift; sourceTree = "<group>"; };
 		35402A292A0EB2A300974CF7 /* NYCBottomViewContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCBottomViewContent.swift; sourceTree = "<group>"; };
 		35402A2B2A0ED23400974CF7 /* NYCImageCarousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCImageCarousel.swift; sourceTree = "<group>"; };
 		3542F59A29D9DF410086CB4F /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
@@ -181,8 +176,8 @@
 		354651C429A83B1F003F7AE8 /* LoadingBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingBottomView.swift; sourceTree = "<group>"; };
 		354F6D3E29F182D500E45CFE /* WriteFeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteFeedbackView.swift; sourceTree = "<group>"; };
 		3550FA2D29B3CA9F0091B558 /* OnboardingNavigationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingNavigationCoordinator.swift; sourceTree = "<group>"; };
-		355C11BD29B78EB7001F092B /* NotificationCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCard.swift; sourceTree = "<group>"; };
 		3563FB9D29F19A2C007E39C5 /* AdminHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminHomeView.swift; sourceTree = "<group>"; };
+		3564A3472A92546500C960F6 /* ReviewStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewStore.swift; sourceTree = "<group>"; };
 		3565689C29A15673007CAF80 /* NYCAlertNotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCAlertNotificationView.swift; sourceTree = "<group>"; };
 		356C52D929A0460C00080D4C /* LocationMapCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationMapCard.swift; sourceTree = "<group>"; };
 		356C52DB29A04BDB00080D4C /* LocationListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationListCell.swift; sourceTree = "<group>"; };
@@ -231,7 +226,7 @@
 		35AD1AED29CBB4780076AE54 /* RatingDotsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingDotsView.swift; sourceTree = "<group>"; };
 		35B77FAB2A919C7E00A5DB53 /* LocationStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationStore.swift; sourceTree = "<group>"; };
 		35B77FAD2A91B38400A5DB53 /* NotificationStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationStore.swift; sourceTree = "<group>"; };
-		35BA64B4299BF69D00E15206 /* ReviewCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCard.swift; sourceTree = "<group>"; };
+		35BA64B4299BF69D00E15206 /* NYCReviewCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCReviewCard.swift; sourceTree = "<group>"; };
 		35C1667829D12FD500963257 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		35D1FDDF2A6EE51E009C7E7F /* Jost-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Jost-Medium.ttf"; sourceTree = "<group>"; };
 		35D1FDE12A6EE52B009C7E7F /* Jost-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Jost-Bold.ttf"; path = "../../../../Downloads/Jost/static/Jost-Bold.ttf"; sourceTree = "<group>"; };
@@ -244,7 +239,6 @@
 		35D9447C29EF035800B9B640 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		35D9448129EF725800B9B640 /* SplashScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
 		35D9448329EF727E00B9B640 /* InitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitView.swift; sourceTree = "<group>"; };
-		35D9A5CD298981EE00A2F8D6 /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
 		35DFA23D29A3BFC800258BB7 /* ReviewListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewListView.swift; sourceTree = "<group>"; };
 		35DFA24029A518B700258BB7 /* AddReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReviewView.swift; sourceTree = "<group>"; };
 		35DFA24229A572BD00258BB7 /* NYCResizableTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCResizableTextField.swift; sourceTree = "<group>"; };
@@ -255,14 +249,13 @@
 		35E7FB932985A9D500EFF282 /* UserRegistrationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegistrationModel.swift; sourceTree = "<group>"; };
 		35E7FB982985AB9300EFF282 /* NotificationPermission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPermission.swift; sourceTree = "<group>"; };
 		35E7FB9A2985ADF800EFF282 /* GeopositionPermission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeopositionPermission.swift; sourceTree = "<group>"; };
-		35E7FB9C2985B88700EFF282 /* GeoLocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoLocationModel.swift; sourceTree = "<group>"; };
+		35E7FB9C2985B88700EFF282 /* LocationManagerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManagerService.swift; sourceTree = "<group>"; };
 		35EF059729B0F0310098110B /* NYCNavigationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCNavigationButton.swift; sourceTree = "<group>"; };
 		35EF059A29B0F2EC0098110B /* NavigationDotsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationDotsView.swift; sourceTree = "<group>"; };
 		35EF059D29B0F40A0098110B /* AccountSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSetupView.swift; sourceTree = "<group>"; };
 		35EF059F29B0FB780098110B /* PersonTypeSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonTypeSetup.swift; sourceTree = "<group>"; };
 		35EF05A129B29BAD0098110B /* NYCSetupCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCSetupCard.swift; sourceTree = "<group>"; };
-		35F29396299E8ED500A85586 /* AmenityCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmenityCard.swift; sourceTree = "<group>"; };
-		35F29398299E8F4A00A85586 /* AmenityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmenityModel.swift; sourceTree = "<group>"; };
+		35F29396299E8ED500A85586 /* NYCAmenityCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCAmenityCard.swift; sourceTree = "<group>"; };
 		35F2939A299F195400A85586 /* NotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsView.swift; sourceTree = "<group>"; };
 		35F563092A13D181004FE102 /* NYCSegmentControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCSegmentControl.swift; sourceTree = "<group>"; };
 		35F7A2FC2A2444DF0021BB5D /* NavigationDestinations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationDestinations.swift; sourceTree = "<group>"; };
@@ -284,7 +277,6 @@
 				35C1668029D1307600963257 /* FirebaseFirestoreSwift in Frameworks */,
 				3524973829EB1C5E009E1002 /* Lottie in Frameworks */,
 				35FAF1132A84553400E67769 /* SwiftUIIntrospect in Frameworks */,
-				35F7A2FB2A243FB20021BB5D /* NavigationTransitions in Frameworks */,
 				3565689B29A12C16007CAF80 /* PopupView in Frameworks */,
 				359B2FAD29DA53EB0097E1DC /* FirebaseStorage in Frameworks */,
 				356569BC2A8EB75B009EB975 /* PostHog in Frameworks */,
@@ -321,7 +313,6 @@
 				351872C929D3C449004B564A /* Network */,
 				358B93962980D35800160BFC /* Model */,
 				358B93992980D42700160BFC /* Views */,
-				3538C62D298358560017800B /* ViewModels */,
 				3503BD99297F5EB900C0E365 /* Other */,
 				3503BD9A297F5ECB00C0E365 /* Resources */,
 				35D1FDDE2A6EE3A6009C7E7F /* Utilities */,
@@ -497,6 +488,7 @@
 				359D87C929D8919C00E827F3 /* UserService.swift */,
 				3542F59A29D9DF410086CB4F /* LocationService.swift */,
 				35915FEE29EB160700263946 /* AppConfigService.swift */,
+				35E7FB9C2985B88700EFF282 /* LocationManagerService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -545,27 +537,6 @@
 			path = "Helper Views";
 			sourceTree = "<group>";
 		};
-		3538C62A298357310017800B /* System */ = {
-			isa = PBXGroup;
-			children = (
-				3538C62B298357490017800B /* AppLanguageModel.swift */,
-				35E7FB9C2985B88700EFF282 /* GeoLocationModel.swift */,
-				35D9A5CD298981EE00A2F8D6 /* SettingsModel.swift */,
-				35F29398299E8F4A00A85586 /* AmenityModel.swift */,
-			);
-			path = System;
-			sourceTree = "<group>";
-		};
-		3538C62D298358560017800B /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				359348DE29BA432800B7739A /* Reviews */,
-				355C11BC29B78EAC001F092B /* Notifications */,
-				35D3821629B6AA8200B66EDA /* Location */,
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
 		354651C129A839D7003F7AE8 /* Animation Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -590,14 +561,6 @@
 				35F7A2FC2A2444DF0021BB5D /* NavigationDestinations.swift */,
 			);
 			path = Coordinators;
-			sourceTree = "<group>";
-		};
-		355C11BC29B78EAC001F092B /* Notifications */ = {
-			isa = PBXGroup;
-			children = (
-				355C11BD29B78EB7001F092B /* NotificationCard.swift */,
-			);
-			path = Notifications;
 			sourceTree = "<group>";
 		};
 		356C52DF29A052CD00080D4C /* Bottom Views */ = {
@@ -670,6 +633,9 @@
 		35746CBB29A31D25007322AA /* Cards */ = {
 			isa = PBXGroup;
 			children = (
+				35F29396299E8ED500A85586 /* NYCAmenityCard.swift */,
+				356C52D929A0460C00080D4C /* LocationMapCard.swift */,
+				35BA64B4299BF69D00E15206 /* NYCReviewCard.swift */,
 				359A792C298ECC6B001B66CF /* NYCSocialCard.swift */,
 				351B3A2629981B22007E7D00 /* NYCSettingsCard.swift */,
 				3583BD4429AA99E600B984EA /* NYCNotificationCard.swift */,
@@ -694,7 +660,6 @@
 				359348DB29BA420D00B7739A /* Review */,
 				35D3821329B6A7B700B66EDA /* Location */,
 				35E7FB922985A9C200EFF282 /* User */,
-				3538C62A298357310017800B /* System */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -721,14 +686,6 @@
 				35A34BE02A856DD80072E6A4 /* LocationSuggestionModel.swift */,
 			);
 			path = Review;
-			sourceTree = "<group>";
-		};
-		359348DE29BA432800B7739A /* Reviews */ = {
-			isa = PBXGroup;
-			children = (
-				35BA64B4299BF69D00E15206 /* ReviewCard.swift */,
-			);
-			path = Reviews;
 			sourceTree = "<group>";
 		};
 		359B2FAB29DA53EB0097E1DC /* Frameworks */ = {
@@ -784,6 +741,7 @@
 			children = (
 				35B77FAB2A919C7E00A5DB53 /* LocationStore.swift */,
 				35B77FAD2A91B38400A5DB53 /* NotificationStore.swift */,
+				3564A3472A92546500C960F6 /* ReviewStore.swift */,
 			);
 			path = Stores;
 			sourceTree = "<group>";
@@ -812,15 +770,6 @@
 			isa = PBXGroup;
 			children = (
 				35D3821429B6A7C000B66EDA /* LocationModel.swift */,
-			);
-			path = Location;
-			sourceTree = "<group>";
-		};
-		35D3821629B6AA8200B66EDA /* Location */ = {
-			isa = PBXGroup;
-			children = (
-				35F29396299E8ED500A85586 /* AmenityCard.swift */,
-				356C52D929A0460C00080D4C /* LocationMapCard.swift */,
 			);
 			path = Location;
 			sourceTree = "<group>";
@@ -934,7 +883,6 @@
 				359B2FAF29DB45300097E1DC /* SDWebImageSwiftUI */,
 				3524973729EB1C5E009E1002 /* Lottie */,
 				35D9447E29EF6B2700B9B640 /* FirebaseMessaging */,
-				35F7A2FA2A243FB20021BB5D /* NavigationTransitions */,
 				35FAF1122A84553400E67769 /* SwiftUIIntrospect */,
 				356569BB2A8EB75B009EB975 /* PostHog */,
 			);
@@ -973,7 +921,6 @@
 				35C1667A29D1307600963257 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				359B2FAE29DB45300097E1DC /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 				3524973629EB1C5E009E1002 /* XCRemoteSwiftPackageReference "lottie-spm" */,
-				35F7A2F92A243FB20021BB5D /* XCRemoteSwiftPackageReference "swiftui-navigation-transitions" */,
 				35FAF1112A84553400E67769 /* XCRemoteSwiftPackageReference "swiftui-introspect" */,
 				356569BA2A8EB75B009EB975 /* XCRemoteSwiftPackageReference "posthog-ios" */,
 			);
@@ -1021,7 +968,6 @@
 				3503BD9D297F5EE500C0E365 /* Resources.swift in Sources */,
 				359E6AA22981ED8B00333BD7 /* Onboarding.swift in Sources */,
 				35A34BE12A856DD80072E6A4 /* LocationSuggestionModel.swift in Sources */,
-				355C11BE29B78EB7001F092B /* NotificationCard.swift in Sources */,
 				359A792B298DFBB9001B66CF /* Modifiers.swift in Sources */,
 				35D9447929EEF80400B9B640 /* FirebaseErrors.swift in Sources */,
 				35EF059B29B0F2EC0098110B /* NavigationDotsView.swift in Sources */,
@@ -1051,7 +997,7 @@
 				350DE27B2991CA7600573163 /* LocationsMapView.swift in Sources */,
 				351872CC29D3C510004B564A /* NotificationService.swift in Sources */,
 				3536C2D72A02A955007D3E1A /* AdminReviewsView.swift in Sources */,
-				35E7FB9D2985B88700EFF282 /* GeoLocationModel.swift in Sources */,
+				35E7FB9D2985B88700EFF282 /* LocationManagerService.swift in Sources */,
 				35F2939B299F195400A85586 /* NotificationsView.swift in Sources */,
 				35216D4F2A3CDED9002D8B81 /* AnalyticsManager.swift in Sources */,
 				35F5630A2A13D181004FE102 /* NYCSegmentControl.swift in Sources */,
@@ -1074,7 +1020,6 @@
 				35737E5B29888866003B68BE /* ProfileView.swift in Sources */,
 				359F80FB298C330B000D792E /* FavoriteLocationsView.swift in Sources */,
 				35B77FAE2A91B38400A5DB53 /* NotificationStore.swift in Sources */,
-				35D9A5CE298981EE00A2F8D6 /* SettingsModel.swift in Sources */,
 				359348DD29BA421900B7739A /* ReviewModel.swift in Sources */,
 				35A8AFE92A16B25D00E362D7 /* NYCReviewTypeBadge.swift in Sources */,
 				3542F59D29DA1A820086CB4F /* LoadingLocationCell.swift in Sources */,
@@ -1083,7 +1028,7 @@
 				359E36902A3F4D4C00BE937D /* NYCMiddleAlertView.swift in Sources */,
 				35FAF10B2A844CA100E67769 /* LocationSuggestionStartingView.swift in Sources */,
 				351872CF29D3C547004B564A /* Notification.swift in Sources */,
-				35BA64B5299BF69D00E15206 /* ReviewCard.swift in Sources */,
+				35BA64B5299BF69D00E15206 /* NYCReviewCard.swift in Sources */,
 				35EF059829B0F0310098110B /* NYCNavigationButton.swift in Sources */,
 				35EF05A029B0FB780098110B /* PersonTypeSetup.swift in Sources */,
 				35DFA23E29A3BFC900258BB7 /* ReviewListView.swift in Sources */,
@@ -1093,7 +1038,6 @@
 				35FAF1152A845D9B00E67769 /* LocationSuggestionBasicInfo.swift in Sources */,
 				35737E6129888DF9003B68BE /* HomeView.swift in Sources */,
 				35E7FB9129848FEE00EFF282 /* NYCActionButton.swift in Sources */,
-				35F29399299E8F4A00A85586 /* AmenityModel.swift in Sources */,
 				35E7FB992985AB9300EFF282 /* NotificationPermission.swift in Sources */,
 				356C52DA29A0460C00080D4C /* LocationMapCard.swift in Sources */,
 				351B3A2529981665007E7D00 /* SupportSettingsView.swift in Sources */,
@@ -1103,10 +1047,11 @@
 				35861C9D2A21493B00DC0AFB /* SuggestInformationView.swift in Sources */,
 				35A34BFF2A89721C0072E6A4 /* NavigationViewBuilder.swift in Sources */,
 				35A34BFD2A8971BB0072E6A4 /* RootNavigationController.swift in Sources */,
-				35F29397299E8ED500A85586 /* AmenityCard.swift in Sources */,
+				35F29397299E8ED500A85586 /* NYCAmenityCard.swift in Sources */,
 				359F80F7298C2508000D792E /* LocationCell.swift in Sources */,
 				35D9448429EF727E00B9B640 /* InitView.swift in Sources */,
 				35AD1AEE29CBB4780076AE54 /* RatingDotsView.swift in Sources */,
+				3564A3482A92546500C960F6 /* ReviewStore.swift in Sources */,
 				35725E5D2A159953002E22B9 /* CalendarBottomView.swift in Sources */,
 				35F7A2FD2A2444DF0021BB5D /* NavigationDestinations.swift in Sources */,
 				35A34BF92A8971010072E6A4 /* Router.swift in Sources */,
@@ -1116,7 +1061,6 @@
 				3503BD88297F50AA00C0E365 /* SceneDelegate.swift in Sources */,
 				35402A2C2A0ED23400974CF7 /* NYCImageCarousel.swift in Sources */,
 				351B3A2929982ABC007E7D00 /* LocationDetailView.swift in Sources */,
-				3538C62C298357490017800B /* AppLanguageModel.swift in Sources */,
 				3583BD4529AA99E600B984EA /* NYCNotificationCard.swift in Sources */,
 				350DE2782991C66600573163 /* Enums.swift in Sources */,
 				354651C329A839E7003F7AE8 /* NYCLoadingSpinner.swift in Sources */,
@@ -1261,7 +1205,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = NYCoworker/NYCoworker.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 53;
+				CURRENT_PROJECT_VERSION = 54;
 				DEVELOPMENT_TEAM = 9S2MZXD36G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NYCoworker/Info.plist;
@@ -1299,7 +1243,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = NYCoworker/NYCoworker.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 53;
+				CURRENT_PROJECT_VERSION = 54;
 				DEVELOPMENT_TEAM = 9S2MZXD36G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NYCoworker/Info.plist;
@@ -1410,14 +1354,6 @@
 				minimumVersion = 9.0.0;
 			};
 		};
-		35F7A2F92A243FB20021BB5D /* XCRemoteSwiftPackageReference "swiftui-navigation-transitions" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/davdroman/swiftui-navigation-transitions";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.9.0;
-			};
-		};
 		35FAF1112A84553400E67769 /* XCRemoteSwiftPackageReference "swiftui-introspect" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/siteline/swiftui-introspect";
@@ -1483,11 +1419,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 35C1667A29D1307600963257 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseMessaging;
-		};
-		35F7A2FA2A243FB20021BB5D /* NavigationTransitions */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 35F7A2F92A243FB20021BB5D /* XCRemoteSwiftPackageReference "swiftui-navigation-transitions" */;
-			productName = NavigationTransitions;
 		};
 		35FAF1122A84553400E67769 /* SwiftUIIntrospect */ = {
 			isa = XCSwiftPackageProductDependency;

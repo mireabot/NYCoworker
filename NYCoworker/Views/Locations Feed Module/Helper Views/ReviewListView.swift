@@ -15,7 +15,7 @@ struct ReviewListView: View {
       ScrollView(.vertical, showsIndicators: true) {
         VStack {
           ForEach(model.reviews,id: \.datePosted) { review in
-            ReviewCard(variation: .full, data: review)
+            NYCReviewCard(variation: .full, data: review)
           }
         }
         .padding([.leading,.trailing], 16)

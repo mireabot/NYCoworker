@@ -1,5 +1,5 @@
 //
-//  GeoLocationModel.swift
+//  LocationManagerService.swift
 //  NYCoworker
 //
 //  Created by Mikhail Kolkov on 1/28/23.

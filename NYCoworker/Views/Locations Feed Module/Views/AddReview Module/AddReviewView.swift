@@ -19,7 +19,6 @@ struct AddReviewView: View {
   @State private var showLoader = false
   @State private var showAlert = false
   @FocusState private var fieldIsFocused: Bool
-  @StateObject var reviewService = ReviewService()
   @State private var sheetContentHeight = CGFloat(0)
   let locationData: Location
   var body: some View {
@@ -184,24 +183,28 @@ extension AddReviewView { //MARK: - Functions
   func submitReview() {
     showLoader = true
     Task {
-      await reviewService.createReview(from:
-                                        Review(locationID: locationData.locationID,
-                                               datePosted: Timestamp(date: Date()),
-                                               dateVisited: Timestamp(date: visitDate),
-                                               text: reviewText,
-                                               type: reviewType,
-                                               userName: Resources.userName,
-                                               userImage: Resources.userImageUrl,
-                                               isLive: false,
-                                               userToken: UserDefaults.standard.string(forKey: "FCMToken") ?? ""),
-                                       location: locationData,
-                                       completion: {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-          withAnimation(.spring()) {
-            showLoader = false
-            showAlert.toggle()
+      await ReviewService.shared.createReview(from:
+                                                Review(locationID: locationData.locationID,
+                                                       datePosted: Timestamp(date: Date()),
+                                                       dateVisited: Timestamp(date: visitDate),
+                                                       text: reviewText,
+                                                       type: reviewType,
+                                                       userName: Resources.userName,
+                                                       userImage: Resources.userImageUrl,
+                                                       isLive: false,
+                                                       userToken: UserDefaults.standard.string(forKey: "FCMToken") ?? "")
+                                              ,completion: { result in
+        switch result {
+        case .success:
+          DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            withAnimation(.spring()) {
+              showLoader = false
+              showAlert.toggle()
+            }
+            AnalyticsManager.shared.log(.reviewSubmitted(locationData.locationID))
           }
-          AnalyticsManager.shared.log(.reviewSubmitted(locationData.locationID))
+        case .failure(let error):
+          print(error.localizedDescription)
         }
       })
     }

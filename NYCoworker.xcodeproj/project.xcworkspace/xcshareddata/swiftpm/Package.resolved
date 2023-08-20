@@ -172,15 +172,6 @@
       }
     },
     {
-      "identity" : "swiftui-navigation-transitions",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/davdroman/swiftui-navigation-transitions",
-      "state" : {
-        "revision" : "49005b9fc6bfb60f5da9592f6b4e941c6954c95f",
-        "version" : "0.10.1"
-      }
-    },
-    {
       "identity" : "swiftui-shimmer",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/markiv/SwiftUI-Shimmer",
