@@ -7,23 +7,9 @@
 
 import SwiftUI
 
-struct ExpandedReviewView: View {
-  enum ExpandedReviewViewType {
-    case fullList
-  }
-  var type: ExpandedReviewViewType?
-  @EnvironmentObject private var model: ReviewService
+struct ReviewListView: View {
+  @EnvironmentObject private var model: LocationStore
   var body: some View {
-    switch type {
-    case .fullList:
-      fullListView()
-    case .none:
-      EmptyView()
-    }
-  }
-  
-  @ViewBuilder
-  func fullListView() -> some View {
     VStack {
       NYCBottomSheetHeader(title: "All reviews").paddingForHeader()
       ScrollView(.vertical, showsIndicators: true) {

@@ -6,11 +6,10 @@
 //
 
 import SwiftUI
-import PopupView
 
 struct NotificationsView: View {
   @EnvironmentObject var router: NYCNavigationViewsRouter
-  @EnvironmentObject var notificationService: NotificationService
+  @EnvironmentObject var notificationStore: NotificationStore
   @State var isLoading = false
   var body: some View {
     NavigationView {
@@ -48,13 +47,13 @@ extension NotificationsView { //MARK: - View components
       ProgressView()
     }
     else {
-      if notificationService.notifications.isEmpty {
+      if notificationStore.notifications.isEmpty {
         NYCEmptyView(type: .notifications)
       }
       else {
         ScrollView(.vertical, showsIndicators: true) {
           LazyVStack(spacing: 10) {
-            ForEach(notificationService.notifications, id: \.datePosted) { item in
+            ForEach(notificationStore.notifications, id: \.datePosted) { item in
               NotificationCard(data: item)
             }
           }

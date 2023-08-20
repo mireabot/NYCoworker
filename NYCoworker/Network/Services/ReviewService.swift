@@ -43,7 +43,6 @@ class ReviewService: ObservableObject {
     do {
       let reviewData = try Firestore.Encoder().encode(review)
       try await db.collection(Endpoints.reviews.rawValue).document().setData(reviewData)
-      //try await db.collection(Endpoints.locations.rawValue).document(location.locationID).setData(["reviews": location.reviews + 1], merge: true)
       await MainActor.run(body: {
         completion()
       })

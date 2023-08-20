@@ -12,19 +12,18 @@ import CoreLocation
 
 struct LocationsMap: View {
   @EnvironmentObject var router: NYCNavigationViewsRouter
-  @EnvironmentObject var locationData: LocationsHomeViewVM
+  @EnvironmentObject var locationStore: LocationStore
   @State var selectedLocation: Location?
   @State var showAlert = false
-//  var locations: [Location]
+  @State var locations: [Location] = []
   var body: some View {
     NavigationView {
       ZStack(alignment: .bottom) {
-        LocationMapView(selectedLocation: $selectedLocation, region: getRegion(), type: .mapModule)
-          .environmentObject(locationData)
+        LocationMapView(locations: $locations, selectedLocation: $selectedLocation, region: getRegion(), type: .mapModule)
           .ignoresSafeArea()
         
         ZStack {
-          ForEach(locationData.locationsData, id: \.self) { location in
+          ForEach(locations, id: \.self) { location in
             if selectedLocation == location {
               LocationMapCard(location: location) {
                 showAlert.toggle()
@@ -37,6 +36,9 @@ struct LocationsMap: View {
           }
         }.padding(.bottom, 30)
       }
+      .onReceive(locationStore.$locations, perform: { data in
+        self.locations = data
+      })
       .navigationBarTitleDisplayMode(.inline)
       .toolbar {
         ToolbarItem(placement: .navigationBarLeading) {
@@ -64,14 +66,14 @@ struct LocationsMap: View {
   }
   
   private func getRegion() -> MKCoordinateRegion {
-    let center = CLLocationCoordinate2D(latitude: locationData.locationsData.first?.locationCoordinates.latitude ?? 0.0, longitude: locationData.locationsData.first?.locationCoordinates.longitude ?? 0.0)
+    let center = CLLocationCoordinate2D(latitude: locations.first?.locationCoordinates.latitude ?? 0.0, longitude: locations.first?.locationCoordinates.longitude ?? 0.0)
     let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
     return MKCoordinateRegion(center: center, span: span)
   }
 }
 
 struct LocationMapView: View {
-  @EnvironmentObject var locationData: LocationsHomeViewVM
+  @Binding var locations: [Location]
   @Binding var selectedLocation: Location?
   @State var region: MKCoordinateRegion
   enum MapType {
@@ -93,7 +95,7 @@ extension LocationMapView { //MARK: - View components
   @ViewBuilder
   func homePreview() -> some View {
     Map(coordinateRegion: $region,
-        interactionModes: .zoom, showsUserLocation: false, annotationItems: locationData.locationsData) { location in
+        interactionModes: .zoom, showsUserLocation: false, annotationItems: locations) { location in
       MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: location.locationCoordinates.latitude, longitude: location.locationCoordinates.longitude)) {
         Button(action: {
           withAnimation {
@@ -115,7 +117,7 @@ extension LocationMapView { //MARK: - View components
   @ViewBuilder
   func mapModule() -> some View {
     Map(coordinateRegion: $region,
-        showsUserLocation: true, annotationItems: locationData.locationsData) { location in
+        showsUserLocation: true, annotationItems: locations) { location in
       MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: location.locationCoordinates.latitude, longitude: location.locationCoordinates.longitude)) {
         Button(action: {
           DispatchQueue.main.async {
@@ -133,7 +135,7 @@ extension LocationMapView { //MARK: - View components
       }
     }
         .onAppear {
-          selectedLocation = locationData.locationsData.first!
+          selectedLocation = locations.first!
         }
   }
 }

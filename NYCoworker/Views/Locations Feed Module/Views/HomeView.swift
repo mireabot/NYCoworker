@@ -14,8 +14,8 @@ struct HomeView: View {
   @EnvironmentObject var router: NYCNavigationViewsRouter
   @State var isLoading = true
   @StateObject var locationManager = LocationManager()
-  @StateObject var locationDataVM = LocationsHomeViewVM()
-  @StateObject private var notificationService = NotificationService()
+  @StateObject private var locationStore = LocationStore()
+  @StateObject private var notificationStore = NotificationStore()
   @AppStorage("UserID") var userId : String = ""
   @State var addToFavs = false
   var body: some View {
@@ -35,7 +35,7 @@ struct HomeView: View {
             else {
               NYCPromoBanner(bannerType: .summerLocations) {
                 DispatchQueue.main.async {
-                  router.pushTo(view: NYCNavigationViewBuilder.builder.makeView(LocationListView(selectedTitle: Locations.cafe.headerTitle, selectedLocations: locationDataVM.cafes)))
+                  router.pushTo(view: NYCNavigationViewBuilder.builder.makeView(LocationListView(selectedTitle: Locations.cafe.headerTitle, selectedLocations: locationStore.cafes)))
                 }
               }
             }
@@ -52,19 +52,9 @@ struct HomeView: View {
       .refreshable(action: {
         DispatchQueue.main.async {
           isLoading = true
-          locationDataVM.locationsData = []
         }
-        await LocationService.shared.fetchLocations(completion: { result in
-          switch result {
-          case .success(let locactions):
-            locationDataVM.locationsData = locactions
-            Resources.userLocation = locationManager.userLocation ?? CLLocation(latitude: 0.0, longitude: 0.0)
-            print("Locations are loaded \(locationDataVM.locationsData.count)")
-            isLoading = false
-          case .failure(let failure):
-            print(failure.localizedDescription)
-          }
-        })
+        await fetchAllLocations()
+        await fetchNotifications()
       })
       .popup(isPresented: $addToFavs) {
         NYCAlertNotificationView(alertStyle: .addedToFavorites)
@@ -77,22 +67,8 @@ struct HomeView: View {
           .animation(.spring(response: 0.4, blendDuration: 0.2))
       }
       .task {
-        await LocationService.shared.fetchLocations(completion: { result in
-          switch result {
-          case .success(let locactions):
-            DispatchQueue.main.async {
-              self.locationDataVM.locationsData = locactions
-              Resources.userLocation = locationManager.userLocation ?? CLLocation(latitude: 0.0, longitude: 0.0)
-              print("Locations are loaded \(locationDataVM.locationsData.count)")
-              isLoading = false
-            }
-          case .failure(let failure):
-            print(failure.localizedDescription)
-          }
-        })
-        await notificationService.fetchNotifications {
-          print("Notifications are fetched with count \(notificationService.notifications.count)")
-        }
+        await fetchAllLocations()
+        await fetchNotifications()
       }
       .toolbar {
         ToolbarItem(placement: .navigationBarLeading) {
@@ -106,7 +82,7 @@ struct HomeView: View {
         }
         
         ToolbarItem(placement: .primaryAction) {
-          NYCCircleImageButton(size: 20, image: Resources.Images.Settings.notifications, showBadge: !notificationService.notifications.isEmpty) { showNotifications() }
+          NYCCircleImageButton(size: 20, image: Resources.Images.Settings.notifications, showBadge: !notificationStore.notifications.isEmpty) { showNotifications() }
         }
       }
       .navigationBarTitleDisplayMode(.inline)
@@ -129,7 +105,7 @@ extension HomeView { //MARK: - Home components
     VStack(alignment: .leading, spacing: 12) {
       Button(action: {
         DispatchQueue.main.async {
-          router.pushTo(view: NYCNavigationViewBuilder.builder.makeView(LocationListView(selectedTitle: Locations.libraries.headerTitle, selectedLocations: locationDataVM.libraries)))
+          router.pushTo(view: NYCNavigationViewBuilder.builder.makeView(LocationListView(selectedTitle: Locations.libraries.headerTitle, selectedLocations: locationStore.libraries)))
         }
       }, label: {
         NYCSectionHeader(title: Locations.libraries.headerTitle, isExpandButton: true)
@@ -144,9 +120,9 @@ extension HomeView { //MARK: - Home components
             }
           }
           else {
-            ForEach(locationDataVM.libraries, id: \.locationName) { data in
+            ForEach(locationStore.libraries, id: \.locationName) { data in
               LocationCell(data: data, type: .large, buttonAction: {
-                addLocationTofavs(location: data.locationID)
+                addLocationToFavorites(location: data.locationID)
               })
               .onTapGesture {
                 DispatchQueue.main.async {
@@ -167,7 +143,7 @@ extension HomeView { //MARK: - Home components
     VStack(alignment: .leading, spacing: 12) {
       Button(action: {
         DispatchQueue.main.async {
-          router.pushTo(view: NYCNavigationViewBuilder.builder.makeView(LocationListView(selectedTitle: Locations.lobbies.headerTitle, selectedLocations: locationDataVM.hotels)))
+          router.pushTo(view: NYCNavigationViewBuilder.builder.makeView(LocationListView(selectedTitle: Locations.lobbies.headerTitle, selectedLocations: locationStore.hotels)))
         }
       }, label: {
         NYCSectionHeader(title: Locations.lobbies.headerTitle, isExpandButton: true)
@@ -182,9 +158,9 @@ extension HomeView { //MARK: - Home components
             }
           }
           else {
-            ForEach(locationDataVM.hotels, id: \.locationName) { data in
+            ForEach(locationStore.hotels, id: \.locationName) { data in
               LocationCell(data: data, type: .large, buttonAction: {
-                addLocationTofavs(location: data.locationID)
+                addLocationToFavorites(location: data.locationID)
               })
               .onTapGesture {
                 DispatchQueue.main.async {
@@ -205,7 +181,7 @@ extension HomeView { //MARK: - Home components
     VStack(alignment: .leading, spacing: 12) {
       Button(action: {
         DispatchQueue.main.async {
-          router.pushTo(view: NYCNavigationViewBuilder.builder.makeView(LocationListView(selectedTitle: Locations.publicSpaces.headerTitle, selectedLocations: locationDataVM.publicSpaces)))
+          router.pushTo(view: NYCNavigationViewBuilder.builder.makeView(LocationListView(selectedTitle: Locations.publicSpaces.headerTitle, selectedLocations: locationStore.publicSpaces)))
         }
       }, label: {
         NYCSectionHeader(title: Locations.publicSpaces.headerTitle, isExpandButton: true)
@@ -217,13 +193,13 @@ extension HomeView { //MARK: - Home components
           LoadingLocationCell(type: .map)
         }
         else {
-          LocationMapCard(location: locationDataVM.publicSpaces[0]) {
-            addLocationTofavs(location: locationDataVM.publicSpaces[0].locationID)
+          LocationMapCard(location: locationStore.publicSpaces[0]) {
+            addLocationToFavorites(location: locationStore.publicSpaces[0].locationID)
           }
           .onTapGesture {
             DispatchQueue.main.async {
-              router.pushTo(view: NYCNavigationViewBuilder.builder.makeView(LocationDetailView(selectedLocation: locationDataVM.publicSpaces[0])))
-              AnalyticsManager.shared.log(.locationSelected(locationDataVM.publicSpaces[0].locationID))
+              router.pushTo(view: NYCNavigationViewBuilder.builder.makeView(LocationDetailView(selectedLocation: locationStore.publicSpaces[0])))
+              AnalyticsManager.shared.log(.locationSelected(locationStore.publicSpaces[0].locationID))
             }
           }
         }
@@ -236,7 +212,7 @@ extension HomeView { //MARK: - Home components
     VStack(alignment: .leading, spacing: 12) {
       NYCSectionHeader(title: "Locations nearby", isExpandButton: false)
       ZStack {
-        LocationMapView(selectedLocation: .constant(Location.mock), region: Resources.mapRegion, type: .homePreview).environmentObject(locationDataVM)
+        LocationMapView(locations: $locationStore.locations, selectedLocation: .constant(Location.mock), region: Resources.mapRegion, type: .homePreview)
           .frame(width: UIScreen.main.bounds.width - 16, height: 120)
           .cornerRadius(15)
       }
@@ -250,7 +226,32 @@ extension HomeView { //MARK: - Home components
 }
 
 extension HomeView { //MARK: - Functions
-  func addLocationTofavs(location: String) {
+  
+  private func fetchAllLocations() async {
+    await locationStore.fetchLocations(completion: { result in
+      switch result {
+      case .success:
+        Resources.userLocation = locationManager.userLocation ?? CLLocation(latitude: 0.0, longitude: 0.0)
+        print("Locations are loaded \(locationStore.locations.count)")
+        isLoading = false
+      case .failure(let error):
+        print(error.localizedDescription)
+      }
+    })
+  }
+  
+  private func fetchNotifications() async {
+    await notificationStore.fetchNotifications(completion: { result in
+      switch result {
+      case .success:
+        print("Notifications are fetched \(notificationStore.notifications.count)")
+      case .failure(let error):
+        print(error.localizedDescription)
+      }
+    })
+  }
+  
+  func addLocationToFavorites(location: String) {
     Task {
       await LocationService.shared.addFavoriteLocation(locationID: location, userID: userId, completion: { result in
         switch result {
@@ -274,14 +275,14 @@ extension HomeView { //MARK: - Functions
   func showNotifications() {
     DispatchQueue.main.async {
       AnalyticsManager.shared.log(.notificationWasOpened)
-      router.pushTo(view: NYCNavigationViewBuilder.builder.makeView(NotificationsView().environmentObject(notificationService)))
+      router.pushTo(view: NYCNavigationViewBuilder.builder.makeView(NotificationsView().environmentObject(notificationStore)))
     }
   }
   
   func showMap() {
     DispatchQueue.main.async {
       AnalyticsManager.shared.log(.openMap)
-      router.pushTo(view: NYCNavigationViewBuilder.builder.makeView(LocationsMap().environmentObject(locationDataVM)))
+      router.pushTo(view: NYCNavigationViewBuilder.builder.makeView(LocationsMap().environmentObject(locationStore)))
     }
   }
 }

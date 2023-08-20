@@ -12,35 +12,14 @@ import Firebase
 struct FavoriteLocationsView: View {
   @EnvironmentObject var router: NYCNavigationViewsRouter
   @State var isLoading = true
-  @State var isUpdating = false
   @StateObject private var userService = UserService()
-  @StateObject var userFavoritesVM = UserFavoritesViewModel()
+  @StateObject private var locationStore = LocationStore()
   @AppStorage("UserID") var userId : String = ""
   var body: some View {
     NavigationView {
       favoriteList()
-        .onAppear {
-          isLoading = true
-          Task(priority: .userInitiated) {
-            do {
-              await userService.fetchUser(documentId: userId, completion: {
-                Task(priority: .userInitiated) {
-                  await LocationService.shared.fetchFavoriteLocations(for: userService.user, completion: { result in
-                    switch result {
-                    case .success(let data):
-                      userFavoritesVM.userFavoritesLocations = data
-                      DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                        print("Favorites locations for userID \(userService.user.userID) fetched with count \(userFavoritesVM.userFavoritesLocations.count)")
-                        isLoading = false
-                      }
-                    case .failure(let error):
-                      print(firestoreError(forError: error))
-                    }
-                  })
-                }
-              })
-            }
-          }
+        .task {
+          await fetchFavoriteLocations()
         }
         .toolbar(content: {
           ToolbarItem(placement: .navigationBarLeading) {
@@ -76,17 +55,17 @@ extension FavoriteLocationsView { //MARK: - View components
         loadingView()
       }
       else {
-        if userFavoritesVM.userFavoritesLocations.isEmpty {
+        if locationStore.favoriteLocations.isEmpty {
           NYCEmptyView(type: .favorites)
         }
         else {
           ScrollView(.vertical, showsIndicators: true) {
             LazyVStack(spacing: 16) {
-              ForEach(userFavoritesVM.userFavoritesLocations, id: \.id) { data in
+              ForEach(locationStore.favoriteLocations, id: \.id) { data in
                 LocationListCell(type: .favorite, data: data, buttonAction: {
-                  removeFromfavs(locationID: data.locationID)
+                  removeLocationFromFavorites(locationID: data.locationID)
                   Task {
-                    await extractedFunc()
+                    await fetchFavoriteLocations()
                   }
                 })
                 .onTapGesture {
@@ -114,37 +93,40 @@ extension FavoriteLocationsView { //MARK: - View components
 }
 
 extension FavoriteLocationsView { //MARK: - Functions
-  fileprivate func extractedFunc() async {
-    isLoading = true
-    userFavoritesVM.userFavoritesLocations = []
-    await userService.fetchUser(documentId: userId, completion: {
-      Task(priority: .userInitiated) {
-        await LocationService.shared.fetchFavoriteLocations(for: userService.user, completion: { result in
-          switch result {
-          case .success(let data):
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-              userFavoritesVM.userFavoritesLocations = data
-              print("Favorites locations for userID \(userId) fetched with count \(userFavoritesVM.userFavoritesLocations.count)")
-              isLoading = false
-            }
-          case .failure(let error):
-            print(firestoreError(forError: error))
-          }
-        })
-      }
-    })
-  }
-  
-  func removeFromfavs(locationID: String) {
+  func removeLocationFromFavorites(locationID: String) {
     Task {
       if userService.user.favoriteLocations.contains(locationID) {
-        Firestore.firestore().collection(Endpoints.users.rawValue).document(userId).updateData([
-          "favoriteLocations": FieldValue.arrayRemove([locationID])
-        ])
+        await LocationService.shared.removeLocationFromFavorites(for: userId, with: locationID) { result in
+          switch result {
+          case .success:
+            print("Location \(locationID) deleted")
+          case .failure(let error):
+            print(error.localizedDescription)
+          }
+        }
       }
       else {
         return
       }
     }
+  }
+  
+  private func fetchFavoriteLocations() async {
+    isLoading = true
+    await userService.fetchUser(documentId: userId, completion: {
+      Task(priority: .userInitiated) {
+        await locationStore.fetchFavoriteLocations(for: userService.user, completion: { result in
+          switch result {
+          case .success:
+            print("Favorites locations for userID \(userService.user.userID) fetched with count \(locationStore.favoriteLocations.count)")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+              isLoading = false
+            }
+          case .failure(let error):
+            print(error.localizedDescription)
+          }
+        })
+      }
+    })
   }
 }

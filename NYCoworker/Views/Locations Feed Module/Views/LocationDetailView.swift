@@ -23,7 +23,7 @@ struct LocationDetailView: View {
   @State var showUpdatesList = false
   @State var reportEdit = false
   @State var isLoading = true
-  @StateObject private var reviewService = ReviewService()
+  @StateObject private var locationStore = LocationStore()
   @State private var sheetContentHeight = CGFloat(0)
   var body: some View {
     NavigationView {
@@ -49,8 +49,8 @@ struct LocationDetailView: View {
         AddReviewView(isPresented: $addReviewView, locationData: selectedLocation ?? Location.mock)
       })
       .sheet(isPresented: $showReviewList, content: {
-        ExpandedReviewView(type: .fullList)
-          .environmentObject(reviewService)
+        ReviewListView()
+          .environmentObject(locationStore)
           .presentationDetents([.fraction(0.95)])
           .presentationDragIndicator(.visible)
       })
@@ -58,12 +58,7 @@ struct LocationDetailView: View {
       .navigationBarTitleDisplayMode(.inline)
       .task {
         AnalyticsManager.shared.log(.locationSelected(selectedLocation?.locationID ?? Location.mock.locationID))
-        guard reviewService.reviews.isEmpty else { return }
-        await reviewService.fetchReviews(locationID: "\(selectedLocation?.locationID ?? Location.mock.locationID)", completion: {
-          DispatchQueue.main.async {
-            isLoading = false
-          }
-        })
+        await fetchAllReviews()
       }
       .toolbar {
         ToolbarItem(placement: .navigationBarLeading) {
@@ -169,11 +164,11 @@ extension LocationDetailView { //MARK: - View components
           .shimmering(active: true)
       }
       else {
-        if reviewService.reviews.isEmpty {
+        if locationStore.reviews.isEmpty {
           NYCEmptyView(type: .noReviews)
         }
         else {
-          ReviewCard(variation: .small, data: reviewService.reviews[0])
+          ReviewCard(variation: .small, data: locationStore.reviews[0])
         }
       }
       
@@ -348,5 +343,16 @@ extension LocationDetailView { //MARK: - Functions
   func showReviewSubmission() {
     AnalyticsManager.shared.log(.reviewOpened(selectedLocation?.locationID ?? Location.mock.locationID))
     addReviewView.toggle()
+  }
+  
+  private func fetchAllReviews() async {
+    await locationStore.fetchReviews(for: selectedLocation?.locationID ?? Location.mock.locationID, completion: { result in
+      switch result {
+      case .success:
+        isLoading = false
+      case .failure(let error):
+        print(error.localizedDescription)
+      }
+    })
   }
 }

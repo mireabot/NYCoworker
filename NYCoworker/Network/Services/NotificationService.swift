@@ -11,11 +11,11 @@ import FirebaseFirestore
 
 class NotificationService: ObservableObject {
   private var db = Firestore.firestore()
-  @Published var notifications: [Notification] = []
+  static let shared = NotificationService()
   
   /// Fetching notifications from database sorted by date posted
   ///- returns: set of notifications
-  func fetchNotifications(completion: @escaping () -> Void) async {
+  func fetchNotifications(completion: @escaping (Result<[Notification], Error>) -> Void) async {
     do {
       var query: Query!
       query = db.collection(Endpoints.notifications.rawValue).order(by: "datePosted", descending: true)
@@ -23,13 +23,10 @@ class NotificationService: ObservableObject {
       let notificationsFetched = docs.documents.compactMap { doc -> Notification? in
         try? doc.data(as: Notification.self)
       }
-      await MainActor.run(body: {
-        notifications = notificationsFetched
-        completion()
-      })
+      completion(.success(notificationsFetched))
     }
     catch {
-      print(error.localizedDescription)
+      completion(.failure(error))
     }
   }
   
