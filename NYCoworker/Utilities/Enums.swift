@@ -47,14 +47,16 @@ enum Endpoints: String {
   case suggestions = "Suggestions"
 }
 
-//MARK: - Pop alerts type enum
-/// Stores title and icon of top pop alerts
-enum PopAlertType {
+//MARK: - Alerts type enum
+
+/// Stores title and icon for top alerts
+enum TopAlertType {
   case addedToFavorites
   case dataUploaded
   case reportSubmitted
   case feedbackSent
   case reviewUploaded
+  case removedFromFavorites
   
   var title: String {
     switch self {
@@ -68,6 +70,8 @@ enum PopAlertType {
       return "We received your feedback"
     case .reviewUploaded:
       return "Your review is live!"
+    case .removedFromFavorites:
+      return "Removed from favorites"
     }
   }
   
@@ -83,28 +87,40 @@ enum PopAlertType {
       return Image("dataUploaded")
     case .reviewUploaded:
       return Image("dataUploaded")
+    case .removedFromFavorites:
+      return Image("favs")
     }
   }
 }
 
-enum AlertType {
-  case notification
-  case geoposition
+/// Stores title and text for middle view alerts
+enum MiddleAlertType {
+  case reviewUnderReview
+  case notificationsRejected
+  case geolocationRejected
+  case feedbackSubmitted
+  case suggestionSubmitted
+  case accountUpdated
   
   var title: String {
     switch self {
-    case .notification:
-      return "Notifications are off"
-    case .geoposition:
-      return "Geoposition is off"
+    case .reviewUnderReview: return "We're reviewing your submission"
+    case .notificationsRejected: return "You will not receive notifications"
+    case .geolocationRejected: return "Location Services Denied"
+    case .feedbackSubmitted: return "Thanks for sharing!"
+    case .suggestionSubmitted: return "Thanks for sharing!"
+    case .accountUpdated: return "Your profile was updated!"
     }
   }
-  var subtitle: String {
+  
+  var text: String {
     switch self {
-    case .notification:
-      return "You can turn on notification later in settings"
-    case .geoposition:
-      return "You can turn on geoposition later in settings"
+    case .reviewUnderReview: return "Thanks for sharing your opinion! Our team'll review it in 1-2 days and send a push when it goes live."
+    case .notificationsRejected: return "No worries! Enable notifications in settings if you change your mind."
+    case .geolocationRejected: return "No worries! You won't see distance from locations unless you turn location services in settings."
+    case .feedbackSubmitted: return "Hearing from you helps us to create the best NYCoworker experience."
+    case .suggestionSubmitted: return "Hearing from you helps us to create the best NYCoworker experience."
+    case .accountUpdated: return "New data successfully saved and will be updated shortly."
     }
   }
 }

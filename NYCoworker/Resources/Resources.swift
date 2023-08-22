@@ -71,6 +71,7 @@ enum Resources {
       static let changeLanguage = Image("language")
       static let website = Image("website")
       static let rate = Image("rate")
+      static let rateFilled = Image("rate_filled")
       static let faq = Image("faq")
       static let like = Image("like")
       static let notifications = Image("bell")

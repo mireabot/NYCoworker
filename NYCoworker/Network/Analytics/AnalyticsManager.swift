@@ -51,6 +51,8 @@ final class AnalyticsManager {
         PHGPostHog.shared()?.capture(event.eventName)
       case .locationSuggestionWasSubmitted:
         PHGPostHog.shared()?.capture(event.eventName)
+      case .locationRemovedFromFavs(let locationID):
+        PHGPostHog.shared()?.capture(event.eventName, properties: ["location" : locationID])
       }
     }
   }
@@ -62,6 +64,7 @@ enum AnalyticsEvents {
   case locationSelected(String)
   case openFavorites
   case locationAddedToFavs(String)
+  case locationRemovedFromFavs(String)
   case reviewOpened(String)
   case reviewSubmitted(String)
   case routeButtonPressed(String)
@@ -90,6 +93,7 @@ enum AnalyticsEvents {
     case .notificationWasOpened: return "notificationsOpened"
     case .locationSuggestionWasOpened: return "Location suggestion was opened"
     case .locationSuggestionWasSubmitted: return "Location was suggested to app"
+    case .locationRemovedFromFavs: return "locationRemovedFromFavs"
     }
   }
 }

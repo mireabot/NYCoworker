@@ -12,59 +12,63 @@ struct InstructionsView: View {
   @Binding var secondTabPressed: Bool
   var locationData: Location
   var body: some View {
-    ZStack(alignment: .center) {
-      HStack(alignment: .center, spacing: 0) {
-        Button {
-          firstTabPressed.toggle()
-        } label: {
-          HStack(spacing: 10) {
-            Resources.Images.Navigation.alert
-              .resizable()
-              .frame(width: 20, height: 20)
-              .foregroundColor(Resources.Colors.primary)
-            
-            Text("Spot features")
+    HStack {
+      Button {
+        firstTabPressed.toggle()
+      } label: {
+        HStack(alignment: .center) {
+          VStack(alignment: .leading, spacing: 2) {
+            Text("Spot Updates")
+              .foregroundColor(Resources.Colors.customBlack)
               .font(Resources.Fonts.regular(withSize: 15))
-              .foregroundColor(Resources.Colors.darkGrey)
-              .padding(.leading, -2)
-            
-            
+            Text("\(locationData.locationUpdates?.count ?? 0)")
+              .foregroundColor(Resources.Colors.customBlack)
+              .font(Resources.Fonts.bold(withSize: 17))
           }
-          .underline()
-          .frame(maxWidth: .infinity)
+          .padding(.leading, 10)
+          Spacer()
+          Resources.Images.Navigation.alert
+            .resizable()
+            .frame(width: 24, height: 24)
+            .foregroundColor(Resources.Colors.primary)
+            .padding(.trailing, 10)
         }
-        .disabled(locationData.locationUpdates?.isEmpty ?? true)
-        
-        Button {
-          secondTabPressed.toggle()
-        } label: {
-          HStack(spacing: 10) {
-            Resources.Images.Tabs.socialTab
-              .resizable()
-              .frame(width: 20, height: 20)
-              .foregroundColor(Resources.Colors.primary)
-            
-            Text("\(locationData.reviews) reviews")
-              .font(Resources.Fonts.regular(withSize: 15))
-              .foregroundColor(Resources.Colors.darkGrey)
-              .padding(.leading, -2)
-            
-            
-          }
-          .underline()
-          .frame(maxWidth: .infinity)
-        }
-        .disabled(locationData.reviews == 0)
+        .padding(.vertical, 5)
+        .padding(.horizontal, 5)
+        .background(Resources.Colors.customGrey)
+        .cornerRadius(10)
       }
-      
-      Rectangle()
-        .fill(Resources.Colors.darkGrey)
-        .frame(width: 1)
+      .buttonStyle(NYCButtonStyle())
+      .disabled(locationData.locationUpdates?.isEmpty ?? true)
+
+      Button {
+        secondTabPressed.toggle()
+      } label: {
+        HStack(alignment: .center) {
+          VStack(alignment: .leading, spacing: 2) {
+            Text("Reviews")
+              .foregroundColor(Resources.Colors.customBlack)
+              .font(Resources.Fonts.regular(withSize: 15))
+            Text("\(locationData.reviews)")
+              .foregroundColor(Resources.Colors.customBlack)
+              .font(Resources.Fonts.bold(withSize: 17))
+          }
+          .padding(.leading, 10)
+          Spacer()
+          Resources.Images.Tabs.socialTab
+            .resizable()
+            .frame(width: 24, height: 24)
+            .foregroundColor(Resources.Colors.primary)
+            .padding(.trailing, 10)
+        }
+        .padding(.vertical, 5)
+        .padding(.horizontal, 5)
+        .background(Resources.Colors.customGrey)
+        .cornerRadius(10)
+      }
+      .buttonStyle(NYCButtonStyle())
+      .disabled(locationData.reviews == 0)
     }
-    .padding(15)
-    .background(Resources.Colors.customGrey)
-    .cornerRadius(15)
-    .fixedSize(horizontal: false, vertical: true)
   }
 }
 

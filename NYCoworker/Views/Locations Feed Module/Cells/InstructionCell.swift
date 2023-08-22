@@ -50,10 +50,10 @@ struct InstructionCell: View {
 }
 
 /*
-struct InstructionCell_Previews: PreviewProvider {
-  static var previews: some View {
-    InstructionCell(updatesData: [LocationUpdates.mock], buttonAction: {})
-      .padding([.leading,.trailing], 16)
-  }
-}
-*/
+ struct InstructionCell_Previews: PreviewProvider {
+ static var previews: some View {
+ InstructionCell(updatesData: [LocationUpdates.mock], buttonAction: {})
+ .padding([.leading,.trailing], 16)
+ }
+ }
+ */

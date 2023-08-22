@@ -8,92 +8,29 @@
 import SwiftUI
 
 struct NYCAlertNotificationView: View {
-    var alertStyle: PopAlertType
-    var title: String?
-    var body: some View {
-        if alertStyle == .reportSubmitted {
-            createAlertError(withTitle: title ?? "Empty")
-        }
-        else {
-            createAlert()
-        }
+  var alertStyle: TopAlertType
+  var body: some View {
+    HStack {
+      HStack(alignment: .center, spacing: 10) {
+        alertStyle.icon
+          .resizable()
+          .frame(width: 20, height: 20)
+          .foregroundColor(Color.white)
+        Text(alertStyle.title)
+          .foregroundColor(Color.white)
+          .font(Resources.Fonts.medium(withSize: 17))
+      }
+      Spacer()
     }
-    
-    @ViewBuilder
-    func createAlert() -> some View {
-        HStack {
-            HStack(alignment: .center, spacing: 10) {
-                alertStyle.icon
-                    .resizable()
-                    .frame(width: 20, height: 20)
-                    .foregroundColor(Color.white)
-                Text(alertStyle.title)
-                    .foregroundColor(Color.white)
-                    .font(Resources.Fonts.medium(withSize: 17))
-            }
-            Spacer()
-        }
-        .padding(16)
-        .background(Resources.Colors.customBlack)
-        .cornerRadius(10)
-        .padding([.leading,.trailing], 16)
-    }
-    
-    @ViewBuilder
-    func createAlertError(withTitle title: String) -> some View {
-        HStack {
-            HStack(alignment: .center, spacing: 5) {
-                alertStyle.icon
-                    .resizable()
-                    .frame(width: 20, height: 20)
-                    .foregroundColor(Color.white)
-                Text(title)
-                    .foregroundColor(Color.white)
-                    .font(Resources.Fonts.regular(withSize: 17))
-            }
-            Spacer()
-        }
-        .padding(10)
-        .background(Resources.Colors.customBlack)
-        .cornerRadius(5)
-        .padding([.leading,.trailing], 16)
-    }
+    .padding(16)
+    .background(Resources.Colors.customBlack)
+    .cornerRadius(10)
+    .padding([.leading,.trailing], 16)
+  }
 }
 
 struct NYCAlertView_Previews: PreviewProvider {
-    static var previews: some View {
-      NYCAlertNotificationView(alertStyle: .addedToFavorites, title: "Added to favorites")
-//        NYCAlertView(type: .notification, action: {})
-        //        NYCBottomErrorAlert(show: .constant(true))
-    }
-}
-
-struct NYCAlertView: View {
-    let type: AlertType
-    var action: (()->Void)
-    var body: some View {
-        VStack(alignment: .center, spacing: 10) {
-            Text(type.title)
-                .foregroundColor(Resources.Colors.customBlack)
-                .font(Resources.Fonts.medium(withSize: 20))
-            Text(type.subtitle)
-                .foregroundColor(Resources.Colors.darkGrey)
-                .font(Resources.Fonts.regular(withSize: 17))
-                .multilineTextAlignment(.center)
-            
-            Button {
-                action()
-            } label: {
-                Text("Got it")
-            }
-            .buttonStyle(NYCActionButtonStyle(showLoader: .constant(false)))
-            .padding([.leading,.trailing], 40)
-            .padding(.top, 10)
-            
-        }
-        .padding()
-        .background(Color.white)
-        .cornerRadius(10)
-        .padding([.leading,.trailing], 16)
-    }
+  static var previews: some View {
+    NYCAlertNotificationView(alertStyle: .removedFromFavorites)
+  }
 }

@@ -17,12 +17,15 @@ struct LocationDetailView: View {
   var selectedLocation: Location?
   @AppStorage("UserID") var userId : String = ""
   @State var currentImage: Int = 0
-  @State var addToFavs = false
-  @State var addReviewView = false
-  @State var showReviewList = false
-  @State var showUpdatesList = false
-  @State var reportEdit = false
-  @State var isLoading = true
+  @State private var addToFavorites = false
+  @State private var removeFromFavorites = false
+  @State private var addReviewView = false
+  @State private var showReviewList = false
+  @State private var showUpdatesList = false
+  @State private var reportEdit = false
+  @State private var isLoading = true
+  @State private var isFavorite = false
+  @StateObject private var userService = UserService()
   @StateObject private var locationStore = LocationStore()
   @State private var sheetContentHeight = CGFloat(0)
   var body: some View {
@@ -34,8 +37,8 @@ struct LocationDetailView: View {
           
           VStack {
             locationInfo()
-            reviews().id(2)
-            amenities().id(3)
+            reviews()
+            amenities()
             workingHours()
             suggestInfo().padding(.bottom, 15)
           }
@@ -59,6 +62,7 @@ struct LocationDetailView: View {
       .task {
         AnalyticsManager.shared.log(.locationSelected(selectedLocation?.locationID ?? Location.mock.locationID))
         await fetchAllReviews()
+        await checkForFavorites(locationID: selectedLocation?.locationID ?? Location.mock.locationID)
       }
       .toolbar {
         ToolbarItem(placement: .navigationBarLeading) {
@@ -67,22 +71,19 @@ struct LocationDetailView: View {
           }
         }
         ToolbarItem(placement: .navigationBarTrailing) {
-          NYCCircleImageButton(size: 20, image: Resources.Images.Settings.rate) {
+          NYCCircleImageButton(size: 20, image: isFavorite ? Resources.Images.Settings.rateFilled : Resources.Images.Settings.rate) {
             Task {
-              await LocationService.shared.addFavoriteLocation(locationID: selectedLocation?.locationID ?? Location.mock.locationID, userID: userId, completion: { result in
-                switch result {
-                case .success:
-                  AnalyticsManager.shared.log(.locationAddedToFavs(selectedLocation?.locationID ?? Location.mock.locationID))
-                  addToFavs.toggle()
-                case .failure(let error):
-                  print(firestoreError(forError: error))
-                }
-              })
+              if isFavorite {
+                await removeLocationFromFavorites(locationID: selectedLocation?.locationID ?? Location.mock.locationID)
+              }
+              else {
+                await addLocationToFavorites(locationID: selectedLocation?.locationID ?? Location.mock.locationID)
+              }
             }
           }
         }
       }
-      .popup(isPresented: $addToFavs) {
+      .popup(isPresented: $addToFavorites) {
         NYCAlertNotificationView(alertStyle: .addedToFavorites)
       } customize: {
         $0
@@ -90,6 +91,22 @@ struct LocationDetailView: View {
           .autohideIn(1.5)
           .type(.floater())
           .position(.bottom)
+          .dismissCallback {
+            isFavorite = true
+          }
+          .animation(.spring(response: 0.4, blendDuration: 0.2))
+      }
+      .popup(isPresented: $removeFromFavorites) {
+        NYCAlertNotificationView(alertStyle: .removedFromFavorites)
+      } customize: {
+        $0
+          .isOpaque(true)
+          .autohideIn(1.5)
+          .type(.floater())
+          .position(.bottom)
+          .dismissCallback {
+            isFavorite = false
+          }
           .animation(.spring(response: 0.4, blendDuration: 0.2))
       }
     }
@@ -335,6 +352,43 @@ extension LocationDetailView { //MARK: - Functions
         isLoading = false
       case .failure(let error):
         print(error.localizedDescription)
+      }
+    })
+  }
+  
+  private func checkForFavorites(locationID id: String) async {
+    await userService.fetchUser(documentId: userId, completion: {
+      Task {
+        if userService.user.favoriteLocations.contains(id) {
+          isFavorite = true
+        }
+        else {
+          isFavorite = false
+        }
+      }
+    })
+  }
+  
+  private func removeLocationFromFavorites(locationID id: String) async {
+    await LocationService.shared.removeLocationFromFavorites(for: userId, with: id) { result in
+      switch result {
+      case .success:
+        AnalyticsManager.shared.log(.locationRemovedFromFavs(id))
+        removeFromFavorites.toggle()
+      case .failure(let error):
+        print(error.localizedDescription)
+      }
+    }
+  }
+  
+  private func addLocationToFavorites(locationID id: String) async {
+    await LocationService.shared.addFavoriteLocation(locationID: id, userID: userId, completion: { result in
+      switch result {
+      case .success:
+        AnalyticsManager.shared.log(.locationAddedToFavs(id))
+        addToFavorites.toggle()
+      case .failure(let error):
+        print(firestoreError(forError: error))
       }
     })
   }

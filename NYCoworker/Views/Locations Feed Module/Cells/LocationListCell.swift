@@ -9,6 +9,7 @@ import SwiftUI
 import SDWebImageSwiftUI
 import CoreLocation
 import Firebase
+
 /// Location cell for list views / favorites and detail list by location category
 ///
 ///  - Parameters:
@@ -47,7 +48,7 @@ struct LocationListCell: View {
           Button {
             buttonAction()
           } label: {
-            Image(type == .list ? "add" : "close")
+            Image(type == .list ? "rate" : "close")
               .resizable()
               .foregroundColor(Resources.Colors.customBlack)
               .frame(width: 20, height: 20)
