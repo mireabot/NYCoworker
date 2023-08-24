@@ -10,7 +10,6 @@ import SDWebImageSwiftUI
 
 struct LocationMapCard: View {
   let location: Location
-  var buttonAction: () -> Void
   var body: some View {
     ZStack(alignment: .bottom) {
       ZStack(alignment: .topTrailing) {
@@ -21,12 +20,6 @@ struct LocationMapCard: View {
         .resizable()
         .aspectRatio(contentMode: .fill)
         .frame(height: 200)
-        
-        
-        NYCCircleImageButton(size: 20, image: Resources.Images.Settings.rate, action: {
-          buttonAction()
-        })
-        .padding([.top,.trailing], 10)
       }
       
       VStack(alignment: .leading, spacing: 2) {
@@ -61,6 +54,6 @@ struct LocationMapCard: View {
 
 struct LocationMapCard_Previews: PreviewProvider {
   static var previews: some View {
-    LocationMapCard(location: Location.mock, buttonAction: {})
+    LocationMapCard(location: Location.mock)
   }
 }

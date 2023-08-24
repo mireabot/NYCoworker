@@ -15,36 +15,10 @@ import Firebase
 ///
 ///  - Parameters:
 ///    - data: Data about location taken from LocationModel
-///    - type: Type of cell taken from enum LocationCellType / small or large
 struct LocationCell: View {
   @StateObject var locationManager = LocationManager()
-  enum LocationCellType {
-    case small
-    case large
-  }
   var data: Location
-  let type: LocationCellType?
-  var buttonAction: () -> Void
   var body: some View {
-    switch type {
-    case .small:
-      smallCard(withData: data)
-    case .large:
-      largeCard(withData: data)
-    case .none:
-      smallCard(withData: data)
-    }
-  }
-}
-/// Views constructors for location cells
-///
-/// Extension of LocationCell struct
-extension LocationCell {
-  /// ViewBuilder for large location card cell
-  ///  - Parameters:
-  ///     - data: Location data from LocationModel
-  @ViewBuilder
-  func largeCard(withData data: Location) -> some View {
     VStack(alignment: .leading, spacing: 2) {
       ZStack(alignment: .bottomLeading) {
         ZStack(alignment: .topTrailing) {
@@ -56,19 +30,6 @@ extension LocationCell {
           .scaledToFill()
           .frame(width: 180, height: 110)
           .cornerRadius(15)
-          
-          Button {
-            buttonAction()
-          } label: {
-            Image("rate")
-              .resizable()
-              .foregroundColor(Resources.Colors.customBlack)
-              .frame(width: 15, height: 15)
-              .padding(5)
-              .background(Color.white)
-              .cornerRadius(15)
-              .offset(x: -6, y: 6)
-          }
         }
         HStack(spacing: 5) {
           ForEach(data.locationTags,id: \.self){ title in
@@ -94,63 +55,11 @@ extension LocationCell {
       }
     }.frame(width: 180)
   }
-  /// ViewBuilder for small location card cell
-  ///  - Parameters:
-  ///     - data: Location data from LocationModel
-  @ViewBuilder
-  func smallCard(withData data: Location) -> some View {
-    VStack(alignment: .leading, spacing: 3) {
-      ZStack(alignment: .topTrailing) {
-        WebImage(url: data.locationImages[0]).placeholder {
-          Image("load")
-            .resizable()
-        }
-        .resizable()
-        .scaledToFill()
-        .frame(width: 120, height: 100)
-        .cornerRadius(10)
-        
-        Button {
-          buttonAction()
-        } label: {
-          Image("add")
-            .resizable()
-            .foregroundColor(Resources.Colors.customBlack)
-            .frame(width: 15, height: 15)
-            .padding(5)
-            .background(Color.white)
-            .cornerRadius(15)
-            .offset(x: -6, y: 6)
-        }
-        
-      }
-      
-      HStack(spacing: 3) {
-        ForEach(data.locationTags,id: \.self) { title in
-          NYCBadgeView(badgeType: .withWord, title: title)
-        }
-      }
-      
-      Text(data.locationName)
-        .foregroundColor(Resources.Colors.customBlack)
-        .font(Resources.Fonts.regular(withSize: 13))
-        .lineLimit(0)
-      
-      HStack(spacing: 4) {
-        Text(String(format: "%.1f", calculateDistance(from: Resources.userLocation, to: data.locationCoordinates)) + " mi · ")
-          .foregroundColor(Resources.Colors.darkGrey)
-          .font(Resources.Fonts.regular(withSize: 12))
-        RatingDotsView(number: data.reviews)
-      }
-    }
-    .frame(width: 120)
-  }
 }
-
 
 struct LocationCell_Previews: PreviewProvider {
   static var previews: some View {
-    LocationCell(data: Location.mock, type: .large, buttonAction: {})
+    LocationCell(data: Location.mock)
   }
 }
 

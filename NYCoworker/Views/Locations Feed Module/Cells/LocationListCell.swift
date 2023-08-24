@@ -44,18 +44,20 @@ struct LocationListCell: View {
         HStack(alignment: .center) {
           NYCRateBadge(rate: data.reviews, badgeType: .card)
             .offset(x: 6, y: 6)
-          Spacer()  
-          Button {
-            buttonAction()
-          } label: {
-            Image(type == .list ? "rate" : "close")
-              .resizable()
-              .foregroundColor(Resources.Colors.customBlack)
-              .frame(width: 20, height: 20)
-              .padding(5)
-              .background(Color.white)
-              .cornerRadius(20)
-              .offset(x: -6, y: 6)
+          Spacer()
+          if type == .favorite {
+            Button {
+              buttonAction()
+            } label: {
+              Image("close")
+                .resizable()
+                .foregroundColor(Resources.Colors.customBlack)
+                .frame(width: 20, height: 20)
+                .padding(5)
+                .background(Color.white)
+                .cornerRadius(20)
+                .offset(x: -6, y: 6)
+            }
           }
         }
       }

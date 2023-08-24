@@ -17,7 +17,6 @@ struct HomeView: View {
   @StateObject private var locationStore = LocationStore()
   @StateObject private var notificationStore = NotificationStore()
   @AppStorage("UserID") var userId : String = ""
-  @State var addToFavs = false
   var body: some View {
     NavigationView {
       ScrollView(.vertical, showsIndicators: false) {
@@ -56,16 +55,6 @@ struct HomeView: View {
         await fetchAllLocations()
         await fetchNotifications()
       })
-      .popup(isPresented: $addToFavs) {
-        NYCAlertNotificationView(alertStyle: .addedToFavorites)
-      } customize: {
-        $0
-          .isOpaque(true)
-          .autohideIn(1.5)
-          .type(.floater())
-          .position(.top)
-          .animation(.spring(response: 0.4, blendDuration: 0.2))
-      }
       .task {
         await fetchAllLocations()
         await fetchNotifications()
@@ -121,15 +110,13 @@ extension HomeView { //MARK: - Home components
           }
           else {
             ForEach(locationStore.libraries, id: \.locationName) { data in
-              LocationCell(data: data, type: .large, buttonAction: {
-                addLocationToFavorites(location: data.locationID)
-              })
-              .onTapGesture {
-                DispatchQueue.main.async {
-                  router.pushTo(view: NYCNavigationViewBuilder.builder.makeView(LocationDetailView(selectedLocation: data)))
-                  AnalyticsManager.shared.log(.locationSelected(data.locationID))
+              LocationCell(data: data)
+                .onTapGesture {
+                  DispatchQueue.main.async {
+                    router.pushTo(view: NYCNavigationViewBuilder.builder.makeView(LocationDetailView(selectedLocation: data)))
+                    AnalyticsManager.shared.log(.locationSelected(data.locationID))
+                  }
                 }
-              }
             }
           }
         }
@@ -159,15 +146,13 @@ extension HomeView { //MARK: - Home components
           }
           else {
             ForEach(locationStore.hotels, id: \.locationName) { data in
-              LocationCell(data: data, type: .large, buttonAction: {
-                addLocationToFavorites(location: data.locationID)
-              })
-              .onTapGesture {
-                DispatchQueue.main.async {
-                  router.pushTo(view: NYCNavigationViewBuilder.builder.makeView(LocationDetailView(selectedLocation: data)))
-                  AnalyticsManager.shared.log(.locationSelected(data.locationID))
+              LocationCell(data: data)
+                .onTapGesture {
+                  DispatchQueue.main.async {
+                    router.pushTo(view: NYCNavigationViewBuilder.builder.makeView(LocationDetailView(selectedLocation: data)))
+                    AnalyticsManager.shared.log(.locationSelected(data.locationID))
+                  }
                 }
-              }
             }
           }
         }
@@ -193,15 +178,13 @@ extension HomeView { //MARK: - Home components
           LoadingLocationCell(type: .map)
         }
         else {
-          LocationMapCard(location: locationStore.publicSpaces[0]) {
-            addLocationToFavorites(location: locationStore.publicSpaces[0].locationID)
-          }
-          .onTapGesture {
-            DispatchQueue.main.async {
-              router.pushTo(view: NYCNavigationViewBuilder.builder.makeView(LocationDetailView(selectedLocation: locationStore.publicSpaces[0])))
-              AnalyticsManager.shared.log(.locationSelected(locationStore.publicSpaces[0].locationID))
+          LocationMapCard(location: locationStore.publicSpaces[0])
+            .onTapGesture {
+              DispatchQueue.main.async {
+                router.pushTo(view: NYCNavigationViewBuilder.builder.makeView(LocationDetailView(selectedLocation: locationStore.publicSpaces[0])))
+                AnalyticsManager.shared.log(.locationSelected(locationStore.publicSpaces[0].locationID))
+              }
             }
-          }
         }
       }
     }
@@ -249,20 +232,6 @@ extension HomeView { //MARK: - Functions
         print(error.localizedDescription)
       }
     })
-  }
-  
-  func addLocationToFavorites(location: String) {
-    Task {
-      await LocationService.shared.addFavoriteLocation(locationID: location, userID: userId, completion: { result in
-        switch result {
-        case .success:
-          AnalyticsManager.shared.log(.locationAddedToFavs(location))
-          addToFavs.toggle()
-        case .failure(let error):
-          print(firestoreError(forError: error))
-        }
-      })
-    }
   }
   
   func showFavourites() {

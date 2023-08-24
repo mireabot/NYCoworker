@@ -14,7 +14,6 @@ struct LocationsMap: View {
   @EnvironmentObject var router: NYCNavigationViewsRouter
   @EnvironmentObject var locationStore: LocationStore
   @State var selectedLocation: Location?
-  @State var showAlert = false
   @State var locations: [Location] = []
   var body: some View {
     NavigationView {
@@ -25,13 +24,11 @@ struct LocationsMap: View {
         ZStack {
           ForEach(locations, id: \.self) { location in
             if selectedLocation == location {
-              LocationMapCard(location: location) {
-                showAlert.toggle()
-              }
-              .onTapGesture {
-                router.pushTo(view: NYCNavigationViewBuilder.builder.makeView(LocationDetailView(selectedLocation: location)))
-              }
-              .transition(.asymmetric(insertion: .move(edge: .trailing),removal: .move(edge: .leading)))
+              LocationMapCard(location: location)
+                .onTapGesture {
+                  router.pushTo(view: NYCNavigationViewBuilder.builder.makeView(LocationDetailView(selectedLocation: location)))
+                }
+                .transition(.asymmetric(insertion: .move(edge: .trailing),removal: .move(edge: .leading)))
             }
           }
         }.padding(.bottom, 30)
@@ -51,16 +48,6 @@ struct LocationsMap: View {
             .font(Resources.Fonts.medium(withSize: 17))
             .foregroundColor(Resources.Colors.customBlack)
         }
-      }
-      .popup(isPresented: $showAlert) {
-        NYCAlertNotificationView(alertStyle: .addedToFavorites)
-      } customize: {
-        $0
-          .isOpaque(true)
-          .autohideIn(1.5)
-          .type(.floater())
-          .position(.top)
-          .animation(.spring(response: 0.4, blendDuration: 0.2))
       }
     }
   }

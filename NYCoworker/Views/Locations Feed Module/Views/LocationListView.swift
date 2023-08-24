@@ -10,7 +10,6 @@ import PopupView
 
 struct LocationListView: View {
   @EnvironmentObject var router: NYCNavigationViewsRouter
-  @State var addToFavs = false
   @AppStorage("UserID") var userId : String = ""
   var selectedTitle: String
   var selectedLocations: [Location]
@@ -20,16 +19,6 @@ struct LocationListView: View {
         locationsList()
       }
       .padding([.leading,.trailing], 16)
-      .popup(isPresented: $addToFavs) {
-        NYCAlertNotificationView(alertStyle: .addedToFavorites)
-      } customize: {
-        $0
-          .isOpaque(true)
-          .autohideIn(1.5)
-          .type(.floater())
-          .position(.top)
-          .animation(.spring(response: 0.4, blendDuration: 0.2))
-      }
       .toolbarBackground(.white, for: .navigationBar)
       .toolbar {
         ToolbarItem(placement: .navigationBarLeading) {
@@ -63,24 +52,11 @@ extension LocationListView { //MARK: - View components
   func locationsList() -> some View {
     LazyVStack(spacing: 12) {
       ForEach(selectedLocations){ location in
-        LocationListCell(type: .list, data: location) {
-          Task {
-            do {
-              await LocationService.shared.addFavoriteLocation(locationID: location.locationID, userID: userId, completion: { result in
-                switch result {
-                case .success:
-                  addToFavs.toggle()
-                case .failure(let error):
-                  print(firestoreError(forError: error))
-                }
-              })
-            }
+        LocationListCell(type: .list, data: location,buttonAction: {})
+          .onTapGesture {
+            router.pushTo(view: NYCNavigationViewBuilder.builder.makeView(LocationDetailView(selectedLocation: location)))
+            AnalyticsManager.shared.log(.locationSelected(location.locationID))
           }
-        }
-        .onTapGesture {
-          router.pushTo(view: NYCNavigationViewBuilder.builder.makeView(LocationDetailView(selectedLocation: location)))
-          AnalyticsManager.shared.log(.locationSelected(location.locationID))
-        }
       }
     }
   }
