@@ -12,15 +12,13 @@ struct LocationMapCard: View {
   let location: Location
   var body: some View {
     ZStack(alignment: .bottom) {
-      ZStack(alignment: .topTrailing) {
-        WebImage(url: location.locationImages[0]).placeholder {
-          Image("load")
-            .resizable()
-        }
-        .resizable()
-        .aspectRatio(contentMode: .fill)
-        .frame(height: 200)
+      WebImage(url: location.locationImages[0]).placeholder {
+        Image("load")
+          .resizable()
       }
+      .resizable()
+      .aspectRatio(contentMode: .fill)
+      .frame(height: 200)
       
       VStack(alignment: .leading, spacing: 2) {
         Text(location.locationName)

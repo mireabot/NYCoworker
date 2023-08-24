@@ -25,13 +25,14 @@ struct LocationsMap: View {
           ForEach(locations, id: \.self) { location in
             if selectedLocation == location {
               LocationMapCard(location: location)
+                .transition(.slide)
                 .onTapGesture {
                   router.pushTo(view: NYCNavigationViewBuilder.builder.makeView(LocationDetailView(selectedLocation: location)))
                 }
-                .transition(.asymmetric(insertion: .move(edge: .trailing),removal: .move(edge: .leading)))
             }
           }
-        }.padding(.bottom, 30)
+        }
+        .padding(.bottom, 30)
       }
       .onReceive(locationStore.$locations, perform: { data in
         self.locations = data
