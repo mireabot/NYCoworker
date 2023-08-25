@@ -62,6 +62,7 @@ enum Resources {
       static let openMap = Image("open-map")
       static let refresh = Image("refresh")
       static let alert = Image("alert")
+      static let highlights = Image("highlights")
     }
     /// Images for settings
     enum Settings {

@@ -36,7 +36,7 @@ struct InstructionsView: View {
         .padding(.vertical, 5)
         .padding(.horizontal, 5)
         .background(Resources.Colors.customGrey)
-        .cornerRadius(10)
+        .cornerRadius(15)
       }
       .buttonStyle(NYCButtonStyle())
       .disabled(locationData.locationUpdates?.isEmpty ?? true)

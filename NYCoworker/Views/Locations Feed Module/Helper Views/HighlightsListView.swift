@@ -8,13 +8,13 @@
 import SwiftUI
 import PopupView
 
-struct InstructionsExpandedView: View {
+struct HighlightsListView: View {
   @State private var showBrowser = false
   @State var browserLink : URL = Resources.websiteURL
   var locationData: Location
     var body: some View {
       VStack {
-        NYCBottomSheetHeader(title: "Location Updates").paddingForHeader()
+        NYCBottomSheetHeader(title: "Highlights").paddingForHeader()
         ScrollView(.vertical, showsIndicators: false) {
           VStack(alignment: .center, spacing: 10) {
             ForEach(locationData.locationUpdates ?? [], id: \.self) { item in

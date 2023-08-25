@@ -57,6 +57,11 @@ struct LocationDetailView: View {
           .presentationDetents([.fraction(0.95)])
           .presentationDragIndicator(.visible)
       })
+      .sheet(isPresented: $showUpdatesList, content: {
+        HighlightsListView(locationData: selectedLocation ?? Location.mock)
+          .presentationDetents([.fraction(0.95)])
+          .presentationDragIndicator(.visible)
+      })
       .toolbarBackground(.white, for: .navigationBar)
       .navigationBarTitleDisplayMode(.inline)
       .task {
@@ -115,7 +120,7 @@ struct LocationDetailView: View {
 
 struct LocationDetailView_Previews: PreviewProvider {
   static var previews: some View {
-    LocationDetailView().environmentObject(NavigationDestinations())
+    LocationDetailView(selectedLocation: .mock).environmentObject(NYCNavigationViewsRouter())
   }
 }
 
@@ -125,7 +130,7 @@ extension LocationDetailView { //MARK: - View components
   func locationInfo() -> some View {
     VStack {
       HStack {
-        VStack(alignment: .leading, spacing: 5) {
+        VStack(alignment: .leading, spacing: 2) {
           Text(selectedLocation?.locationName ?? Location.mock.locationName)
             .foregroundColor(Resources.Colors.customBlack)
             .font(Resources.Fonts.medium(withSize: 22))
@@ -151,13 +156,9 @@ extension LocationDetailView { //MARK: - View components
         Spacer()
       }
       
-      InstructionsView(firstTabPressed: $showUpdatesList, secondTabPressed: $showReviewList, locationData: selectedLocation ?? Location.mock)
-        .padding(.top, 5)
-        .sheet(isPresented: $showUpdatesList, content: {
-          InstructionsExpandedView(locationData: selectedLocation ?? Location.mock)
-            .presentationDetents([.fraction(0.95)])
-            .presentationDragIndicator(.visible)
-        })
+      NYCHighlightsCard {
+        showUpdatesList.toggle()
+      }
       
       Rectangle()
         .foregroundColor(Resources.Colors.customGrey)
@@ -174,6 +175,15 @@ extension LocationDetailView { //MARK: - View components
           .foregroundColor(Resources.Colors.customBlack)
           .font(Resources.Fonts.medium(withSize: 15))
         Spacer()
+        
+        Button {
+          showReviewList.toggle()
+        } label: {
+          Text("See all")
+            .foregroundColor(Resources.Colors.primary)
+            .font(Resources.Fonts.medium(withSize: 15))
+        }
+
       }
       if isLoading {
         NYCEmptyView(type: .noReviews)

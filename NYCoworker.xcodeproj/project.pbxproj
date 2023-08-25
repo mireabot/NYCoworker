@@ -30,7 +30,7 @@
 		3524973A29EB1CE9009E1002 /* MaintenanceOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3524973929EB1CE9009E1002 /* MaintenanceOverlayView.swift */; };
 		3524974229EB2669009E1002 /* makeup.json in Resources */ = {isa = PBXBuildFile; fileRef = 3524974129EB2669009E1002 /* makeup.json */; };
 		3535AF562A2E8C3A00B55184 /* InstructionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3535AF552A2E8C3A00B55184 /* InstructionCell.swift */; };
-		3535AF582A2E8D4A00B55184 /* InstructionsExpandedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3535AF572A2E8D4A00B55184 /* InstructionsExpandedView.swift */; };
+		3535AF582A2E8D4A00B55184 /* HighlightsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3535AF572A2E8D4A00B55184 /* HighlightsListView.swift */; };
 		3536C2D72A02A955007D3E1A /* AdminReviewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3536C2D62A02A955007D3E1A /* AdminReviewsView.swift */; };
 		3538C623298353210017800B /* iPages in Frameworks */ = {isa = PBXBuildFile; productRef = 3538C622298353210017800B /* iPages */; };
 		3538C6292983569D0017800B /* NYCBottomSheetHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3538C6282983569D0017800B /* NYCBottomSheetHeader.swift */; };
@@ -129,6 +129,7 @@
 		35EF059E29B0F40A0098110B /* AccountSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EF059D29B0F40A0098110B /* AccountSetupView.swift */; };
 		35EF05A029B0FB780098110B /* PersonTypeSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EF059F29B0FB780098110B /* PersonTypeSetup.swift */; };
 		35EF05A229B29BAD0098110B /* NYCSetupCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EF05A129B29BAD0098110B /* NYCSetupCard.swift */; };
+		35EFE6952A982BBD006CB680 /* NYCHighlightsCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EFE6942A982BBD006CB680 /* NYCHighlightsCard.swift */; };
 		35F29397299E8ED500A85586 /* NYCAmenityCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F29396299E8ED500A85586 /* NYCAmenityCard.swift */; };
 		35F2939B299F195400A85586 /* NotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F2939A299F195400A85586 /* NotificationsView.swift */; };
 		35F5630A2A13D181004FE102 /* NYCSegmentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F563092A13D181004FE102 /* NYCSegmentControl.swift */; };
@@ -165,7 +166,7 @@
 		3524973929EB1CE9009E1002 /* MaintenanceOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaintenanceOverlayView.swift; sourceTree = "<group>"; };
 		3524974129EB2669009E1002 /* makeup.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = makeup.json; sourceTree = "<group>"; };
 		3535AF552A2E8C3A00B55184 /* InstructionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionCell.swift; sourceTree = "<group>"; };
-		3535AF572A2E8D4A00B55184 /* InstructionsExpandedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionsExpandedView.swift; sourceTree = "<group>"; };
+		3535AF572A2E8D4A00B55184 /* HighlightsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightsListView.swift; sourceTree = "<group>"; };
 		3536C2D62A02A955007D3E1A /* AdminReviewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminReviewsView.swift; sourceTree = "<group>"; };
 		3538C6282983569D0017800B /* NYCBottomSheetHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCBottomSheetHeader.swift; sourceTree = "<group>"; };
 		35402A292A0EB2A300974CF7 /* NYCBottomViewContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCBottomViewContent.swift; sourceTree = "<group>"; };
@@ -255,6 +256,7 @@
 		35EF059D29B0F40A0098110B /* AccountSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSetupView.swift; sourceTree = "<group>"; };
 		35EF059F29B0FB780098110B /* PersonTypeSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonTypeSetup.swift; sourceTree = "<group>"; };
 		35EF05A129B29BAD0098110B /* NYCSetupCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCSetupCard.swift; sourceTree = "<group>"; };
+		35EFE6942A982BBD006CB680 /* NYCHighlightsCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCHighlightsCard.swift; sourceTree = "<group>"; };
 		35F29396299E8ED500A85586 /* NYCAmenityCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCAmenityCard.swift; sourceTree = "<group>"; };
 		35F2939A299F195400A85586 /* NotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsView.swift; sourceTree = "<group>"; };
 		35F563092A13D181004FE102 /* NYCSegmentControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCSegmentControl.swift; sourceTree = "<group>"; };
@@ -374,7 +376,7 @@
 			children = (
 				35DFA23D29A3BFC800258BB7 /* ReviewListView.swift */,
 				3591C97D2A2CF67D002832C8 /* InstructionsView.swift */,
-				3535AF572A2E8D4A00B55184 /* InstructionsExpandedView.swift */,
+				3535AF572A2E8D4A00B55184 /* HighlightsListView.swift */,
 			);
 			path = "Helper Views";
 			sourceTree = "<group>";
@@ -641,6 +643,7 @@
 				3583BD4429AA99E600B984EA /* NYCNotificationCard.swift */,
 				35EF05A129B29BAD0098110B /* NYCSetupCard.swift */,
 				350B52D12A2FCA0F00D61B6E /* NYCPromoBanner.swift */,
+				35EFE6942A982BBD006CB680 /* NYCHighlightsCard.swift */,
 			);
 			path = Cards;
 			sourceTree = "<group>";
@@ -988,8 +991,9 @@
 				359E36952A3F6EFB00BE937D /* AdminModerationView.swift in Sources */,
 				35E7FB942985A9D500EFF282 /* UserRegistrationModel.swift in Sources */,
 				35DFA24129A518B700258BB7 /* AddReviewView.swift in Sources */,
-				3535AF582A2E8D4A00B55184 /* InstructionsExpandedView.swift in Sources */,
+				3535AF582A2E8D4A00B55184 /* HighlightsListView.swift in Sources */,
 				354F6D3F29F182D500E45CFE /* WriteFeedbackView.swift in Sources */,
+				35EFE6952A982BBD006CB680 /* NYCHighlightsCard.swift in Sources */,
 				35D37B492A5DFE3C0056484E /* NYCEmptyView.swift in Sources */,
 				350DE2762991C5F200573163 /* LocationListView.swift in Sources */,
 				3535AF562A2E8C3A00B55184 /* InstructionCell.swift in Sources */,

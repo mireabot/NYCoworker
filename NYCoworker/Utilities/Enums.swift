@@ -152,6 +152,7 @@ enum SettingsData {
   case visitWebsite
   case rateApp
   case writeFeedback
+  case locationUpdates
   
   var icon: Image {
     switch self {
@@ -165,6 +166,8 @@ enum SettingsData {
       return Resources.Images.Settings.rate
     case .writeFeedback:
       return Resources.Images.Settings.manageAccount
+    case .locationUpdates:
+      return Resources.Images.Navigation.alert
     }
   }
   
@@ -180,6 +183,8 @@ enum SettingsData {
       return Strings.Settings.rateApp
     case .writeFeedback:
       return Strings.Settings.writeFeedback
+    case .locationUpdates:
+      return "Location updates"
     }
   }
 }

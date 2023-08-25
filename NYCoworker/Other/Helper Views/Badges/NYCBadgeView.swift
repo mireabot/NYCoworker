@@ -28,7 +28,7 @@ struct NYCBadgeView: View {
     var badgeWithTitle: some View {
         Text(title)
             .foregroundColor(Resources.Colors.primary)
-            .font(Resources.Fonts.regular(withSize: 10))
+            .font(Resources.Fonts.regular(withSize: 12))
             .padding([.top,.bottom], 2)
             .padding([.leading,.trailing], 5)
             .background(Resources.Colors.customGrey)

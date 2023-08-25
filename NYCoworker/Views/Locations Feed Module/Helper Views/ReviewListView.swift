@@ -11,7 +11,7 @@ struct ReviewListView: View {
   @EnvironmentObject private var model: LocationStore
   var body: some View {
     VStack {
-      NYCBottomSheetHeader(title: "All reviews").paddingForHeader()
+      NYCBottomSheetHeader(title: "Reviews").paddingForHeader()
       ScrollView(.vertical, showsIndicators: true) {
         VStack {
           ForEach(model.reviews,id: \.datePosted) { review in
