@@ -13,7 +13,6 @@ struct NYCBottomSheetHeader: View {
     VStack(alignment: .center) {
       Text(title)
         .font(Resources.Fonts.medium(withSize: 17))
-      Divider()
     }
   }
 }
@@ -51,7 +50,10 @@ struct NYCHeader: View {
 
 struct NYCBottomSheetHeader_Previews: PreviewProvider {
   static var previews: some View {
-    NYCBottomSheetHeader(title: "Test title header").paddingForHeader()
+    VStack {
+      NYCBottomSheetHeader(title: "Test title header")
+      Color.blue
+    }
   }
 }
 

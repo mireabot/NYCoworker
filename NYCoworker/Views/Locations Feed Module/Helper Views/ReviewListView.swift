@@ -19,8 +19,8 @@ struct ReviewListView: View {
           }
         }
         .padding([.leading,.trailing], 16)
-        .padding(.top, 10)
       }
+      .padding(.top, 10)
     }
     .background(Color.white)
     .cornerRadius(16, corners: [.topLeft,.topRight])

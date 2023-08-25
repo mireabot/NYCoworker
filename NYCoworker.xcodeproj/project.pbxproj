@@ -60,7 +60,6 @@
 		3588F05E2A355EAD00E6FA72 /* PromoBannerLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3588F05D2A355EAD00E6FA72 /* PromoBannerLoadingView.swift */; };
 		35915FEF29EB160700263946 /* AppConfigService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35915FEE29EB160700263946 /* AppConfigService.swift */; };
 		3591C97A2A2BE585002832C8 /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3591C9792A2BE585002832C8 /* SafariView.swift */; };
-		3591C97E2A2CF67D002832C8 /* InstructionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3591C97D2A2CF67D002832C8 /* InstructionsView.swift */; };
 		359348DD29BA421900B7739A /* ReviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359348DC29BA421900B7739A /* ReviewModel.swift */; };
 		359A792B298DFBB9001B66CF /* Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359A792A298DFBB9001B66CF /* Modifiers.swift */; };
 		359A792D298ECC6B001B66CF /* NYCSocialCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359A792C298ECC6B001B66CF /* NYCSocialCard.swift */; };
@@ -194,7 +193,6 @@
 		3588F05D2A355EAD00E6FA72 /* PromoBannerLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoBannerLoadingView.swift; sourceTree = "<group>"; };
 		35915FEE29EB160700263946 /* AppConfigService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigService.swift; sourceTree = "<group>"; };
 		3591C9792A2BE585002832C8 /* SafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
-		3591C97D2A2CF67D002832C8 /* InstructionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionsView.swift; sourceTree = "<group>"; };
 		359348DC29BA421900B7739A /* ReviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewModel.swift; sourceTree = "<group>"; };
 		359A792A298DFBB9001B66CF /* Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifiers.swift; sourceTree = "<group>"; };
 		359A792C298ECC6B001B66CF /* NYCSocialCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCSocialCard.swift; sourceTree = "<group>"; };
@@ -375,7 +373,6 @@
 			isa = PBXGroup;
 			children = (
 				35DFA23D29A3BFC800258BB7 /* ReviewListView.swift */,
-				3591C97D2A2CF67D002832C8 /* InstructionsView.swift */,
 				3535AF572A2E8D4A00B55184 /* HighlightsListView.swift */,
 			);
 			path = "Helper Views";
@@ -1010,7 +1007,6 @@
 				359A792D298ECC6B001B66CF /* NYCSocialCard.swift in Sources */,
 				35D9447B29EF026D00B9B640 /* NYCErrorBottomAlert.swift in Sources */,
 				351B3A23299814B8007E7D00 /* AccountSettingsView.swift in Sources */,
-				3591C97E2A2CF67D002832C8 /* InstructionsView.swift in Sources */,
 				35A34BF72A89706F0072E6A4 /* NavigationControllers.swift in Sources */,
 				35DFA24329A572BD00258BB7 /* NYCResizableTextField.swift in Sources */,
 				3591C97A2A2BE585002832C8 /* SafariView.swift in Sources */,
@@ -1209,7 +1205,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = NYCoworker/NYCoworker.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 56;
+				CURRENT_PROJECT_VERSION = 57;
 				DEVELOPMENT_TEAM = 9S2MZXD36G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NYCoworker/Info.plist;
@@ -1247,7 +1243,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = NYCoworker/NYCoworker.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 56;
+				CURRENT_PROJECT_VERSION = 57;
 				DEVELOPMENT_TEAM = 9S2MZXD36G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NYCoworker/Info.plist;
