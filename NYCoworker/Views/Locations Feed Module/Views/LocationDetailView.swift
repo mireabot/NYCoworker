@@ -14,7 +14,7 @@ import UIKit
 
 struct LocationDetailView: View {
   @EnvironmentObject var router: NYCNavigationViewsRouter
-  var selectedLocation: Location?
+  var selectedLocation: Location
   @AppStorage("UserID") var userId : String = ""
   @State var currentImage: Int = 0
   @State private var addToFavorites = false
@@ -32,7 +32,7 @@ struct LocationDetailView: View {
     NavigationView {
       ScrollView(.vertical, showsIndicators: true) {
         LazyVStack(spacing: -5) {
-          NYCImageCarousel(imageUrls: selectedLocation?.locationImages ?? Location.mock.locationImages)
+          NYCImageCarousel(imageUrls: selectedLocation.locationImages)
             .frame(width: UIScreen.main.bounds.width, height: 230)
           
           VStack {
@@ -46,10 +46,10 @@ struct LocationDetailView: View {
         }
       }
       .fullScreenCover(isPresented: $reportEdit, content: {
-        SuggestInformationView(locationID: selectedLocation?.locationID ?? Location.mock.locationID, isPresented: $reportEdit)
+        SuggestInformationView(locationID: selectedLocation.locationID, isPresented: $reportEdit)
       })
       .fullScreenCover(isPresented: $addReviewView, content: {
-        AddReviewView(isPresented: $addReviewView, locationData: selectedLocation ?? Location.mock)
+        AddReviewView(isPresented: $addReviewView, locationData: selectedLocation)
       })
       .sheet(isPresented: $showReviewList, content: {
         ReviewListView()
@@ -58,16 +58,16 @@ struct LocationDetailView: View {
           .presentationDragIndicator(.visible)
       })
       .sheet(isPresented: $showUpdatesList, content: {
-        HighlightsListView(locationData: selectedLocation ?? Location.mock)
+        HighlightsListView(locationData: selectedLocation)
           .presentationDetents([.fraction(0.95)])
           .presentationDragIndicator(.visible)
       })
       .toolbarBackground(.white, for: .navigationBar)
       .navigationBarTitleDisplayMode(.inline)
       .task {
-        AnalyticsManager.shared.log(.locationSelected(selectedLocation?.locationID ?? Location.mock.locationID))
+        AnalyticsManager.shared.log(.locationSelected(selectedLocation.locationID))
         await fetchAllReviews()
-        await checkForFavorites(locationID: selectedLocation?.locationID ?? Location.mock.locationID)
+        await checkForFavorites(locationID: selectedLocation.locationID)
       }
       .toolbar {
         ToolbarItem(placement: .navigationBarLeading) {
@@ -79,10 +79,10 @@ struct LocationDetailView: View {
           NYCCircleImageButton(size: 20, image: isFavorite ? Resources.Images.Settings.rateFilled : Resources.Images.Settings.rate) {
             Task {
               if isFavorite {
-                await removeLocationFromFavorites(locationID: selectedLocation?.locationID ?? Location.mock.locationID)
+                await removeLocationFromFavorites(locationID: selectedLocation.locationID)
               }
               else {
-                await addLocationToFavorites(locationID: selectedLocation?.locationID ?? Location.mock.locationID)
+                await addLocationToFavorites(locationID: selectedLocation.locationID)
               }
             }
           }
@@ -131,10 +131,10 @@ extension LocationDetailView { //MARK: - View components
     VStack {
       HStack {
         VStack(alignment: .leading, spacing: 2) {
-          Text(selectedLocation?.locationName ?? Location.mock.locationName)
+          Text(selectedLocation.locationName)
             .foregroundColor(Resources.Colors.customBlack)
             .font(Resources.Fonts.medium(withSize: 22))
-          Text(selectedLocation?.locationAddress ?? Location.mock.locationAddress)
+          Text(selectedLocation.locationAddress)
             .foregroundColor(Resources.Colors.darkGrey)
             .font(Resources.Fonts.regular(withSize: 13))
         }
@@ -142,22 +142,23 @@ extension LocationDetailView { //MARK: - View components
         Spacer()
         
         NYCCircleImageButton(size: 24, image: Resources.Images.Navigation.openMap) {
-          AnalyticsManager.shared.log(.routeButtonPressed(selectedLocation?.locationID ?? Location.mock.locationID))
-          guard let selectedLocation = selectedLocation else { return }
+          AnalyticsManager.shared.log(.routeButtonPressed(selectedLocation.locationID))
           openInAppleMaps(address: selectedLocation.locationAddress, withName: selectedLocation.locationName)
           AnalyticsManager.shared.log(.routeButtonPressed(selectedLocation.locationName))
         }
       }
       
       HStack(spacing: 3) {
-        ForEach(selectedLocation?.locationTags ?? Location.mock.locationTags,id: \.self) { title in
+        ForEach(selectedLocation.locationTags, id: \.self) { title in
           NYCBadgeView(badgeType: .withWord, title: title)
         }
         Spacer()
       }
       
-      NYCHighlightsCard {
-        showUpdatesList.toggle()
+      if !(selectedLocation.locationUpdates?.isEmpty ?? true) {
+        NYCHighlightsCard {
+          showUpdatesList.toggle()
+        }
       }
       
       Rectangle()
@@ -183,6 +184,7 @@ extension LocationDetailView { //MARK: - View components
             .foregroundColor(Resources.Colors.primary)
             .font(Resources.Fonts.medium(withSize: 15))
         }
+        .disabled(isLoading)
 
       }
       if isLoading {
@@ -201,7 +203,7 @@ extension LocationDetailView { //MARK: - View components
       
       Button {
         showReviewSubmission()
-        AnalyticsManager.shared.log(.reviewOpened(selectedLocation?.locationID ?? Location.mock.locationID))
+        AnalyticsManager.shared.log(.reviewOpened(selectedLocation.locationID))
       } label: {
         Text("Leave your review")
       }
@@ -225,12 +227,12 @@ extension LocationDetailView { //MARK: - View components
         .font(Resources.Fonts.medium(withSize: 15))
         .padding([.leading,.trailing], 16)
       
-      if let amenitiesData = selectedLocation?.locationAmenities, !amenitiesData.isEmpty {
+      if !selectedLocation.locationAmenities.isEmpty {
         ScrollView(.horizontal, showsIndicators: false) {
           amenitiesGridView()
             .padding([.leading,.trailing], 16)
         }
-        .disabled(amenitiesData.count <= 6)
+        .disabled(selectedLocation.locationAmenities.count <= 6)
       }
       else {
         NYCEmptyView(type: .noAmenities)
@@ -252,10 +254,10 @@ extension LocationDetailView { //MARK: - View components
         .font(Resources.Fonts.medium(withSize: 15))
         .padding(.leading, 16)
       
-      if let hoursData = selectedLocation?.locationHours, !hoursData.isEmpty {
+      if !selectedLocation.locationHours.isEmpty {
         ScrollView(.horizontal, showsIndicators: false) {
           HStack(spacing: 5) {
-            ForEach(selectedLocation?.locationHours ?? Location.mock.locationHours,id: \.self){ item in
+            ForEach(selectedLocation.locationHours, id: \.self){ item in
               NYCWorkingHoursCard(data: item)
             }
           }
@@ -309,7 +311,7 @@ extension LocationDetailView { //MARK: - View components
     ]
     
     LazyHGrid(rows: rows, alignment: .center, spacing: 10) {
-      ForEach(selectedLocation?.locationAmenities ?? Location.mock.locationAmenities,id: \.self) { item in
+      ForEach(selectedLocation.locationAmenities, id: \.self) { item in
         NYCAmenityCard(data: item)
       }
     }
@@ -351,12 +353,12 @@ extension LocationDetailView { //MARK: - Functions
   }
   
   func showReviewSubmission() {
-    AnalyticsManager.shared.log(.reviewOpened(selectedLocation?.locationID ?? Location.mock.locationID))
+    AnalyticsManager.shared.log(.reviewOpened(selectedLocation.locationID))
     addReviewView.toggle()
   }
   
   private func fetchAllReviews() async {
-    await locationStore.fetchReviews(for: selectedLocation?.locationID ?? Location.mock.locationID, completion: { result in
+    await locationStore.fetchReviews(for: selectedLocation.locationID, completion: { result in
       switch result {
       case .success:
         isLoading = false

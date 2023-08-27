@@ -54,8 +54,12 @@ struct TabBarView: View {
         
         if #available(iOS 15.0, *) {
           let navigationBarAppearance = UINavigationBarAppearance()
+          let atters: [NSAttributedString.Key: Any] = [
+            .font: UIFont(name: "Jost-Medium", size: 17)!
+              ]
           navigationBarAppearance.backgroundColor = .white
           navigationBarAppearance.shadowColor = .clear
+          navigationBarAppearance.titleTextAttributes = atters
           UINavigationBar.appearance().standardAppearance = navigationBarAppearance
           UINavigationBar.appearance().compactAppearance = navigationBarAppearance
           UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance

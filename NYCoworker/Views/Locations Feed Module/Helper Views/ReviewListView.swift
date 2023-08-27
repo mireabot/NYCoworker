@@ -10,8 +10,7 @@ import SwiftUI
 struct ReviewListView: View {
   @EnvironmentObject private var model: LocationStore
   var body: some View {
-    VStack {
-      NYCBottomSheetHeader(title: "Reviews").paddingForHeader()
+    NavigationView {
       ScrollView(.vertical, showsIndicators: true) {
         VStack {
           ForEach(model.reviews,id: \.datePosted) { review in
@@ -21,8 +20,13 @@ struct ReviewListView: View {
         .padding([.leading,.trailing], 16)
       }
       .padding(.top, 10)
+      .navigationBarTitleDisplayMode(.inline)
+      .toolbar {
+        ToolbarItem(placement: .principal) {
+          Text("Reviews")
+            .font(Resources.Fonts.medium(withSize: 17))
+        }
+      }
     }
-    .background(Color.white)
-    .cornerRadius(16, corners: [.topLeft,.topRight])
   }
 }

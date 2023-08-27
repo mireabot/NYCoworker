@@ -25,6 +25,7 @@ struct NYCTextField: View {
         .tint(Resources.Colors.primary)
         .keyboardType(.alphabet)
         .autocorrectionDisabled(true)
+        .submitLabel(.done)
         .background(
           RoundedRectangle(cornerRadius: 16)
             .strokeBorder(Resources.Colors.lightGrey, lineWidth: 1)

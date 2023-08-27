@@ -6,33 +6,38 @@
 //
 
 import SwiftUI
-import PopupView
 
 struct HighlightsListView: View {
   @State private var showBrowser = false
   @State var browserLink : URL = Resources.websiteURL
   var locationData: Location
   var body: some View {
-    VStack {
-      NYCBottomSheetHeader(title: "Highlights").paddingForHeader()
+    NavigationView {
       ScrollView(.vertical, showsIndicators: false) {
         VStack(alignment: .center, spacing: 10) {
-          ForEach(locationData.locationUpdates ?? [], id: \.self) { item in
-            InstructionCell(updatesData: item) {
-              DispatchQueue.main.async {
-                browserLink = URL(string: item.url)!
-                showBrowser.toggle()
+          LazyVStack(pinnedViews: [.sectionHeaders]) {
+            ForEach(locationData.locationUpdates ?? [], id: \.self) { item in
+              InstructionCell(updatesData: item) {
+                DispatchQueue.main.async {
+                  browserLink = URL(string: item.url)!
+                  showBrowser.toggle()
+                }
               }
             }
           }
         }
         .padding([.leading,.trailing], 16)
       }
-      .padding(.top, 10)
-    }
-    .background(Color.white)
-    .sheet(isPresented: $showBrowser) {
-      SafariView(url: $browserLink)
+      .navigationBarTitleDisplayMode(.inline)
+      .toolbar(content: {
+        ToolbarItem(placement: .principal) {
+          Text("Highlights")
+            .font(Resources.Fonts.medium(withSize: 17))
+        }
+      })
+      .sheet(isPresented: $showBrowser) {
+        SafariView(url: $browserLink)
+      }
     }
   }
 }

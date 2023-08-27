@@ -20,6 +20,7 @@ struct NYCResizableTextField: View {
             .tint(Resources.Colors.primary)
             .keyboardType(.alphabet)
             .autocorrectionDisabled(true)
+            .submitLabel(.done)
             .onChange(of: message) { newValue in
               if newValue.count > characterLimit {
                 message = String(newValue.prefix(characterLimit))
