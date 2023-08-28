@@ -17,6 +17,8 @@ struct HomeView: View {
   @StateObject private var locationStore = LocationStore()
   @StateObject private var notificationStore = NotificationStore()
   @AppStorage("UserID") var userId : String = ""
+  @State private var selectedLocation: Location?
+  @State private var showMap = false
   var body: some View {
     NavigationView {
       ScrollView(.vertical, showsIndicators: false) {
@@ -48,6 +50,12 @@ struct HomeView: View {
           .padding([.top,.bottom], 10)
         }
       }
+      .fullScreenCover(item: $selectedLocation, content: { location in
+        LocationDetailView(selectedLocation: location).disableRefresh()
+      })
+      .fullScreenCover(isPresented: $showMap, content: {
+        LocationsMapView().environmentObject(locationStore)
+      })
       .refreshable(action: {
         DispatchQueue.main.async {
           isLoading = true
@@ -113,7 +121,7 @@ extension HomeView { //MARK: - Home components
               LocationCell(data: data)
                 .onTapGesture {
                   DispatchQueue.main.async {
-                    router.pushTo(view: NYCNavigationViewBuilder.builder.makeView(LocationDetailView(selectedLocation: data)))
+                    selectedLocation = data
                     AnalyticsManager.shared.log(.locationSelected(data.locationID))
                   }
                 }
@@ -149,7 +157,7 @@ extension HomeView { //MARK: - Home components
               LocationCell(data: data)
                 .onTapGesture {
                   DispatchQueue.main.async {
-                    router.pushTo(view: NYCNavigationViewBuilder.builder.makeView(LocationDetailView(selectedLocation: data)))
+                    selectedLocation = data
                     AnalyticsManager.shared.log(.locationSelected(data.locationID))
                   }
                 }
@@ -181,7 +189,7 @@ extension HomeView { //MARK: - Home components
           LocationMapCard(location: locationStore.publicSpaces[0])
             .onTapGesture {
               DispatchQueue.main.async {
-                router.pushTo(view: NYCNavigationViewBuilder.builder.makeView(LocationDetailView(selectedLocation: locationStore.publicSpaces[0])))
+                selectedLocation = locationStore.publicSpaces[0]
                 AnalyticsManager.shared.log(.locationSelected(locationStore.publicSpaces[0].locationID))
               }
             }
@@ -195,13 +203,13 @@ extension HomeView { //MARK: - Home components
     VStack(alignment: .leading, spacing: 12) {
       NYCSectionHeader(title: "Locations nearby", isExpandButton: false)
       ZStack {
-        LocationMapView(locations: $locationStore.locations, selectedLocation: .constant(Location.mock), region: Resources.mapRegion, type: .homePreview)
+        NYCMap(locations: $locationStore.locations, selectedLocation: .constant(Location.mock), region: Resources.mapRegion, type: .homePreview)
           .frame(width: UIScreen.main.bounds.width - 16, height: 120)
           .cornerRadius(15)
       }
       .disabled(isLoading)
       .onTapGesture {
-        showMap()
+        showMap.toggle()
       }
     }
     .padding([.leading,.trailing], 16)
@@ -245,13 +253,6 @@ extension HomeView { //MARK: - Functions
     DispatchQueue.main.async {
       AnalyticsManager.shared.log(.notificationWasOpened)
       router.pushTo(view: NYCNavigationViewBuilder.builder.makeView(NotificationsView().environmentObject(notificationStore)))
-    }
-  }
-  
-  func showMap() {
-    DispatchQueue.main.async {
-      AnalyticsManager.shared.log(.openMap)
-      router.pushTo(view: NYCNavigationViewBuilder.builder.makeView(LocationsMap().environmentObject(locationStore)))
     }
   }
 }

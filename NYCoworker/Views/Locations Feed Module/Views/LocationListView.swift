@@ -13,11 +13,15 @@ struct LocationListView: View {
   @AppStorage("UserID") var userId : String = ""
   var selectedTitle: String
   var selectedLocations: [Location]
+  @State private var selectedLocation: Location?
   var body: some View {
     NavigationView {
       ScrollView(.vertical, showsIndicators: true) {
         locationsList()
       }
+      .fullScreenCover(item: $selectedLocation, content: { locationData in
+        LocationDetailView(selectedLocation: locationData).disableRefresh()
+      })
       .padding([.leading,.trailing], 16)
       .toolbarBackground(.white, for: .navigationBar)
       .toolbar {
@@ -52,9 +56,9 @@ extension LocationListView { //MARK: - View components
   func locationsList() -> some View {
     LazyVStack(spacing: 12) {
       ForEach(selectedLocations){ location in
-        LocationListCell(type: .list, data: location,buttonAction: {})
+        LocationListCell(type: .list, data: location, buttonAction: {})
           .onTapGesture {
-            router.pushTo(view: NYCNavigationViewBuilder.builder.makeView(LocationDetailView(selectedLocation: location)))
+            selectedLocation = location
             AnalyticsManager.shared.log(.locationSelected(location.locationID))
           }
       }

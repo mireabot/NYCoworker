@@ -28,6 +28,10 @@ extension View {
   func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
     clipShape( RoundedCorner(radius: radius, corners: corners))
   }
+  
+  func disableRefresh() -> some View {
+    self.environment(\EnvironmentValues.refresh as! WritableKeyPath<EnvironmentValues, RefreshAction?>, nil)
+  }
 }
 struct RoundedCorner: Shape {
   

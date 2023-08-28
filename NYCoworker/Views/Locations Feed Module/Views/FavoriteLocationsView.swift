@@ -15,9 +15,13 @@ struct FavoriteLocationsView: View {
   @StateObject private var userService = UserService()
   @StateObject private var locationStore = LocationStore()
   @AppStorage("UserID") var userId : String = ""
+  @State private var selectedLocation: Location?
   var body: some View {
     NavigationView {
       favoriteList()
+        .fullScreenCover(item: $selectedLocation, content: { locationData in
+          LocationDetailView(selectedLocation: locationData)
+        })
         .task {
           await fetchFavoriteLocations()
         }
@@ -69,7 +73,7 @@ extension FavoriteLocationsView { //MARK: - View components
                   }
                 })
                 .onTapGesture {
-                  router.pushTo(view: NYCNavigationViewBuilder.builder.makeView(LocationDetailView(selectedLocation: data)))
+                  selectedLocation = data
                 }
               }
             }

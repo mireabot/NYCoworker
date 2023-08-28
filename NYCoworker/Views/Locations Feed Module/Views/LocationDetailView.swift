@@ -13,7 +13,7 @@ import Shimmer
 import UIKit
 
 struct LocationDetailView: View {
-  @EnvironmentObject var router: NYCNavigationViewsRouter
+  @Environment(\.dismiss) var makeDismiss
   var selectedLocation: Location
   @AppStorage("UserID") var userId : String = ""
   @State var currentImage: Int = 0
@@ -32,8 +32,16 @@ struct LocationDetailView: View {
     NavigationView {
       ScrollView(.vertical, showsIndicators: true) {
         LazyVStack(spacing: -5) {
-          NYCImageCarousel(imageUrls: selectedLocation.locationImages)
-            .frame(width: UIScreen.main.bounds.width, height: 230)
+          GeometryReader { proxy -> AnyView in
+            let offset = proxy.frame(in: .global).minY
+            
+            AnyView(
+              NYCImageCarousel(imageUrls: selectedLocation.locationImages)
+                .frame(width: UIScreen.main.bounds.width, height: 200 + (offset > 0 ? offset : 0))
+                .offset(y: (offset > 0 ? -offset : 0))
+            )
+          }
+          .frame(height: 200)
           
           VStack {
             locationInfo()
@@ -71,8 +79,8 @@ struct LocationDetailView: View {
       }
       .toolbar {
         ToolbarItem(placement: .navigationBarLeading) {
-          NYCCircleImageButton(size: 20, image: Resources.Images.Navigation.arrowBack) {
-            router.nav?.popViewController(animated: true)
+          NYCCircleImageButton(size: 20, image: Resources.Images.Navigation.chevronDown) {
+            makeDismiss()
           }
         }
         ToolbarItem(placement: .navigationBarTrailing) {
@@ -185,7 +193,7 @@ extension LocationDetailView { //MARK: - View components
             .font(Resources.Fonts.medium(withSize: 15))
         }
         .disabled(isLoading)
-
+        
       }
       if isLoading {
         NYCEmptyView(type: .noReviews)

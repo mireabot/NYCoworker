@@ -10,24 +10,25 @@ import MapKit
 import PopupView
 import CoreLocation
 
-struct LocationsMap: View {
-  @EnvironmentObject var router: NYCNavigationViewsRouter
+struct LocationsMapView: View {
+  @Environment(\.dismiss) var makeDismiss
   @EnvironmentObject var locationStore: LocationStore
-  @State var selectedLocation: Location?
+  @State var currentLocation: Location?
+  @State private var selectedLocation: Location?
   @State var locations: [Location] = []
   var body: some View {
     NavigationView {
       ZStack(alignment: .bottom) {
-        LocationMapView(locations: $locations, selectedLocation: $selectedLocation, region: getRegion(), type: .mapModule)
+        NYCMap(locations: $locations, selectedLocation: $currentLocation, region: getRegion(), type: .mapModule)
           .ignoresSafeArea()
         
         ZStack {
           ForEach(locations, id: \.self) { location in
-            if selectedLocation == location {
+            if currentLocation == location {
               LocationMapCard(location: location)
                 .transition(.slide)
                 .onTapGesture {
-                  router.pushTo(view: NYCNavigationViewBuilder.builder.makeView(LocationDetailView(selectedLocation: location)))
+                  selectedLocation = location
                 }
             }
           }
@@ -37,17 +38,16 @@ struct LocationsMap: View {
       .onReceive(locationStore.$locations, perform: { data in
         self.locations = data
       })
+      .fullScreenCover(item: $selectedLocation, content: { locationData in
+        LocationDetailView(selectedLocation: locationData)
+      })
       .navigationBarTitleDisplayMode(.inline)
+      .toolbarBackground(.clear, for: .navigationBar)
       .toolbar {
         ToolbarItem(placement: .navigationBarLeading) {
-          NYCCircleImageButton(size: 20, image: Resources.Images.Navigation.arrowBack) {
-            router.nav?.popViewController(animated: true)
+          NYCCircleImageButton(size: 24, image: Resources.Images.Navigation.chevronDown) {
+            makeDismiss()
           }
-        }
-        ToolbarItem(placement: .principal) {
-          Text("Locations nearby")
-            .font(Resources.Fonts.medium(withSize: 17))
-            .foregroundColor(Resources.Colors.customBlack)
         }
       }
     }
@@ -60,7 +60,7 @@ struct LocationsMap: View {
   }
 }
 
-struct LocationMapView: View {
+struct NYCMap: View {
   @Binding var locations: [Location]
   @Binding var selectedLocation: Location?
   @State var region: MKCoordinateRegion
@@ -79,7 +79,7 @@ struct LocationMapView: View {
   }
 }
 
-extension LocationMapView { //MARK: - View components
+extension NYCMap { //MARK: - View components
   @ViewBuilder
   func homePreview() -> some View {
     Map(coordinateRegion: $region,
@@ -128,7 +128,7 @@ extension LocationMapView { //MARK: - View components
   }
 }
 
-extension LocationMapView { //MARK: - Functions
+extension NYCMap { //MARK: - Functions
   func updateRegion(location: Location) {
     let center = CLLocationCoordinate2D(latitude: location.locationCoordinates.latitude, longitude: location.locationCoordinates.longitude)
     let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
